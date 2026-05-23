@@ -1,7 +1,15 @@
 node_modules/
 lib/
+dist/
+docs/
 coverage/
 .nyc_output/
 .testnetrc
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
 .idea
 .vscode
+.codegraph/
