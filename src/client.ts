@@ -34,8 +34,7 @@
  */
 
 import assert from 'assert'
-import verror from 'verror'
-const { VError } = verror
+import { RPCError } from './errors.js'
 import packageVersion from './version.js'
 
 import { Blockchain } from './helpers/blockchain.js'
@@ -98,7 +97,7 @@ interface RPCCall extends RPCRequest {
     params: [number | string, string, any[]]
 }
 
-interface RPCError {
+interface RPCErrorData {
     code: number
     message: string
     data?: any
@@ -109,7 +108,7 @@ interface RPCResponse {
      * Response sequence number, corresponding to request sequence number.
      */
     id: number
-    error?: RPCError
+    error?: RPCErrorData
     result?: any
 }
 
@@ -441,7 +440,7 @@ export class Client {
                 this.healthTracker.recordApiFailure(currentAddress, api)
             }
 
-            throw new VError({ info: data, name: 'RPCError' }, message)
+            throw new RPCError(message, data)
         }
         assert.equal(response.id, request.id, 'got invalid response id')
         return response.result

@@ -35,8 +35,7 @@
 
 import assert from 'assert'
 import { createHash } from 'crypto'
-import verror from 'verror'
-const { VError } = verror
+import { SerializationError } from './errors.js'
 import { Types } from './chain/serializer.js'
 import { SignedTransaction, Transaction } from './chain/transaction.js'
 import { DEFAULT_ADDRESS_PREFIX, DEFAULT_CHAIN_ID } from './client.js'
@@ -406,10 +405,7 @@ function transactionDigest(
   try {
     Types.Transaction(writer, transaction)
   } catch (cause: any) {
-    throw new VError(
-      { cause, name: 'SerializationError' },
-      'Unable to serialize transaction'
-    )
+    throw new SerializationError('Unable to serialize transaction', cause)
   }
   const transactionData = writer.getBuffer()
   const digest = sha256(Buffer.concat([chainId, transactionData]))
@@ -449,10 +445,7 @@ function generateTrxId(transaction: Transaction) {
   try {
     Types.Transaction(writer, transaction)
   } catch (cause: any) {
-    throw new VError(
-      { cause, name: 'SerializationError' },
-      'Unable to serialize transaction'
-    )
+    throw new SerializationError('Unable to serialize transaction', cause)
   }
   const transactionData = writer.getBuffer()
   return cryptoUtils.sha256(Buffer.from(transactionData)).toString('hex').slice(0, 40)

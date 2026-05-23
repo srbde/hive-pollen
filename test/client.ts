@@ -1,9 +1,6 @@
 import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
 ;
 import assert from "assert";
-import verror from "verror";
-const { VError } = verror;
-
 import { Client, utils } from "../src/index.js";
 
 describe("client", function() {
@@ -40,7 +37,7 @@ describe("client", function() {
         error.message.includes(`Could not find method i_like_turtles`)
       ); // appbase
 
-      const info = VError.info(error);
+      const info = (error as any).info;
       assert(info.code === 10 || info.code === 4030100 || info.code === 4100100);
       assert(info.name === "assert_exception" || info.name === "not_enough_rc_exception" || info.name === "tx_missing_expiration" || info.name === "transaction_expiration_exception");
     }
@@ -63,7 +60,7 @@ describe("client", function() {
         error.message.includes("Account name") ||
         error.message.includes("expiration")
       );
-      const info = VError.info(error);
+      const info = (error as any).info;
       assert(info.code === 10 || info.code === 4030100 || info.code === 4100100);
       assert(info.name === "assert_exception" || info.name === "not_enough_rc_exception" || info.name === "tx_missing_expiration" || info.name === "transaction_expiration_exception");
     }

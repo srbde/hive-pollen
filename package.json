@@ -62,12 +62,10 @@
     "jsbi": "^4.3.2",
     "node-fetch": "^2.7.0",
     "regenerator-runtime": "^0.14.1",
-    "verror": "^1.10.1",
     "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
     "@types/node": "^22.19.19",
-    "@types/verror": "^1.10.11",
     "@vitest/coverage-v8": "^4.1.7",
     "assert": "^2.1.0",
     "buffer": "^6.0.3",

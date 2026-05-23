@@ -2,8 +2,6 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 ;
 import assert from "assert";
 import { loremIpsum as lorem } from "lorem-ipsum";
-import verror from "verror";
-const { VError } = verror;
 
 import { Client, PrivateKey, utils } from "../src/index.js";
 

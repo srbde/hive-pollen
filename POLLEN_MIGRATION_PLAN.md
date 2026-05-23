@@ -19,29 +19,20 @@ This document outlines the strategic roadmap for **`@srbde/pollen`**.
 - [x] **esbuild:** Integrated for high-performance browser bundling.
 
 ## ✅ Phase 4: Architectural Modernization (COMPLETED)
+- [x] **Pure ESM Migration:** Converted project to Pure ESM.
+- [x] **Network Resilience:** Implemented robust Exponential Backoff.
+- [x] **Native Engine:** Replaced legacy `ByteBuffer` with native `Uint8Array` engine.
+- [x] **Legacy Pruning:** Removed POW ops and obsolete polyfills.
 
-### 1. ✅ Pure ESM Migration (COMPLETED)
-- [x] Converted project to Pure ESM (`"type": "module"`).
-- [x] Added required `.js` extensions to all internal imports.
-- [x] Modernized `tsconfig.json` and build pipeline.
-- [x] Resolved ESM interoperability issues with legacy CJS packages.
+## 🛠️ Phase 5: The Strictness Siege (IN PROGRESS)
 
-### 2. ✅ Network Resilience & Test Stabilization (COMPLETED)
-- [x] Implemented robust **Exponential Backoff** with Jitter.
-- [x] Achieved **100% Green Test Suite** (92 passing tests).
-- [x] Modernized test vectors and error handling for 2026 hived nodes.
+**Goal:** Turn Pollen into a world-class, type-safe SDK by eliminating `any` and enabling strict compiler checks.
 
-### 3. ✅ Native Streams & Uint8Arrays (COMPLETED)
-- [x] Removed legacy `@ecency/bytebuffer` dependency.
-- [x] Implemented native **BinaryWriter** and **BinaryReader** using `Uint8Array` and `DataView`.
-- [x] Overhauled the entire serialization layer for zero-dependency operation.
-- [x] Verified with live-chain **Smoke Test** success.
-
-### 4. ✅ Legacy Pruning & Cleanup (COMPLETED)
-- [x] Pruned internal fallback functions no longer required by Hive nodes.
-- [x] Removed explicitly deprecated `rebrandedApi` and `updateOperations` methods.
-- [x] Deleted obsolete configuration files (`.babelrc`, `tslint.json`).
-- [x] Cleaned up redundant core-js/regenerator-runtime polyfills.
+- [ ] **Native Error Handling:** Replace `verror` with a native `PollenError` class.
+- [ ] **Enable `strict: true`:** Flip the switch in `tsconfig.json` and fix the fallout.
+- [ ] **Operation Union Types:** Exhaustively type all 50+ Hive operations.
+- [ ] **Typed RPC Layer:** Ensure every `database` and `broadcast` call has a strict return interface.
+- [ ] **Eliminate `any`:** Goal: < 10 usages of `any` in the entire production `src/` directory.
 
 ---
-*Document updated on Saturday, May 23, 2026. The Migration Roadmap is now 100% Complete.*
+*Document updated on Saturday, May 23, 2026. Phase 5 is active.*
