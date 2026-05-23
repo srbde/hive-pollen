@@ -7,9 +7,9 @@ import {
   SignedBlock,
   AppliedOperation,
   BlockchainMode
-} from "./../src";
+} from "../src/index.js";
 
-import { agent, TEST_NODE } from "./common";
+import { agent, TEST_NODE } from "./common.js";
 
 describe("blockchain", function() {
   

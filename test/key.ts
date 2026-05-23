@@ -2,12 +2,12 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 import assert from 'assert'
 
 
-import { Client } from './../src'
-import { agent } from './common'
+import { Client } from '../src/index.js'
+import { agent } from './common.js'
 
 describe('account_by_key_api', function() {
-  this.slow(500)
-  this.timeout(20 * 1000)
+  
+  
 
   const client = Client.testnet({ agent })
 

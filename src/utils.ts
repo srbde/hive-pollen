@@ -36,7 +36,7 @@
 import fetch from 'cross-fetch'
 import { EventEmitter } from 'events'
 import { PassThrough } from 'stream'
-import { NodeHealthTracker } from './health-tracker'
+import { NodeHealthTracker } from './health-tracker.js'
 
 // Errors that indicate the request never reached the server — safe to retry even for broadcasts
 const PRE_CONNECTION_ERRORS = ['ECONNREFUSED', 'ENOTFOUND', 'EHOSTUNREACH', 'EAI_AGAIN']
@@ -337,10 +337,10 @@ export async function retryingFetch(
 // Hack to be able to generate a valid witness_set_properties op
 // Can hopefully be removed when hived's JSON representation is fixed
 import ByteBuffer from '@ecency/bytebuffer'
-import { Asset, PriceType } from './chain/asset'
-import { WitnessSetPropertiesOperation } from './chain/operation'
-import { Serializer, Types } from './chain/serializer'
-import { PublicKey } from './crypto'
+import { Asset, PriceType } from './chain/asset.js'
+import { WitnessSetPropertiesOperation } from './chain/operation.js'
+import { Serializer, Types } from './chain/serializer.js'
+import { PublicKey } from './crypto.js'
 export interface WitnessProps {
   account_creation_fee?: string | Asset
   account_subsidy_budget?: number // uint32_t
@@ -407,7 +407,7 @@ export const buildWitnessUpdateOp = (
   return ['witness_set_properties', data]
 }
 
-const JSBI = require('jsbi')
+import JSBI from 'jsbi'
 export const operationOrders = {
   vote: 0,
   // tslint:disable-next-line: object-literal-sort-keys

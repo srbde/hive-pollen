@@ -1,5 +1,5 @@
-import { SMTAsset } from './asset'
-import { Bignum } from './misc'
+import { SMTAsset } from './asset.js'
+import { Bignum } from './misc.js'
 
 export interface RCParams {
     resource_history_bytes: Resource

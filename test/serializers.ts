@@ -3,13 +3,13 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 import assert from 'assert'
 import ByteBuffer from '@ecency/bytebuffer'
 
-import {Types, Serializer, HexBuffer} from './../src'
+import {Types, Serializer, HexBuffer} from '../src/index.js'
 
 /*
  Serializer tests in the format:
  [{"name": "Type[::Subtype]", "values": [["expected output as hex string", <value>]]}]
 */
-const serializerTests = require('./serializer-tests.json')
+import serializerTests from './serializer-tests.json'
 
 function serialize(serializer: Serializer, data: any) {
     const buffer = new ByteBuffer(ByteBuffer.DEFAULT_CAPACITY, ByteBuffer.LITTLE_ENDIAN)

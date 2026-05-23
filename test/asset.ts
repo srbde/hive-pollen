@@ -2,7 +2,7 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 ;
 import assert from "assert";
 
-import { Asset, Price, getVestingSharePrice } from "./../src";
+import { Asset, Price, getVestingSharePrice } from "../src/index.js";
 
 describe("asset", function() {
   it("should create from string", function() {

@@ -34,10 +34,10 @@
  */
 
 import ByteBuffer from '@ecency/bytebuffer'
-import { PublicKey } from '../crypto'
-import { Asset } from './asset'
-import { HexBuffer } from './misc'
-import { Operation } from './operation'
+import { PublicKey } from '../crypto.js'
+import { Asset } from './asset.js'
+import { HexBuffer } from './misc.js'
+import { Operation } from './operation.js'
 
 export type Serializer = (buffer: ByteBuffer, data: any) => void
 

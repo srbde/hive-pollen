@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Transaction } from './transaction'
+import { Transaction } from './transaction.js'
 
 /**
  * Unsigned block header.

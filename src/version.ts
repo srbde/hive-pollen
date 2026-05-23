@@ -1,2 +1,2 @@
 // overwritten by buildscript
-export default require('./../package.json').version as string
+export default '0.0.0'

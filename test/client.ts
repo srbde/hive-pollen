@@ -3,7 +3,7 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 import assert from "assert";
 import { VError } from "verror";
 
-import { Client, utils } from "./../src";
+import { Client, utils } from "../src/index.js";
 
 describe("client", function() {
   

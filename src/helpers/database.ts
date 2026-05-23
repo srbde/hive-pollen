@@ -33,18 +33,18 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { ExtendedAccount } from '../chain/account'
-import { Price } from '../chain/asset'
-import { BlockHeader, SignedBlock } from '../chain/block'
-import { Discussion } from '../chain/comment'
-import { DynamicGlobalProperties } from '../chain/misc'
-import { ChainProperties, VestingDelegation } from '../chain/misc'
-import { AppliedOperation } from '../chain/operation'
+import { ExtendedAccount } from '../chain/account.js'
+import { Price } from '../chain/asset.js'
+import { BlockHeader, SignedBlock } from '../chain/block.js'
+import { Discussion } from '../chain/comment.js'
+import { DynamicGlobalProperties } from '../chain/misc.js'
+import { ChainProperties, VestingDelegation } from '../chain/misc.js'
+import { AppliedOperation } from '../chain/operation.js'
 import {
   SignedTransaction,
   TransactionConfirmation
-} from '../chain/transaction'
-import { Client } from './../client'
+} from '../chain/transaction.js'
+import { Client } from './../client.js'
 
 /**
  * Possible categories for `get_discussions_by_*`.

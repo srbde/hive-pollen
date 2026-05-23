@@ -1,12 +1,12 @@
 import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
 ;
 import assert from "assert";
-import { Memo } from "../src/memo"
+import { Memo } from "../src/memo.js"
 const { encode, decode } = Memo
 
 import {
     PrivateKey
-} from "./../src";
+} from "../src/index.js";
 
 const private_key = PrivateKey.fromSeed("")
 const public_key = private_key.createPublic()

@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Asset } from './asset'
+import { Asset } from './asset.js'
 
 export interface Comment {
     id: number // comment_id_type

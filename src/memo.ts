@@ -1,9 +1,9 @@
 import { base58 as bs58 } from '@scure/base'
 import ByteBuffer from '@ecency/bytebuffer'
-import { types } from './chain/deserializer'
-import { Types } from './chain/serializer'
-import { PrivateKey, PublicKey } from './crypto'
-import * as Aes from './helpers/aes'
+import { types } from './chain/deserializer.js'
+import { Types } from './chain/serializer.js'
+import { PrivateKey, PublicKey } from './crypto.js'
+import * as Aes from './helpers/aes.js'
 
 /**
  * Memo/Any message encoding using AES (aes-cbc algorithm)

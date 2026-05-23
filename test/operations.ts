@@ -3,11 +3,11 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 import assert from "assert";
 import { randomBytes } from "crypto";
 
-import * as ds from "./../src";
+import * as ds from "../src/index.js";
 
 const { Asset, PrivateKey, Client, HexBuffer } = ds;
 
-import { getTestnetAccounts, randomString, agent } from "./common";
+import { getTestnetAccounts, randomString, agent } from "./common.js";
 
 describe("operations", function() {
   

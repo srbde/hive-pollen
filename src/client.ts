@@ -35,17 +35,17 @@
 
 import assert from 'assert'
 import { VError } from 'verror'
-import packageVersion from './version'
+import packageVersion from './version.js'
 
-import { Blockchain } from './helpers/blockchain'
-import { BroadcastAPI } from './helpers/broadcast'
-import { DatabaseAPI } from './helpers/database'
-import { HivemindAPI } from './helpers/hivemind'
-import {AccountByKeyAPI} from './helpers/key'
-import { RCAPI } from './helpers/rc'
-import {TransactionStatusAPI} from './helpers/transaction'
-import { NodeHealthTracker, HealthTrackerOptions } from './health-tracker'
-import { copy, retryingFetch, waitForEvent } from './utils'
+import { Blockchain } from './helpers/blockchain.js'
+import { BroadcastAPI } from './helpers/broadcast.js'
+import { DatabaseAPI } from './helpers/database.js'
+import { HivemindAPI } from './helpers/hivemind.js'
+import {AccountByKeyAPI} from './helpers/key.js'
+import { RCAPI } from './helpers/rc.js'
+import {TransactionStatusAPI} from './helpers/transaction.js'
+import { NodeHealthTracker, HealthTrackerOptions } from './health-tracker.js'
+import { copy, retryingFetch, waitForEvent } from './utils.js'
 
 /**
  * Library version.

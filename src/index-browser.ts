@@ -42,4 +42,4 @@ import 'core-js/features/symbol/async-iterator'
 import 'regenerator-runtime/runtime'
 import 'whatwg-fetch'
 
-export * from './index'
+export * from './index.js'

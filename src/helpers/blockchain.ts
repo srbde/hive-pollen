@@ -33,8 +33,8 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Client } from './../client'
-import { iteratorStream, sleep } from './../utils'
+import { Client } from './../client.js'
+import { iteratorStream, sleep } from './../utils.js'
 
 export enum BlockchainMode {
   /**

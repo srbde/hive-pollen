@@ -2,10 +2,10 @@
  * Hivemind database query wrapper
  */
 
-import { Account } from '../chain/account'
-import { Discussion } from '../chain/comment'
-import { CommunityDetail, Notifications } from '../chain/hivemind'
-import { Client } from './../client'
+import { Account } from '../chain/account.js'
+import { Discussion } from '../chain/comment.js'
+import { CommunityDetail, Notifications } from '../chain/hivemind.js'
+import { Client } from './../client.js'
 
 interface PostsQuery {
     /**

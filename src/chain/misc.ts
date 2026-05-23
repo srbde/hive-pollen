@@ -32,8 +32,8 @@
  * You acknowledge that this software is not designed, licensed or intended for use
  * in the design, construction, operation or maintenance of any military facility.
  */
-import { Account } from './account'
-import { Asset, Price } from './asset'
+import { Account } from './account.js'
+import { Asset, Price } from './asset.js'
 
 /**
  * Large number that may be unsafe to represent natively in JavaScript.

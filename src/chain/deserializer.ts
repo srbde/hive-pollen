@@ -1,5 +1,5 @@
 import ByteBuffer from '@ecency/bytebuffer'
-import { PublicKey } from '../crypto'
+import { PublicKey } from '../crypto.js'
 
 export type Deserializer = (buffer: ByteBuffer) => void
 

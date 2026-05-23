@@ -4,9 +4,9 @@ import assert from "assert";
 import { loremIpsum as lorem } from "lorem-ipsum";
 import { VError } from "verror";
 
-import { Client, PrivateKey, utils } from "./../src";
+import { Client, PrivateKey, utils } from "../src/index.js";
 
-import { getTestnetAccounts, randomString, agent } from "./common";
+import { getTestnetAccounts, randomString, agent } from "./common.js";
 
 describe("broadcast", function() {
   

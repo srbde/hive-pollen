@@ -1,9 +1,9 @@
 /* tslint:disable:no-string-literal */
 
-import { Account } from '../chain/account'
-import { getVests } from '../chain/misc'
-import { Manabar, RCAccount, RCParams, RCPool } from '../chain/rc'
-import { Client } from './../client'
+import { Account } from '../chain/account.js'
+import { getVests } from '../chain/misc.js'
+import { Manabar, RCAccount, RCParams, RCPool } from '../chain/rc.js'
+import { Client } from './../client.js'
 
 export class RCAPI {
     constructor(readonly client: Client) {}

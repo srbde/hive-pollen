@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Operation } from './operation'
+import { Operation } from './operation.js'
 
 export interface Transaction {
     ref_block_num: number

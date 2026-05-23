@@ -2,8 +2,8 @@ import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } 
 ;
 import assert from "assert";
 
-import { Client, Asset, Transaction, PrivateKey } from "./../src";
-import { getTestnetAccounts, randomString, agent, TEST_NODE } from "./common";
+import { Client, Asset, Transaction, PrivateKey } from "../src/index.js";
+import { getTestnetAccounts, randomString, agent, TEST_NODE } from "./common.js";
 
 describe("rc_api", function() {
   

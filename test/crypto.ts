@@ -15,7 +15,7 @@ import {
   cryptoUtils,
   Transaction,
   Types
-} from "./../src";
+} from "../src/index.js";
 
 describe("crypto", function() {
   const testnetPrefix = "STX";

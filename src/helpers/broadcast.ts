@@ -35,8 +35,8 @@
 
 import assert from 'assert'
 
-import { Authority, AuthorityType } from '../chain/account'
-import { Asset } from '../chain/asset'
+import { Authority, AuthorityType } from '../chain/account.js'
+import { Asset } from '../chain/asset.js'
 import {
   AccountUpdateOperation,
   ClaimAccountOperation,
@@ -48,14 +48,14 @@ import {
   Operation,
   TransferOperation,
   VoteOperation
-} from '../chain/operation'
+} from '../chain/operation.js'
 import {
   SignedTransaction,
   Transaction,
   TransactionConfirmation
-} from '../chain/transaction'
-import { Client } from './../client'
-import { cryptoUtils, PrivateKey, PublicKey } from './../crypto'
+} from '../chain/transaction.js'
+import { Client } from './../client.js'
+import { cryptoUtils, PrivateKey, PublicKey } from './../crypto.js'
 
 export interface CreateAccountOptions {
   /**

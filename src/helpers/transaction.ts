@@ -3,7 +3,7 @@
  * @author Bartłomiej (@engrave) Górnicki
  */
 
-import {Client} from './../client'
+import {Client} from './../client.js'
 
 export type TransactionStatus =
     'unknown'

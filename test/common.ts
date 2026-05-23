@@ -1,8 +1,9 @@
+import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
 import * as fs from "fs";
 import * as https from "https";
 import { randomBytes } from "crypto";
 import fetch from "cross-fetch";
-import { Client, PrivateKey } from './../src'
+import { Client, PrivateKey } from '../src/index.js'
 
 export const NUM_TEST_ACCOUNTS = 2;
 export const IS_BROWSER = global["isBrowser"] === true;

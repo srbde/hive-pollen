@@ -4,7 +4,7 @@ import assert from "assert";
 import * as stream from "stream";
 import { VError } from "verror";
 
-import { utils } from "./../src";
+import { utils } from "../src/index.js";
 
 describe("misc", function() {
   describe("iteratorStream", function() {

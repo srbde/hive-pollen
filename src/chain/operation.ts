@@ -33,12 +33,12 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { PublicKey } from '../crypto'
-import { AuthorityType } from './account'
-import { Asset, PriceType } from './asset'
-import { SignedBlockHeader } from './block'
-import { BeneficiaryRoute } from './comment'
-import { ChainProperties, HexBuffer } from './misc'
+import { PublicKey } from '../crypto.js'
+import { AuthorityType } from './account.js'
+import { Asset, PriceType } from './asset.js'
+import { SignedBlockHeader } from './block.js'
+import { BeneficiaryRoute } from './comment.js'
+import { ChainProperties, HexBuffer } from './misc.js'
 
 /**
  * Operation name.
