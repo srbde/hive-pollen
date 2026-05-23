@@ -1,5 +1,5 @@
 
-dhive comment feed example
+Pollen comment feed example
 ===========================
 
 Running on: <https://comments.esteem.app>

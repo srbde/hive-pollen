@@ -1,14 +1,12 @@
 
-import {Client, BlockchainMode} from '@hiveio/dhive'
+import {Client, BlockchainMode} from '@srbde/pollen'
 
 import * as removeMarkdown from 'remove-markdown'
 
 const DEFAULT_SERVER = [
-    'https://rpc.esteem.app',
-    'https://anyx.io',
-    'https://api.pharesim.me',
     'https://api.hive.blog',
-    'https://api.hivekings.com',
+    'https://api.openhive.network',
+    'https://anyx.io',
   ];
 const client = new Client(DEFAULT_SERVER, {
     timeout: 5000,
@@ -21,7 +19,7 @@ function sleep(ms: number): Promise<void> {
 }
 
 function shortBody(body: string) {
-    let rv: string = removeMarkdown(body).replace(/<[^>]*>/g, '')
+    let rv: string = (removeMarkdown as any)(body).replace(/<[^>]*>/g, '')
     if (rv.length > 140) {
         return rv.slice(0, 139) + '…'
     }
@@ -33,7 +31,7 @@ function buildComment(comment: any): HTMLDivElement {
     rv.className = 'comment'
 
     const {author, body, parent_author, parent_permlink} = comment
-    const parent = `@${ parent_author }/${ parent_permlink }`
+    const _parent = `@${ parent_author }/${ parent_permlink }`
 
     rv.innerHTML += `
         <span class="author">
@@ -58,12 +56,12 @@ async function *getComments() {
 }
 
 export default async function main() {
-    const commentsEl = document.getElementById('comments')
-    const backlog = []
+    const commentsEl = document.getElementById('comments')!
+    const backlog: any[] = []
 
-    let renderTimer: NodeJS.Timer | undefined
+    let renderTimer: any
 
-    document.querySelector('a[href="#pause"]').addEventListener('click', function(event) {
+    document.querySelector('a[href="#pause"]')!.addEventListener('click', function(event) {
         event.preventDefault()
         if (renderTimer) {
             this.textContent = 'Resume'
@@ -82,7 +80,7 @@ export default async function main() {
             while (commentsEl.children.length > 100) {
                 commentsEl.removeChild(commentsEl.children[0])
             }
-            window.scrollTo(undefined, document.body.scrollHeight)
+            window.scrollTo(0, document.body.scrollHeight)
         }
         const next = 3000 / (backlog.length + 1)
         renderTimer = setTimeout(render, next)
@@ -100,8 +98,8 @@ export default async function main() {
     const run = async () => {
         try {
             while (true) { await iter.next() }
-        } catch (error) {
-            console.error('Problem fetching comments', error)
+        } catch (error: any) {
+            console.error('Problem fetching comments', error.message)
             setTimeout(() => {
                 iter = update()
                 run()

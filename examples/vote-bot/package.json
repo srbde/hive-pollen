@@ -1,6 +1,8 @@
 {
-  "private": true,
+  "name": "vote-bot",
+  "version": "1.0.0",
+  "type": "module",
   "dependencies": {
-    "@hiveio/dhive": "file:../.."
+    "@srbde/pollen": "link:../.."
   }
 }

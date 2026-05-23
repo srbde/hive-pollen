@@ -15,7 +15,7 @@
     "watchify": false,
     "extensions": [".ts"],
     "plugins": ["tsify"],
-    "staticLibs": ["@hiveio/dhive"],
+    "staticLibs": ["@srbde/pollen"],
     "staticLibsBundle": true
   },
   "stylus": {
