@@ -92,6 +92,10 @@ function App() {
           ))
         )}
       </main>
+
+      <footer className="footer">
+        Powered by Pollen 🌸 | Copyright 2026 Sustainable Resource and Business Development Enterprise
+      </footer>
     </div>
   )
 }
