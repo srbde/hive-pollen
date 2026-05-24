@@ -8,7 +8,7 @@
 
 > **bytesEqual**(`a`, `b`): `boolean`
 
-Defined in: [src/utils.ts:154](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L154)
+Defined in: [src/utils.ts:167](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L167)
 
 Compares two byte arrays for equality.
 

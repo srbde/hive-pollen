@@ -8,7 +8,7 @@
 
 > **buildWitnessUpdateOp**(`owner`, `props`): [`WitnessSetPropertiesOperation`](../../../../interfaces/WitnessSetPropertiesOperation.md)
 
-Defined in: [src/utils.ts:655](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L655)
+Defined in: [src/utils.ts:660](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L660)
 
 ## Parameters
 

@@ -33,21 +33,13 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Buffer } from "buffer";
-import process from "process";
-
-if (typeof window !== "undefined") {
-  (window as any).global = window;
-  (window as any).Buffer = Buffer;
-  (window as any).process = process;
-}
-
 /**
  * Browser entry point for Pollen.
  *
  * @remarks
- * This module installs the minimal `Buffer`, `process`, and `global` shims
- * needed by the browser bundle before re-exporting the main API surface.
+ * This module re-exports the main API surface for browser environments.
+ * Native Web Streams and Uint8Array are used throughout to ensure compatibility
+ * without legacy Node.js polyfills.
  *
  * @example
  * ```ts

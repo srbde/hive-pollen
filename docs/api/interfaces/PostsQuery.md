@@ -6,7 +6,7 @@
 
 # Interface: PostsQuery
 
-Defined in: [src/helpers/hivemind.ts:27](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L27)
+Defined in: [src/helpers/hivemind.ts:27](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L27)
 
 Query options for ranked Hivemind post feeds.
 
@@ -32,7 +32,7 @@ const query: PostsQuery = {
 
 > `optional` **limit?**: `number`
 
-Defined in: [src/helpers/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L31)
+Defined in: [src/helpers/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L31)
 
 Number of posts to fetch
 
@@ -42,7 +42,7 @@ Number of posts to fetch
 
 > `optional` **observer?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:43](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L43)
+Defined in: [src/helpers/hivemind.ts:43](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L43)
 
 Observer account
 
@@ -52,7 +52,7 @@ Observer account
 
 > **sort**: `"hot"` \| `"promoted"` \| `"trending"` \| `"created"` \| `"payout"` \| `"payout_comments"` \| `"muted"`
 
-Defined in: [src/helpers/hivemind.ts:35](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L35)
+Defined in: [src/helpers/hivemind.ts:35](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L35)
 
 Sorting posts
 
@@ -62,7 +62,7 @@ Sorting posts
 
 > `optional` **start\_author?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:47](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L47)
+Defined in: [src/helpers/hivemind.ts:47](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L47)
 
 Paginating last post author
 
@@ -72,7 +72,7 @@ Paginating last post author
 
 > `optional` **start\_permlink?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:51](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L51)
+Defined in: [src/helpers/hivemind.ts:51](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L51)
 
 Paginating last post permlink
 
@@ -82,6 +82,6 @@ Paginating last post permlink
 
 > `optional` **tag?**: `string` \| `string`[]
 
-Defined in: [src/helpers/hivemind.ts:39](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L39)
+Defined in: [src/helpers/hivemind.ts:39](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L39)
 
 Filtering with tags

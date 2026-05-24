@@ -15,7 +15,7 @@
  *     and/or other materials provided with the distribution.
  *
  *  3. Neither the name of the copyright holder nor the names of its contributors
- *     may be endorse or promote products derived from this software without
+ *     may be used to endorse or promote products derived from this software without
  *     specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import assert from "assert";
+import { assert, fromHex } from "./../utils.js";
 
 import { Authority, AuthorityType } from "../chain/account.js";
 import { Asset } from "../chain/asset.js";
@@ -52,7 +52,6 @@ import {
 import { SignedTransaction, Transaction, TransactionConfirmation } from "../chain/transaction.js";
 import { Client } from "./../client.js";
 import { cryptoUtils, PrivateKey, PublicKey } from "./../crypto.js";
-import { fromHex } from "./../utils.js";
 
 /**
  * Options used by {@link BroadcastAPI.createTestAccount}.

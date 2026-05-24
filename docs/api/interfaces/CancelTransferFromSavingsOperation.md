@@ -6,7 +6,7 @@
 
 # Interface: CancelTransferFromSavingsOperation
 
-Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L435)
+Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L435)
 
 Cancels a pending savings withdrawal request.
 
@@ -20,7 +20,7 @@ Cancels a pending savings withdrawal request.
 
 > **0**: `"cancel_transfer_from_savings"`
 
-Defined in: [src/chain/operation.ts:436](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L436)
+Defined in: [src/chain/operation.ts:436](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L436)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:436](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:437](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L437)
+Defined in: [src/chain/operation.ts:437](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L437)
 
 #### from
 

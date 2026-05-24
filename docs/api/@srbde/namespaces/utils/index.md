@@ -39,6 +39,7 @@ const mask = utils.makeBitMaskFilter([utils.operationOrders.transfer])
 
 ## Functions
 
+- [assert](functions/assert.md)
 - [buildWitnessUpdateOp](functions/buildWitnessUpdateOp.md)
 - [bytesEqual](functions/bytesEqual.md)
 - [concat](functions/concat.md)
@@ -50,4 +51,3 @@ const mask = utils.makeBitMaskFilter([utils.operationOrders.transfer])
 - [retryingFetch](functions/retryingFetch.md)
 - [sleep](functions/sleep.md)
 - [toHex](functions/toHex.md)
-- [waitForEvent](functions/waitForEvent.md)

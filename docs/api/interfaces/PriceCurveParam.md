@@ -6,7 +6,7 @@
 
 # Interface: PriceCurveParam
 
-Defined in: [src/chain/rc.ts:53](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L53)
+Defined in: [src/chain/rc.ts:53](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L53)
 
 Curve coefficients used to convert resource usage into RC cost.
 
@@ -16,7 +16,7 @@ Curve coefficients used to convert resource usage into RC cost.
 
 > **coeff\_a**: `string`
 
-Defined in: [src/chain/rc.ts:54](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L54)
+Defined in: [src/chain/rc.ts:54](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L54)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/chain/rc.ts:54](https://github.com/TheCrazyGM/dhive/blob/a6addb
 
 > **coeff\_b**: `string`
 
-Defined in: [src/chain/rc.ts:55](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L55)
+Defined in: [src/chain/rc.ts:55](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L55)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/chain/rc.ts:55](https://github.com/TheCrazyGM/dhive/blob/a6addb
 
 > **shift**: `number`
 
-Defined in: [src/chain/rc.ts:56](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L56)
+Defined in: [src/chain/rc.ts:56](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L56)

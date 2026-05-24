@@ -6,7 +6,7 @@
 
 # Interface: DeclineVotingRightsOperation
 
-Defined in: [src/chain/operation.ts:672](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L672)
+Defined in: [src/chain/operation.ts:672](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L672)
 
 Enables or disables an account's ability to vote.
 
@@ -20,7 +20,7 @@ Enables or disables an account's ability to vote.
 
 > **0**: `"decline_voting_rights"`
 
-Defined in: [src/chain/operation.ts:673](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L673)
+Defined in: [src/chain/operation.ts:673](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L673)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:673](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:674](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L674)
+Defined in: [src/chain/operation.ts:674](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L674)
 
 #### account
 

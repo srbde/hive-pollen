@@ -6,7 +6,7 @@
 
 # Enumeration: BlockchainMode
 
-Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/blockchain.ts#L39)
+Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/blockchain.ts#L39)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/b
 
 > **Irreversible**: `0`
 
-Defined in: [src/helpers/blockchain.ts:47](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/blockchain.ts#L47)
+Defined in: [src/helpers/blockchain.ts:47](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/blockchain.ts#L47)
 
 Stream only blocks that the Hive consensus protocol has made irreversible.
 
@@ -29,7 +29,7 @@ must not react to a block that can still be replaced by a fork.
 
 > **Latest**: `1`
 
-Defined in: [src/helpers/blockchain.ts:55](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/blockchain.ts#L55)
+Defined in: [src/helpers/blockchain.ts:55](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/blockchain.ts#L55)
 
 Stream from the latest head block, including blocks that are still reversible.
 

@@ -8,6 +8,6 @@
 
 > `const` **NETWORK\_ID**: `Uint8Array`\<`ArrayBuffer`\>
 
-Defined in: [src/crypto.ts:51](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L51)
+Defined in: [src/crypto.ts:50](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L50)
 
 Network marker byte used by Hive WIF private keys.

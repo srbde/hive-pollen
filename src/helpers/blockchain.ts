@@ -91,7 +91,7 @@ export interface BlockchainStreamOptions {
 
 /**
  * Convenience helper for reading Hive blocks and operations as async iterators
- * or Node streams.
+ * or native Web Streams.
  *
  * @remarks
  * `Blockchain` builds on {@link DatabaseAPI} and adds polling, block-number
@@ -238,7 +238,7 @@ export class Blockchain {
   }
 
   /**
-   * Creates a Node readable stream of block numbers.
+   * Creates a native Web ReadableStream of block numbers.
    *
    * @param options - Same options accepted by {@link getBlockNumbers}.
    * @returns A stream backed by the async block-number iterator.
@@ -246,7 +246,10 @@ export class Blockchain {
    * @example
    * ```ts
    * const stream = client.blockchain.getBlockNumberStream(90_000_000)
-   * stream.on('data', (blockNum) => console.log(blockNum))
+   * // Use native Web Stream API or async iteration
+   * for await (const blockNum of stream) {
+   *   console.log(blockNum)
+   * }
    * ```
    */
   public getBlockNumberStream(options?: BlockchainStreamOptions | number) {
@@ -276,16 +279,17 @@ export class Blockchain {
   }
 
   /**
-   * Creates a Node readable stream of full signed blocks.
+   * Creates a native Web ReadableStream of full signed blocks.
    *
    * @param options - Same options accepted by {@link getBlockNumbers}.
    * @returns A stream backed by the async block iterator.
    *
    * @example
    * ```ts
-   * client.blockchain
-   *   .getBlockStream({ from: 90_000_000 })
-   *   .on('data', (block) => console.log(block.block_id))
+   * const stream = client.blockchain.getBlockStream({ from: 90_000_000 })
+   * for await (const block of stream) {
+   *   console.log(block.block_id)
+   * }
    * ```
    */
   public getBlockStream(options?: BlockchainStreamOptions | number) {
@@ -328,7 +332,7 @@ export class Blockchain {
   }
 
   /**
-   * Creates a Node readable stream of applied operations.
+   * Creates a native Web ReadableStream of applied operations.
    *
    * @param options - Same options accepted by {@link getBlockNumbers}.
    * @returns A stream backed by the async operation iterator.
@@ -336,7 +340,9 @@ export class Blockchain {
    * @example
    * ```ts
    * const stream = client.blockchain.getOperationsStream({ from: 90_000_000 })
-   * stream.on('data', (applied) => console.log(applied.op[0]))
+   * for await (const applied of stream) {
+   *   console.log(applied.op[0])
+   * }
    * ```
    */
   public getOperationsStream(options?: BlockchainStreamOptions | number) {

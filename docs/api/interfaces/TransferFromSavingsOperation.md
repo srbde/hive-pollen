@@ -6,7 +6,7 @@
 
 # Interface: TransferFromSavingsOperation
 
-Defined in: [src/chain/operation.ts:1102](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1102)
+Defined in: [src/chain/operation.ts:1102](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1102)
 
 Withdraws funds from savings to liquid balance after the savings delay.
 
@@ -25,7 +25,7 @@ before it completes.
 
 > **0**: `"transfer_from_savings"`
 
-Defined in: [src/chain/operation.ts:1103](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1103)
+Defined in: [src/chain/operation.ts:1103](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1103)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:1103](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1104](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1104)
+Defined in: [src/chain/operation.ts:1104](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1104)
 
 #### amount
 

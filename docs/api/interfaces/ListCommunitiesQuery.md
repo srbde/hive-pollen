@@ -6,7 +6,7 @@
 
 # Interface: ListCommunitiesQuery
 
-Defined in: [src/helpers/hivemind.ts:121](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L121)
+Defined in: [src/helpers/hivemind.ts:121](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L121)
 
 Query options for listing communities known to Hivemind.
 
@@ -25,7 +25,7 @@ const query: ListCommunitiesQuery = {
 
 > `optional` **last?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:125](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L125)
+Defined in: [src/helpers/hivemind.ts:125](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L125)
 
 Paginating last
 
@@ -35,7 +35,7 @@ Paginating last
 
 > **limit**: `number`
 
-Defined in: [src/helpers/hivemind.ts:129](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L129)
+Defined in: [src/helpers/hivemind.ts:129](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L129)
 
 Number of communities to fetch
 
@@ -45,7 +45,7 @@ Number of communities to fetch
 
 > `optional` **observer?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:137](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L137)
+Defined in: [src/helpers/hivemind.ts:137](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L137)
 
 Observer account
 
@@ -55,6 +55,6 @@ Observer account
 
 > `optional` **query?**: `any`
 
-Defined in: [src/helpers/hivemind.ts:133](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L133)
+Defined in: [src/helpers/hivemind.ts:133](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L133)
 
 To be developed, not ready yet

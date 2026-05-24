@@ -6,7 +6,7 @@
 
 # Interface: CommunityRolesQuery
 
-Defined in: [src/helpers/hivemind.ts:89](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L89)
+Defined in: [src/helpers/hivemind.ts:89](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L89)
 
 Query options for community role lookups.
 
@@ -21,4 +21,4 @@ other community team assignments.
 
 > **community**: `string`
 
-Defined in: [src/helpers/hivemind.ts:90](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L90)
+Defined in: [src/helpers/hivemind.ts:90](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L90)

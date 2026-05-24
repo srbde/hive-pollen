@@ -6,7 +6,7 @@
 
 # Class: HivemindAPI
 
-Defined in: [src/helpers/hivemind.ts:160](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L160)
+Defined in: [src/helpers/hivemind.ts:160](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L160)
 
 Helper for Hive Hivemind and bridge API reads.
 
@@ -35,7 +35,7 @@ console.log(posts.map((post) => post.title))
 
 > **new HivemindAPI**(`client`): `HivemindAPI`
 
-Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L166)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L166)
 
 Creates a Hivemind helper bound to a client.
 
@@ -57,7 +57,7 @@ Client used to call the bridge API namespace.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L166)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L166)
 
 Client used to call the bridge API namespace.
 
@@ -67,7 +67,7 @@ Client used to call the bridge API namespace.
 
 > **call**\<`T`\>(`method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/helpers/hivemind.ts:187](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L187)
+Defined in: [src/helpers/hivemind.ts:187](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L187)
 
 Sends a raw bridge API call.
 
@@ -118,7 +118,7 @@ const posts = await client.hivemind.call('get_ranked_posts', {
 
 > **getAccountNotifications**(`options?`): `Promise`\<[`Notifications`](../interfaces/Notifications.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:297](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L297)
+Defined in: [src/helpers/hivemind.ts:297](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L297)
 
 Fetches an account's Hivemind notification feed.
 
@@ -156,7 +156,7 @@ const notifications = await client.hivemind.getAccountNotifications({
 
 > **getAccountPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:233](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L233)
+Defined in: [src/helpers/hivemind.ts:233](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L233)
 
 Fetches posts authored or surfaced by a specific account.
 
@@ -195,7 +195,7 @@ const posts = await client.hivemind.getAccountPosts({
 
 > **getCommunity**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:257](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L257)
+Defined in: [src/helpers/hivemind.ts:257](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L257)
 
 Fetches community metadata from Hivemind.
 
@@ -236,7 +236,7 @@ console.log(community.title)
 
 > **getRankedPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:211](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L211)
+Defined in: [src/helpers/hivemind.ts:211](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L211)
 
 Fetches ranked posts from Hivemind.
 
@@ -277,7 +277,7 @@ const posts = await client.hivemind.getRankedPosts({
 
 > **listAllSubscriptions**(`account`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:276](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L276)
+Defined in: [src/helpers/hivemind.ts:276](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L276)
 
 Lists communities followed by an account.
 
@@ -313,7 +313,7 @@ console.log(subscriptions)
 
 > **listCommunities**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:318](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/hivemind.ts#L318)
+Defined in: [src/helpers/hivemind.ts:318](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/hivemind.ts#L318)
 
 Lists communities known to Hivemind.
 

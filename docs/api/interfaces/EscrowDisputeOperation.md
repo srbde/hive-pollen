@@ -6,7 +6,7 @@
 
 # Interface: EscrowDisputeOperation
 
-Defined in: [src/chain/operation.ts:740](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L740)
+Defined in: [src/chain/operation.ts:740](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L740)
 
 If either the sender or receiver of an escrow payment has an issue, they can
 raise it for dispute. Once a payment is in dispute, the agent has authority over
@@ -22,7 +22,7 @@ who gets what.
 
 > **0**: `"escrow_dispute"`
 
-Defined in: [src/chain/operation.ts:741](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L741)
+Defined in: [src/chain/operation.ts:741](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L741)
 
 #### Overrides
 
@@ -34,7 +34,7 @@ Defined in: [src/chain/operation.ts:741](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:742](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L742)
+Defined in: [src/chain/operation.ts:742](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L742)
 
 #### agent
 

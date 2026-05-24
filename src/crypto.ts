@@ -33,12 +33,11 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import assert from "assert";
 import { SerializationError } from "./errors.js";
 import { Types } from "./chain/serializer.js";
 import { SignedTransaction, Transaction } from "./chain/transaction.js";
 import { DEFAULT_ADDRESS_PREFIX, DEFAULT_CHAIN_ID } from "./client.js";
-import { copy, BinaryWriter, toHex, fromHex, concat, bytesEqual } from "./utils.js";
+import { copy, BinaryWriter, toHex, fromHex, concat, bytesEqual, assert } from "./utils.js";
 
 import { base58 } from "@scure/base";
 import { ripemd160 as nobleRipemd160 } from "@noble/hashes/legacy.js";
@@ -94,13 +93,13 @@ function encodePublic(key: Uint8Array, prefix: string): string {
  */
 function decodePublic(encodedKey: string): { key: Uint8Array; prefix: string } {
   const prefix = encodedKey.slice(0, 3);
-  assert.equal(prefix.length, 3, "public key invalid prefix");
+  assert(prefix.length === 3, "public key invalid prefix");
   encodedKey = encodedKey.slice(3);
   const buffer = base58.decode(encodedKey);
   const checksum = buffer.slice(-4);
   const key = buffer.slice(0, -4);
   const checksumVerify = ripemd160(key).slice(0, 4);
-  assert.deepEqual(checksumVerify, checksum, "public key checksum mismatch");
+  assert(bytesEqual(checksumVerify, checksum), "public key checksum mismatch");
   return { key, prefix };
 }
 
@@ -108,7 +107,7 @@ function decodePublic(encodedKey: string): { key: Uint8Array; prefix: string } {
  * Encode bs58+doubleSha256-checksum private key.
  */
 function encodePrivate(key: Uint8Array): string {
-  assert.equal(key[0], 0x80, "private key network id mismatch");
+  assert(key[0] === 0x80, "private key network id mismatch");
   const checksum = doubleSha256(key);
   return base58.encode(concat([key, checksum.slice(0, 4)]));
 }
@@ -118,11 +117,11 @@ function encodePrivate(key: Uint8Array): string {
  */
 function decodePrivate(encodedKey: string): Uint8Array {
   const buffer = base58.decode(encodedKey);
-  assert.deepEqual(buffer.slice(0, 1), NETWORK_ID, "private key network id mismatch");
+  assert(bytesEqual(buffer.slice(0, 1), NETWORK_ID), "private key network id mismatch");
   const checksum = buffer.slice(-4);
   const key = buffer.slice(0, -4);
   const checksumVerify = doubleSha256(key).slice(0, 4);
-  assert.deepEqual(checksumVerify, checksum, "private key checksum mismatch");
+  assert(bytesEqual(checksumVerify, checksum), "private key checksum mismatch");
   return key;
 }
 
@@ -353,11 +352,11 @@ export class Signature {
     public data: Uint8Array,
     public recovery: number,
   ) {
-    assert.equal(data.length, 64, "invalid signature");
+    assert(data.length === 64, "invalid signature");
   }
 
   public static fromBuffer(buffer: Uint8Array) {
-    assert.equal(buffer.length, 65, "invalid signature");
+    assert(buffer.length === 65, "invalid signature");
     // Hive uses 27-30 or 31-34. Noble wants 0-3.
     let recovery = buffer[0];
     if (recovery >= 31) recovery -= 31;

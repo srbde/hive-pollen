@@ -8,7 +8,7 @@
 
 > `const` **cryptoUtils**: `object`
 
-Defined in: [src/crypto.ts:455](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L455)
+Defined in: [src/crypto.ts:454](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L454)
 
 Low-level cryptographic utility namespace.
 

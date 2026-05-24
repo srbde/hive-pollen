@@ -6,7 +6,7 @@
 
 # Class: DatabaseAPI
 
-Defined in: [src/helpers/database.ts:142](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L142)
+Defined in: [src/helpers/database.ts:142](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L142)
 
 Read-only helper for Hive condenser/database RPC methods.
 
@@ -38,7 +38,7 @@ console.log(account.reputation, account.posting_json_metadata)
 
 > **new DatabaseAPI**(`client`): `DatabaseAPI`
 
-Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L148)
+Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L148)
 
 Creates a database helper bound to a client.
 
@@ -60,7 +60,7 @@ Client used to send condenser API calls.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L148)
+Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L148)
 
 Client used to send condenser API calls.
 
@@ -70,7 +70,7 @@ Client used to send condenser API calls.
 
 > **call**\<`T`\>(`method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/helpers/database.ts:166](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L166)
+Defined in: [src/helpers/database.ts:166](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L166)
 
 Sends a raw condenser API call through the parent client.
 
@@ -118,7 +118,7 @@ console.log(result.HIVE_BLOCK_INTERVAL)
 
 > **getAccountHistory**(`account`, `from`, `limit`, `operation_bitmask?`): `Promise`\<\[\[`number`, [`AppliedOperation`](../interfaces/AppliedOperation.md)\]\]\>
 
-Defined in: [src/helpers/database.ts:486](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L486)
+Defined in: [src/helpers/database.ts:486](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L486)
 
 Fetches historical operations for an account.
 
@@ -207,7 +207,7 @@ const history = await client.database.getAccountHistory(
 
 > **getAccounts**(`usernames`): `Promise`\<[`ExtendedAccount`](../interfaces/ExtendedAccount.md)[]\>
 
-Defined in: [src/helpers/database.ts:411](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L411)
+Defined in: [src/helpers/database.ts:411](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L411)
 
 Fetches extended account objects for one or more account names.
 
@@ -244,7 +244,7 @@ console.log(account.name, account.reputation)
 
 > **getBlock**(`blockNum`): `Promise`\<[`SignedBlock`](../interfaces/SignedBlock.md)\>
 
-Defined in: [src/helpers/database.ts:335](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L335)
+Defined in: [src/helpers/database.ts:335](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L335)
 
 Fetches a full signed block by number.
 
@@ -280,7 +280,7 @@ console.log(block.transactions.length)
 
 > **getBlockHeader**(`blockNum`): `Promise`\<[`BlockHeader`](../interfaces/BlockHeader.md)\>
 
-Defined in: [src/helpers/database.ts:316](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L316)
+Defined in: [src/helpers/database.ts:316](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L316)
 
 Fetches the header for a specific block number.
 
@@ -316,7 +316,7 @@ console.log(header.previous)
 
 > **getChainProperties**(): `Promise`\<[`ChainProperties`](../interfaces/ChainProperties.md)\>
 
-Defined in: [src/helpers/database.ts:203](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L203)
+Defined in: [src/helpers/database.ts:203](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L203)
 
 Fetches witness-voted median chain properties.
 
@@ -344,7 +344,7 @@ console.log(props.account_creation_fee.toString())
 
 > **getConfig**(): `Promise`\<\{\[`name`: `string`\]: `string` \| `number` \| `boolean`; \}\>
 
-Defined in: [src/helpers/database.ts:297](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L297)
+Defined in: [src/helpers/database.ts:297](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L297)
 
 Fetches static protocol constants exposed by the RPC node.
 
@@ -381,7 +381,7 @@ https://github.com/steemit/steem/blob/master/libraries/protocol/include/steemit/
 
 > **getCurrentMedianHistoryPrice**(): `Promise`\<[`Price`](Price.md)\>
 
-Defined in: [src/helpers/database.ts:246](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L246)
+Defined in: [src/helpers/database.ts:246](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L246)
 
 Fetches the witness median market price for HIVE denominated in HBD.
 
@@ -409,7 +409,7 @@ console.log(`${price.base} per ${price.quote}`)
 
 > **getDiscussions**(`by`, `query`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/database.ts:388](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L388)
+Defined in: [src/helpers/database.ts:388](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L388)
 
 Fetches discussion records such as posts, comments, blog entries, or feeds.
 
@@ -463,7 +463,7 @@ console.log(posts.map((post) => post.permlink))
 
 > **getDynamicGlobalProperties**(): `Promise`\<[`DynamicGlobalProperties`](../interfaces/DynamicGlobalProperties.md)\>
 
-Defined in: [src/helpers/database.ts:185](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L185)
+Defined in: [src/helpers/database.ts:185](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L185)
 
 Fetches the dynamic global state maintained by the current RPC node.
 
@@ -492,7 +492,7 @@ console.log(props.head_block_number, props.time)
 
 > **getOperations**(`blockNum`, `onlyVirtual?`): `Promise`\<[`AppliedOperation`](../interfaces/AppliedOperation.md)[]\>
 
-Defined in: [src/helpers/database.ts:357](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L357)
+Defined in: [src/helpers/database.ts:357](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L357)
 
 Fetches applied operations recorded in a block.
 
@@ -536,7 +536,7 @@ console.log(operations.map((applied) => applied.op[0]))
 
 > **getState**(`path`): `Promise`\<`unknown`\>
 
-Defined in: [src/helpers/database.ts:228](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L228)
+Defined in: [src/helpers/database.ts:228](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L228)
 
 Fetches condenser state for a Hive-style URL path.
 
@@ -579,7 +579,7 @@ console.log(Object.keys(state.content))
 
 > **getTransaction**(`txId`): `Promise`\<[`SignedTransaction`](../interfaces/SignedTransaction.md)\>
 
-Defined in: [src/helpers/database.ts:433](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L433)
+Defined in: [src/helpers/database.ts:433](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L433)
 
 Fetches a signed transaction by transaction id.
 
@@ -618,7 +618,7 @@ console.log(transaction.operations)
 
 > **getVersion**(): `Promise`\<`object`\>
 
-Defined in: [src/helpers/database.ts:537](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L537)
+Defined in: [src/helpers/database.ts:537](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L537)
 
 Fetches version information from the active RPC node.
 
@@ -646,7 +646,7 @@ console.log(version)
 
 > **getVestingDelegations**(`account`, `from?`, `limit?`): `Promise`\<[`VestingDelegation`](../interfaces/VestingDelegation.md)[]\>
 
-Defined in: [src/helpers/database.ts:269](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L269)
+Defined in: [src/helpers/database.ts:269](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L269)
 
 Fetches vesting delegations made by an account.
 
@@ -696,7 +696,7 @@ for (const delegation of delegations) {
 
 > **verifyAuthority**(`stx`): `Promise`\<`boolean`\>
 
-Defined in: [src/helpers/database.ts:519](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/database.ts#L519)
+Defined in: [src/helpers/database.ts:519](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/database.ts#L519)
 
 Verifies that a signed transaction satisfies Hive authority rules.
 

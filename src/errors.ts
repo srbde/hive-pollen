@@ -23,7 +23,7 @@
  * ```
  */
 export class PollenError extends Error {
-  public readonly info?: any;
+  public readonly info?: unknown;
 
   /**
    * Creates a Pollen error with optional structured context.
@@ -31,7 +31,7 @@ export class PollenError extends Error {
    * @param message - Human-readable error message.
    * @param info - Optional structured details from the failing subsystem.
    */
-  constructor(message: string, info?: any) {
+  constructor(message: string, info?: unknown) {
     super(message);
     this.name = "PollenError";
     this.info = info;
@@ -66,7 +66,7 @@ export class RPCError extends PollenError {
    * @param message - Formatted RPC error message.
    * @param info - Raw RPC error data, when provided by the node.
    */
-  constructor(message: string, info?: any) {
+  constructor(message: string, info?: unknown) {
     super(message, info);
     this.name = "RPCError";
     Object.setPrototypeOf(this, RPCError.prototype);
@@ -99,7 +99,7 @@ export class SerializationError extends PollenError {
    * @param message - Human-readable serialization failure.
    * @param info - Optional underlying cause or field-level context.
    */
-  constructor(message: string, info?: any) {
+  constructor(message: string, info?: unknown) {
     super(message, info);
     this.name = "SerializationError";
     Object.setPrototypeOf(this, SerializationError.prototype);

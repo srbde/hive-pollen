@@ -6,7 +6,7 @@
 
 # Interface: TransferOperation
 
-Defined in: [src/chain/operation.ts:1073](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1073)
+Defined in: [src/chain/operation.ts:1073](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1073)
 
 Transfers asset from one account to another.
 
@@ -36,7 +36,7 @@ const op: TransferOperation = ['transfer', {
 
 > **0**: `"transfer"`
 
-Defined in: [src/chain/operation.ts:1074](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1074)
+Defined in: [src/chain/operation.ts:1074](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1074)
 
 #### Overrides
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/operation.ts:1074](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1075](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1075)
+Defined in: [src/chain/operation.ts:1075](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1075)
 
 #### amount
 

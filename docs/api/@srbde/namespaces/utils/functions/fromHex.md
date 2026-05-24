@@ -8,7 +8,7 @@
 
 > **fromHex**(`hex`): `Uint8Array`
 
-Defined in: [src/utils.ts:103](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L103)
+Defined in: [src/utils.ts:116](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L116)
 
 Converts a hex-encoded string to a Uint8Array.
 

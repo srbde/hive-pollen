@@ -42,7 +42,7 @@
     "prebuild": "mkdir -p lib dist docs",
     "build:version": "echo \"export default '$npm_package_version';\" > src/version.ts",
     "build:node": "tsc -p tsconfig.json --outDir lib && pnpm run build:version",
-    "build:browser": "esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=iife --global-name=pollen --outfile=dist/pollen.js --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:stream=stream-browserify --alias:events=events && esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=esm --outfile=dist/pollen.mjs --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:stream=stream-browserify --alias:events=events && gzip -9 -f -c dist/pollen.js > dist/pollen.js.gz",
+    "build:browser": "esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=iife --global-name=pollen --outfile=dist/pollen.js --define:global=window --define:process.env.NODE_ENV='\"production\"' && esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=esm --outfile=dist/pollen.mjs --define:global=window --define:process.env.NODE_ENV='\"production\"' && gzip -9 -f -c dist/pollen.js > dist/pollen.js.gz",
     "build:types": "dts-bundle-generator --no-banner -o dist/pollen.d.ts src/index-node.ts",
     "build": "pnpm run build:node && pnpm run build:browser && pnpm run build:types",
     "test": "vitest run --coverage",
@@ -67,21 +67,16 @@
   "devDependencies": {
     "@types/node": "^25.9.1",
     "@vitest/coverage-v8": "^4.1.7",
-    "assert": "^2.1.0",
-    "buffer": "^6.0.3",
     "dts-bundle-generator": "^9.5.1",
     "esbuild": "^0.28.0",
-    "events": "^3.3.0",
+    "husky": "^9.1.7",
     "lorem-ipsum": "^3.0.0",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
     "typedoc": "^0.28.19",
     "typedoc-plugin-markdown": "^4.11.0",
-    "husky": "^9.1.7",
     "typescript": "^6.0.3",
-    "vitepress": "^1.6.4",
+    "vitepress": "2.0.0-alpha.17",
     "vitest": "^4.1.7"
   }
 }

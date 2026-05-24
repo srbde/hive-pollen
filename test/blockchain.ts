@@ -1,7 +1,6 @@
-import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
-import assert from "assert";
-
+import { describe, it, expect } from "vitest";
 import { Client, SignedBlock, AppliedOperation, BlockchainMode } from "../src/index.js";
+import { bytesEqual, assert } from "../src/utils.js";
 
 import { agent, TEST_NODE } from "./_common.js";
 
@@ -75,22 +74,17 @@ describe("blockchain", function () {
     for await (const block of client.blockchain.getBlocks({ from: 1, to: 2 })) {
       ids.push(block.block_id);
     }
-    assert.deepEqual(ids, expectedIds);
+    expect(ids).toEqual(expectedIds);
   }, 30000);
 
   it("should stream blocks", async function () {
-    await new Promise((resolve, reject) => {
-      const stream = client.blockchain.getBlockStream({ from: 1, to: 2 });
-      let ids: string[] = [];
-      stream.on("data", (block: SignedBlock) => {
-        ids.push(block.block_id);
-      });
-      stream.on("error", reject);
-      stream.on("end", () => {
-        assert.deepEqual(ids, expectedIds);
-        resolve(undefined);
-      });
-    });
+    const stream = client.blockchain.getBlockStream({ from: 1, to: 2 });
+    let ids: string[] = [];
+    // @ts-ignore - ReadableStream is async iterable in Node 18+
+    for await (const block of stream) {
+      ids.push(block.block_id);
+    }
+    expect(ids).toEqual(expectedIds);
   }, 30000);
 
   it("should yield operations", async function () {
@@ -101,75 +95,50 @@ describe("blockchain", function () {
     })) {
       ops.push(operation.op[0]);
     }
-    assert.deepEqual(ops, expectedOps);
+    expect(ops).toEqual(expectedOps);
   }, 30000);
 
   it("should stream operations", async function () {
-    await new Promise((resolve, reject) => {
-      const stream = client.blockchain.getOperationsStream({
-        from: 13300000,
-        to: 13300001,
-      });
-      let ops: string[] = [];
-      stream.on("data", (operation: AppliedOperation) => {
-        ops.push(operation.op[0]);
-      });
-      stream.on("error", reject);
-      stream.on("end", () => {
-        assert.deepEqual(ops, expectedOps);
-        resolve(undefined);
-      });
+    const stream = client.blockchain.getOperationsStream({
+      from: 13300000,
+      to: 13300001,
     });
+    let ops: string[] = [];
+    // @ts-ignore - ReadableStream is async iterable in Node 18+
+    for await (const operation of stream) {
+      ops.push(operation.op[0]);
+    }
+    expect(ops).toEqual(expectedOps);
   }, 30000);
 
-  // nonsense - feel free to investigate
-  // it("should yield latest blocks", async function() {
-  //   const latest = await client.blockchain.getCurrentBlock(
-  //     BlockchainMode.Latest
-  //   );
-  //   for await (const block of client.blockchain.getBlocks({
-  //     mode: BlockchainMode.Latest
-  //   })) {
-  //     if (block.block_id === latest.block_id) {
-  //       continue;
-  //     }
-  //     assert.equal(
-  //       block.previous,
-  //       latest.block_id,
-  //       "should have the same block id"
-  //     );
-  //     break;
-  //   }
-  // });
-
   it("should handle errors on stream", async function () {
-    await new Promise((resolve, reject) => {
-      const stream = client.blockchain.getBlockStream(Number.MAX_VALUE);
-      stream.on("data", () => {
-        assert(false, "unexpected stream data");
-      });
-      stream.on("error", (error) => {
-        resolve(undefined);
-      });
-    });
+    const stream = client.blockchain.getBlockStream(Number.MAX_VALUE);
+    let sawError = false;
+    try {
+      // @ts-ignore
+      for await (const _ of stream) {
+        expect(false).toBe(true); // Should not reach here
+      }
+    } catch (error) {
+      sawError = true;
+    }
+    expect(sawError).toBe(true);
   });
 
   it("should get block number stream", async function () {
     const current = await client.blockchain.getCurrentBlockNum();
-    await new Promise(async (resolve, reject) => {
-      const stream = client.blockchain.getBlockNumberStream();
-      stream.on("data", (num) => {
-        assert(num >= current);
-        resolve(undefined);
-      });
-      stream.on("error", reject);
-    });
+    const stream = client.blockchain.getBlockNumberStream();
+    // @ts-ignore
+    const reader = stream.getReader();
+    const { value: num } = await reader.read();
+    expect(num).toBeGreaterThanOrEqual(current);
+    await reader.cancel();
   });
 
   it("should get current block header", async function () {
     const now = Date.now();
     const header = await client.blockchain.getCurrentBlockHeader();
     const ts = new Date(header.timestamp + "Z").getTime();
-    assert(Math.abs(ts / 1000 - now / 1000) < 120, "blockheader timestamp too old");
+    expect(Math.abs(ts / 1000 - now / 1000)).toBeLessThan(120);
   });
 });

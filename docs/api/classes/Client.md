@@ -6,7 +6,7 @@
 
 # Class: Client
 
-Defined in: [src/client.ts:249](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L249)
+Defined in: [src/client.ts:248](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L248)
 
 High-level Hive RPC client used by every Pollen helper.
 
@@ -40,7 +40,7 @@ console.log(`Hive head block: ${props.head_block_number}`)
 
 > **new Client**(`address`, `options?`): `Client`
 
-Defined in: [src/client.ts:349](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L349)
+Defined in: [src/client.ts:348](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L348)
 
 Creates a client for one or more Hive RPC endpoints.
 
@@ -94,7 +94,7 @@ console.log(accounts[0].balance)
 
 > **address**: `string` \| `string`[]
 
-Defined in: [src/client.ts:259](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L259)
+Defined in: [src/client.ts:258](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L258)
 
 Address to Hive RPC server.
 String or String[] *read-only*
@@ -105,7 +105,7 @@ String or String[] *read-only*
 
 > `readonly` **addressPrefix**: `string`
 
-Defined in: [src/client.ts:310](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L310)
+Defined in: [src/client.ts:309](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L309)
 
 Address prefix for current network.
 
@@ -115,7 +115,7 @@ Address prefix for current network.
 
 > `readonly` **blockchain**: [`Blockchain`](Blockchain.md)
 
-Defined in: [src/client.ts:279](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L279)
+Defined in: [src/client.ts:278](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L278)
 
 Blockchain helper.
 
@@ -125,7 +125,7 @@ Blockchain helper.
 
 > `readonly` **broadcast**: [`BroadcastAPI`](BroadcastAPI.md)
 
-Defined in: [src/client.ts:274](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L274)
+Defined in: [src/client.ts:273](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L273)
 
 Broadcast API helper.
 
@@ -135,7 +135,7 @@ Broadcast API helper.
 
 > `readonly` **chainId**: `Uint8Array`
 
-Defined in: [src/client.ts:305](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L305)
+Defined in: [src/client.ts:304](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L304)
 
 Chain ID for current network.
 
@@ -145,7 +145,7 @@ Chain ID for current network.
 
 > **currentAddress**: `string`
 
-Defined in: [src/client.ts:319](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L319)
+Defined in: [src/client.ts:318](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L318)
 
 ***
 
@@ -153,7 +153,7 @@ Defined in: [src/client.ts:319](https://github.com/TheCrazyGM/dhive/blob/a6addb1
 
 > `readonly` **database**: [`DatabaseAPI`](DatabaseAPI.md)
 
-Defined in: [src/client.ts:264](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L264)
+Defined in: [src/client.ts:263](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L263)
 
 Database API helper.
 
@@ -163,7 +163,7 @@ Database API helper.
 
 > `readonly` **healthTracker**: [`NodeHealthTracker`](NodeHealthTracker.md)
 
-Defined in: [src/client.ts:300](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L300)
+Defined in: [src/client.ts:299](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L299)
 
 Node health tracker for smart failover.
 Tracks per-node, per-API health and head block freshness.
@@ -174,7 +174,7 @@ Tracks per-node, per-API health and head block freshness.
 
 > `readonly` **hivemind**: [`HivemindAPI`](HivemindAPI.md)
 
-Defined in: [src/client.ts:284](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L284)
+Defined in: [src/client.ts:283](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L283)
 
 Hivemind helper.
 
@@ -184,7 +184,7 @@ Hivemind helper.
 
 > `readonly` **keys**: [`AccountByKeyAPI`](AccountByKeyAPI.md)
 
-Defined in: [src/client.ts:289](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L289)
+Defined in: [src/client.ts:288](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L288)
 
 Accounts by key API helper.
 
@@ -194,7 +194,7 @@ Accounts by key API helper.
 
 > `readonly` **options**: [`ClientOptions`](../interfaces/ClientOptions.md)
 
-Defined in: [src/client.ts:253](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L253)
+Defined in: [src/client.ts:252](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L252)
 
 Client options, *read-only*.
 
@@ -204,7 +204,7 @@ Client options, *read-only*.
 
 > `readonly` **rc**: [`RCAPI`](RCAPI.md)
 
-Defined in: [src/client.ts:269](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L269)
+Defined in: [src/client.ts:268](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L268)
 
 RC API helper.
 
@@ -214,7 +214,7 @@ RC API helper.
 
 > `readonly` **transaction**: [`TransactionStatusAPI`](TransactionStatusAPI.md)
 
-Defined in: [src/client.ts:294](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L294)
+Defined in: [src/client.ts:293](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L293)
 
 Transaction status API helper.
 
@@ -224,7 +224,7 @@ Transaction status API helper.
 
 > **call**\<`T`\>(`api`, `method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/client.ts:442](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L442)
+Defined in: [src/client.ts:441](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L441)
 
 Sends a JSON-RPC request through the configured failover transport.
 
@@ -302,7 +302,7 @@ console.log(config.HIVE_BLOCK_INTERVAL)
 
 > `static` **testnet**(`options?`): `Client`
 
-Defined in: [src/client.ts:395](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/client.ts#L395)
+Defined in: [src/client.ts:394](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/client.ts#L394)
 
 Creates a client preconfigured for the public Hive testnet.
 

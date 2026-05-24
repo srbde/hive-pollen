@@ -6,7 +6,7 @@
 
 # Interface: TransactionConfirmation
 
-Defined in: [src/chain/transaction.ts:114](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/transaction.ts#L114)
+Defined in: [src/chain/transaction.ts:114](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/transaction.ts#L114)
 
 Confirmation returned after broadcasting a transaction.
 
@@ -28,7 +28,7 @@ console.log(confirmation.id, confirmation.block_num)
 
 > **block\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:122](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/transaction.ts#L122)
+Defined in: [src/chain/transaction.ts:122](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/transaction.ts#L122)
 
 Block number that accepted the transaction.
 
@@ -38,7 +38,7 @@ Block number that accepted the transaction.
 
 > **expired**: `boolean`
 
-Defined in: [src/chain/transaction.ts:130](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/transaction.ts#L130)
+Defined in: [src/chain/transaction.ts:130](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/transaction.ts#L130)
 
 Whether the node considered the transaction expired.
 
@@ -48,7 +48,7 @@ Whether the node considered the transaction expired.
 
 > **id**: `string`
 
-Defined in: [src/chain/transaction.ts:118](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/transaction.ts#L118)
+Defined in: [src/chain/transaction.ts:118](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/transaction.ts#L118)
 
 Transaction id.
 
@@ -58,6 +58,6 @@ Transaction id.
 
 > **trx\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:126](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/transaction.ts#L126)
+Defined in: [src/chain/transaction.ts:126](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/transaction.ts#L126)
 
 Transaction index within the accepting block.

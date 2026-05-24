@@ -6,7 +6,7 @@
 
 # Interface: ClaimRewardBalanceOperation
 
-Defined in: [src/chain/operation.ts:486](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L486)
+Defined in: [src/chain/operation.ts:486](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L486)
 
 Claims pending author, curation, and vesting rewards.
 
@@ -25,7 +25,7 @@ operation to name all three reward buckets explicitly.
 
 > **0**: `"claim_reward_balance"`
 
-Defined in: [src/chain/operation.ts:487](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L487)
+Defined in: [src/chain/operation.ts:487](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L487)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:487](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:488](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L488)
+Defined in: [src/chain/operation.ts:488](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L488)
 
 #### account
 

@@ -6,7 +6,7 @@
 
 # Class: HexBuffer
 
-Defined in: [src/chain/misc.ts:64](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L64)
+Defined in: [src/chain/misc.ts:64](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L64)
 
 Byte wrapper that serializes to a hex-encoded string.
 
@@ -29,7 +29,7 @@ console.log(bytes.toJSON())
 
 > **new HexBuffer**(`buffer`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L70)
+Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L70)
 
 Creates a hex-buffer wrapper around native bytes.
 
@@ -51,7 +51,7 @@ Raw binary data as a `Uint8Array`.
 
 > **buffer**: `Uint8Array`
 
-Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L70)
+Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L70)
 
 Raw binary data as a `Uint8Array`.
 
@@ -61,7 +61,7 @@ Raw binary data as a `Uint8Array`.
 
 > **toJSON**(): `string`
 
-Defined in: [src/chain/misc.ts:102](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L102)
+Defined in: [src/chain/misc.ts:102](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L102)
 
 #### Returns
 
@@ -73,7 +73,7 @@ Defined in: [src/chain/misc.ts:102](https://github.com/TheCrazyGM/dhive/blob/a6a
 
 > **toString**(`encoding?`): `string`
 
-Defined in: [src/chain/misc.ts:95](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L95)
+Defined in: [src/chain/misc.ts:95](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L95)
 
 #### Parameters
 
@@ -91,7 +91,7 @@ Defined in: [src/chain/misc.ts:95](https://github.com/TheCrazyGM/dhive/blob/a6ad
 
 > `static` **from**(`value`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:83](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/misc.ts#L83)
+Defined in: [src/chain/misc.ts:83](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/misc.ts#L83)
 
 Normalizes hex, bytes, or an existing wrapper into a HexBuffer.
 

@@ -33,8 +33,6 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { EventEmitter } from "events";
-import { PassThrough } from "stream";
 import { NodeHealthTracker } from "./health-tracker.js";
 
 // Errors that indicate the request never reached the server — safe to retry even for broadcasts
@@ -61,6 +59,21 @@ export interface RetryContext {
   api?: string;
   isBroadcast?: boolean;
   consoleOnFailover?: boolean;
+}
+
+/**
+ * Asserts that a condition is truthy.
+ *
+ * @param condition - The condition to check.
+ * @param message - Optional error message.
+ *
+ * @throws Error
+ * Thrown when `condition` is falsy.
+ */
+export function assert(condition: any, message?: string): asserts condition {
+  if (!condition) {
+    throw new Error(message || "Assertion failed");
+  }
 }
 
 /**
@@ -385,15 +398,6 @@ export class BinaryReader {
 }
 
 /**
- * Resolves the next time an event emitter emits a specific event.
- */
-export function waitForEvent<T>(emitter: EventEmitter, eventName: string | symbol): Promise<T> {
-  return new Promise((resolve, reject) => {
-    emitter.once(eventName, resolve);
-  });
-}
-
-/**
  * Pauses execution for a fixed number of milliseconds.
  */
 export function sleep(ms: number): Promise<void> {
@@ -403,26 +407,27 @@ export function sleep(ms: number): Promise<void> {
 }
 
 /**
- * Converts an async iterator into an object-mode readable stream.
+ * Converts an async iterator into a native Web ReadableStream.
+ *
+ * @remarks
+ * This replaces the Node-specific `PassThrough` implementation with a browser-native
+ * stream engine, enabling zero-dependency streaming in both environments.
  */
-export function iteratorStream<T>(iterator: AsyncIterableIterator<T>): NodeJS.ReadableStream {
-  const stream = new PassThrough({ objectMode: true });
-  const iterate = async () => {
-    for await (const item of iterator) {
-      if (!stream.write(item)) {
-        await waitForEvent(stream, "drain");
+export function iteratorStream<T>(iterator: AsyncIterableIterator<T>): ReadableStream<T> {
+  return new ReadableStream({
+    async pull(controller) {
+      try {
+        const { value, done } = await iterator.next();
+        if (done) {
+          controller.close();
+        } else {
+          controller.enqueue(value);
+        }
+      } catch (error) {
+        controller.error(error);
       }
-    }
-  };
-  iterate()
-    .then(() => {
-      stream.end();
-    })
-    .catch((error) => {
-      stream.emit("error", error);
-      stream.end();
-    });
-  return stream;
+    },
+  });
 }
 
 /**

@@ -6,7 +6,7 @@
 
 # Interface: RecoverAccountOperation
 
-Defined in: [src/chain/operation.ts:918](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L918)
+Defined in: [src/chain/operation.ts:918](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L918)
 
 Recover an account to a new authority using a previous authority and verification
 of the recovery account as proof of identity. This operation can only succeed
@@ -54,7 +54,7 @@ concern.
 
 > **0**: `"recover_account"`
 
-Defined in: [src/chain/operation.ts:919](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L919)
+Defined in: [src/chain/operation.ts:919](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L919)
 
 #### Overrides
 
@@ -66,7 +66,7 @@ Defined in: [src/chain/operation.ts:919](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:920](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L920)
+Defined in: [src/chain/operation.ts:920](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L920)
 
 #### account\_to\_recover
 

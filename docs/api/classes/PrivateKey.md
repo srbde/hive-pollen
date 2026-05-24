@@ -6,7 +6,7 @@
 
 # Class: PrivateKey
 
-Defined in: [src/crypto.ts:247](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L247)
+Defined in: [src/crypto.ts:246](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L246)
 
 Hive private key backed by the secp256k1 elliptic curve.
 
@@ -16,7 +16,7 @@ Hive private key backed by the secp256k1 elliptic curve.
 
 > **new PrivateKey**(`key`): `PrivateKey`
 
-Defined in: [src/crypto.ts:248](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L248)
+Defined in: [src/crypto.ts:247](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L247)
 
 #### Parameters
 
@@ -34,7 +34,7 @@ Defined in: [src/crypto.ts:248](https://github.com/TheCrazyGM/dhive/blob/a6addb1
 
 > **createPublic**(`prefix?`): [`PublicKey`](PublicKey.md)
 
-Defined in: [src/crypto.ts:318](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L318)
+Defined in: [src/crypto.ts:317](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L317)
 
 Derives the compressed public key for this private key.
 
@@ -54,7 +54,7 @@ Derives the compressed public key for this private key.
 
 > **get\_shared\_secret**(`public_key`): `Uint8Array`
 
-Defined in: [src/crypto.ts:341](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L341)
+Defined in: [src/crypto.ts:340](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L340)
 
 Derives the shared secret used by encrypted Hive memos.
 
@@ -74,7 +74,7 @@ Derives the shared secret used by encrypted Hive memos.
 
 > **inspect**(): `string`
 
-Defined in: [src/crypto.ts:333](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L333)
+Defined in: [src/crypto.ts:332](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L332)
 
 Used by `utils.inspect` and `console.log` in node.js.
 
@@ -88,7 +88,7 @@ Used by `utils.inspect` and `console.log` in node.js.
 
 > **sign**(`message`): [`Signature`](Signature.md)
 
-Defined in: [src/crypto.ts:296](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L296)
+Defined in: [src/crypto.ts:295](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L295)
 
 Signs a 32-byte digest with this private key.
 
@@ -108,7 +108,7 @@ Signs a 32-byte digest with this private key.
 
 > **toString**(): `string`
 
-Defined in: [src/crypto.ts:326](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L326)
+Defined in: [src/crypto.ts:325](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L325)
 
 Renders the private key as a WIF string.
 
@@ -122,7 +122,7 @@ Renders the private key as a WIF string.
 
 > `static` **from**(`value`): `PrivateKey`
 
-Defined in: [src/crypto.ts:263](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L263)
+Defined in: [src/crypto.ts:262](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L262)
 
 Normalizes a WIF string or raw 32-byte secret into a private key.
 
@@ -147,7 +147,7 @@ independent of Node `Buffer` while still working in browser builds.
 
 > `static` **fromLogin**(`username`, `password`, `role?`): `PrivateKey`
 
-Defined in: [src/crypto.ts:288](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L288)
+Defined in: [src/crypto.ts:287](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L287)
 
 Derives a Hive role key from an account name and master password.
 
@@ -175,7 +175,7 @@ Derives a Hive role key from an account name and master password.
 
 > `static` **fromSeed**(`seed`): `PrivateKey`
 
-Defined in: [src/crypto.ts:281](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L281)
+Defined in: [src/crypto.ts:280](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L280)
 
 Derives a private key by hashing an arbitrary seed string.
 
@@ -195,7 +195,7 @@ Derives a private key by hashing an arbitrary seed string.
 
 > `static` **fromString**(`wif`): `PrivateKey`
 
-Defined in: [src/crypto.ts:274](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/crypto.ts#L274)
+Defined in: [src/crypto.ts:273](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/crypto.ts#L273)
 
 Parses a WIF-encoded Hive private key.
 

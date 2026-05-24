@@ -6,7 +6,7 @@
 
 # Class: TransactionStatusAPI
 
-Defined in: [src/helpers/transaction.ts:49](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/transaction.ts#L49)
+Defined in: [src/helpers/transaction.ts:49](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/transaction.ts#L49)
 
 Helper for checking Hive transaction inclusion status.
 
@@ -29,7 +29,7 @@ console.log(status)
 
 > **new TransactionStatusAPI**(`client`): `TransactionStatusAPI`
 
-Defined in: [src/helpers/transaction.ts:55](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/transaction.ts#L55)
+Defined in: [src/helpers/transaction.ts:55](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/transaction.ts#L55)
 
 Creates a transaction-status helper bound to a client.
 
@@ -51,7 +51,7 @@ Client used to call `transaction_status_api`.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/transaction.ts:55](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/transaction.ts#L55)
+Defined in: [src/helpers/transaction.ts:55](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/transaction.ts#L55)
 
 Client used to call `transaction_status_api`.
 
@@ -61,7 +61,7 @@ Client used to call `transaction_status_api`.
 
 > **call**\<`T`\>(`method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/helpers/transaction.ts:75](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/transaction.ts#L75)
+Defined in: [src/helpers/transaction.ts:75](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/transaction.ts#L75)
 
 Sends a raw `transaction_status_api` call.
 
@@ -111,7 +111,7 @@ const result = await client.transaction.call('find_transaction', {
 
 > **findTransaction**(`transaction_id`, `expiration?`): `Promise`\<\{ `status`: [`TransactionStatus`](../type-aliases/TransactionStatus.md); \}\>
 
-Defined in: [src/helpers/transaction.ts:102](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/helpers/transaction.ts#L102)
+Defined in: [src/helpers/transaction.ts:102](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/helpers/transaction.ts#L102)
 
 Finds the current lifecycle status of a transaction id.
 

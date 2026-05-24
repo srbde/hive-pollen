@@ -33,7 +33,6 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import assert from "assert";
 import { RPCError } from "./errors.js";
 import packageVersion from "./version.js";
 
@@ -46,10 +45,10 @@ import { RCAPI } from "./helpers/rc.js";
 import { TransactionStatusAPI } from "./helpers/transaction.js";
 import { NodeHealthTracker, HealthTrackerOptions } from "./health-tracker.js";
 import {
+  assert,
   copy,
   exponentialBackoffWithJitter,
   retryingFetch,
-  waitForEvent,
   fromHex,
   toHex,
 } from "./utils.js";
@@ -352,7 +351,7 @@ export class Client {
     this.options = options;
 
     this.chainId = options.chainId ? fromHex(options.chainId) : DEFAULT_CHAIN_ID;
-    assert.equal(this.chainId.length, 32, "invalid chain id");
+    assert(this.chainId.length === 32, "invalid chain id");
     this.addressPrefix = options.addressPrefix || DEFAULT_ADDRESS_PREFIX;
 
     this.timeout = options.timeout || 60 * 1000;
@@ -576,7 +575,7 @@ export class Client {
 
       throw new RPCError(message, response.error.data);
     }
-    assert.equal(response.id, request.id, "got invalid response id");
+    assert(response.id === request.id, "got invalid response id");
     return response.result as T;
   }
 }

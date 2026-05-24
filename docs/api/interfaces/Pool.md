@@ -6,7 +6,7 @@
 
 # Interface: Pool
 
-Defined in: [src/chain/rc.ts:77](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L77)
+Defined in: [src/chain/rc.ts:77](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L77)
 
 Current pool amount for one RC resource class.
 
@@ -16,4 +16,4 @@ Current pool amount for one RC resource class.
 
 > **pool**: `string`
 
-Defined in: [src/chain/rc.ts:78](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/rc.ts#L78)
+Defined in: [src/chain/rc.ts:78](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/rc.ts#L78)

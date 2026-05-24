@@ -8,7 +8,7 @@
 
 > **toHex**(`data`): `string`
 
-Defined in: [src/utils.ts:81](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L81)
+Defined in: [src/utils.ts:94](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L94)
 
 Converts a Uint8Array to a hex-encoded string.
 

@@ -6,7 +6,7 @@
 
 # Class: PollenError
 
-Defined in: [src/errors.ts:25](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/errors.ts#L25)
+Defined in: [src/errors.ts:25](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/errors.ts#L25)
 
 Base error class for all Pollen-specific failures.
 
@@ -43,7 +43,7 @@ try {
 
 > **new PollenError**(`message`, `info?`): `PollenError`
 
-Defined in: [src/errors.ts:34](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/errors.ts#L34)
+Defined in: [src/errors.ts:34](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/errors.ts#L34)
 
 Creates a Pollen error with optional structured context.
 
@@ -57,7 +57,7 @@ Human-readable error message.
 
 ##### info?
 
-`any`
+`unknown`
 
 Optional structured details from the failing subsystem.
 
@@ -85,9 +85,9 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 ### info?
 
-> `readonly` `optional` **info?**: `any`
+> `readonly` `optional` **info?**: `unknown`
 
-Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/errors.ts#L26)
+Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/errors.ts#L26)
 
 ***
 

@@ -6,11 +6,11 @@
 
 # Function: iteratorStream()
 
-> **iteratorStream**\<`T`\>(`iterator`): `ReadableStream`
+> **iteratorStream**\<`T`\>(`iterator`): `ReadableStream`\<`T`\>
 
-Defined in: [src/utils.ts:408](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L408)
+Defined in: [src/utils.ts:416](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L416)
 
-Converts an async iterator into an object-mode readable stream.
+Converts an async iterator into a native Web ReadableStream.
 
 ## Type Parameters
 
@@ -26,4 +26,9 @@ Converts an async iterator into an object-mode readable stream.
 
 ## Returns
 
-`ReadableStream`
+`ReadableStream`\<`T`\>
+
+## Remarks
+
+This replaces the Node-specific `PassThrough` implementation with a browser-native
+stream engine, enabling zero-dependency streaming in both environments.

@@ -1,7 +1,4 @@
-import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
-import assert from "assert";
-import * as stream from "stream";
-
+import { describe, it, expect } from "vitest";
 import { utils } from "../src/index.js";
 
 describe("misc", function () {
@@ -22,43 +19,42 @@ describe("misc", function () {
     }
 
     it("should handle backpressure", async function () {
-      await new Promise((resolve, reject) => {
-        const s1 = new stream.PassThrough({
-          highWaterMark: 10,
-          objectMode: true,
-        });
-        const s2 = utils.iteratorStream(counter(100));
-        s2.pipe(s1);
-        setTimeout(() => {
-          let c = 0;
-          s1.on("data", (d: any) => {
-            c = d.i;
-          });
-          s1.on("end", () => {
-            assert.equal(c, 99);
-            resolve(undefined);
-          });
-        }, 50);
-      });
+      const stream = utils.iteratorStream(counter(100));
+      const reader = stream.getReader();
+      
+      // Simulate slow consumer
+      await new Promise(r => setTimeout(r, 50));
+      
+      let lastValue = 0;
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        lastValue = value.i;
+      }
+      
+      expect(lastValue).toBe(99);
     });
 
     it("should handle errors", async function () {
-      await new Promise((resolve) => {
-        const s = utils.iteratorStream(errorCounter(10, 2));
-        let last = 0;
-        let sawError = false;
-        s.on("data", (d) => {
-          last = d.i;
-        });
-        s.on("error", (error) => {
-          assert.equal(last, 2);
-          sawError = true;
-        });
-        s.on("end", () => {
-          assert(sawError);
-          resolve(undefined);
-        });
-      });
+      const stream = utils.iteratorStream(errorCounter(10, 2));
+      const reader = stream.getReader();
+      
+      let lastValue = 0;
+      let sawError = false;
+      
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          lastValue = value.i;
+        }
+      } catch (error: any) {
+        expect(error.message).toBe("Oh noes");
+        expect(lastValue).toBe(2);
+        sawError = true;
+      }
+      
+      expect(sawError).toBe(true);
     });
   });
 });

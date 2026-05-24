@@ -6,7 +6,7 @@
 
 # Interface: UpdateProposalVotesOperation
 
-Defined in: [src/chain/operation.ts:1284](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1284)
+Defined in: [src/chain/operation.ts:1284](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1284)
 
 Approves or removes approvals for DHF proposal ids.
 
@@ -20,7 +20,7 @@ Approves or removes approvals for DHF proposal ids.
 
 > **0**: `"update_proposal_votes"`
 
-Defined in: [src/chain/operation.ts:1285](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1285)
+Defined in: [src/chain/operation.ts:1285](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1285)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:1285](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1286](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L1286)
+Defined in: [src/chain/operation.ts:1286](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L1286)
 
 #### approve
 

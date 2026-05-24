@@ -6,7 +6,7 @@
 
 # Interface: AccountCreateOperation
 
-Defined in: [src/chain/operation.ts:328](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L328)
+Defined in: [src/chain/operation.ts:328](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L328)
 
 Legacy paid account creation operation.
 
@@ -41,7 +41,7 @@ const op: AccountCreateOperation = ['account_create', {
 
 > **0**: `"account_create"`
 
-Defined in: [src/chain/operation.ts:329](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L329)
+Defined in: [src/chain/operation.ts:329](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L329)
 
 #### Overrides
 
@@ -53,7 +53,7 @@ Defined in: [src/chain/operation.ts:329](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:330](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L330)
+Defined in: [src/chain/operation.ts:330](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L330)
 
 #### active
 

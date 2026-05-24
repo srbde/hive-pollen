@@ -6,7 +6,7 @@
 
 # Class: BinaryWriter
 
-Defined in: [src/utils.ts:175](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L175)
+Defined in: [src/utils.ts:188](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L188)
 
 Growable little-endian byte writer used by Hive serializers.
 
@@ -23,7 +23,7 @@ are written in Hive's little-endian wire order.
 
 > **new BinaryWriter**(`size?`): `BinaryWriter`
 
-Defined in: [src/utils.ts:179](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L179)
+Defined in: [src/utils.ts:192](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L192)
 
 #### Parameters
 
@@ -41,7 +41,7 @@ Defined in: [src/utils.ts:179](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **getBuffer**(): `Uint8Array`
 
-Defined in: [src/utils.ts:286](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L286)
+Defined in: [src/utils.ts:299](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L299)
 
 #### Returns
 
@@ -53,7 +53,7 @@ Defined in: [src/utils.ts:286](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeBytes**(`bytes`): `void`
 
-Defined in: [src/utils.ts:280](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L280)
+Defined in: [src/utils.ts:293](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L293)
 
 #### Parameters
 
@@ -71,7 +71,7 @@ Defined in: [src/utils.ts:280](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeInt16**(`value`): `void`
 
-Defined in: [src/utils.ts:204](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L204)
+Defined in: [src/utils.ts:217](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L217)
 
 #### Parameters
 
@@ -89,7 +89,7 @@ Defined in: [src/utils.ts:204](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeInt32**(`value`): `void`
 
-Defined in: [src/utils.ts:224](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L224)
+Defined in: [src/utils.ts:237](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L237)
 
 #### Parameters
 
@@ -107,7 +107,7 @@ Defined in: [src/utils.ts:224](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeInt64**(`value`): `void`
 
-Defined in: [src/utils.ts:244](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L244)
+Defined in: [src/utils.ts:257](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L257)
 
 #### Parameters
 
@@ -125,7 +125,7 @@ Defined in: [src/utils.ts:244](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeInt8**(`value`): `void`
 
-Defined in: [src/utils.ts:191](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L191)
+Defined in: [src/utils.ts:204](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L204)
 
 #### Parameters
 
@@ -143,7 +143,7 @@ Defined in: [src/utils.ts:191](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeString**(`value`): `void`
 
-Defined in: [src/utils.ts:274](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L274)
+Defined in: [src/utils.ts:287](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L287)
 
 #### Parameters
 
@@ -161,7 +161,7 @@ Defined in: [src/utils.ts:274](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeUint16**(`value`): `void`
 
-Defined in: [src/utils.ts:214](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L214)
+Defined in: [src/utils.ts:227](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L227)
 
 #### Parameters
 
@@ -179,7 +179,7 @@ Defined in: [src/utils.ts:214](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeUint32**(`value`): `void`
 
-Defined in: [src/utils.ts:234](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L234)
+Defined in: [src/utils.ts:247](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L247)
 
 #### Parameters
 
@@ -197,7 +197,7 @@ Defined in: [src/utils.ts:234](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeUint64**(`value`): `void`
 
-Defined in: [src/utils.ts:255](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L255)
+Defined in: [src/utils.ts:268](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L268)
 
 #### Parameters
 
@@ -215,7 +215,7 @@ Defined in: [src/utils.ts:255](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeUint8**(`value`): `void`
 
-Defined in: [src/utils.ts:199](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L199)
+Defined in: [src/utils.ts:212](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L212)
 
 #### Parameters
 
@@ -233,7 +233,7 @@ Defined in: [src/utils.ts:199](https://github.com/TheCrazyGM/dhive/blob/a6addb19
 
 > **writeVarint32**(`value`): `void`
 
-Defined in: [src/utils.ts:266](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/utils.ts#L266)
+Defined in: [src/utils.ts:279](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/utils.ts#L279)
 
 #### Parameters
 

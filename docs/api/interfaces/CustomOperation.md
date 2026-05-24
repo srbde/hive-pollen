@@ -6,7 +6,7 @@
 
 # Interface: CustomOperation
 
-Defined in: [src/chain/operation.ts:608](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L608)
+Defined in: [src/chain/operation.ts:608](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L608)
 
 Legacy binary custom operation requiring active authority.
 
@@ -20,7 +20,7 @@ Legacy binary custom operation requiring active authority.
 
 > **0**: `"custom"`
 
-Defined in: [src/chain/operation.ts:609](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L609)
+Defined in: [src/chain/operation.ts:609](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L609)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:609](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:610](https://github.com/TheCrazyGM/dhive/blob/a6addb193286615945aa63ffa3e9ae428a4a1118/src/chain/operation.ts#L610)
+Defined in: [src/chain/operation.ts:610](https://github.com/TheCrazyGM/dhive/blob/30e513f7071b156ae2048e0f9aa531643a28717f/src/chain/operation.ts#L610)
 
 #### data
 
