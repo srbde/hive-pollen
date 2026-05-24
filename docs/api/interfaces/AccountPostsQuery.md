@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AccountPostsQuery
 
 # Interface: AccountPostsQuery
 
-Defined in: [src/helpers/hivemind.ts:69](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L69)
+Defined in: [src/helpers/hivemind.ts:69](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L69)
 
 Query options for posts associated with a specific account.
 
@@ -14,10 +14,10 @@ Query options for posts associated with a specific account.
 
 ```ts
 const query: AccountPostsQuery = {
-  account: "srbde",
-  sort: "posts",
-  limit: 10,
-};
+  account: 'srbde',
+  sort: 'posts',
+  limit: 10
+}
 ```
 
 ## Extends
@@ -30,15 +30,15 @@ const query: AccountPostsQuery = {
 
 > **account**: `string`
 
-Defined in: [src/helpers/hivemind.ts:70](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L70)
+Defined in: [src/helpers/hivemind.ts:70](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L70)
 
----
+***
 
 ### limit?
 
 > `optional` **limit?**: `number`
 
-Defined in: [src/helpers/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L31)
+Defined in: [src/helpers/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L31)
 
 Number of posts to fetch
 
@@ -46,13 +46,13 @@ Number of posts to fetch
 
 [`PostsQuery`](PostsQuery.md).[`limit`](PostsQuery.md#limit)
 
----
+***
 
 ### observer?
 
 > `optional` **observer?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:43](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L43)
+Defined in: [src/helpers/hivemind.ts:43](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L43)
 
 Observer account
 
@@ -60,21 +60,21 @@ Observer account
 
 [`PostsQuery`](PostsQuery.md).[`observer`](PostsQuery.md#observer)
 
----
+***
 
 ### sort
 
 > **sort**: `"posts"`
 
-Defined in: [src/helpers/hivemind.ts:71](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L71)
+Defined in: [src/helpers/hivemind.ts:71](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L71)
 
----
+***
 
-### start_author?
+### start\_author?
 
-> `optional` **start_author?**: `string`
+> `optional` **start\_author?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:47](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L47)
+Defined in: [src/helpers/hivemind.ts:47](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L47)
 
 Paginating last post author
 
@@ -82,13 +82,13 @@ Paginating last post author
 
 [`PostsQuery`](PostsQuery.md).[`start_author`](PostsQuery.md#start_author)
 
----
+***
 
-### start_permlink?
+### start\_permlink?
 
-> `optional` **start_permlink?**: `string`
+> `optional` **start\_permlink?**: `string`
 
-Defined in: [src/helpers/hivemind.ts:51](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L51)
+Defined in: [src/helpers/hivemind.ts:51](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L51)
 
 Paginating last post permlink
 
@@ -96,13 +96,13 @@ Paginating last post permlink
 
 [`PostsQuery`](PostsQuery.md).[`start_permlink`](PostsQuery.md#start_permlink)
 
----
+***
 
 ### tag?
 
 > `optional` **tag?**: `string` \| `string`[]
 
-Defined in: [src/helpers/hivemind.ts:39](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L39)
+Defined in: [src/helpers/hivemind.ts:39](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L39)
 
 Filtering with tags
 

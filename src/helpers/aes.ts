@@ -1,5 +1,4 @@
-import assert from "assert";
-import { createCipheriv, createDecipheriv, createHash, randomBytes } from "crypto";
+import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
 import { PrivateKey, PublicKey } from "../crypto.js";
 import { BinaryReader, BinaryWriter, concat } from "../utils.js";
 import { sha256 as nobleSha256, sha512 as nobleSha512 } from "@noble/hashes/sha2.js";
@@ -58,8 +57,25 @@ export const decrypt = (
 ): Uint8Array => crypt(private_key, public_key, nonce, message, checksum).message;
 
 /**
- * @arg {Uint8Array} message - Encrypted or plain text message (see checksum)
- * @arg {number} checksum - shared secret checksum (null to encrypt, non-null to decrypt)
+ * Encrypts or decrypts memo bytes using Hive's shared-secret derivation.
+ *
+ * @param private_key - Local memo private key.
+ * @param public_key - Counterparty memo public key.
+ * @param nonce - Memo nonce as a decimal string or native `bigint`.
+ * @param message - Plaintext bytes when encrypting, ciphertext bytes when
+ * decrypting.
+ * @param checksum - Shared-secret checksum when decrypting. Omit when
+ * encrypting.
+ * @returns Normalized nonce, transformed bytes, and checksum.
+ *
+ * @remarks
+ * The nonce is written with `BinaryWriter.writeUint64`, so native `bigint`
+ * values travel through the same little-endian byte engine used by transaction
+ * serialization. The AES key material is derived with Noble SHA-512 rather than
+ * Node-specific hash wrappers.
+ *
+ * @throws Error
+ * Thrown when a supplied checksum does not match the derived shared secret.
  */
 const crypt = (
   private_key: PrivateKey,
@@ -106,7 +122,12 @@ const crypt = (
 };
 
 /**
- * Encrypt a message using AES-256-CBC.
+ * Encrypts raw bytes with AES-256-CBC.
+ *
+ * @param message - Plaintext bytes.
+ * @param key - 32-byte AES key.
+ * @param iv - 16-byte initialization vector.
+ * @returns Ciphertext bytes.
  */
 const cryptoJsEncrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
   const cipher = createCipheriv("aes-256-cbc", key, iv);
@@ -114,7 +135,12 @@ const cryptoJsEncrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): 
 };
 
 /**
- * Decrypt a message using AES-256-CBC.
+ * Decrypts raw bytes with AES-256-CBC.
+ *
+ * @param message - Ciphertext bytes.
+ * @param key - 32-byte AES key.
+ * @param iv - 16-byte initialization vector.
+ * @returns Plaintext bytes.
  */
 const cryptoJsDecrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
   const decipher = createDecipheriv("aes-256-cbc", key, iv);
@@ -122,7 +148,13 @@ const cryptoJsDecrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): 
 };
 
 /**
- * Node code to generate a unique 64-bit nonce.
+ * Generates a unique 64-bit memo nonce.
+ *
+ * @returns A native `bigint` nonce.
+ *
+ * @remarks
+ * The high bits come from current time and the low bits from cryptographic
+ * entropy, producing the unsigned 64-bit value expected by Hive memo envelopes.
  */
 const uniqueNonce = () => {
   const entropy = randomBytes(2);

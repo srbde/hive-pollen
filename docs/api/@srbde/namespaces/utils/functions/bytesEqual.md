@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../../../../index.md)
 
----
+***
 
 [@srbde/pollen](../../../../index.md) / [utils](../index.md) / bytesEqual
 
@@ -8,7 +8,7 @@
 
 > **bytesEqual**(`a`, `b`): `boolean`
 
-Defined in: [src/utils.ts:98](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L98)
+Defined in: [src/utils.ts:154](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L154)
 
 Compares two byte arrays for equality.
 
@@ -18,10 +18,24 @@ Compares two byte arrays for equality.
 
 `Uint8Array`
 
+First byte array.
+
 ### b
 
 `Uint8Array`
 
+Second byte array.
+
 ## Returns
 
 `boolean`
+
+True when both arrays have the same length and byte values.
+
+## Example
+
+```ts
+if (!bytesEqual(expected, actual)) {
+  throw new Error('checksum mismatch')
+}
+```

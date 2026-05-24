@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / UpdateProposalOperation
 
 # Interface: UpdateProposalOperation
 
-Defined in: [src/chain/operation.ts:1206](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1206)
+Defined in: [src/chain/operation.ts:1206](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1206)
 
 Updates mutable fields on an existing DHF proposal.
 
@@ -20,27 +20,27 @@ Updates mutable fields on an existing DHF proposal.
 
 > **0**: `"update_proposal"`
 
-Defined in: [src/chain/operation.ts:1207](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1207)
+Defined in: [src/chain/operation.ts:1207](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1207)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1208](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1208)
+Defined in: [src/chain/operation.ts:1208](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1208)
 
 #### creator
 
 > **creator**: `string`
 
-#### daily_pay
+#### daily\_pay
 
-> **daily_pay**: `string` \| [`Asset`](../classes/Asset.md)
+> **daily\_pay**: `string` \| [`Asset`](../classes/Asset.md)
 
 #### extensions
 
@@ -50,9 +50,9 @@ Defined in: [src/chain/operation.ts:1208](https://github.com/TheCrazyGM/dhive/bl
 
 > **permlink**: `string`
 
-#### proposal_id
+#### proposal\_id
 
-> **proposal_id**: `number`
+> **proposal\_id**: `number`
 
 #### subject
 

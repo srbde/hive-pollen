@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / LimitOrderCreateOperation
 
 # Interface: LimitOrderCreateOperation
 
-Defined in: [src/chain/operation.ts:750](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L750)
+Defined in: [src/chain/operation.ts:750](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L750)
 
 This operation creates a limit order and matches it against existing open orders.
 
@@ -20,35 +20,35 @@ This operation creates a limit order and matches it against existing open orders
 
 > **0**: `"limit_order_create"`
 
-Defined in: [src/chain/operation.ts:751](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L751)
+Defined in: [src/chain/operation.ts:751](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L751)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:752](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L752)
+Defined in: [src/chain/operation.ts:752](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L752)
 
-#### amount_to_sell
+#### amount\_to\_sell
 
-> **amount_to_sell**: `string` \| [`Asset`](../classes/Asset.md)
+> **amount\_to\_sell**: `string` \| [`Asset`](../classes/Asset.md)
 
 #### expiration
 
 > **expiration**: `string`
 
-#### fill_or_kill
+#### fill\_or\_kill
 
-> **fill_or_kill**: `boolean`
+> **fill\_or\_kill**: `boolean`
 
-#### min_to_receive
+#### min\_to\_receive
 
-> **min_to_receive**: `string` \| [`Asset`](../classes/Asset.md)
+> **min\_to\_receive**: `string` \| [`Asset`](../classes/Asset.md)
 
 #### orderid
 

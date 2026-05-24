@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / TransferFromSavingsOperation
 
 # Interface: TransferFromSavingsOperation
 
-Defined in: [src/chain/operation.ts:999](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L999)
+Defined in: [src/chain/operation.ts:999](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L999)
 
 Withdraws funds from savings to liquid balance after the savings delay.
 
@@ -25,19 +25,19 @@ before it completes.
 
 > **0**: `"transfer_from_savings"`
 
-Defined in: [src/chain/operation.ts:1000](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1000)
+Defined in: [src/chain/operation.ts:1000](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1000)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1001](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1001)
+Defined in: [src/chain/operation.ts:1001](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1001)
 
 #### amount
 
@@ -51,9 +51,9 @@ Defined in: [src/chain/operation.ts:1001](https://github.com/TheCrazyGM/dhive/bl
 
 > **memo**: `string`
 
-#### request_id
+#### request\_id
 
-> **request_id**: `number`
+> **request\_id**: `number`
 
 #### to
 

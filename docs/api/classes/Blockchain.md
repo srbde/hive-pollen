@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Blockchain
 
 # Class: Blockchain
 
-Defined in: [src/helpers/blockchain.ts:116](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L116)
+Defined in: [src/helpers/blockchain.ts:116](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L116)
 
 Convenience helper for reading Hive blocks and operations as async iterators
 or Node streams.
@@ -21,19 +21,19 @@ blocks or operations without hand-writing polling loops.
 ## Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const client = new Client("https://api.hive.blog");
+const client = new Client('https://api.hive.blog')
 
 for await (const op of client.blockchain.getOperations({ from: 90_000_000 })) {
-  console.log(op.op[0], op.trx_id);
+  console.log(op.op[0], op.trx_id)
 }
 ```
 
 ## See
 
-- [BlockchainStreamOptions](../interfaces/BlockchainStreamOptions.md)
-- [DatabaseAPI.getBlock](DatabaseAPI.md#getblock)
+ - [BlockchainStreamOptions](../interfaces/BlockchainStreamOptions.md)
+ - [DatabaseAPI.getBlock](DatabaseAPI.md#getblock)
 
 ## Constructors
 
@@ -41,7 +41,7 @@ for await (const op of client.blockchain.getOperations({ from: 90_000_000 })) {
 
 > **new Blockchain**(`client`): `Blockchain`
 
-Defined in: [src/helpers/blockchain.ts:122](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L122)
+Defined in: [src/helpers/blockchain.ts:122](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L122)
 
 Creates a blockchain helper bound to a client.
 
@@ -63,7 +63,7 @@ Client used for database API reads.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/blockchain.ts:122](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L122)
+Defined in: [src/helpers/blockchain.ts:122](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L122)
 
 Client used for database API reads.
 
@@ -73,7 +73,7 @@ Client used for database API reads.
 
 > **getBlockNumbers**(`options?`): `AsyncGenerator`\<`number`, `void`, `unknown`\>
 
-Defined in: [src/helpers/blockchain.ts:214](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L214)
+Defined in: [src/helpers/blockchain.ts:214](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L214)
 
 Creates an async iterator that yields block numbers as they become available.
 
@@ -112,19 +112,19 @@ Thrown when polling dynamic global properties fails.
 ```ts
 for await (const blockNum of client.blockchain.getBlockNumbers({
   from: 90_000_000,
-  to: 90_000_005,
+  to: 90_000_005
 })) {
-  console.log(blockNum);
+  console.log(blockNum)
 }
 ```
 
----
+***
 
 ### getBlockNumberStream()
 
 > **getBlockNumberStream**(`options?`): `ReadableStream`
 
-Defined in: [src/helpers/blockchain.ts:252](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L252)
+Defined in: [src/helpers/blockchain.ts:252](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L252)
 
 Creates a Node readable stream of block numbers.
 
@@ -145,17 +145,17 @@ A stream backed by the async block-number iterator.
 #### Example
 
 ```ts
-const stream = client.blockchain.getBlockNumberStream(90_000_000);
-stream.on("data", (blockNum) => console.log(blockNum));
+const stream = client.blockchain.getBlockNumberStream(90_000_000)
+stream.on('data', (blockNum) => console.log(blockNum))
 ```
 
----
+***
 
 ### getBlocks()
 
 > **getBlocks**(`options?`): `AsyncGenerator`\<[`SignedBlock`](../interfaces/SignedBlock.md), `void`, `unknown`\>
 
-Defined in: [src/helpers/blockchain.ts:272](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L272)
+Defined in: [src/helpers/blockchain.ts:272](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L272)
 
 Creates an async iterator that yields full signed blocks.
 
@@ -182,17 +182,17 @@ Thrown when block-number polling or block retrieval fails.
 
 ```ts
 for await (const block of client.blockchain.getBlocks(90_000_000)) {
-  console.log(block.witness, block.transactions.length);
+  console.log(block.witness, block.transactions.length)
 }
 ```
 
----
+***
 
 ### getBlockStream()
 
 > **getBlockStream**(`options?`): `ReadableStream`
 
-Defined in: [src/helpers/blockchain.ts:291](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L291)
+Defined in: [src/helpers/blockchain.ts:291](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L291)
 
 Creates a Node readable stream of full signed blocks.
 
@@ -215,16 +215,16 @@ A stream backed by the async block iterator.
 ```ts
 client.blockchain
   .getBlockStream({ from: 90_000_000 })
-  .on("data", (block) => console.log(block.block_id));
+  .on('data', (block) => console.log(block.block_id))
 ```
 
----
+***
 
 ### getCurrentBlock()
 
 > **getCurrentBlock**(`mode?`): `Promise`\<[`SignedBlock`](../interfaces/SignedBlock.md)\>
 
-Defined in: [src/helpers/blockchain.ts:184](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L184)
+Defined in: [src/helpers/blockchain.ts:184](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L184)
 
 Fetches the current block for the selected finality mode.
 
@@ -250,17 +250,17 @@ Thrown when the RPC node rejects either the properties or block call.
 #### Example
 
 ```ts
-const block = await client.blockchain.getCurrentBlock();
-console.log(block.transactions.length);
+const block = await client.blockchain.getCurrentBlock()
+console.log(block.transactions.length)
 ```
 
----
+***
 
 ### getCurrentBlockHeader()
 
 > **getCurrentBlockHeader**(`mode?`): `Promise`\<[`BlockHeader`](../interfaces/BlockHeader.md)\>
 
-Defined in: [src/helpers/blockchain.ts:165](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L165)
+Defined in: [src/helpers/blockchain.ts:165](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L165)
 
 Fetches the current block header for the selected finality mode.
 
@@ -286,17 +286,17 @@ Thrown when the RPC node rejects either the properties or block-header call.
 #### Example
 
 ```ts
-const header = await client.blockchain.getCurrentBlockHeader();
-console.log(header.timestamp);
+const header = await client.blockchain.getCurrentBlockHeader()
+console.log(header.timestamp)
 ```
 
----
+***
 
 ### getCurrentBlockNum()
 
 > **getCurrentBlockNum**(`mode?`): `Promise`\<`number`\>
 
-Defined in: [src/helpers/blockchain.ts:140](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L140)
+Defined in: [src/helpers/blockchain.ts:140](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L140)
 
 Resolves the current block number for the selected finality mode.
 
@@ -323,17 +323,17 @@ Thrown when the underlying `get_dynamic_global_properties` call fails.
 #### Example
 
 ```ts
-const irreversible = await client.blockchain.getCurrentBlockNum();
-const latest = await client.blockchain.getCurrentBlockNum(BlockchainMode.Latest);
+const irreversible = await client.blockchain.getCurrentBlockNum()
+const latest = await client.blockchain.getCurrentBlockNum(BlockchainMode.Latest)
 ```
 
----
+***
 
 ### getOperations()
 
 > **getOperations**(`options?`): `AsyncGenerator`\<[`AppliedOperation`](../interfaces/AppliedOperation.md), `void`, `unknown`\>
 
-Defined in: [src/helpers/blockchain.ts:321](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L321)
+Defined in: [src/helpers/blockchain.ts:321](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L321)
 
 Creates an async iterator that yields applied operations from each block.
 
@@ -367,21 +367,21 @@ Thrown when block-number polling or operation retrieval fails.
 ```ts
 for await (const applied of client.blockchain.getOperations({
   from: 90_000_000,
-  to: 90_000_010,
+  to: 90_000_010
 })) {
-  if (applied.op[0] === "transfer") {
-    console.log(applied.op[1]);
+  if (applied.op[0] === 'transfer') {
+    console.log(applied.op[1])
   }
 }
 ```
 
----
+***
 
 ### getOperationsStream()
 
 > **getOperationsStream**(`options?`): `ReadableStream`
 
-Defined in: [src/helpers/blockchain.ts:342](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/blockchain.ts#L342)
+Defined in: [src/helpers/blockchain.ts:342](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/blockchain.ts#L342)
 
 Creates a Node readable stream of applied operations.
 
@@ -402,6 +402,6 @@ A stream backed by the async operation iterator.
 #### Example
 
 ```ts
-const stream = client.blockchain.getOperationsStream({ from: 90_000_000 });
-stream.on("data", (applied) => console.log(applied.op[0]));
+const stream = client.blockchain.getOperationsStream({ from: 90_000_000 })
+stream.on('data', (applied) => console.log(applied.op[0]))
 ```

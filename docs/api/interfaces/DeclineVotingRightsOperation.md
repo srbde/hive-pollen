@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / DeclineVotingRightsOperation
 
 # Interface: DeclineVotingRightsOperation
 
-Defined in: [src/chain/operation.ts:569](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L569)
+Defined in: [src/chain/operation.ts:569](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L569)
 
 Enables or disables an account's ability to vote.
 
@@ -20,19 +20,19 @@ Enables or disables an account's ability to vote.
 
 > **0**: `"decline_voting_rights"`
 
-Defined in: [src/chain/operation.ts:570](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L570)
+Defined in: [src/chain/operation.ts:570](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L570)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:571](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L571)
+Defined in: [src/chain/operation.ts:571](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L571)
 
 #### account
 

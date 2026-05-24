@@ -71,7 +71,7 @@ import {
 export const VERSION = packageVersion;
 
 /**
- * Main Hive network chain id as a 32-byte buffer.
+ * Main Hive network chain id as 32 raw bytes.
  *
  * @remarks
  * The chain id is mixed into transaction signatures. Keeping the default here
@@ -414,7 +414,7 @@ export class Client {
    * @returns The decoded `result` member returned by the RPC node.
    *
    * @remarks
-   * The transport serializes Buffers as Hive-compatible hex strings, applies
+   * The transport serializes `Uint8Array` values as Hive-compatible hex strings, applies
    * jittered retry backoff, tracks API-specific node failures, and passively
    * records head-block freshness from `get_dynamic_global_properties`
    * responses. Broadcast calls skip the short per-fetch timeout because they

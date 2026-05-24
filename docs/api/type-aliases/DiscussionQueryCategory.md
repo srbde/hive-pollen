@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / DiscussionQueryCategory
 
@@ -8,7 +8,7 @@
 
 > **DiscussionQueryCategory** = `"active"` \| `"blog"` \| `"cashout"` \| `"children"` \| `"comments"` \| `"feed"` \| `"hot"` \| `"promoted"` \| `"trending"` \| `"votes"` \| `"created"`
 
-Defined in: [src/helpers/database.ts:62](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L62)
+Defined in: [src/helpers/database.ts:62](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L62)
 
 Sort or lookup category used by Hive's `get_discussions_by_*` RPC family.
 
@@ -21,8 +21,8 @@ content tag.
 ## Example
 
 ```ts
-const posts = await client.database.getDiscussions("trending", {
-  tag: "hive-139531",
-  limit: 10,
-});
+const posts = await client.database.getDiscussions('trending', {
+  tag: 'hive-139531',
+  limit: 10
+})
 ```

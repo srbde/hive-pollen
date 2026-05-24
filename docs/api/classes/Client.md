@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Client
 
 # Class: Client
 
-Defined in: [src/client.ts:249](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L249)
+Defined in: [src/client.ts:249](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L249)
 
 High-level Hive RPC client used by every Pollen helper.
 
@@ -21,18 +21,18 @@ to assemble raw RPC payloads.
 ## Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const client = new Client("https://api.hive.blog");
-const props = await client.database.getDynamicGlobalProperties();
+const client = new Client('https://api.hive.blog')
+const props = await client.database.getDynamicGlobalProperties()
 
-console.log(`Hive head block: ${props.head_block_number}`);
+console.log(`Hive head block: ${props.head_block_number}`)
 ```
 
 ## See
 
-- [ClientOptions](../interfaces/ClientOptions.md)
-- [RPCError](RPCError.md)
+ - [ClientOptions](../interfaces/ClientOptions.md)
+ - [RPCError](RPCError.md)
 
 ## Constructors
 
@@ -40,7 +40,7 @@ console.log(`Hive head block: ${props.head_block_number}`);
 
 > **new Client**(`address`, `options?`): `Client`
 
-Defined in: [src/client.ts:349](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L349)
+Defined in: [src/client.ts:349](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L349)
 
 Creates a client for one or more Hive RPC endpoints.
 
@@ -77,15 +77,15 @@ Thrown when `options.chainId` is not exactly 32 bytes after hex decoding.
 #### Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const client = new Client(["https://api.hive.blog", "https://api.deathwing.me"], {
-  timeout: 30_000,
-  failoverThreshold: 2,
-});
+const client = new Client(
+  ['https://api.hive.blog', 'https://api.deathwing.me'],
+  { timeout: 30_000, failoverThreshold: 2 }
+)
 
-const accounts = await client.database.getAccounts(["srbde"]);
-console.log(accounts[0].balance);
+const accounts = await client.database.getAccounts(['srbde'])
+console.log(accounts[0].balance)
 ```
 
 ## Properties
@@ -94,127 +94,127 @@ console.log(accounts[0].balance);
 
 > **address**: `string` \| `string`[]
 
-Defined in: [src/client.ts:259](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L259)
+Defined in: [src/client.ts:259](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L259)
 
 Address to Hive RPC server.
-String or String[] _read-only_
+String or String[] *read-only*
 
----
+***
 
 ### addressPrefix
 
 > `readonly` **addressPrefix**: `string`
 
-Defined in: [src/client.ts:310](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L310)
+Defined in: [src/client.ts:310](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L310)
 
 Address prefix for current network.
 
----
+***
 
 ### blockchain
 
 > `readonly` **blockchain**: [`Blockchain`](Blockchain.md)
 
-Defined in: [src/client.ts:279](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L279)
+Defined in: [src/client.ts:279](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L279)
 
 Blockchain helper.
 
----
+***
 
 ### broadcast
 
 > `readonly` **broadcast**: [`BroadcastAPI`](BroadcastAPI.md)
 
-Defined in: [src/client.ts:274](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L274)
+Defined in: [src/client.ts:274](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L274)
 
 Broadcast API helper.
 
----
+***
 
 ### chainId
 
 > `readonly` **chainId**: `Uint8Array`
 
-Defined in: [src/client.ts:305](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L305)
+Defined in: [src/client.ts:305](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L305)
 
 Chain ID for current network.
 
----
+***
 
 ### currentAddress
 
 > **currentAddress**: `string`
 
-Defined in: [src/client.ts:319](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L319)
+Defined in: [src/client.ts:319](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L319)
 
----
+***
 
 ### database
 
 > `readonly` **database**: [`DatabaseAPI`](DatabaseAPI.md)
 
-Defined in: [src/client.ts:264](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L264)
+Defined in: [src/client.ts:264](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L264)
 
 Database API helper.
 
----
+***
 
 ### healthTracker
 
 > `readonly` **healthTracker**: [`NodeHealthTracker`](NodeHealthTracker.md)
 
-Defined in: [src/client.ts:300](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L300)
+Defined in: [src/client.ts:300](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L300)
 
 Node health tracker for smart failover.
 Tracks per-node, per-API health and head block freshness.
 
----
+***
 
 ### hivemind
 
 > `readonly` **hivemind**: [`HivemindAPI`](HivemindAPI.md)
 
-Defined in: [src/client.ts:284](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L284)
+Defined in: [src/client.ts:284](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L284)
 
 Hivemind helper.
 
----
+***
 
 ### keys
 
 > `readonly` **keys**: [`AccountByKeyAPI`](AccountByKeyAPI.md)
 
-Defined in: [src/client.ts:289](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L289)
+Defined in: [src/client.ts:289](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L289)
 
 Accounts by key API helper.
 
----
+***
 
 ### options
 
 > `readonly` **options**: [`ClientOptions`](../interfaces/ClientOptions.md)
 
-Defined in: [src/client.ts:253](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L253)
+Defined in: [src/client.ts:253](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L253)
 
-Client options, _read-only_.
+Client options, *read-only*.
 
----
+***
 
 ### rc
 
 > `readonly` **rc**: [`RCAPI`](RCAPI.md)
 
-Defined in: [src/client.ts:269](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L269)
+Defined in: [src/client.ts:269](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L269)
 
 RC API helper.
 
----
+***
 
 ### transaction
 
 > `readonly` **transaction**: [`TransactionStatusAPI`](TransactionStatusAPI.md)
 
-Defined in: [src/client.ts:294](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L294)
+Defined in: [src/client.ts:294](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L294)
 
 Transaction status API helper.
 
@@ -224,7 +224,7 @@ Transaction status API helper.
 
 > **call**(`api`, `method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/client.ts:444](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L444)
+Defined in: [src/client.ts:442](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L442)
 
 Sends a JSON-RPC request through the configured failover transport.
 
@@ -257,7 +257,7 @@ The decoded `result` member returned by the RPC node.
 
 #### Remarks
 
-The transport serializes Buffers as Hive-compatible hex strings, applies
+The transport serializes `Uint8Array` values as Hive-compatible hex strings, applies
 jittered retry backoff, tracks API-specific node failures, and passively
 records head-block freshness from `get_dynamic_global_properties`
 responses. Broadcast calls skip the short per-fetch timeout because they
@@ -277,26 +277,26 @@ Thrown when the response id does not match the request id.
 #### Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const client = new Client("https://api.hive.blog");
-const config = await client.call("condenser_api", "get_config");
+const client = new Client('https://api.hive.blog')
+const config = await client.call('condenser_api', 'get_config')
 
-console.log(config.HIVE_BLOCK_INTERVAL);
+console.log(config.HIVE_BLOCK_INTERVAL)
 ```
 
 #### See
 
-- [retryingFetch](../@srbde/namespaces/utils/functions/retryingFetch.md)
-- [NodeHealthTracker](NodeHealthTracker.md)
+ - [retryingFetch](../@srbde/namespaces/utils/functions/retryingFetch.md)
+ - [NodeHealthTracker](NodeHealthTracker.md)
 
----
+***
 
 ### testnet()
 
 > `static` **testnet**(`options?`): `Client`
 
-Defined in: [src/client.ts:397](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L397)
+Defined in: [src/client.ts:395](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L395)
 
 Creates a client preconfigured for the public Hive testnet.
 
@@ -325,9 +325,9 @@ with mainnet signatures.
 #### Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const testnet = Client.testnet({ timeout: 20_000 });
-const props = await testnet.database.getDynamicGlobalProperties();
-console.log(props.head_block_number);
+const testnet = Client.testnet({ timeout: 20_000 })
+const props = await testnet.database.getDynamicGlobalProperties()
+console.log(props.head_block_number)
 ```

@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Serializer
 
@@ -8,9 +8,10 @@
 
 > **Serializer** = (`buffer`, `data`) => `void`
 
-Defined in: [src/chain/serializer.ts:59](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/serializer.ts#L59)
+Defined in: [src/chain/serializer.ts:60](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/serializer.ts#L60)
 
-Function signature for writing one Hive protocol value to a binary buffer.
+Function signature for writing one Hive protocol value to Pollen's native
+byte writer.
 
 ## Parameters
 
@@ -33,12 +34,12 @@ Value to serialize.
 ## Remarks
 
 Serializers are intentionally composable. Complex operation serializers are
-built by combining primitive serializers for numbers, strings, assets,
-public keys, arrays, options, and objects.
+built by combining primitive serializers for numbers, native `bigint`-backed
+64-bit values, strings, assets, public keys, arrays, options, and objects.
 
 ## Example
 
 ```ts
-const writer = new BinaryWriter();
-Types.String(writer, "pollen");
+const writer = new BinaryWriter()
+Types.String(writer, 'pollen')
 ```

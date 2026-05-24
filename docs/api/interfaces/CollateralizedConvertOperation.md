@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CollateralizedConvertOperation
 
 # Interface: CollateralizedConvertOperation
 
-Defined in: [src/chain/operation.ts:1221](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1221)
+Defined in: [src/chain/operation.ts:1221](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1221)
 
 Converts HIVE to HBD through the collateralized conversion flow.
 
@@ -20,19 +20,19 @@ Converts HIVE to HBD through the collateralized conversion flow.
 
 > **0**: `"collateralized_convert"`
 
-Defined in: [src/chain/operation.ts:1222](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1222)
+Defined in: [src/chain/operation.ts:1222](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1222)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1223](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1223)
+Defined in: [src/chain/operation.ts:1223](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1223)
 
 #### amount
 

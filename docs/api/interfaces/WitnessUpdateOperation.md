@@ -1,24 +1,24 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / WitnessUpdateOperation
 
 # Interface: WitnessUpdateOperation
 
-Defined in: [src/chain/operation.ts:1110](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1110)
+Defined in: [src/chain/operation.ts:1110](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1110)
 
 Users who wish to become a witness must pay a fee acceptable to
 the current witnesses to apply for the position and allow voting
 to begin.
 
-If the owner isn't a witness they will become a witness. Witnesses
+If the owner isn't a witness they will become a witness.  Witnesses
 are charged a fee equal to 1 weeks worth of witness pay which in
-turn is derived from the current share supply. The fee is
+turn is derived from the current share supply.  The fee is
 only applied if the owner is not already a witness.
 
 If the block_signing_key is null then the witness is removed from
-contention. The network will pick the top 21 witnesses for
+contention.  The network will pick the top 21 witnesses for
 producing blocks.
 
 ## Extends
@@ -31,23 +31,23 @@ producing blocks.
 
 > **0**: `"witness_update"`
 
-Defined in: [src/chain/operation.ts:1111](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1111)
+Defined in: [src/chain/operation.ts:1111](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1111)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1112](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1112)
+Defined in: [src/chain/operation.ts:1112](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1112)
 
-#### block_signing_key
+#### block\_signing\_key
 
-> **block_signing_key**: `string` \| [`PublicKey`](../classes/PublicKey.md) \| `null`
+> **block\_signing\_key**: `string` \| [`PublicKey`](../classes/PublicKey.md) \| `null`
 
 #### fee
 

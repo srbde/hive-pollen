@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / ChainProperties
 
 # Interface: ChainProperties
 
-Defined in: [src/chain/misc.ts:119](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L119)
+Defined in: [src/chain/misc.ts:120](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L120)
 
 Chain properties voted on by Hive witnesses.
 
@@ -18,17 +18,17 @@ values for account creation fee, block capacity, and HBD interest.
 ## Example
 
 ```ts
-const props = await client.database.getChainProperties();
-console.log(props.account_creation_fee);
+const props = await client.database.getChainProperties()
+console.log(props.account_creation_fee)
 ```
 
 ## Properties
 
-### account_creation_fee
+### account\_creation\_fee
 
-> **account_creation_fee**: `string` \| [`Asset`](../classes/Asset.md)
+> **account\_creation\_fee**: `string` \| [`Asset`](../classes/Asset.md)
 
-Defined in: [src/chain/misc.ts:131](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L131)
+Defined in: [src/chain/misc.ts:132](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L132)
 
 This fee, paid in HIVE, is converted into VESTING SHARES for the new account. Accounts
 without vesting shares cannot earn usage rations and therefore are powerless. This minimum
@@ -40,23 +40,23 @@ ability to vote and make transactions.
 This has to be multiplied by STEEMIT ? `CREATE_ACCOUNT_WITH_HIVE_MODIFIER`
 (defined as 30 on the main chain) to get the minimum fee needed to create an account.
 
----
+***
 
-### hbd_interest_rate
+### hbd\_interest\_rate
 
-> **hbd_interest_rate**: `number`
+> **hbd\_interest\_rate**: `number`
 
-Defined in: [src/chain/misc.ts:140](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L140)
+Defined in: [src/chain/misc.ts:141](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L141)
 
 The HBD interest percentage rate decided by witnesses, expressed 0 to 10000.
 
----
+***
 
-### maximum_block_size
+### maximum\_block\_size
 
-> **maximum_block_size**: `number`
+> **maximum\_block\_size**: `number`
 
-Defined in: [src/chain/misc.ts:136](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L136)
+Defined in: [src/chain/misc.ts:137](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L137)
 
 This witnesses vote for the maximum_block_size which is used by the network
 to tune rate limiting and capacity.

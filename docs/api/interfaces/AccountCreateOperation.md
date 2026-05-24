@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AccountCreateOperation
 
 # Interface: AccountCreateOperation
 
-Defined in: [src/chain/operation.ts:225](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L225)
+Defined in: [src/chain/operation.ts:225](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L225)
 
 Legacy paid account creation operation.
 
@@ -19,19 +19,16 @@ account creation often uses claimed account tickets through
 ## Example
 
 ```ts
-const op: AccountCreateOperation = [
-  "account_create",
-  {
-    fee: "3.000 HIVE",
-    creator: "srbde",
-    new_account_name: "new-user",
-    owner,
-    active,
-    posting,
-    memo_key,
-    json_metadata: "{}",
-  },
-];
+const op: AccountCreateOperation = ['account_create', {
+  fee: '3.000 HIVE',
+  creator: 'srbde',
+  new_account_name: 'new-user',
+  owner,
+  active,
+  posting,
+  memo_key,
+  json_metadata: '{}'
+}]
 ```
 
 ## Extends
@@ -44,19 +41,19 @@ const op: AccountCreateOperation = [
 
 > **0**: `"account_create"`
 
-Defined in: [src/chain/operation.ts:226](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L226)
+Defined in: [src/chain/operation.ts:226](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L226)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:227](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L227)
+Defined in: [src/chain/operation.ts:227](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L227)
 
 #### active
 
@@ -70,17 +67,17 @@ Defined in: [src/chain/operation.ts:227](https://github.com/TheCrazyGM/dhive/blo
 
 > **fee**: `string` \| [`Asset`](../classes/Asset.md)
 
-#### json_metadata
+#### json\_metadata
 
-> **json_metadata**: `string`
+> **json\_metadata**: `string`
 
-#### memo_key
+#### memo\_key
 
-> **memo_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
+> **memo\_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
 
-#### new_account_name
+#### new\_account\_name
 
-> **new_account_name**: `string`
+> **new\_account\_name**: `string`
 
 #### owner
 

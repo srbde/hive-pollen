@@ -1,16 +1,16 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
-[@srbde/pollen](../index.md) / DEFAULT_CHAIN_ID
+[@srbde/pollen](../index.md) / DEFAULT\_CHAIN\_ID
 
-# Variable: DEFAULT_CHAIN_ID
+# Variable: DEFAULT\_CHAIN\_ID
 
-> `const` **DEFAULT_CHAIN_ID**: `Uint8Array`\<`ArrayBufferLike`\>
+> `const` **DEFAULT\_CHAIN\_ID**: `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [src/client.ts:88](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/client.ts#L88)
+Defined in: [src/client.ts:88](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/client.ts#L88)
 
-Main Hive network chain id as a 32-byte buffer.
+Main Hive network chain id as 32 raw bytes.
 
 ## Remarks
 
@@ -21,7 +21,7 @@ different chain.
 ## Example
 
 ```ts
-import { DEFAULT_CHAIN_ID } from "@srbde/pollen";
+import { DEFAULT_CHAIN_ID } from '@srbde/pollen'
 
-console.log(toHex(DEFAULT_CHAIN_ID));
+console.log(toHex(DEFAULT_CHAIN_ID))
 ```

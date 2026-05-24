@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / getVestingSharePrice
 
@@ -8,7 +8,7 @@
 
 > **getVestingSharePrice**(`props`): [`Price`](../classes/Price.md)
 
-Defined in: [src/chain/misc.ts:317](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L317)
+Defined in: [src/chain/misc.ts:318](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L318)
 
 Calculates the HIVE/VESTS conversion price from global properties.
 
@@ -36,6 +36,6 @@ HIVE. If either side of the vesting pool is zero, Pollen returns a neutral
 ## Example
 
 ```ts
-const props = await client.database.getDynamicGlobalProperties();
-const vestingPrice = getVestingSharePrice(props);
+const props = await client.database.getDynamicGlobalProperties()
+const vestingPrice = getVestingSharePrice(props)
 ```

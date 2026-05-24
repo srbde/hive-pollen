@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AccountUpdate2Operation
 
 # Interface: AccountUpdate2Operation
 
-Defined in: [src/chain/operation.ts:1143](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1143)
+Defined in: [src/chain/operation.ts:1143](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1143)
 
 Modern account update operation with posting JSON metadata.
 
@@ -25,19 +25,19 @@ profile/application metadata in `posting_json_metadata`.
 
 > **0**: `"account_update2"`
 
-Defined in: [src/chain/operation.ts:1144](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1144)
+Defined in: [src/chain/operation.ts:1144](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1144)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1145](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1145)
+Defined in: [src/chain/operation.ts:1145](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1145)
 
 #### account
 
@@ -51,13 +51,13 @@ Defined in: [src/chain/operation.ts:1145](https://github.com/TheCrazyGM/dhive/bl
 
 > **extensions**: `any`[]
 
-#### json_metadata
+#### json\_metadata
 
-> **json_metadata**: `string`
+> **json\_metadata**: `string`
 
-#### memo_key?
+#### memo\_key?
 
-> `optional` **memo_key?**: `string` \| [`PublicKey`](../classes/PublicKey.md)
+> `optional` **memo\_key?**: `string` \| [`PublicKey`](../classes/PublicKey.md)
 
 #### owner?
 
@@ -67,9 +67,9 @@ Defined in: [src/chain/operation.ts:1145](https://github.com/TheCrazyGM/dhive/bl
 
 > `optional` **posting?**: [`AuthorityType`](AuthorityType.md)
 
-#### posting_json_metadata
+#### posting\_json\_metadata
 
-> **posting_json_metadata**: `string`
+> **posting\_json\_metadata**: `string`
 
 #### Overrides
 

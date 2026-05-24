@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / RemoveProposalOperation
 
 # Interface: RemoveProposalOperation
 
-Defined in: [src/chain/operation.ts:1194](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1194)
+Defined in: [src/chain/operation.ts:1194](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1194)
 
 Removes DHF proposals owned by an account.
 
@@ -20,31 +20,31 @@ Removes DHF proposals owned by an account.
 
 > **0**: `"remove_proposal"`
 
-Defined in: [src/chain/operation.ts:1195](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1195)
+Defined in: [src/chain/operation.ts:1195](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1195)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1196](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1196)
+Defined in: [src/chain/operation.ts:1196](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1196)
 
 #### extensions
 
 > **extensions**: `any`[]
 
-#### proposal_ids
+#### proposal\_ids
 
-> **proposal_ids**: `number`[]
+> **proposal\_ids**: `number`[]
 
-#### proposal_owner
+#### proposal\_owner
 
-> **proposal_owner**: `string`
+> **proposal\_owner**: `string`
 
 #### Overrides
 

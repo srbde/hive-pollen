@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CommentOperation
 
 # Interface: CommentOperation
 
-Defined in: [src/chain/operation.ts:433](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L433)
+Defined in: [src/chain/operation.ts:433](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L433)
 
 Creates or updates a post or reply.
 
@@ -18,18 +18,15 @@ creates a reply under the parent author/permlink pair.
 ## Example
 
 ```ts
-const op: CommentOperation = [
-  "comment",
-  {
-    parent_author: "",
-    parent_permlink: "hive-139531",
-    author: "srbde",
-    permlink: "hello-pollen",
-    title: "Hello Pollen",
-    body: "Posted with Pollen.",
-    json_metadata: JSON.stringify({ tags: ["hive-139531"] }),
-  },
-];
+const op: CommentOperation = ['comment', {
+  parent_author: '',
+  parent_permlink: 'hive-139531',
+  author: 'srbde',
+  permlink: 'hello-pollen',
+  title: 'Hello Pollen',
+  body: 'Posted with Pollen.',
+  json_metadata: JSON.stringify({ tags: ['hive-139531'] })
+}]
 ```
 
 ## Extends
@@ -42,19 +39,19 @@ const op: CommentOperation = [
 
 > **0**: `"comment"`
 
-Defined in: [src/chain/operation.ts:434](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L434)
+Defined in: [src/chain/operation.ts:434](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L434)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L435)
+Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L435)
 
 #### author
 
@@ -64,17 +61,17 @@ Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blo
 
 > **body**: `string`
 
-#### json_metadata
+#### json\_metadata
 
-> **json_metadata**: `string`
+> **json\_metadata**: `string`
 
-#### parent_author
+#### parent\_author
 
-> **parent_author**: `string`
+> **parent\_author**: `string`
 
-#### parent_permlink
+#### parent\_permlink
 
-> **parent_permlink**: `string`
+> **parent\_permlink**: `string`
 
 #### permlink
 

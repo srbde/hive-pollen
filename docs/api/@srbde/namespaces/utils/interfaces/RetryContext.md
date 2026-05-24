@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../../../../index.md)
 
----
+***
 
 [@srbde/pollen](../../../../index.md) / [utils](../index.md) / RetryContext
 
 # Interface: RetryContext
 
-Defined in: [src/utils.ts:49](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L49)
+Defined in: [src/utils.ts:59](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L59)
 
 Context for smart retry and failover decisions.
 
@@ -16,28 +16,28 @@ Context for smart retry and failover decisions.
 
 > `optional` **api?**: `string`
 
-Defined in: [src/utils.ts:51](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L51)
+Defined in: [src/utils.ts:61](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L61)
 
----
+***
 
 ### consoleOnFailover?
 
 > `optional` **consoleOnFailover?**: `boolean`
 
-Defined in: [src/utils.ts:53](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L53)
+Defined in: [src/utils.ts:63](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L63)
 
----
+***
 
 ### healthTracker?
 
 > `optional` **healthTracker?**: [`NodeHealthTracker`](../../../../classes/NodeHealthTracker.md)
 
-Defined in: [src/utils.ts:50](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L50)
+Defined in: [src/utils.ts:60](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L60)
 
----
+***
 
 ### isBroadcast?
 
 > `optional` **isBroadcast?**: `boolean`
 
-Defined in: [src/utils.ts:52](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L52)
+Defined in: [src/utils.ts:62](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L62)

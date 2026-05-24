@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / SignedBlock
 
 # Interface: SignedBlock
 
-Defined in: [src/chain/block.ts:91](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L91)
+Defined in: [src/chain/block.ts:91](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L91)
 
 Full Hive signed block including transactions.
 
@@ -18,9 +18,9 @@ transaction ids, and the deserialized transactions in block order.
 ## Example
 
 ```ts
-const block = await client.database.getBlock(90_000_000);
+const block = await client.database.getBlock(90_000_000)
 for (const transaction of block.transactions) {
-  console.log(transaction.operations.length);
+  console.log(transaction.operations.length)
 }
 ```
 
@@ -30,103 +30,103 @@ for (const transaction of block.transactions) {
 
 ## Properties
 
-### block_id
+### block\_id
 
-> **block_id**: `string`
+> **block\_id**: `string`
 
-Defined in: [src/chain/block.ts:92](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L92)
+Defined in: [src/chain/block.ts:92](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L92)
 
----
+***
 
 ### extensions
 
 > **extensions**: `any`[]
 
-Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L56)
+Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L56)
 
 #### Inherited from
 
 [`SignedBlockHeader`](SignedBlockHeader.md).[`extensions`](SignedBlockHeader.md#extensions)
 
----
+***
 
 ### previous
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L52)
+Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L52)
 
 #### Inherited from
 
 [`SignedBlockHeader`](SignedBlockHeader.md).[`previous`](SignedBlockHeader.md#previous)
 
----
+***
 
-### signing_key
+### signing\_key
 
-> **signing_key**: `string`
+> **signing\_key**: `string`
 
-Defined in: [src/chain/block.ts:93](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L93)
+Defined in: [src/chain/block.ts:93](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L93)
 
----
+***
 
 ### timestamp
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L53)
+Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L53)
 
 #### Inherited from
 
 [`SignedBlockHeader`](SignedBlockHeader.md).[`timestamp`](SignedBlockHeader.md#timestamp)
 
----
+***
 
-### transaction_ids
+### transaction\_ids
 
-> **transaction_ids**: `string`[]
+> **transaction\_ids**: `string`[]
 
-Defined in: [src/chain/block.ts:94](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L94)
+Defined in: [src/chain/block.ts:94](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L94)
 
----
+***
 
-### transaction_merkle_root
+### transaction\_merkle\_root
 
-> **transaction_merkle_root**: `string`
+> **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L55)
+Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L55)
 
 #### Inherited from
 
 [`SignedBlockHeader`](SignedBlockHeader.md).[`transaction_merkle_root`](SignedBlockHeader.md#transaction_merkle_root)
 
----
+***
 
 ### transactions
 
 > **transactions**: [`Transaction`](Transaction.md)[]
 
-Defined in: [src/chain/block.ts:95](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L95)
+Defined in: [src/chain/block.ts:95](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L95)
 
----
+***
 
 ### witness
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L54)
+Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L54)
 
 #### Inherited from
 
 [`SignedBlockHeader`](SignedBlockHeader.md).[`witness`](SignedBlockHeader.md#witness)
 
----
+***
 
-### witness_signature
+### witness\_signature
 
-> **witness_signature**: `string`
+> **witness\_signature**: `string`
 
-Defined in: [src/chain/block.ts:73](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/block.ts#L73)
+Defined in: [src/chain/block.ts:73](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/block.ts#L73)
 
 #### Inherited from
 

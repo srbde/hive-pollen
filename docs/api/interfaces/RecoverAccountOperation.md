@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / RecoverAccountOperation
 
 # Interface: RecoverAccountOperation
 
-Defined in: [src/chain/operation.ts:815](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L815)
+Defined in: [src/chain/operation.ts:815](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L815)
 
 Recover an account to a new authority using a previous authority and verification
 of the recovery account as proof of identity. This operation can only succeed
@@ -54,23 +54,23 @@ concern.
 
 > **0**: `"recover_account"`
 
-Defined in: [src/chain/operation.ts:816](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L816)
+Defined in: [src/chain/operation.ts:816](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L816)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:817](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L817)
+Defined in: [src/chain/operation.ts:817](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L817)
 
-#### account_to_recover
+#### account\_to\_recover
 
-> **account_to_recover**: `string`
+> **account\_to\_recover**: `string`
 
 The account to be recovered.
 
@@ -80,15 +80,15 @@ The account to be recovered.
 
 Extensions. Not currently used.
 
-#### new_owner_authority
+#### new\_owner\_authority
 
-> **new_owner_authority**: [`AuthorityType`](AuthorityType.md)
+> **new\_owner\_authority**: [`AuthorityType`](AuthorityType.md)
 
 The new owner authority as specified in the request account recovery operation.
 
-#### recent_owner_authority
+#### recent\_owner\_authority
 
-> **recent_owner_authority**: [`AuthorityType`](AuthorityType.md)
+> **recent\_owner\_authority**: [`AuthorityType`](AuthorityType.md)
 
 A previous owner authority that the account holder will use to prove
 past ownership of the account to be recovered.

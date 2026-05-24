@@ -9,7 +9,9 @@ import { PublicKey } from "../crypto.js";
  *
  * @remarks
  * Deserializers mirror the serializer registry for the limited binary payloads
- * Pollen needs to decode, currently focused on encrypted memo envelopes.
+ * Pollen needs to decode, currently focused on encrypted memo envelopes. Inputs
+ * are native `Uint8Array` bytes or an existing {@link BinaryReader}; no Node
+ * `Buffer` wrapper is required.
  *
  * @example
  * ```ts

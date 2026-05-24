@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Price
 
 # Class: Price
 
-Defined in: [src/chain/asset.ts:377](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L377)
+Defined in: [src/chain/asset.ts:377](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L377)
 
 Price ratio between two different Hive assets.
 
@@ -19,11 +19,11 @@ Price ratio between two different Hive assets.
 
 ```ts
 const price = Price.from({
-  base: "1.000 HIVE",
-  quote: "0.300 HBD",
-});
+  base: '1.000 HIVE',
+  quote: '0.300 HBD'
+})
 
-const hbd = price.convert(Asset.from("10.000 HIVE"));
+const hbd = price.convert(Asset.from('10.000 HIVE'))
 ```
 
 ## Constructors
@@ -32,7 +32,7 @@ const hbd = price.convert(Asset.from("10.000 HIVE"));
 
 > **new Price**(`base`, `quote`): `Price`
 
-Defined in: [src/chain/asset.ts:392](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L392)
+Defined in: [src/chain/asset.ts:392](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L392)
 
 Creates a price ratio from non-zero base and quote assets.
 
@@ -62,7 +62,7 @@ Thrown when either amount is zero or both assets use the same symbol.
 #### Example
 
 ```ts
-const price = new Price(Asset.from("1.000 HIVE"), Asset.from("0.300 HBD"));
+const price = new Price(Asset.from('1.000 HIVE'), Asset.from('0.300 HBD'))
 ```
 
 ## Properties
@@ -71,17 +71,17 @@ const price = new Price(Asset.from("1.000 HIVE"), Asset.from("0.300 HBD"));
 
 > `readonly` **base**: [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:393](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L393)
+Defined in: [src/chain/asset.ts:393](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L393)
 
 Asset being priced.
 
----
+***
 
 ### quote
 
 > `readonly` **quote**: [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:394](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L394)
+Defined in: [src/chain/asset.ts:394](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L394)
 
 Relative asset used to express the price.
 
@@ -91,7 +91,7 @@ Relative asset used to express the price.
 
 > **convert**(`asset`): [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:447](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L447)
+Defined in: [src/chain/asset.ts:447](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L447)
 
 Converts an asset between the price pair's two symbols.
 
@@ -117,16 +117,16 @@ Thrown when `asset.symbol` is not part of this price pair.
 #### Example
 
 ```ts
-const hbd = price.convert(Asset.from("10.000 HIVE"));
+const hbd = price.convert(Asset.from('10.000 HIVE'))
 ```
 
----
+***
 
 ### toString()
 
 > **toString**(): `string`
 
-Defined in: [src/chain/asset.ts:429](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L429)
+Defined in: [src/chain/asset.ts:429](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L429)
 
 Renders the price pair.
 
@@ -139,16 +139,16 @@ String in `base:quote` form.
 #### Example
 
 ```ts
-price.toString();
+price.toString()
 ```
 
----
+***
 
 ### from()
 
 > `static` **from**(`value`): `Price`
 
-Defined in: [src/chain/asset.ts:411](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/asset.ts#L411)
+Defined in: [src/chain/asset.ts:411](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/asset.ts#L411)
 
 Normalizes a price-like value into a Price.
 
@@ -169,5 +169,5 @@ A normalized price.
 #### Example
 
 ```ts
-const price = Price.from({ base: "1.000 HIVE", quote: "0.300 HBD" });
+const price = Price.from({ base: '1.000 HIVE', quote: '0.300 HBD' })
 ```

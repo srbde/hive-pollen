@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../../../index.md)
 
----
+***
 
 [@srbde/pollen](../../../index.md) / utils
 
@@ -18,9 +18,9 @@ integrations.
 ## Example
 
 ```ts
-import { utils } from "@srbde/pollen";
+import { utils } from '@srbde/pollen'
 
-const mask = utils.makeBitMaskFilter([utils.operationOrders.transfer]);
+const mask = utils.makeBitMaskFilter([utils.operationOrders.transfer])
 ```
 
 ## Classes

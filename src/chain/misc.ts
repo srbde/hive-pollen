@@ -48,11 +48,12 @@ import { fromHex, toHex } from "../utils.js";
 export type Bignum = string;
 
 /**
- * Buffer wrapper that serializes to a hex-encoded string.
+ * Byte wrapper that serializes to a hex-encoded string.
  *
  * @remarks
  * Hive APIs frequently represent binary values as hex strings. `HexBuffer`
- * keeps binary data available for serializers while rendering cleanly in JSON.
+ * now stores a native `Uint8Array`, keeping protocol bytes available for
+ * serializers without reintroducing Node `Buffer` as a core byte container.
  *
  * @example
  * ```ts
@@ -62,16 +63,16 @@ export type Bignum = string;
  */
 export class HexBuffer {
   /**
-   * Creates a hex-buffer wrapper around a Uint8Array.
+   * Creates a hex-buffer wrapper around native bytes.
    *
-   * @param buffer - Raw binary data.
+   * @param buffer - Raw binary data as a `Uint8Array`.
    */
   constructor(public buffer: Uint8Array) {}
 
   /**
    * Normalizes hex, bytes, or an existing wrapper into a {@link HexBuffer}.
    *
-   * @param value - Uint8Array, existing wrapper, byte array, or hex string.
+   * @param value - `Uint8Array`, existing wrapper, byte array, or hex string.
    * @returns A hex-buffer wrapper.
    *
    * @example

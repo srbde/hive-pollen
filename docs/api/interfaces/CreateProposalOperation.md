@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CreateProposalOperation
 
 # Interface: CreateProposalOperation
 
-Defined in: [src/chain/operation.ts:1164](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1164)
+Defined in: [src/chain/operation.ts:1164](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1164)
 
 Creates a Decentralized Hive Fund proposal.
 
@@ -25,31 +25,31 @@ when the proposal receives sufficient stake-weighted approval.
 
 > **0**: `"create_proposal"`
 
-Defined in: [src/chain/operation.ts:1165](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1165)
+Defined in: [src/chain/operation.ts:1165](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1165)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1166](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1166)
+Defined in: [src/chain/operation.ts:1166](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1166)
 
 #### creator
 
 > **creator**: `string`
 
-#### daily_pay
+#### daily\_pay
 
-> **daily_pay**: `string` \| [`Asset`](../classes/Asset.md)
+> **daily\_pay**: `string` \| [`Asset`](../classes/Asset.md)
 
-#### end_date
+#### end\_date
 
-> **end_date**: `string`
+> **end\_date**: `string`
 
 #### extensions
 
@@ -63,9 +63,9 @@ Defined in: [src/chain/operation.ts:1166](https://github.com/TheCrazyGM/dhive/bl
 
 > **receiver**: `string`
 
-#### start_date
+#### start\_date
 
-> **start_date**: `string`
+> **start\_date**: `string`
 
 #### subject
 

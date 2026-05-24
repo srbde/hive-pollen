@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / ReportOverProductionOperation
 
 # Interface: ReportOverProductionOperation
 
-Defined in: [src/chain/operation.ts:851](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L851)
+Defined in: [src/chain/operation.ts:851](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L851)
 
 This operation is used to report a miner who signs two blocks
 at the same time. To be valid, the violation must be reported within
@@ -30,31 +30,31 @@ of the block producer to the reporter.
 
 > **0**: `"report_over_production"`
 
-Defined in: [src/chain/operation.ts:852](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L852)
+Defined in: [src/chain/operation.ts:852](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L852)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:853](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L853)
+Defined in: [src/chain/operation.ts:853](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L853)
 
-#### first_block
+#### first\_block
 
-> **first_block**: [`SignedBlockHeader`](SignedBlockHeader.md)
+> **first\_block**: [`SignedBlockHeader`](SignedBlockHeader.md)
 
 #### reporter
 
 > **reporter**: `string`
 
-#### second_block
+#### second\_block
 
-> **second_block**: [`SignedBlockHeader`](SignedBlockHeader.md)
+> **second\_block**: [`SignedBlockHeader`](SignedBlockHeader.md)
 
 #### Overrides
 

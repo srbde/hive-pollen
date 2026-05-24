@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CommunityRolesQuery
 
 # Interface: CommunityRolesQuery
 
-Defined in: [src/helpers/hivemind.ts:89](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L89)
+Defined in: [src/helpers/hivemind.ts:89](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L89)
 
 Query options for community role lookups.
 
@@ -21,4 +21,4 @@ other community team assignments.
 
 > **community**: `string`
 
-Defined in: [src/helpers/hivemind.ts:90](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L90)
+Defined in: [src/helpers/hivemind.ts:90](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L90)

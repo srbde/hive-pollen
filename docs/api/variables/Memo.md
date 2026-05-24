@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Memo
 
@@ -8,7 +8,7 @@
 
 > `const` **Memo**: `object`
 
-Defined in: [src/memo.ts:163](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/memo.ts#L163)
+Defined in: [src/memo.ts:156](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/memo.ts#L156)
 
 Hive encrypted memo helper.
 
@@ -22,7 +22,7 @@ Decodes a Hive memo, decrypting messages that begin with `#`.
 
 #### Parameters
 
-##### private_key
+##### private\_key
 
 `string` \| [`PrivateKey`](../classes/PrivateKey.md)
 
@@ -57,8 +57,8 @@ or AES checksum validation fails.
 #### Example
 
 ```ts
-const plaintext = Memo.decode(recipientMemoKey, encryptedMemo);
-console.log(plaintext);
+const plaintext = Memo.decode(recipientMemoKey, encryptedMemo)
+console.log(plaintext)
 ```
 
 ### encode
@@ -69,14 +69,14 @@ Encodes a Hive memo, encrypting messages that begin with `#`.
 
 #### Parameters
 
-##### private_key
+##### private\_key
 
 `string` \| [`PrivateKey`](../classes/PrivateKey.md)
 
 Sender memo private key, either as a [PrivateKey](../classes/PrivateKey.md)
 instance or WIF string.
 
-##### public_key
+##### public\_key
 
 `string` \| [`PublicKey`](../classes/PublicKey.md)
 
@@ -116,7 +116,7 @@ fails.
 #### Example
 
 ```ts
-const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, "#hello nectar");
+const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, '#hello nectar')
 ```
 
 ## Remarks
@@ -129,8 +129,8 @@ beginning with `#` are encrypted.
 ## Example
 
 ```ts
-import { Memo } from "@srbde/pollen";
+import { Memo } from '@srbde/pollen'
 
-const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, "#for your eyes");
-const plaintext = Memo.decode(recipientMemoKey, encrypted);
+const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, '#for your eyes')
+const plaintext = Memo.decode(recipientMemoKey, encrypted)
 ```

@@ -1,25 +1,26 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / HexBuffer
 
 # Class: HexBuffer
 
-Defined in: [src/chain/misc.ts:63](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L63)
+Defined in: [src/chain/misc.ts:64](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L64)
 
-Buffer wrapper that serializes to a hex-encoded string.
+Byte wrapper that serializes to a hex-encoded string.
 
 ## Remarks
 
 Hive APIs frequently represent binary values as hex strings. `HexBuffer`
-keeps binary data available for serializers while rendering cleanly in JSON.
+now stores a native `Uint8Array`, keeping protocol bytes available for
+serializers without reintroducing Node `Buffer` as a core byte container.
 
 ## Example
 
 ```ts
-const bytes = HexBuffer.from("deadbeef");
-console.log(bytes.toJSON());
+const bytes = HexBuffer.from('deadbeef')
+console.log(bytes.toJSON())
 ```
 
 ## Constructors
@@ -28,9 +29,9 @@ console.log(bytes.toJSON());
 
 > **new HexBuffer**(`buffer`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:69](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L69)
+Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L70)
 
-Creates a hex-buffer wrapper around a Uint8Array.
+Creates a hex-buffer wrapper around native bytes.
 
 #### Parameters
 
@@ -38,7 +39,7 @@ Creates a hex-buffer wrapper around a Uint8Array.
 
 `Uint8Array`
 
-Raw binary data.
+Raw binary data as a `Uint8Array`.
 
 #### Returns
 
@@ -50,9 +51,9 @@ Raw binary data.
 
 > **buffer**: `Uint8Array`
 
-Defined in: [src/chain/misc.ts:69](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L69)
+Defined in: [src/chain/misc.ts:70](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L70)
 
-Raw binary data.
+Raw binary data as a `Uint8Array`.
 
 ## Methods
 
@@ -60,19 +61,19 @@ Raw binary data.
 
 > **toJSON**(): `string`
 
-Defined in: [src/chain/misc.ts:101](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L101)
+Defined in: [src/chain/misc.ts:102](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L102)
 
 #### Returns
 
 `string`
 
----
+***
 
 ### toString()
 
 > **toString**(`encoding?`): `string`
 
-Defined in: [src/chain/misc.ts:94](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L94)
+Defined in: [src/chain/misc.ts:95](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L95)
 
 #### Parameters
 
@@ -84,13 +85,13 @@ Defined in: [src/chain/misc.ts:94](https://github.com/TheCrazyGM/dhive/blob/ab36
 
 `string`
 
----
+***
 
 ### from()
 
 > `static` **from**(`value`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:82](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L82)
+Defined in: [src/chain/misc.ts:83](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L83)
 
 Normalizes hex, bytes, or an existing wrapper into a HexBuffer.
 
@@ -100,7 +101,7 @@ Normalizes hex, bytes, or an existing wrapper into a HexBuffer.
 
 `string` \| `number`[] \| `Uint8Array`\<`ArrayBufferLike`\> \| `HexBuffer`
 
-Uint8Array, existing wrapper, byte array, or hex string.
+`Uint8Array`, existing wrapper, byte array, or hex string.
 
 #### Returns
 
@@ -111,5 +112,5 @@ A hex-buffer wrapper.
 #### Example
 
 ```ts
-const buffer = HexBuffer.from([0xde, 0xad, 0xbe, 0xef]);
+const buffer = HexBuffer.from([0xde, 0xad, 0xbe, 0xef])
 ```

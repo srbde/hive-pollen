@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Manabar
 
 # Interface: Manabar
 
-Defined in: [src/chain/rc.ts:117](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/rc.ts#L117)
+Defined in: [src/chain/rc.ts:117](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/rc.ts#L117)
 
 Projected manabar value returned by Pollen mana helpers.
 
@@ -18,30 +18,30 @@ human-readable percent value.
 ## Example
 
 ```ts
-const mana = await client.rc.getVPMana("srbde");
-console.log(`${mana.percentage / 100}%`);
+const mana = await client.rc.getVPMana('srbde')
+console.log(`${mana.percentage / 100}%`)
 ```
 
 ## Properties
 
-### current_mana
+### current\_mana
 
-> **current_mana**: `number`
+> **current\_mana**: `number`
 
-Defined in: [src/chain/rc.ts:118](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/rc.ts#L118)
+Defined in: [src/chain/rc.ts:118](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/rc.ts#L118)
 
----
+***
 
-### max_mana
+### max\_mana
 
-> **max_mana**: `number`
+> **max\_mana**: `number`
 
-Defined in: [src/chain/rc.ts:119](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/rc.ts#L119)
+Defined in: [src/chain/rc.ts:119](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/rc.ts#L119)
 
----
+***
 
 ### percentage
 
 > **percentage**: `number`
 
-Defined in: [src/chain/rc.ts:120](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/rc.ts#L120)
+Defined in: [src/chain/rc.ts:120](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/rc.ts#L120)

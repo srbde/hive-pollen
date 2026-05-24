@@ -52,7 +52,7 @@ import {
 import { SignedTransaction, Transaction, TransactionConfirmation } from "../chain/transaction.js";
 import { Client } from "./../client.js";
 import { cryptoUtils, PrivateKey, PublicKey } from "./../crypto.js";
-import { fromHex, toHex } from "./../utils.js";
+import { fromHex } from "./../utils.js";
 
 /**
  * Options used by {@link BroadcastAPI.createTestAccount}.

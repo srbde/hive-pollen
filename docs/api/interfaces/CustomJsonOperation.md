@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CustomJsonOperation
 
 # Interface: CustomJsonOperation
 
-Defined in: [src/chain/operation.ts:550](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L550)
+Defined in: [src/chain/operation.ts:550](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L550)
 
 JSON custom operation used by Hive application protocols.
 
@@ -19,15 +19,12 @@ account-control implications.
 ## Example
 
 ```ts
-const op: CustomJsonOperation = [
-  "custom_json",
-  {
-    required_auths: [],
-    required_posting_auths: ["srbde"],
-    id: "pollen.demo",
-    json: JSON.stringify({ ok: true }),
-  },
-];
+const op: CustomJsonOperation = ['custom_json', {
+  required_auths: [],
+  required_posting_auths: ['srbde'],
+  id: 'pollen.demo',
+  json: JSON.stringify({ ok: true })
+}]
 ```
 
 ## Extends
@@ -40,19 +37,19 @@ const op: CustomJsonOperation = [
 
 > **0**: `"custom_json"`
 
-Defined in: [src/chain/operation.ts:551](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L551)
+Defined in: [src/chain/operation.ts:551](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L551)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:552](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L552)
+Defined in: [src/chain/operation.ts:552](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L552)
 
 #### id
 
@@ -66,13 +63,13 @@ ID string, must be less than 32 characters long.
 
 JSON encoded string, must be valid JSON.
 
-#### required_auths
+#### required\_auths
 
-> **required_auths**: `string`[]
+> **required\_auths**: `string`[]
 
-#### required_posting_auths
+#### required\_posting\_auths
 
-> **required_posting_auths**: `string`[]
+> **required\_posting\_auths**: `string`[]
 
 #### Overrides
 

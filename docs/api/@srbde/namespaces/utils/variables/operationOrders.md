@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../../../../index.md)
 
----
+***
 
 [@srbde/pollen](../../../../index.md) / [utils](../index.md) / operationOrders
 
@@ -8,346 +8,346 @@
 
 > `const` **operationOrders**: `object`
 
-Defined in: [src/utils.ts:605](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L605)
+Defined in: [src/utils.ts:695](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L695)
 
 ## Type Declaration
 
-### account_create
+### account\_create
 
-> **account_create**: `number` = `9`
+> **account\_create**: `number` = `9`
 
-### account_create_with_delegation
+### account\_create\_with\_delegation
 
-> **account_create_with_delegation**: `number` = `41`
+> **account\_create\_with\_delegation**: `number` = `41`
 
-### account_created
+### account\_created
 
-> **account_created**: `number` = `80`
+> **account\_created**: `number` = `80`
 
-### account_update
+### account\_update
 
-> **account_update**: `number` = `10`
+> **account\_update**: `number` = `10`
 
-### account_update2
+### account\_update2
 
-> **account_update2**: `number` = `43`
+> **account\_update2**: `number` = `43`
 
-### account_witness_proxy
+### account\_witness\_proxy
 
-> **account_witness_proxy**: `number` = `13`
+> **account\_witness\_proxy**: `number` = `13`
 
-### account_witness_vote
+### account\_witness\_vote
 
-> **account_witness_vote**: `number` = `12`
+> **account\_witness\_vote**: `number` = `12`
 
-### author_reward
+### author\_reward
 
-> **author_reward**: `number` = `51`
+> **author\_reward**: `number` = `51`
 
-### cancel_transfer_from_savings
+### cancel\_transfer\_from\_savings
 
-> **cancel_transfer_from_savings**: `number` = `34`
+> **cancel\_transfer\_from\_savings**: `number` = `34`
 
-### change_recovery_account
+### change\_recovery\_account
 
-> **change_recovery_account**: `number` = `26`
+> **change\_recovery\_account**: `number` = `26`
 
-### changed_recovery_account
+### changed\_recovery\_account
 
-> **changed_recovery_account**: `number` = `76`
+> **changed\_recovery\_account**: `number` = `76`
 
-### claim_account
+### claim\_account
 
-> **claim_account**: `number` = `22`
+> **claim\_account**: `number` = `22`
 
-### claim_reward_balance
+### claim\_reward\_balance
 
-> **claim_reward_balance**: `number` = `39`
+> **claim\_reward\_balance**: `number` = `39`
 
-### clear_null_account_balance
+### clear\_null\_account\_balance
 
-> **clear_null_account_balance**: `number` = `65`
+> **clear\_null\_account\_balance**: `number` = `65`
 
-### collateralized_convert
+### collateralized\_convert
 
-> **collateralized_convert**: `number` = `48`
+> **collateralized\_convert**: `number` = `48`
 
 ### comment
 
 > **comment**: `number` = `1`
 
-### comment_benefactor_reward
+### comment\_benefactor\_reward
 
-> **comment_benefactor_reward**: `number` = `63`
+> **comment\_benefactor\_reward**: `number` = `63`
 
-### comment_options
+### comment\_options
 
-> **comment_options**: `number` = `19`
+> **comment\_options**: `number` = `19`
 
-### comment_payout_update
+### comment\_payout\_update
 
-> **comment_payout_update**: `number` = `61`
+> **comment\_payout\_update**: `number` = `61`
 
-### comment_reward
+### comment\_reward
 
-> **comment_reward**: `number` = `53`
+> **comment\_reward**: `number` = `53`
 
-### consolidate_treasury_balance
+### consolidate\_treasury\_balance
 
-> **consolidate_treasury_balance**: `number` = `71`
+> **consolidate\_treasury\_balance**: `number` = `71`
 
 ### convert
 
 > **convert**: `number` = `8`
 
-### create_claimed_account
+### create\_claimed\_account
 
-> **create_claimed_account**: `number` = `23`
+> **create\_claimed\_account**: `number` = `23`
 
-### create_proposal
+### create\_proposal
 
-> **create_proposal**: `number` = `44`
+> **create\_proposal**: `number` = `44`
 
-### curation_reward
+### curation\_reward
 
-> **curation_reward**: `number` = `52`
+> **curation\_reward**: `number` = `52`
 
 ### custom
 
 > **custom**: `number` = `15`
 
-### custom_binary
+### custom\_binary
 
-> **custom_binary**: `number` = `35`
+> **custom\_binary**: `number` = `35`
 
-### custom_json
+### custom\_json
 
-> **custom_json**: `number` = `18`
+> **custom\_json**: `number` = `18`
 
-### decline_voting_rights
+### decline\_voting\_rights
 
-> **decline_voting_rights**: `number` = `36`
+> **decline\_voting\_rights**: `number` = `36`
 
-### delayed_voting
+### delayed\_voting
 
-> **delayed_voting**: `number` = `70`
+> **delayed\_voting**: `number` = `70`
 
-### delegate_vesting_shares
+### delegate\_vesting\_shares
 
-> **delegate_vesting_shares**: `number` = `40`
+> **delegate\_vesting\_shares**: `number` = `40`
 
-### delete_comment
+### delete\_comment
 
-> **delete_comment**: `number` = `17`
+> **delete\_comment**: `number` = `17`
 
-### effective_comment_vote
+### effective\_comment\_vote
 
-> **effective_comment_vote**: `number` = `72`
+> **effective\_comment\_vote**: `number` = `72`
 
-### escrow_approve
+### escrow\_approve
 
-> **escrow_approve**: `number` = `31`
+> **escrow\_approve**: `number` = `31`
 
-### escrow_dispute
+### escrow\_dispute
 
-> **escrow_dispute**: `number` = `28`
+> **escrow\_dispute**: `number` = `28`
 
-### escrow_release
+### escrow\_release
 
-> **escrow_release**: `number` = `29`
+> **escrow\_release**: `number` = `29`
 
-### escrow_transfer
+### escrow\_transfer
 
-> **escrow_transfer**: `number` = `27`
+> **escrow\_transfer**: `number` = `27`
 
-### expired_account_notification
+### expired\_account\_notification
 
-> **expired_account_notification**: `number` = `75`
+> **expired\_account\_notification**: `number` = `75`
 
-### failed_recurrent_transfer
+### failed\_recurrent\_transfer
 
-> **failed_recurrent_transfer**: `number` = `84`
+> **failed\_recurrent\_transfer**: `number` = `84`
 
-### feed_publish
+### feed\_publish
 
-> **feed_publish**: `number` = `7`
+> **feed\_publish**: `number` = `7`
 
-### fill_collateralized_convert_request
+### fill\_collateralized\_convert\_request
 
-> **fill_collateralized_convert_request**: `number` = `81`
+> **fill\_collateralized\_convert\_request**: `number` = `81`
 
-### fill_convert_request
+### fill\_convert\_request
 
-> **fill_convert_request**: `number` = `50`
+> **fill\_convert\_request**: `number` = `50`
 
-### fill_order
+### fill\_order
 
-> **fill_order**: `number` = `57`
+> **fill\_order**: `number` = `57`
 
-### fill_recurrent_transfer
+### fill\_recurrent\_transfer
 
-> **fill_recurrent_transfer**: `number` = `83`
+> **fill\_recurrent\_transfer**: `number` = `83`
 
-### fill_transfer_from_savings
+### fill\_transfer\_from\_savings
 
-> **fill_transfer_from_savings**: `number` = `59`
+> **fill\_transfer\_from\_savings**: `number` = `59`
 
-### fill_vesting_withdraw
+### fill\_vesting\_withdraw
 
-> **fill_vesting_withdraw**: `number` = `56`
+> **fill\_vesting\_withdraw**: `number` = `56`
 
 ### hardfork
 
 > **hardfork**: `number` = `60`
 
-### hardfork_hive
+### hardfork\_hive
 
-> **hardfork_hive**: `number` = `68`
+> **hardfork\_hive**: `number` = `68`
 
-### hardfork_hive_restore
+### hardfork\_hive\_restore
 
-> **hardfork_hive_restore**: `number` = `69`
+> **hardfork\_hive\_restore**: `number` = `69`
 
-### ineffective_delete_comment
+### ineffective\_delete\_comment
 
-> **ineffective_delete_comment**: `number` = `73`
+> **ineffective\_delete\_comment**: `number` = `73`
 
 ### interest
 
 > **interest**: `number` = `55`
 
-### limit_order_cancel
+### limit\_order\_cancel
 
-> **limit_order_cancel**: `number` = `6`
+> **limit\_order\_cancel**: `number` = `6`
 
-### limit_order_create
+### limit\_order\_create
 
-> **limit_order_create**: `number` = `5`
+> **limit\_order\_create**: `number` = `5`
 
-### limit_order_create2
+### limit\_order\_create2
 
-> **limit_order_create2**: `number` = `21`
+> **limit\_order\_create2**: `number` = `21`
 
-### liquidity_reward
+### liquidity\_reward
 
-> **liquidity_reward**: `number` = `54`
+> **liquidity\_reward**: `number` = `54`
 
 ### pow
 
 > **pow**: `number` = `14`
 
-### pow_reward
+### pow\_reward
 
-> **pow_reward**: `number` = `78`
+> **pow\_reward**: `number` = `78`
 
 ### pow2
 
 > **pow2**: `number` = `30`
 
-### producer_reward
+### producer\_reward
 
-> **producer_reward**: `number` = `64`
+> **producer\_reward**: `number` = `64`
 
-### proposal_pay
+### proposal\_pay
 
-> **proposal_pay**: `number` = `66`
+> **proposal\_pay**: `number` = `66`
 
-### recover_account
+### recover\_account
 
-> **recover_account**: `number` = `25`
+> **recover\_account**: `number` = `25`
 
-### recurrent_transfer
+### recurrent\_transfer
 
-> **recurrent_transfer**: `number` = `49`
+> **recurrent\_transfer**: `number` = `49`
 
-### remove_proposal
+### remove\_proposal
 
-> **remove_proposal**: `number` = `46`
+> **remove\_proposal**: `number` = `46`
 
-### report_over_production
+### report\_over\_production
 
-> **report_over_production**: `number` = `16`
+> **report\_over\_production**: `number` = `16`
 
-### request_account_recovery
+### request\_account\_recovery
 
-> **request_account_recovery**: `number` = `24`
+> **request\_account\_recovery**: `number` = `24`
 
-### reset_account
+### reset\_account
 
-> **reset_account**: `number` = `37`
+> **reset\_account**: `number` = `37`
 
-### return_vesting_delegation
+### return\_vesting\_delegation
 
-> **return_vesting_delegation**: `number` = `62`
+> **return\_vesting\_delegation**: `number` = `62`
 
-### set_reset_account
+### set\_reset\_account
 
-> **set_reset_account**: `number` = `38`
+> **set\_reset\_account**: `number` = `38`
 
-### set_withdraw_vesting_route
+### set\_withdraw\_vesting\_route
 
-> **set_withdraw_vesting_route**: `number` = `20`
+> **set\_withdraw\_vesting\_route**: `number` = `20`
 
-### shutdown_witness
+### shutdown\_witness
 
-> **shutdown_witness**: `number` = `58`
+> **shutdown\_witness**: `number` = `58`
 
-### sps_convert
+### sps\_convert
 
-> **sps_convert**: `number` = `74`
+> **sps\_convert**: `number` = `74`
 
-### sps_fund
+### sps\_fund
 
-> **sps_fund**: `number` = `67`
+> **sps\_fund**: `number` = `67`
 
-### system_warning
+### system\_warning
 
-> **system_warning**: `number` = `82`
+> **system\_warning**: `number` = `82`
 
 ### transfer
 
 > **transfer**: `number` = `2`
 
-### transfer_from_savings
+### transfer\_from\_savings
 
-> **transfer_from_savings**: `number` = `33`
+> **transfer\_from\_savings**: `number` = `33`
 
-### transfer_to_savings
+### transfer\_to\_savings
 
-> **transfer_to_savings**: `number` = `32`
+> **transfer\_to\_savings**: `number` = `32`
 
-### transfer_to_vesting
+### transfer\_to\_vesting
 
-> **transfer_to_vesting**: `number` = `3`
+> **transfer\_to\_vesting**: `number` = `3`
 
-### transfer_to_vesting_completed
+### transfer\_to\_vesting\_completed
 
-> **transfer_to_vesting_completed**: `number` = `77`
+> **transfer\_to\_vesting\_completed**: `number` = `77`
 
-### update_proposal
+### update\_proposal
 
-> **update_proposal**: `number` = `47`
+> **update\_proposal**: `number` = `47`
 
-### update_proposal_votes
+### update\_proposal\_votes
 
-> **update_proposal_votes**: `number` = `45`
+> **update\_proposal\_votes**: `number` = `45`
 
-### vesting_shares_split
+### vesting\_shares\_split
 
-> **vesting_shares_split**: `number` = `79`
+> **vesting\_shares\_split**: `number` = `79`
 
 ### vote
 
 > **vote**: `number` = `0`
 
-### withdraw_vesting
+### withdraw\_vesting
 
-> **withdraw_vesting**: `number` = `4`
+> **withdraw\_vesting**: `number` = `4`
 
-### witness_set_properties
+### witness\_set\_properties
 
-> **witness_set_properties**: `number` = `42`
+> **witness\_set\_properties**: `number` = `42`
 
-### witness_update
+### witness\_update
 
-> **witness_update**: `number` = `11`
+> **witness\_update**: `number` = `11`

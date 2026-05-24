@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CancelTransferFromSavingsOperation
 
 # Interface: CancelTransferFromSavingsOperation
 
-Defined in: [src/chain/operation.ts:332](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L332)
+Defined in: [src/chain/operation.ts:332](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L332)
 
 Cancels a pending savings withdrawal request.
 
@@ -20,27 +20,27 @@ Cancels a pending savings withdrawal request.
 
 > **0**: `"cancel_transfer_from_savings"`
 
-Defined in: [src/chain/operation.ts:333](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L333)
+Defined in: [src/chain/operation.ts:333](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L333)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:334](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L334)
+Defined in: [src/chain/operation.ts:334](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L334)
 
 #### from
 
 > **from**: `string`
 
-#### request_id
+#### request\_id
 
-> **request_id**: `number`
+> **request\_id**: `number`
 
 #### Overrides
 

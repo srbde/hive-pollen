@@ -40,7 +40,7 @@ import { Discussion } from "../chain/comment.js";
 import { DynamicGlobalProperties } from "../chain/misc.js";
 import { ChainProperties, VestingDelegation } from "../chain/misc.js";
 import { AppliedOperation } from "../chain/operation.js";
-import { SignedTransaction, TransactionConfirmation } from "../chain/transaction.js";
+import { SignedTransaction } from "../chain/transaction.js";
 import { Client } from "./../client.js";
 
 /**

@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AccountUpdateOperation
 
 # Interface: AccountUpdateOperation
 
-Defined in: [src/chain/operation.ts:281](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L281)
+Defined in: [src/chain/operation.ts:281](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L281)
 
 Updates account authorities, memo key, or legacy JSON metadata.
 
@@ -18,14 +18,11 @@ Authority changes require the appropriate owner or active signatures. Use
 ## Example
 
 ```ts
-const op: AccountUpdateOperation = [
-  "account_update",
-  {
-    account: "srbde",
-    memo_key,
-    json_metadata: "{}",
-  },
-];
+const op: AccountUpdateOperation = ['account_update', {
+  account: 'srbde',
+  memo_key,
+  json_metadata: '{}'
+}]
 ```
 
 ## Extends
@@ -38,19 +35,19 @@ const op: AccountUpdateOperation = [
 
 > **0**: `"account_update"`
 
-Defined in: [src/chain/operation.ts:282](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L282)
+Defined in: [src/chain/operation.ts:282](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L282)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:283](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L283)
+Defined in: [src/chain/operation.ts:283](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L283)
 
 #### account
 
@@ -60,13 +57,13 @@ Defined in: [src/chain/operation.ts:283](https://github.com/TheCrazyGM/dhive/blo
 
 > `optional` **active?**: [`AuthorityType`](AuthorityType.md)
 
-#### json_metadata
+#### json\_metadata
 
-> **json_metadata**: `string`
+> **json\_metadata**: `string`
 
-#### memo_key
+#### memo\_key
 
-> **memo_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
+> **memo\_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
 
 #### owner?
 

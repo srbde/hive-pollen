@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / DatabaseAPI
 
 # Class: DatabaseAPI
 
-Defined in: [src/helpers/database.ts:142](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L142)
+Defined in: [src/helpers/database.ts:142](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L142)
 
 Read-only helper for Hive condenser/database RPC methods.
 
@@ -20,12 +20,12 @@ familiarity while returning Pollen chain types such as [Asset](Asset.md),
 ## Example
 
 ```ts
-import { Client } from "@srbde/pollen";
+import { Client } from '@srbde/pollen'
 
-const client = new Client("https://api.hive.blog");
-const [account] = await client.database.getAccounts(["srbde"]);
+const client = new Client('https://api.hive.blog')
+const [account] = await client.database.getAccounts(['srbde'])
 
-console.log(account.reputation, account.posting_json_metadata);
+console.log(account.reputation, account.posting_json_metadata)
 ```
 
 ## See
@@ -38,7 +38,7 @@ console.log(account.reputation, account.posting_json_metadata);
 
 > **new DatabaseAPI**(`client`): `DatabaseAPI`
 
-Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L148)
+Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L148)
 
 Creates a database helper bound to a client.
 
@@ -60,7 +60,7 @@ Client used to send condenser API calls.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L148)
+Defined in: [src/helpers/database.ts:148](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L148)
 
 Client used to send condenser API calls.
 
@@ -70,7 +70,7 @@ Client used to send condenser API calls.
 
 > **call**(`method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/database.ts:166](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L166)
+Defined in: [src/helpers/database.ts:166](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L166)
 
 Sends a raw condenser API call through the parent client.
 
@@ -102,17 +102,17 @@ Thrown when the RPC node rejects the call or the method is unavailable.
 #### Example
 
 ```ts
-const result = await client.database.call("get_config");
-console.log(result.HIVE_BLOCK_INTERVAL);
+const result = await client.database.call('get_config')
+console.log(result.HIVE_BLOCK_INTERVAL)
 ```
 
----
+***
 
 ### getAccountHistory()
 
 > **getAccountHistory**(`account`, `from`, `limit`, `operation_bitmask?`): `Promise`\<\[\[`number`, [`AppliedOperation`](../interfaces/AppliedOperation.md)\]\]\>
 
-Defined in: [src/helpers/database.ts:486](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L486)
+Defined in: [src/helpers/database.ts:486](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L486)
 
 Fetches historical operations for an account.
 
@@ -137,7 +137,7 @@ recent entry.
 
 Maximum number of entries to return.
 
-##### operation_bitmask?
+##### operation\_bitmask?
 
 \[`number`, `number`\]
 
@@ -168,7 +168,7 @@ Thrown when account history is unavailable or the node rejects the lookup.
 
 #### Example
 
-````ts
+```ts
 const op = pollen.utils.operationOrders
 const operationsBitmask = pollen.utils.makeBitMaskFilter([
   op.transfer,
@@ -201,7 +201,7 @@ const history = await client.database.getAccountHistory(
 
 > **getAccounts**(`usernames`): `Promise`\<[`ExtendedAccount`](../interfaces/ExtendedAccount.md)[]\>
 
-Defined in: [src/helpers/database.ts:411](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L411)
+Defined in: [src/helpers/database.ts:411](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L411)
 
 Fetches extended account objects for one or more account names.
 
@@ -230,15 +230,15 @@ Thrown when the RPC node rejects the account lookup.
 ```ts
 const [account] = await client.database.getAccounts(['srbde'])
 console.log(account.name, account.reputation)
-````
+```
 
----
+***
 
 ### getBlock()
 
 > **getBlock**(`blockNum`): `Promise`\<[`SignedBlock`](../interfaces/SignedBlock.md)\>
 
-Defined in: [src/helpers/database.ts:335](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L335)
+Defined in: [src/helpers/database.ts:335](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L335)
 
 Fetches a full signed block by number.
 
@@ -264,17 +264,17 @@ Thrown when the block does not exist or the node rejects the request.
 #### Example
 
 ```ts
-const block = await client.database.getBlock(90_000_000);
-console.log(block.transactions.length);
+const block = await client.database.getBlock(90_000_000)
+console.log(block.transactions.length)
 ```
 
----
+***
 
 ### getBlockHeader()
 
 > **getBlockHeader**(`blockNum`): `Promise`\<[`BlockHeader`](../interfaces/BlockHeader.md)\>
 
-Defined in: [src/helpers/database.ts:316](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L316)
+Defined in: [src/helpers/database.ts:316](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L316)
 
 Fetches the header for a specific block number.
 
@@ -300,17 +300,17 @@ Thrown when the block does not exist or the node rejects the request.
 #### Example
 
 ```ts
-const header = await client.database.getBlockHeader(90_000_000);
-console.log(header.previous);
+const header = await client.database.getBlockHeader(90_000_000)
+console.log(header.previous)
 ```
 
----
+***
 
 ### getChainProperties()
 
 > **getChainProperties**(): `Promise`\<[`ChainProperties`](../interfaces/ChainProperties.md)\>
 
-Defined in: [src/helpers/database.ts:203](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L203)
+Defined in: [src/helpers/database.ts:203](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L203)
 
 Fetches witness-voted median chain properties.
 
@@ -328,17 +328,17 @@ Thrown when the RPC node cannot read chain properties.
 #### Example
 
 ```ts
-const props = await client.database.getChainProperties();
-console.log(props.account_creation_fee.toString());
+const props = await client.database.getChainProperties()
+console.log(props.account_creation_fee.toString())
 ```
 
----
+***
 
 ### getConfig()
 
 > **getConfig**(): `Promise`\<\{\[`name`: `string`\]: `string` \| `number` \| `boolean`; \}\>
 
-Defined in: [src/helpers/database.ts:297](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L297)
+Defined in: [src/helpers/database.ts:297](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L297)
 
 Fetches static protocol constants exposed by the RPC node.
 
@@ -361,21 +361,21 @@ Thrown when the node cannot serve `get_config`.
 #### Example
 
 ```ts
-const config = await client.database.getConfig();
-console.log(config.HIVE_BLOCK_INTERVAL);
+const config = await client.database.getConfig()
+console.log(config.HIVE_BLOCK_INTERVAL)
 ```
 
 #### See
 
 https://github.com/steemit/steem/blob/master/libraries/protocol/include/steemit/protocol/config.hpp
 
----
+***
 
 ### getCurrentMedianHistoryPrice()
 
 > **getCurrentMedianHistoryPrice**(): `Promise`\<[`Price`](Price.md)\>
 
-Defined in: [src/helpers/database.ts:246](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L246)
+Defined in: [src/helpers/database.ts:246](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L246)
 
 Fetches the witness median market price for HIVE denominated in HBD.
 
@@ -393,17 +393,17 @@ Thrown when the RPC node cannot serve the price feed.
 #### Example
 
 ```ts
-const price = await client.database.getCurrentMedianHistoryPrice();
-console.log(`${price.base} per ${price.quote}`);
+const price = await client.database.getCurrentMedianHistoryPrice()
+console.log(`${price.base} per ${price.quote}`)
 ```
 
----
+***
 
 ### getDiscussions()
 
 > **getDiscussions**(`by`, `query`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/database.ts:388](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L388)
+Defined in: [src/helpers/database.ts:388](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L388)
 
 Fetches discussion records such as posts, comments, blog entries, or feeds.
 
@@ -442,22 +442,22 @@ unavailable on the node.
 #### Example
 
 ```ts
-const posts = await client.database.getDiscussions("blog", {
-  tag: "srbde",
+const posts = await client.database.getDiscussions('blog', {
+  tag: 'srbde',
   limit: 5,
-  truncate_body: 256,
-});
+  truncate_body: 256
+})
 
-console.log(posts.map((post) => post.permlink));
+console.log(posts.map((post) => post.permlink))
 ```
 
----
+***
 
 ### getDynamicGlobalProperties()
 
 > **getDynamicGlobalProperties**(): `Promise`\<[`DynamicGlobalProperties`](../interfaces/DynamicGlobalProperties.md)\>
 
-Defined in: [src/helpers/database.ts:185](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L185)
+Defined in: [src/helpers/database.ts:185](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L185)
 
 Fetches the dynamic global state maintained by the current RPC node.
 
@@ -476,17 +476,17 @@ Thrown when the node cannot serve `get_dynamic_global_properties`.
 #### Example
 
 ```ts
-const props = await client.database.getDynamicGlobalProperties();
-console.log(props.head_block_number, props.time);
+const props = await client.database.getDynamicGlobalProperties()
+console.log(props.head_block_number, props.time)
 ```
 
----
+***
 
 ### getOperations()
 
 > **getOperations**(`blockNum`, `onlyVirtual?`): `Promise`\<[`AppliedOperation`](../interfaces/AppliedOperation.md)[]\>
 
-Defined in: [src/helpers/database.ts:357](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L357)
+Defined in: [src/helpers/database.ts:357](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L357)
 
 Fetches applied operations recorded in a block.
 
@@ -520,17 +520,17 @@ available on the node.
 #### Example
 
 ```ts
-const operations = await client.database.getOperations(90_000_000);
-console.log(operations.map((applied) => applied.op[0]));
+const operations = await client.database.getOperations(90_000_000)
+console.log(operations.map((applied) => applied.op[0]))
 ```
 
----
+***
 
 ### getState()
 
 > **getState**(`path`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/database.ts:228](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L228)
+Defined in: [src/helpers/database.ts:228](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L228)
 
 Fetches condenser state for a Hive-style URL path.
 
@@ -563,17 +563,17 @@ Thrown when the RPC node rejects the state lookup.
 #### Example
 
 ```ts
-const state = await client.database.getState("trending/hive-139531");
-console.log(Object.keys(state.content));
+const state = await client.database.getState('trending/hive-139531')
+console.log(Object.keys(state.content))
 ```
 
----
+***
 
 ### getTransaction()
 
 > **getTransaction**(`txId`): `Promise`\<[`SignedTransaction`](../interfaces/SignedTransaction.md)\>
 
-Defined in: [src/helpers/database.ts:433](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L433)
+Defined in: [src/helpers/database.ts:433](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L433)
 
 Fetches a signed transaction by transaction id.
 
@@ -601,18 +601,18 @@ support.
 
 ```ts
 const transaction = await client.database.getTransaction(
-  "0000000000000000000000000000000000000000",
-);
-console.log(transaction.operations);
+  '0000000000000000000000000000000000000000'
+)
+console.log(transaction.operations)
 ```
 
----
+***
 
 ### getVersion()
 
 > **getVersion**(): `Promise`\<`object`\>
 
-Defined in: [src/helpers/database.ts:537](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L537)
+Defined in: [src/helpers/database.ts:537](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L537)
 
 Fetches version information from the active RPC node.
 
@@ -630,17 +630,17 @@ Thrown when the node does not expose `get_version`.
 #### Example
 
 ```ts
-const version = await client.database.getVersion();
-console.log(version);
+const version = await client.database.getVersion()
+console.log(version)
 ```
 
----
+***
 
 ### getVestingDelegations()
 
 > **getVestingDelegations**(`account`, `from?`, `limit?`): `Promise`\<[`VestingDelegation`](../interfaces/VestingDelegation.md)[]\>
 
-Defined in: [src/helpers/database.ts:269](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L269)
+Defined in: [src/helpers/database.ts:269](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L269)
 
 Fetches vesting delegations made by an account.
 
@@ -678,19 +678,19 @@ Thrown when the account is invalid or the node rejects the request.
 #### Example
 
 ```ts
-const delegations = await client.database.getVestingDelegations("srbde", "", 50);
+const delegations = await client.database.getVestingDelegations('srbde', '', 50)
 for (const delegation of delegations) {
-  console.log(delegation.delegatee, delegation.vesting_shares.toString());
+  console.log(delegation.delegatee, delegation.vesting_shares.toString())
 }
 ```
 
----
+***
 
 ### verifyAuthority()
 
 > **verifyAuthority**(`stx`): `Promise`\<`boolean`\>
 
-Defined in: [src/helpers/database.ts:519](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/database.ts#L519)
+Defined in: [src/helpers/database.ts:519](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/database.ts#L519)
 
 Verifies that a signed transaction satisfies Hive authority rules.
 
@@ -717,7 +717,7 @@ Thrown when the node rejects the transaction or cannot evaluate authority.
 #### Example
 
 ```ts
-const signed = client.broadcast.sign(transaction, privateKey);
-const ok = await client.database.verifyAuthority(signed);
-console.log(ok);
+const signed = client.broadcast.sign(transaction, privateKey)
+const ok = await client.database.verifyAuthority(signed)
+console.log(ok)
 ```

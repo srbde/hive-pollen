@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Authority
 
 # Class: Authority
 
-Defined in: [src/chain/account.ts:74](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L74)
+Defined in: [src/chain/account.ts:74](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L74)
 
 Convenience wrapper for Hive owner, active, and posting authorities.
 
@@ -18,7 +18,7 @@ accounts or from a full weighted authority object for multisig setups.
 ## Example
 
 ```ts
-const posting = Authority.from(postingPublicKey);
+const posting = Authority.from(postingPublicKey)
 ```
 
 ## Implements
@@ -31,7 +31,7 @@ const posting = Authority.from(postingPublicKey);
 
 > **new Authority**(`authority`): `Authority`
 
-Defined in: [src/chain/account.ts:84](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L84)
+Defined in: [src/chain/account.ts:84](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L84)
 
 Creates an authority from explicit threshold and auth lists.
 
@@ -49,35 +49,35 @@ Raw authority fields from Hive.
 
 ## Properties
 
-### account_auths
+### account\_auths
 
-> **account_auths**: \[`string`, `number`\][]
+> **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:76](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L76)
+Defined in: [src/chain/account.ts:76](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L76)
 
 #### Implementation of
 
 [`AuthorityType`](../interfaces/AuthorityType.md).[`account_auths`](../interfaces/AuthorityType.md#account_auths)
 
----
+***
 
-### key_auths
+### key\_auths
 
-> **key_auths**: \[`string` \| [`PublicKey`](PublicKey.md), `number`\][]
+> **key\_auths**: \[`string` \| [`PublicKey`](PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:77](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L77)
+Defined in: [src/chain/account.ts:77](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L77)
 
 #### Implementation of
 
 [`AuthorityType`](../interfaces/AuthorityType.md).[`key_auths`](../interfaces/AuthorityType.md#key_auths)
 
----
+***
 
-### weight_threshold
+### weight\_threshold
 
-> **weight_threshold**: `number`
+> **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:75](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L75)
+Defined in: [src/chain/account.ts:75](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L75)
 
 #### Implementation of
 
@@ -89,7 +89,7 @@ Defined in: [src/chain/account.ts:75](https://github.com/TheCrazyGM/dhive/blob/a
 
 > `static` **from**(`value`): `Authority`
 
-Defined in: [src/chain/account.ts:102](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L102)
+Defined in: [src/chain/account.ts:102](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L102)
 
 Normalizes a public key or raw authority into an Authority.
 
@@ -111,5 +111,5 @@ A normalized authority.
 #### Example
 
 ```ts
-const authority = Authority.from("STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA");
+const authority = Authority.from('STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA')
 ```

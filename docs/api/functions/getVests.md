@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / getVests
 
@@ -8,7 +8,7 @@
 
 > **getVests**(`account`, `subtract_delegated?`, `add_received?`): `number`
 
-Defined in: [src/chain/misc.ts:349](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/misc.ts#L349)
+Defined in: [src/chain/misc.ts:350](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/misc.ts#L350)
 
 Calculates an account's effective vesting shares.
 
@@ -21,14 +21,14 @@ Calculates an account's effective vesting shares.
 Account containing vesting, delegation, and withdrawal
 fields.
 
-### subtract_delegated?
+### subtract\_delegated?
 
 `boolean` = `true`
 
 Whether outgoing delegations should reduce the
 result.
 
-### add_received?
+### add\_received?
 
 `boolean` = `true`
 
@@ -50,6 +50,6 @@ use this to derive maximum voting mana.
 ## Example
 
 ```ts
-const [account] = await client.database.getAccounts(["srbde"]);
-const effectiveVests = getVests(account);
+const [account] = await client.database.getAccounts(['srbde'])
+const effectiveVests = getVests(account)
 ```

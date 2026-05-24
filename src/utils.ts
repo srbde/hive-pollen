@@ -65,6 +65,18 @@ export interface RetryContext {
 
 /**
  * Converts a Uint8Array to a hex-encoded string.
+ *
+ * @param data - Native byte array to encode.
+ * @returns Lowercase hex string with two characters per byte.
+ *
+ * @remarks
+ * Pollen uses this helper at RPC and JSON boundaries where Hive expects binary
+ * protocol values to be represented as hex text.
+ *
+ * @example
+ * ```ts
+ * const hex = toHex(new Uint8Array([0xde, 0xad, 0xbe, 0xef]))
+ * ```
  */
 export function toHex(data: Uint8Array): string {
   let out = "";
@@ -76,6 +88,17 @@ export function toHex(data: Uint8Array): string {
 
 /**
  * Converts a hex-encoded string to a Uint8Array.
+ *
+ * @param hex - Hex string with an even number of characters.
+ * @returns Native bytes represented by the string.
+ *
+ * @throws Error
+ * Thrown when `hex` has an odd number of characters.
+ *
+ * @example
+ * ```ts
+ * const bytes = fromHex('deadbeef')
+ * ```
  */
 export function fromHex(hex: string): Uint8Array {
   if (hex.length % 2 !== 0) {
@@ -90,6 +113,18 @@ export function fromHex(hex: string): Uint8Array {
 
 /**
  * Concatenates multiple Uint8Arrays into one.
+ *
+ * @param arrays - Byte arrays to join in order.
+ * @returns A new `Uint8Array` containing all input bytes.
+ *
+ * @remarks
+ * This replaces Node `Buffer.concat` in protocol paths that must run the same
+ * way in Node and browsers.
+ *
+ * @example
+ * ```ts
+ * const digestInput = concat([chainId, transactionBytes])
+ * ```
  */
 export function concat(arrays: Uint8Array[]): Uint8Array {
   const totalLength = arrays.reduce((acc, arr) => acc + arr.length, 0);
@@ -104,6 +139,17 @@ export function concat(arrays: Uint8Array[]): Uint8Array {
 
 /**
  * Compares two byte arrays for equality.
+ *
+ * @param a - First byte array.
+ * @param b - Second byte array.
+ * @returns True when both arrays have the same length and byte values.
+ *
+ * @example
+ * ```ts
+ * if (!bytesEqual(expected, actual)) {
+ *   throw new Error('checksum mismatch')
+ * }
+ * ```
  */
 export function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
   if (a.length !== b.length) {
@@ -119,6 +165,12 @@ export function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
 
 /**
  * Growable little-endian byte writer used by Hive serializers.
+ *
+ * @remarks
+ * The writer is built on `Uint8Array` and `DataView`, so protocol serialization
+ * does not depend on Node `Buffer` or third-party byte-buffer packages. 64-bit
+ * integers are accepted as `number`, decimal `string`, or native `bigint` and
+ * are written in Hive's little-endian wire order.
  */
 export class BinaryWriter {
   private buffer: Uint8Array;
@@ -238,13 +290,19 @@ export class BinaryWriter {
 
 /**
  * Little-endian byte reader used by Hive deserializers and memo decoding.
+ *
+ * @remarks
+ * The constructor copies input into a clean `Uint8Array` before creating its
+ * `DataView`. That avoids backing-store offset surprises from Buffer-like
+ * views while preserving a browser-native byte engine. 64-bit readers return
+ * native `bigint`, matching the Phase 8 removal of JSBI from the hot path.
  */
 export class BinaryReader {
   private view: DataView;
   private cursor = 0;
 
   constructor(private buffer: Uint8Array) {
-    // Ensure we have a real clean Uint8Array to avoid Node Buffer .buffer weirdness
+    // Normalize to a clean view so byte offsets never leak into DataView reads.
     const b = new Uint8Array(buffer);
     this.buffer = b;
     this.view = new DataView(b.buffer, b.byteOffset, b.byteLength);
@@ -723,6 +781,25 @@ export const operationOrders = {
   failed_recurrent_transfer: 84,
 };
 
+/**
+ * Builds the two-word account-history operation mask accepted by Hive.
+ *
+ * @param allowedOperations - Operation ids from {@link operationOrders}.
+ * @returns Low/high mask words as decimal strings, with zero words represented
+ * as `null`.
+ *
+ * @remarks
+ * Native `bigint` is used for the 64-bit mask words, replacing the older JSBI
+ * shim while keeping the returned RPC shape as decimal strings or `null`.
+ *
+ * @example
+ * ```ts
+ * const mask = makeBitMaskFilter([
+ *   operationOrders.transfer,
+ *   operationOrders.claim_reward_balance
+ * ])
+ * ```
+ */
 export function makeBitMaskFilter(allowedOperations: number[]) {
   return allowedOperations
     .reduce(redFunction, [0n, 0n])

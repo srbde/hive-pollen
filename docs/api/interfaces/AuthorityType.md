@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AuthorityType
 
 # Interface: AuthorityType
 
-Defined in: [src/chain/account.ts:56](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L56)
+Defined in: [src/chain/account.ts:56](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L56)
 
 Raw Hive authority object.
 
@@ -22,30 +22,30 @@ authorities meet `weight_threshold`.
 const authority: AuthorityType = {
   weight_threshold: 1,
   account_auths: [],
-  key_auths: [[publicKey, 1]],
-};
+  key_auths: [[publicKey, 1]]
+}
 ```
 
 ## Properties
 
-### account_auths
+### account\_auths
 
-> **account_auths**: \[`string`, `number`\][]
+> **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:58](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L58)
+Defined in: [src/chain/account.ts:58](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L58)
 
----
+***
 
-### key_auths
+### key\_auths
 
-> **key_auths**: \[`string` \| [`PublicKey`](../classes/PublicKey.md), `number`\][]
+> **key\_auths**: \[`string` \| [`PublicKey`](../classes/PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L59)
+Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L59)
 
----
+***
 
-### weight_threshold
+### weight\_threshold
 
-> **weight_threshold**: `number`
+> **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:57](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/account.ts#L57)
+Defined in: [src/chain/account.ts:57](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/account.ts#L57)

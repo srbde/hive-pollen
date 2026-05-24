@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../../../../index.md)
 
----
+***
 
 [@srbde/pollen](../../../../index.md) / [utils](../index.md) / buildWitnessUpdateOp
 
@@ -8,7 +8,7 @@
 
 > **buildWitnessUpdateOp**(`owner`, `props`): [`WitnessSetPropertiesOperation`](../../../../interfaces/WitnessSetPropertiesOperation.md)
 
-Defined in: [src/utils.ts:563](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/utils.ts#L563)
+Defined in: [src/utils.ts:653](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/utils.ts#L653)
 
 ## Parameters
 

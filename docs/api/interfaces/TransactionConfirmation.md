@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / TransactionConfirmation
 
 # Interface: TransactionConfirmation
 
-Defined in: [src/chain/transaction.ts:114](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/transaction.ts#L114)
+Defined in: [src/chain/transaction.ts:114](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/transaction.ts#L114)
 
 Confirmation returned after broadcasting a transaction.
 
@@ -18,46 +18,46 @@ transaction indexes are supplied by the RPC node when available.
 ## Example
 
 ```ts
-const confirmation = await client.broadcast.transfer(transfer, activeKey);
-console.log(confirmation.id, confirmation.block_num);
+const confirmation = await client.broadcast.transfer(transfer, activeKey)
+console.log(confirmation.id, confirmation.block_num)
 ```
 
 ## Properties
 
-### block_num
+### block\_num
 
-> **block_num**: `number`
+> **block\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:122](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/transaction.ts#L122)
+Defined in: [src/chain/transaction.ts:122](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/transaction.ts#L122)
 
 Block number that accepted the transaction.
 
----
+***
 
 ### expired
 
 > **expired**: `boolean`
 
-Defined in: [src/chain/transaction.ts:130](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/transaction.ts#L130)
+Defined in: [src/chain/transaction.ts:130](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/transaction.ts#L130)
 
 Whether the node considered the transaction expired.
 
----
+***
 
 ### id
 
 > **id**: `string`
 
-Defined in: [src/chain/transaction.ts:118](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/transaction.ts#L118)
+Defined in: [src/chain/transaction.ts:118](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/transaction.ts#L118)
 
 Transaction id.
 
----
+***
 
-### trx_num
+### trx\_num
 
-> **trx_num**: `number`
+> **trx\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:126](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/transaction.ts#L126)
+Defined in: [src/chain/transaction.ts:126](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/transaction.ts#L126)
 
 Transaction index within the accepting block.

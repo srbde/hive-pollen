@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / BroadcastAPI
 
 # Class: BroadcastAPI
 
-Defined in: [src/helpers/broadcast.ts:148](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L148)
+Defined in: [src/helpers/broadcast.ts:148](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L148)
 
 Helper for signing and broadcasting Hive operations.
 
@@ -21,28 +21,28 @@ primitives.
 ## Example
 
 ```ts
-import { Client, PrivateKey } from "@srbde/pollen";
+import { Client, PrivateKey } from '@srbde/pollen'
 
-const client = new Client("https://api.hive.blog");
-const key = PrivateKey.fromString(process.env.HIVE_ACTIVE_KEY!);
+const client = new Client('https://api.hive.blog')
+const key = PrivateKey.fromString(process.env.HIVE_ACTIVE_KEY!)
 
 const confirmation = await client.broadcast.transfer(
   {
-    from: "srbde",
-    to: "alice",
-    amount: "0.001 HIVE",
-    memo: "Pollen transfer",
+    from: 'srbde',
+    to: 'alice',
+    amount: '0.001 HIVE',
+    memo: 'Pollen transfer'
   },
-  key,
-);
+  key
+)
 
-console.log(confirmation.id);
+console.log(confirmation.id)
 ```
 
 ## See
 
-- [cryptoUtils.signTransaction](../variables/cryptoUtils.md#signtransaction)
-- [Client.call](Client.md#call)
+ - [cryptoUtils.signTransaction](../variables/cryptoUtils.md#signtransaction)
+ - [Client.call](Client.md#call)
 
 ## Constructors
 
@@ -50,7 +50,7 @@ console.log(confirmation.id);
 
 > **new BroadcastAPI**(`client`): `BroadcastAPI`
 
-Defined in: [src/helpers/broadcast.ts:161](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L161)
+Defined in: [src/helpers/broadcast.ts:161](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L161)
 
 Creates a broadcast helper bound to a client.
 
@@ -73,18 +73,18 @@ submission.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/broadcast.ts:161](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L161)
+Defined in: [src/helpers/broadcast.ts:161](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L161)
 
 Client used for chain-property reads and transaction
 submission.
 
----
+***
 
 ### expireTime
 
 > **expireTime**: `number`
 
-Defined in: [src/helpers/broadcast.ts:153](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L153)
+Defined in: [src/helpers/broadcast.ts:153](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L153)
 
 How many milliseconds in the future to set the expiry time to when
 broadcasting a transaction, defaults to 1 minute.
@@ -95,7 +95,7 @@ broadcasting a transaction, defaults to 1 minute.
 
 > **call**(`method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/broadcast.ts:630](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L630)
+Defined in: [src/helpers/broadcast.ts:630](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L630)
 
 Sends a raw broadcast-related condenser API call.
 
@@ -127,16 +127,16 @@ Thrown when the node rejects the RPC call.
 #### Example
 
 ```ts
-const result = await client.broadcast.call("broadcast_transaction", [signed]);
+const result = await client.broadcast.call('broadcast_transaction', [signed])
 ```
 
----
+***
 
 ### comment()
 
 > **comment**(`comment`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:191](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L191)
+Defined in: [src/helpers/broadcast.ts:191](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L191)
 
 Broadcasts a Hive `comment` operation.
 
@@ -198,25 +198,25 @@ missing, or the comment payload violates chain rules.
 ```ts
 await client.broadcast.comment(
   {
-    parent_author: "",
-    parent_permlink: "hive-139531",
-    author: "srbde",
-    permlink: "hello-pollen",
-    title: "Hello Pollen",
-    body: "Published through the Pollen SDK.",
-    json_metadata: JSON.stringify({ tags: ["hive-139531"] }),
+    parent_author: '',
+    parent_permlink: 'hive-139531',
+    author: 'srbde',
+    permlink: 'hello-pollen',
+    title: 'Hello Pollen',
+    body: 'Published through the Pollen SDK.',
+    json_metadata: JSON.stringify({ tags: ['hive-139531'] })
   },
-  postingKey,
-);
+  postingKey
+)
 ```
 
----
+***
 
 ### commentWithOptions()
 
 > **commentWithOptions**(`comment`, `options`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:225](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L225)
+Defined in: [src/helpers/broadcast.ts:225](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L225)
 
 Broadcasts a comment together with its payout and beneficiary options.
 
@@ -320,28 +320,24 @@ Thrown when either operation fails chain validation.
 #### Example
 
 ```ts
-await client.broadcast.commentWithOptions(
-  comment,
-  {
-    author: comment.author,
-    permlink: comment.permlink,
-    max_accepted_payout: "1000000.000 HBD",
-    percent_hbd: 10000,
-    allow_votes: true,
-    allow_curation_rewards: true,
-    extensions: [],
-  },
-  postingKey,
-);
+await client.broadcast.commentWithOptions(comment, {
+  author: comment.author,
+  permlink: comment.permlink,
+  max_accepted_payout: '1000000.000 HBD',
+  percent_hbd: 10000,
+  allow_votes: true,
+  allow_curation_rewards: true,
+  extensions: []
+}, postingKey)
 ```
 
----
+***
 
 ### createTestAccount()
 
 > **createTestAccount**(`options`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:359](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L359)
+Defined in: [src/helpers/broadcast.ts:359](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L359)
 
 Creates and optionally delegates to a new account in test environments.
 
@@ -393,22 +389,22 @@ Thrown when the chain rejects the account creation transaction.
 ```ts
 await testnet.broadcast.createTestAccount(
   {
-    username: "pollen-dev",
-    password: "correct horse battery staple",
-    creator: "initminer",
-    metadata: { app: "pollen-tests" },
+    username: 'pollen-dev',
+    password: 'correct horse battery staple',
+    creator: 'initminer',
+    metadata: { app: 'pollen-tests' }
   },
-  initminerActiveKey,
-);
+  initminerActiveKey
+)
 ```
 
----
+***
 
 ### delegateVestingShares()
 
 > **delegateVestingShares**(`options`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:505](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L505)
+Defined in: [src/helpers/broadcast.ts:505](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L505)
 
 Delegates vesting shares from one account to another.
 
@@ -467,21 +463,21 @@ the chain rejects the delegation.
 ```ts
 await client.broadcast.delegateVestingShares(
   {
-    delegator: "srbde",
-    delegatee: "alice",
-    vesting_shares: "100.000000 VESTS",
+    delegator: 'srbde',
+    delegatee: 'alice',
+    vesting_shares: '100.000000 VESTS'
   },
-  activeKey,
-);
+  activeKey
+)
 ```
 
----
+***
 
 ### json()
 
 > **json**(`data`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:320](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L320)
+Defined in: [src/helpers/broadcast.ts:320](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L320)
 
 Broadcasts a `custom_json` operation for application-level protocols.
 
@@ -536,21 +532,21 @@ Thrown when authority requirements are not met or the payload is invalid.
 await client.broadcast.json(
   {
     required_auths: [],
-    required_posting_auths: ["srbde"],
-    id: "pollen.demo",
-    json: JSON.stringify({ nectar: "ready" }),
+    required_posting_auths: ['srbde'],
+    id: 'pollen.demo',
+    json: JSON.stringify({ nectar: 'ready' })
   },
-  postingKey,
-);
+  postingKey
+)
 ```
 
----
+***
 
 ### send()
 
 > **send**(`transaction`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:609](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L609)
+Defined in: [src/helpers/broadcast.ts:609](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L609)
 
 Broadcasts an already signed transaction to the active RPC node.
 
@@ -576,18 +572,18 @@ Thrown when the node rejects the signed transaction.
 #### Example
 
 ```ts
-const signed = client.broadcast.sign(transaction, activeKey);
-const confirmation = await client.broadcast.send(signed);
-console.log(confirmation.id);
+const signed = client.broadcast.sign(transaction, activeKey)
+const confirmation = await client.broadcast.send(signed)
+console.log(confirmation.id)
 ```
 
----
+***
 
 ### sendOperations()
 
 > **sendOperations**(`operations`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:538](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L538)
+Defined in: [src/helpers/broadcast.ts:538](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L538)
 
 Builds, signs, and broadcasts a transaction containing one or more operations.
 
@@ -626,28 +622,23 @@ Thrown when property lookup or transaction broadcast fails.
 
 ```ts
 await client.broadcast.sendOperations(
-  [
-    [
-      "vote",
-      {
-        voter: "srbde",
-        author: "alice",
-        permlink: "field-notes",
-        weight: 5_000,
-      },
-    ],
-  ],
-  postingKey,
-);
+  [['vote', {
+    voter: 'srbde',
+    author: 'alice',
+    permlink: 'field-notes',
+    weight: 5_000
+  }]],
+  postingKey
+)
 ```
 
----
+***
 
 ### sign()
 
 > **sign**(`transaction`, `key`): [`SignedTransaction`](../interfaces/SignedTransaction.md)
 
-Defined in: [src/helpers/broadcast.ts:589](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L589)
+Defined in: [src/helpers/broadcast.ts:589](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L589)
 
 Signs a transaction with one or more private keys.
 
@@ -679,21 +670,21 @@ from being replayed across Hive-compatible networks.
 #### Example
 
 ```ts
-const signed = client.broadcast.sign(transaction, activeKey);
-console.log(signed.signatures);
+const signed = client.broadcast.sign(transaction, activeKey)
+console.log(signed.signatures)
 ```
 
 #### See
 
 [cryptoUtils.signTransaction](../variables/cryptoUtils.md#signtransaction)
 
----
+***
 
 ### transfer()
 
 > **transfer**(`data`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:290](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L290)
+Defined in: [src/helpers/broadcast.ts:290](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L290)
 
 Broadcasts a liquid HIVE or HBD transfer.
 
@@ -750,22 +741,22 @@ rejects the transaction.
 ```ts
 await client.broadcast.transfer(
   {
-    from: "srbde",
-    to: "alice",
-    amount: "1.000 HIVE",
-    memo: "Invoice 42",
+    from: 'srbde',
+    to: 'alice',
+    amount: '1.000 HIVE',
+    memo: 'Invoice 42'
   },
-  activeKey,
-);
+  activeKey
+)
 ```
 
----
+***
 
 ### updateAccount()
 
 > **updateAccount**(`data`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:470](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L470)
+Defined in: [src/helpers/broadcast.ts:470](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L470)
 
 Broadcasts an `account_update` operation.
 
@@ -823,24 +814,24 @@ Thrown when the update lacks required authority or violates account rules.
 ```ts
 await client.broadcast.updateAccount(
   {
-    account: "srbde",
+    account: 'srbde',
     memo_key: memoPublicKey,
-    json_metadata: JSON.stringify({ profile: { name: "SRBDE" } }),
+    json_metadata: JSON.stringify({ profile: { name: 'SRBDE' } }),
     owner: undefined,
     active: undefined,
-    posting: undefined,
+    posting: undefined
   },
-  activeKey,
-);
+  activeKey
+)
 ```
 
----
+***
 
 ### vote()
 
 > **vote**(`vote`, `key`): `Promise`\<[`TransactionConfirmation`](../interfaces/TransactionConfirmation.md)\>
 
-Defined in: [src/helpers/broadcast.ts:261](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/broadcast.ts#L261)
+Defined in: [src/helpers/broadcast.ts:261](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/broadcast.ts#L261)
 
 Broadcasts a vote operation.
 
@@ -891,11 +882,11 @@ invalid.
 ```ts
 await client.broadcast.vote(
   {
-    voter: "srbde",
-    author: "alice",
-    permlink: "field-notes",
-    weight: 10_000,
+    voter: 'srbde',
+    author: 'alice',
+    permlink: 'field-notes',
+    weight: 10_000
   },
-  postingKey,
-);
+  postingKey
+)
 ```

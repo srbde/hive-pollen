@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / AccountCreateWithDelegationOperation
 
 # Interface: AccountCreateWithDelegationOperation
 
-Defined in: [src/chain/operation.ts:246](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L246)
+Defined in: [src/chain/operation.ts:246](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L246)
 
 Account creation operation that also delegates initial VESTS.
 
@@ -25,19 +25,19 @@ transferring ownership of the underlying vesting shares.
 
 > **0**: `"account_create_with_delegation"`
 
-Defined in: [src/chain/operation.ts:247](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L247)
+Defined in: [src/chain/operation.ts:247](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L247)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:248](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L248)
+Defined in: [src/chain/operation.ts:248](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L248)
 
 #### active
 
@@ -61,17 +61,17 @@ Extensions. Not currently used.
 
 > **fee**: `string` \| [`Asset`](../classes/Asset.md)
 
-#### json_metadata
+#### json\_metadata
 
-> **json_metadata**: `string`
+> **json\_metadata**: `string`
 
-#### memo_key
+#### memo\_key
 
-> **memo_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
+> **memo\_key**: `string` \| [`PublicKey`](../classes/PublicKey.md)
 
-#### new_account_name
+#### new\_account\_name
 
-> **new_account_name**: `string`
+> **new\_account\_name**: `string`
 
 #### owner
 

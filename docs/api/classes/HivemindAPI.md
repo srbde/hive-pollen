@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / HivemindAPI
 
 # Class: HivemindAPI
 
-Defined in: [src/helpers/hivemind.ts:160](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L160)
+Defined in: [src/helpers/hivemind.ts:160](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L160)
 
 Helper for Hive Hivemind and bridge API reads.
 
@@ -21,12 +21,12 @@ front ends.
 
 ```ts
 const posts = await client.hivemind.getRankedPosts({
-  sort: "trending",
-  tag: "hive-139531",
-  limit: 10,
-});
+  sort: 'trending',
+  tag: 'hive-139531',
+  limit: 10
+})
 
-console.log(posts.map((post) => post.title));
+console.log(posts.map((post) => post.title))
 ```
 
 ## Constructors
@@ -35,7 +35,7 @@ console.log(posts.map((post) => post.title));
 
 > **new HivemindAPI**(`client`): `HivemindAPI`
 
-Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L166)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L166)
 
 Creates a Hivemind helper bound to a client.
 
@@ -57,7 +57,7 @@ Client used to call the bridge API namespace.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L166)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L166)
 
 Client used to call the bridge API namespace.
 
@@ -67,7 +67,7 @@ Client used to call the bridge API namespace.
 
 > **call**(`method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/hivemind.ts:187](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L187)
+Defined in: [src/helpers/hivemind.ts:187](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L187)
 
 Sends a raw bridge API call.
 
@@ -99,20 +99,20 @@ Thrown when the active node does not expose bridge or rejects the request.
 #### Example
 
 ```ts
-const posts = await client.hivemind.call("get_ranked_posts", {
-  sort: "hot",
-  tag: "hive-139531",
-  limit: 5,
-});
+const posts = await client.hivemind.call('get_ranked_posts', {
+  sort: 'hot',
+  tag: 'hive-139531',
+  limit: 5
+})
 ```
 
----
+***
 
 ### getAccountNotifications()
 
 > **getAccountNotifications**(`options?`): `Promise`\<[`Notifications`](../interfaces/Notifications.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:297](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L297)
+Defined in: [src/helpers/hivemind.ts:297](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L297)
 
 Fetches an account's Hivemind notification feed.
 
@@ -139,18 +139,18 @@ Thrown when bridge rejects the notification query.
 
 ```ts
 const notifications = await client.hivemind.getAccountNotifications({
-  account: "srbde",
-  limit: 25,
-});
+  account: 'srbde',
+  limit: 25
+})
 ```
 
----
+***
 
 ### getAccountPosts()
 
 > **getAccountPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:233](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L233)
+Defined in: [src/helpers/hivemind.ts:233](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L233)
 
 Fetches posts authored or surfaced by a specific account.
 
@@ -177,19 +177,19 @@ Thrown when bridge rejects the account-post query.
 
 ```ts
 const posts = await client.hivemind.getAccountPosts({
-  account: "srbde",
-  sort: "posts",
-  limit: 10,
-});
+  account: 'srbde',
+  sort: 'posts',
+  limit: 10
+})
 ```
 
----
+***
 
 ### getCommunity()
 
 > **getCommunity**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:257](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L257)
+Defined in: [src/helpers/hivemind.ts:257](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L257)
 
 Fetches community metadata from Hivemind.
 
@@ -217,20 +217,20 @@ Thrown when the community cannot be read.
 
 ```ts
 const [community] = await client.hivemind.getCommunity({
-  name: "hive-139531",
-  observer: "srbde",
-});
+  name: 'hive-139531',
+  observer: 'srbde'
+})
 
-console.log(community.title);
+console.log(community.title)
 ```
 
----
+***
 
 ### getRankedPosts()
 
 > **getRankedPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:211](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L211)
+Defined in: [src/helpers/hivemind.ts:211](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L211)
 
 Fetches ranked posts from Hivemind.
 
@@ -258,20 +258,20 @@ Thrown when bridge rejects the ranking query.
 
 ```ts
 const posts = await client.hivemind.getRankedPosts({
-  sort: "created",
-  tag: "hive-139531",
+  sort: 'created',
+  tag: 'hive-139531',
   limit: 20,
-  observer: "srbde",
-});
+  observer: 'srbde'
+})
 ```
 
----
+***
 
 ### listAllSubscriptions()
 
 > **listAllSubscriptions**(`account`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:276](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L276)
+Defined in: [src/helpers/hivemind.ts:276](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L276)
 
 Lists communities followed by an account.
 
@@ -297,17 +297,17 @@ Thrown when bridge rejects the subscription lookup.
 #### Example
 
 ```ts
-const subscriptions = await client.hivemind.listAllSubscriptions("srbde");
-console.log(subscriptions);
+const subscriptions = await client.hivemind.listAllSubscriptions('srbde')
+console.log(subscriptions)
 ```
 
----
+***
 
 ### listCommunities()
 
 > **listCommunities**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:318](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/hivemind.ts#L318)
+Defined in: [src/helpers/hivemind.ts:318](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/hivemind.ts#L318)
 
 Lists communities known to Hivemind.
 
@@ -335,6 +335,6 @@ Thrown when bridge rejects the community list query.
 ```ts
 const communities = await client.hivemind.listCommunities({
   limit: 20,
-  observer: "srbde",
-});
+  observer: 'srbde'
+})
 ```

@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / DelegateVestingSharesOperation
 
 # Interface: DelegateVestingSharesOperation
 
-Defined in: [src/chain/operation.ts:583](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L583)
+Defined in: [src/chain/operation.ts:583](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L583)
 
 Delegates vesting shares from one account to another.
 
@@ -24,19 +24,19 @@ Set `vesting_shares` to `0.000000 VESTS` to remove an existing delegation.
 
 > **0**: `"delegate_vesting_shares"`
 
-Defined in: [src/chain/operation.ts:584](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L584)
+Defined in: [src/chain/operation.ts:584](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L584)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:585](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L585)
+Defined in: [src/chain/operation.ts:585](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L585)
 
 #### delegatee
 
@@ -50,9 +50,9 @@ The account receiving vesting shares.
 
 The account delegating vesting shares.
 
-#### vesting_shares
+#### vesting\_shares
 
-> **vesting_shares**: `string` \| [`Asset`](../classes/Asset.md)
+> **vesting\_shares**: `string` \| [`Asset`](../classes/Asset.md)
 
 The amount of vesting shares delegated.
 

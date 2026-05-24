@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / SetResetAccountOperation
 
 # Interface: SetResetAccountOperation
 
-Defined in: [src/chain/operation.ts:927](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L927)
+Defined in: [src/chain/operation.ts:927](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L927)
 
 This operation allows 'account' owner to control which account has the power
 to execute the 'reset_account_operation' after 60 days.
@@ -21,31 +21,31 @@ to execute the 'reset_account_operation' after 60 days.
 
 > **0**: `"set_reset_account"`
 
-Defined in: [src/chain/operation.ts:928](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L928)
+Defined in: [src/chain/operation.ts:928](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L928)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:929](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L929)
+Defined in: [src/chain/operation.ts:929](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L929)
 
 #### account
 
 > **account**: `string`
 
-#### current_reset_account
+#### current\_reset\_account
 
-> **current_reset_account**: `string`
+> **current\_reset\_account**: `string`
 
-#### reset_account
+#### reset\_account
 
-> **reset_account**: `string`
+> **reset\_account**: `string`
 
 #### Overrides
 

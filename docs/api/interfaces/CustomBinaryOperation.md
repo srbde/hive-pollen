@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / CustomBinaryOperation
 
 # Interface: CustomBinaryOperation
 
-Defined in: [src/chain/operation.ts:517](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L517)
+Defined in: [src/chain/operation.ts:517](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L517)
 
 Binary custom operation supporting owner, active, posting, and authority auths.
 
@@ -20,19 +20,19 @@ Binary custom operation supporting owner, active, posting, and authority auths.
 
 > **0**: `"custom_binary"`
 
-Defined in: [src/chain/operation.ts:518](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L518)
+Defined in: [src/chain/operation.ts:518](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L518)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:519](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L519)
+Defined in: [src/chain/operation.ts:519](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L519)
 
 #### data
 
@@ -44,21 +44,21 @@ Defined in: [src/chain/operation.ts:519](https://github.com/TheCrazyGM/dhive/blo
 
 ID string, must be less than 32 characters long.
 
-#### required_active_auths
+#### required\_active\_auths
 
-> **required_active_auths**: `string`[]
+> **required\_active\_auths**: `string`[]
 
-#### required_auths
+#### required\_auths
 
-> **required_auths**: [`AuthorityType`](AuthorityType.md)[]
+> **required\_auths**: [`AuthorityType`](AuthorityType.md)[]
 
-#### required_owner_auths
+#### required\_owner\_auths
 
-> **required_owner_auths**: `string`[]
+> **required\_owner\_auths**: `string`[]
 
-#### required_posting_auths
+#### required\_posting\_auths
 
-> **required_posting_auths**: `string`[]
+> **required\_posting\_auths**: `string`[]
 
 #### Overrides
 

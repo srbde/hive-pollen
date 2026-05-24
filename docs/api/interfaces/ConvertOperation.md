@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / ConvertOperation
 
 # Interface: ConvertOperation
 
-Defined in: [src/chain/operation.ts:473](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L473)
+Defined in: [src/chain/operation.ts:473](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L473)
 
 Converts HBD to HIVE through the standard conversion request flow.
 
@@ -20,19 +20,19 @@ Converts HBD to HIVE through the standard conversion request flow.
 
 > **0**: `"convert"`
 
-Defined in: [src/chain/operation.ts:474](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L474)
+Defined in: [src/chain/operation.ts:474](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L474)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:475](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L475)
+Defined in: [src/chain/operation.ts:475](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L475)
 
 #### amount
 

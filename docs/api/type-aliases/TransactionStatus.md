@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / TransactionStatus
 
@@ -8,7 +8,7 @@
 
 > **TransactionStatus** = `"unknown"` \| `"within_mempool"` \| `"within_reversible_block"` \| `"within_irreversible_block"` \| `"expired_reversible"` \| `"expired_irreversible"` \| `"too_old"`
 
-Defined in: [src/helpers/transaction.ts:22](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/helpers/transaction.ts#L22)
+Defined in: [src/helpers/transaction.ts:22](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/helpers/transaction.ts#L22)
 
 Lifecycle state reported by Hive's transaction-status plugin.
 
@@ -21,6 +21,6 @@ for before treating a transaction as final.
 ## Example
 
 ```ts
-const { status } = await client.transaction.findTransaction(txId);
-const final = status === "within_irreversible_block";
+const { status } = await client.transaction.findTransaction(txId)
+const final = status === 'within_irreversible_block'
 ```

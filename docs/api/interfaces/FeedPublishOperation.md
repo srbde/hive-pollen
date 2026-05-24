@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / FeedPublishOperation
 
 # Interface: FeedPublishOperation
 
-Defined in: [src/chain/operation.ts:728](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L728)
+Defined in: [src/chain/operation.ts:728](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L728)
 
 Publishes a witness price feed.
 
@@ -25,23 +25,23 @@ debt-ratio mechanics.
 
 > **0**: `"feed_publish"`
 
-Defined in: [src/chain/operation.ts:729](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L729)
+Defined in: [src/chain/operation.ts:729](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L729)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:730](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L730)
+Defined in: [src/chain/operation.ts:730](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L730)
 
-#### exchange_rate
+#### exchange\_rate
 
-> **exchange_rate**: [`PriceType`](../type-aliases/PriceType.md)
+> **exchange\_rate**: [`PriceType`](../type-aliases/PriceType.md)
 
 #### publisher
 

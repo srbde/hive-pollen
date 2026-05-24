@@ -254,7 +254,11 @@ export class PrivateKey {
   }
 
   /**
-   * Normalizes a WIF string or raw secret buffer into a private key.
+   * Normalizes a WIF string or raw 32-byte secret into a private key.
+   *
+   * @remarks
+   * Raw secrets are accepted as `Uint8Array` values so Pollen's key path stays
+   * independent of Node `Buffer` while still working in browser builds.
    */
   public static from(value: string | Uint8Array) {
     if (typeof value === "string") {

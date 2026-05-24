@@ -1,12 +1,12 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / VoteOperation
 
 # Interface: VoteOperation
 
-Defined in: [src/chain/operation.ts:1060](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1060)
+Defined in: [src/chain/operation.ts:1060](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1060)
 
 Casts, updates, or removes a vote on a post or comment.
 
@@ -18,15 +18,12 @@ vote, and negative values are downvotes.
 ## Example
 
 ```ts
-const op: VoteOperation = [
-  "vote",
-  {
-    voter: "srbde",
-    author: "alice",
-    permlink: "field-notes",
-    weight: 10_000,
-  },
-];
+const op: VoteOperation = ['vote', {
+  voter: 'srbde',
+  author: 'alice',
+  permlink: 'field-notes',
+  weight: 10_000
+}]
 ```
 
 ## Extends
@@ -39,19 +36,19 @@ const op: VoteOperation = [
 
 > **0**: `"vote"`
 
-Defined in: [src/chain/operation.ts:1061](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1061)
+Defined in: [src/chain/operation.ts:1061](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1061)
 
 #### Overrides
 
 [`Operation`](Operation.md).[`0`](Operation.md#0)
 
----
+***
 
 ### 1
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1062](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/operation.ts#L1062)
+Defined in: [src/chain/operation.ts:1062](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/operation.ts#L1062)
 
 #### author
 

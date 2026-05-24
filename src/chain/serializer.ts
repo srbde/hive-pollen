@@ -40,15 +40,16 @@ import { HexBuffer } from "./misc.js";
 import { Operation } from "./operation.js";
 
 /**
- * Function signature for writing one Hive protocol value to a binary buffer.
+ * Function signature for writing one Hive protocol value to Pollen's native
+ * byte writer.
  *
  * @param buffer - Destination binary writer.
  * @param data - Value to serialize.
  *
  * @remarks
  * Serializers are intentionally composable. Complex operation serializers are
- * built by combining primitive serializers for numbers, strings, assets,
- * public keys, arrays, options, and objects.
+ * built by combining primitive serializers for numbers, native `bigint`-backed
+ * 64-bit values, strings, assets, public keys, arrays, options, and objects.
  *
  * @example
  * ```ts
@@ -58,7 +59,7 @@ import { Operation } from "./operation.js";
  */
 export type Serializer = (buffer: BinaryWriter, data: any) => void;
 
-const VoidSerializer = (buffer: BinaryWriter) => {
+const VoidSerializer = (_buffer: BinaryWriter) => {
   throw new Error("Void can not be serialized");
 };
 
@@ -648,9 +649,10 @@ const EncryptedMemoSerializer = ObjectSerializer([
  * @remarks
  * `Types` is the internal engine behind transaction signing, transaction id
  * generation, memo envelopes, and witness property encoding. Each member writes
- * one Hive-compatible value into a {@link BinaryWriter}. The object is exported
- * for advanced protocol tooling, but most applications should use higher-level
- * helpers such as `client.broadcast`.
+ * one Hive-compatible value into a {@link BinaryWriter}, which is backed by
+ * `Uint8Array` and `DataView` rather than legacy byte-buffer dependencies. The
+ * object is exported for advanced protocol tooling, but most applications
+ * should use higher-level helpers such as `client.broadcast`.
  *
  * @example
  * ```ts

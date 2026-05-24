@@ -1,6 +1,6 @@
 [**@srbde/pollen**](../index.md)
 
----
+***
 
 [@srbde/pollen](../index.md) / Types
 
@@ -8,7 +8,7 @@
 
 > `const` **Types**: `object`
 
-Defined in: [src/chain/serializer.ts:668](https://github.com/TheCrazyGM/dhive/blob/ab36e508de98a7faeac27bf4201fc79843d471c8/src/chain/serializer.ts#L668)
+Defined in: [src/chain/serializer.ts:670](https://github.com/TheCrazyGM/dhive/blob/0ed1b4ad88b2fc94d193020c03d6253503431e9e/src/chain/serializer.ts#L670)
 
 Hive protocol serializer registry.
 
@@ -427,11 +427,11 @@ Should not be a problem in real-world usage.
 
 ### Void
 
-> **Void**: (`buffer`) => `never` = `VoidSerializer`
+> **Void**: (`_buffer`) => `never` = `VoidSerializer`
 
 #### Parameters
 
-##### buffer
+##### \_buffer
 
 [`BinaryWriter`](../@srbde/namespaces/utils/classes/BinaryWriter.md)
 
@@ -443,17 +443,18 @@ Should not be a problem in real-world usage.
 
 `Types` is the internal engine behind transaction signing, transaction id
 generation, memo envelopes, and witness property encoding. Each member writes
-one Hive-compatible value into a [BinaryWriter](../@srbde/namespaces/utils/classes/BinaryWriter.md). The object is exported
-for advanced protocol tooling, but most applications should use higher-level
-helpers such as `client.broadcast`.
+one Hive-compatible value into a [BinaryWriter](../@srbde/namespaces/utils/classes/BinaryWriter.md), which is backed by
+`Uint8Array` and `DataView` rather than legacy byte-buffer dependencies. The
+object is exported for advanced protocol tooling, but most applications
+should use higher-level helpers such as `client.broadcast`.
 
 ## Example
 
 ```ts
-const writer = new BinaryWriter();
-Types.Transaction(writer, transaction);
+const writer = new BinaryWriter()
+Types.Transaction(writer, transaction)
 
-const bytes = writer.getBuffer();
+const bytes = writer.getBuffer()
 ```
 
 ## Throws
