@@ -1,4 +1,5 @@
-import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
+import { cbc } from "@noble/ciphers/aes.js";
+import { randomBytes } from "@noble/hashes/utils.js";
 import { PrivateKey, PublicKey } from "../crypto.js";
 import { BinaryReader, BinaryWriter, concat } from "../utils.js";
 import { sha256 as nobleSha256, sha512 as nobleSha512 } from "@noble/hashes/sha2.js";
@@ -130,8 +131,7 @@ const crypt = (
  * @returns Ciphertext bytes.
  */
 const cryptoJsEncrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
-  const cipher = createCipheriv("aes-256-cbc", key, iv);
-  return concat([cipher.update(message), cipher.final()]);
+  return cbc(key, iv).encrypt(message);
 };
 
 /**
@@ -143,8 +143,7 @@ const cryptoJsEncrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): 
  * @returns Plaintext bytes.
  */
 const cryptoJsDecrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
-  const decipher = createDecipheriv("aes-256-cbc", key, iv);
-  return concat([decipher.update(message), decipher.final()]);
+  return cbc(key, iv).decrypt(message);
 };
 
 /**

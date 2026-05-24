@@ -42,7 +42,7 @@
     "prebuild": "mkdir -p lib dist docs",
     "build:version": "echo \"export default '$npm_package_version';\" > src/version.ts",
     "build:node": "tsc -p tsconfig.json --outDir lib && pnpm run build:version",
-    "build:browser": "esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=iife --global-name=pollen --outfile=dist/pollen.js --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:assert=assert --alias:stream=stream-browserify --alias:crypto=crypto-browserify --alias:buffer=buffer --alias:events=events && esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=esm --outfile=dist/pollen.mjs --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:assert=assert --alias:stream=stream-browserify --alias:crypto=crypto-browserify --alias:buffer=buffer --alias:events=events && gzip -9 -f -c dist/pollen.js > dist/pollen.js.gz",
+    "build:browser": "esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=iife --global-name=pollen --outfile=dist/pollen.js --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:stream=stream-browserify --alias:events=events && esbuild src/index-browser.ts --bundle --minify --sourcemap --platform=browser --format=esm --outfile=dist/pollen.mjs --define:global=window --define:process.env.NODE_ENV='\"production\"' --alias:stream=stream-browserify --alias:events=events && gzip -9 -f -c dist/pollen.js > dist/pollen.js.gz",
     "build:types": "dts-generator --prefix pollen --project . --out dist/pollen.d.ts && perl -i -pe\"s@'pollen/index'@'pollen'@g\" dist/pollen.d.ts",
     "build": "pnpm run build:node && pnpm run build:browser && pnpm run build:types",
     "test": "vitest run --coverage",
@@ -57,6 +57,7 @@
     "prepare": "pnpm run build"
   },
   "dependencies": {
+    "@noble/ciphers": "^2.2.0",
     "@noble/curves": "^2.2.0",
     "@noble/hashes": "^1.8.0",
     "@scure/base": "^1.2.6",
