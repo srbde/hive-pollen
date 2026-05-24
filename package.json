@@ -2,8 +2,28 @@
   "name": "@srbde/pollen",
   "version": "2.0.0",
   "description": "Modern, secure, and zero-dependency TypeScript SDK for the Hive blockchain",
-  "author": "Sustainable Resource and Business Development Enterprise (SRBDE)",
+  "keywords": [
+    "blockchain",
+    "hive",
+    "nectar",
+    "noble",
+    "pollen",
+    "sdk",
+    "typescript"
+  ],
+  "homepage": "https://github.com/srbde/pollen#readme",
+  "bugs": {
+    "url": "https://github.com/srbde/pollen/issues"
+  },
   "license": "BSD-3-Clause-No-Military-License",
+  "author": "Sustainable Resource and Business Development Enterprise (SRBDE)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srbde/pollen.git"
+  },
+  "bin": {
+    "pollen": "./lib/src/index-node.js"
+  },
   "type": "module",
   "main": "./lib/src/index-node.js",
   "browser": "./dist/pollen.js",
@@ -17,9 +37,6 @@
       "types": "./lib/src/index-browser.d.ts",
       "import": "./lib/src/index-browser.js"
     }
-  },
-  "bin": {
-    "pollen": "./lib/src/index-node.js"
   },
   "scripts": {
     "prebuild": "mkdir -p lib dist docs",
@@ -39,32 +56,12 @@
     "docs": "pnpm run docs:build",
     "prepare": "pnpm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/srbde/pollen.git"
-  },
-  "keywords": [
-    "hive",
-    "blockchain",
-    "pollen",
-    "nectar",
-    "sdk",
-    "typescript",
-    "noble"
-  ],
-  "bugs": {
-    "url": "https://github.com/srbde/pollen/issues"
-  },
-  "homepage": "https://github.com/srbde/pollen#readme",
   "dependencies": {
     "@noble/curves": "^2.2.0",
     "@noble/hashes": "^1.8.0",
     "@scure/base": "^1.2.6",
     "core-js": "^3.49.0",
-    "cross-fetch": "^4.1.0",
-    "node-fetch": "^2.7.0",
-    "regenerator-runtime": "^0.14.1",
-    "whatwg-fetch": "^3.6.20"
+    "regenerator-runtime": "^0.14.1"
   },
   "devDependencies": {
     "@types/node": "^22.19.19",

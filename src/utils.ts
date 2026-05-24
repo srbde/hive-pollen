@@ -33,352 +33,353 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import fetch from 'cross-fetch'
-import { EventEmitter } from 'events'
-import { PassThrough } from 'stream'
-import { NodeHealthTracker } from './health-tracker.js'
+import { EventEmitter } from "events";
+import { PassThrough } from "stream";
+import { NodeHealthTracker } from "./health-tracker.js";
 
 // Errors that indicate the request never reached the server — safe to retry even for broadcasts
-const PRE_CONNECTION_ERRORS = ['ECONNREFUSED', 'ENOTFOUND', 'EHOSTUNREACH', 'EAI_AGAIN']
+const PRE_CONNECTION_ERRORS = ["ECONNREFUSED", "ENOTFOUND", "EHOSTUNREACH", "EAI_AGAIN"];
 
 // All errors that should trigger failover for read operations
-const FAILOVER_ERRORS = [...PRE_CONNECTION_ERRORS, 'timeout', 'database lock', 'CERT_HAS_EXPIRED', 'ECONNRESET', 'ERR_TLS_CERT_ALTNAME_INVALID', 'ETIMEDOUT', 'EPIPE', 'EPROTO']
+const FAILOVER_ERRORS = [
+  ...PRE_CONNECTION_ERRORS,
+  "timeout",
+  "database lock",
+  "CERT_HAS_EXPIRED",
+  "ECONNRESET",
+  "ERR_TLS_CERT_ALTNAME_INVALID",
+  "ETIMEDOUT",
+  "EPIPE",
+  "EPROTO",
+];
 
 /**
  * Context for smart retry and failover decisions.
- *
- * @remarks
- * The client passes this metadata into {@link retryingFetch} so the transport
- * can distinguish read calls from broadcasts and record node health at the
- * correct API granularity.
- *
- * @example
- * ```ts
- * const retryContext: RetryContext = {
- *   healthTracker: client.healthTracker,
- *   api: 'condenser_api',
- *   isBroadcast: false
- * }
- * ```
  */
 export interface RetryContext {
-  /** Health tracker instance for per-node, per-API tracking */
-  healthTracker?: NodeHealthTracker
-  /** The API being called (e.g. "bridge", "condenser_api", "database_api") */
-  api?: string
-  /** Whether this is a broadcast operation — never retry after request may have been received */
-  isBroadcast?: boolean
-  /** Whether to log failover events to console */
-  consoleOnFailover?: boolean
+  healthTracker?: NodeHealthTracker;
+  api?: string;
+  isBroadcast?: boolean;
+  consoleOnFailover?: boolean;
+}
+
+/**
+ * Converts a Uint8Array to a hex-encoded string.
+ */
+export function toHex(data: Uint8Array): string {
+  let out = "";
+  for (let i = 0; i < data.length; i++) {
+    out += data[i].toString(16).padStart(2, "0");
+  }
+  return out;
+}
+
+/**
+ * Converts a hex-encoded string to a Uint8Array.
+ */
+export function fromHex(hex: string): Uint8Array {
+  if (hex.length % 2 !== 0) {
+    throw new Error("Invalid hex string");
+  }
+  const out = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < out.length; i++) {
+    out[i] = parseInt(hex.substring(i * 2, i * 2 + 2), 16);
+  }
+  return out;
+}
+
+/**
+ * Concatenates multiple Uint8Arrays into one.
+ */
+export function concat(arrays: Uint8Array[]): Uint8Array {
+  const totalLength = arrays.reduce((acc, arr) => acc + arr.length, 0);
+  const result = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const arr of arrays) {
+    result.set(arr, offset);
+    offset += arr.length;
+  }
+  return result;
+}
+
+/**
+ * Compares two byte arrays for equality.
+ */
+export function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
  * Growable little-endian byte writer used by Hive serializers.
- *
- * @remarks
- * Pollen uses this native `Uint8Array` writer instead of external byte-buffer
- * libraries so Node and browser builds share the same serialization engine.
- * Integer methods match Hive's wire format, and variable-length strings are
- * encoded with a varint length prefix followed by UTF-8 bytes.
- *
- * @example
- * ```ts
- * const writer = new BinaryWriter()
- * writer.writeString('pollen')
- * writer.writeUint16(42)
- *
- * const bytes = writer.getBuffer()
- * ```
  */
 export class BinaryWriter {
-  private buffer: Uint8Array
-  private cursor = 0
+  private buffer: Uint8Array;
+  private cursor = 0;
 
   constructor(size = 1024) {
-    this.buffer = new Uint8Array(size)
+    this.buffer = new Uint8Array(size);
   }
 
   private ensureCapacity(size: number) {
     if (this.cursor + size > this.buffer.length) {
-      const newBuffer = new Uint8Array(this.buffer.length * 2 + size)
-      newBuffer.set(this.buffer)
-      this.buffer = newBuffer
+      const newBuffer = new Uint8Array(this.buffer.length * 2 + size);
+      newBuffer.set(this.buffer);
+      this.buffer = newBuffer;
     }
   }
 
   public writeInt8(value: number) {
-    this.ensureCapacity(1)
-    new DataView(this.buffer.buffer).setInt8(this.cursor++, value)
+    this.ensureCapacity(1);
+    new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength).setInt8(
+      this.cursor++,
+      value,
+    );
   }
 
   public writeUint8(value: number) {
-    this.ensureCapacity(1)
-    this.buffer[this.cursor++] = value
+    this.ensureCapacity(1);
+    this.buffer[this.cursor++] = value;
   }
 
   public writeInt16(value: number) {
-    this.ensureCapacity(2)
-    new DataView(this.buffer.buffer).setInt16(this.cursor, value, true)
-    this.cursor += 2
+    this.ensureCapacity(2);
+    new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength).setInt16(
+      this.cursor,
+      value,
+      true,
+    );
+    this.cursor += 2;
   }
 
   public writeUint16(value: number) {
-    this.ensureCapacity(2)
-    new DataView(this.buffer.buffer).setUint16(this.cursor, value, true)
-    this.cursor += 2
+    this.ensureCapacity(2);
+    new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength).setUint16(
+      this.cursor,
+      value,
+      true,
+    );
+    this.cursor += 2;
   }
 
   public writeInt32(value: number) {
-    this.ensureCapacity(4)
-    new DataView(this.buffer.buffer).setInt32(this.cursor, value, true)
-    this.cursor += 4
+    this.ensureCapacity(4);
+    new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength).setInt32(
+      this.cursor,
+      value,
+      true,
+    );
+    this.cursor += 4;
   }
 
   public writeUint32(value: number) {
-    this.ensureCapacity(4)
-    new DataView(this.buffer.buffer).setUint32(this.cursor, value, true)
-    this.cursor += 4
+    this.ensureCapacity(4);
+    new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength).setUint32(
+      this.cursor,
+      value,
+      true,
+    );
+    this.cursor += 4;
   }
 
   public writeInt64(value: number | string | bigint) {
-    this.ensureCapacity(8)
-    const val = BigInt(value.toString())
-    const low = Number(val & 0xffffffffn)
-    const high = Number(val >> 32n)
-    new DataView(this.buffer.buffer).setUint32(this.cursor, low, true)
-    new DataView(this.buffer.buffer).setUint32(this.cursor + 4, high, true)
-    this.cursor += 8
+    this.ensureCapacity(8);
+    const val = BigInt(value.toString());
+    const low = Number(val & 0xffffffffn);
+    const high = Number(val >> 32n);
+    const view = new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength);
+    view.setUint32(this.cursor, low, true);
+    view.setUint32(this.cursor + 4, high, true);
+    this.cursor += 8;
   }
 
   public writeUint64(value: number | string | bigint) {
-    this.ensureCapacity(8)
-    const val = BigInt(value.toString())
-    const low = Number(val & 0xffffffffn)
-    const high = Number(val >> 32n)
-    new DataView(this.buffer.buffer).setUint32(this.cursor, low, true)
-    new DataView(this.buffer.buffer).setUint32(this.cursor + 4, high, true)
-    this.cursor += 8
+    this.ensureCapacity(8);
+    const val = BigInt(value.toString());
+    const low = Number(val & 0xffffffffn);
+    const high = Number(val >> 32n);
+    const view = new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength);
+    view.setUint32(this.cursor, low, true);
+    view.setUint32(this.cursor + 4, high, true);
+    this.cursor += 8;
   }
 
   public writeVarint32(value: number) {
     while (value >= 0x80) {
-      this.writeUint8((value & 0x7f) | 0x80)
-      value >>>= 7
+      this.writeUint8((value & 0x7f) | 0x80);
+      value >>>= 7;
     }
-    this.writeUint8(value)
+    this.writeUint8(value);
   }
 
   public writeString(value: string) {
-    const bytes = new TextEncoder().encode(value)
-    this.writeVarint32(bytes.length)
-    this.writeBytes(bytes)
+    const bytes = new TextEncoder().encode(value);
+    this.writeVarint32(bytes.length);
+    this.writeBytes(bytes);
   }
 
-  public writeBytes(bytes: Uint8Array | Buffer) {
-    this.ensureCapacity(bytes.length)
-    this.buffer.set(bytes, this.cursor)
-    this.cursor += bytes.length
+  public writeBytes(bytes: Uint8Array) {
+    this.ensureCapacity(bytes.length);
+    this.buffer.set(bytes, this.cursor);
+    this.cursor += bytes.length;
   }
 
   public getBuffer(): Uint8Array {
-    return this.buffer.slice(0, this.cursor)
+    return this.buffer.slice(0, this.cursor);
   }
 }
 
 /**
  * Little-endian byte reader used by Hive deserializers and memo decoding.
- *
- * @remarks
- * The reader mirrors {@link BinaryWriter} and advances an internal cursor as
- * values are consumed. It is intentionally small and browser-safe.
- *
- * @example
- * ```ts
- * const reader = new BinaryReader(bytes)
- * const memo = reader.readString()
- * ```
  */
 export class BinaryReader {
-  private view: DataView
-  private cursor = 0
+  private view: DataView;
+  private cursor = 0;
 
   constructor(private buffer: Uint8Array) {
-    this.view = new DataView(buffer.buffer, buffer.byteOffset, buffer.byteLength)
+    // Ensure we have a real clean Uint8Array to avoid Node Buffer .buffer weirdness
+    const b = new Uint8Array(buffer);
+    this.buffer = b;
+    this.view = new DataView(b.buffer, b.byteOffset, b.byteLength);
   }
 
   public readInt8(): number {
-    return this.view.getInt8(this.cursor++)
+    return this.view.getInt8(this.cursor++);
   }
 
   public readUint8(): number {
-    return this.view.getUint8(this.cursor++)
+    return this.view.getUint8(this.cursor++);
   }
 
   public readInt16(): number {
-    const val = this.view.getInt16(this.cursor, true)
-    this.cursor += 2
-    return val
+    const val = this.view.getInt16(this.cursor, true);
+    this.cursor += 2;
+    return val;
   }
 
   public readUint16(): number {
-    const val = this.view.getUint16(this.cursor, true)
-    this.cursor += 2
-    return val
+    const val = this.view.getUint16(this.cursor, true);
+    this.cursor += 2;
+    return val;
   }
 
   public readInt32(): number {
-    const val = this.view.getInt32(this.cursor, true)
-    this.cursor += 4
-    return val
+    const val = this.view.getInt32(this.cursor, true);
+    this.cursor += 4;
+    return val;
   }
 
   public readUint32(): number {
-    const val = this.view.getUint32(this.cursor, true)
-    this.cursor += 4
-    return val
+    const val = this.view.getUint32(this.cursor, true);
+    this.cursor += 4;
+    return val;
   }
 
   public readInt64(): bigint {
-    const low = BigInt(this.view.getUint32(this.cursor, true))
-    const high = BigInt(this.view.getUint32(this.cursor + 4, true))
-    this.cursor += 8
-    return low + (high << 32n)
+    const low = BigInt(this.view.getUint32(this.cursor, true));
+    const high = BigInt(this.view.getUint32(this.cursor + 4, true));
+    this.cursor += 8;
+    return low + (high << 32n);
   }
 
   public readUint64(): bigint {
-    return this.readInt64()
+    return this.readInt64();
   }
 
   public readVarint32(): number {
-    let value = 0
-    let shift = 0
-    let b: number
+    let value = 0;
+    let shift = 0;
+    let b: number;
     do {
-      b = this.readUint8()
-      value |= (b & 0x7f) << shift
-      shift += 7
-    } while (b & 0x80)
-    return value
+      b = this.readUint8();
+      value |= (b & 0x7f) << shift;
+      shift += 7;
+    } while (b & 0x80);
+    return value;
   }
 
   public readString(): string {
-    const length = this.readVarint32()
-    const bytes = this.buffer.slice(this.cursor, this.cursor + length)
-    this.cursor += length
-    return new TextDecoder().decode(bytes)
+    const length = this.readVarint32();
+    return new TextDecoder().decode(this.readBytes(length));
   }
 
   public readBytes(length: number): Uint8Array {
-    const bytes = this.buffer.slice(this.cursor, this.cursor + length)
-    this.cursor += length
-    return bytes
+    if (this.cursor + length > this.buffer.length) {
+      throw new Error(
+        `Out of bounds read: requested ${length} bytes but only ${this.buffer.length - this.cursor} available`,
+      );
+    }
+    const bytes = this.buffer.slice(this.cursor, this.cursor + length);
+    this.cursor += length;
+    return bytes;
   }
 
   public skip(length: number) {
-    this.cursor += length
+    this.cursor += length;
   }
 }
 
 /**
  * Resolves the next time an event emitter emits a specific event.
- *
- * @param emitter - Event emitter or stream to observe.
- * @param eventName - Event name or symbol to wait for.
- * @returns A promise for the first emitted event payload.
- *
- * @example
- * ```ts
- * await waitForEvent(stream, 'drain')
- * ```
  */
-export function waitForEvent<T>(
-  emitter: EventEmitter,
-  eventName: string | symbol
-): Promise<T> {
+export function waitForEvent<T>(emitter: EventEmitter, eventName: string | symbol): Promise<T> {
   return new Promise((resolve, reject) => {
-    emitter.once(eventName, resolve)
-  })
+    emitter.once(eventName, resolve);
+  });
 }
 
 /**
  * Pauses execution for a fixed number of milliseconds.
- *
- * @param ms - Delay duration.
- * @returns A promise that resolves after the timeout.
- *
- * @example
- * ```ts
- * await sleep(3000)
- * ```
  */
 export function sleep(ms: number): Promise<void> {
   return new Promise<void>((resolve) => {
-    setTimeout(resolve, ms)
-  })
+    setTimeout(resolve, ms);
+  });
 }
 
 /**
  * Converts an async iterator into an object-mode readable stream.
- *
- * @param iterator - Async iterator whose values should be emitted.
- * @returns A Node readable stream that respects backpressure.
- *
- * @remarks
- * This bridge lets browser-friendly async generators power Node stream APIs
- * used by older Hive indexing tools.
- *
- * @example
- * ```ts
- * const stream = iteratorStream(client.blockchain.getBlocks(90_000_000))
- * stream.on('data', (block) => console.log(block.block_id))
- * ```
  */
-export function iteratorStream<T>(
-  iterator: AsyncIterableIterator<T>
-): NodeJS.ReadableStream {
-  const stream = new PassThrough({ objectMode: true })
+export function iteratorStream<T>(iterator: AsyncIterableIterator<T>): NodeJS.ReadableStream {
+  const stream = new PassThrough({ objectMode: true });
   const iterate = async () => {
     for await (const item of iterator) {
       if (!stream.write(item)) {
-        await waitForEvent(stream, 'drain')
+        await waitForEvent(stream, "drain");
       }
     }
-  }
+  };
   iterate()
     .then(() => {
-      stream.end()
+      stream.end();
     })
     .catch((error) => {
-      stream.emit('error', error)
-      stream.end()
-    })
-  return stream
+      stream.emit("error", error);
+      stream.end();
+    });
+  return stream;
 }
+
 /**
  * Creates a deep copy of a JSON-serializable object.
- *
- * @param object - Plain object, array, or value to clone.
- * @returns A cloned value produced through JSON serialization.
- *
- * @remarks
- * Pollen uses this for transaction and RPC payloads where the data model is
- * already JSON-compatible.
- *
- * @example
- * ```ts
- * const txCopy = copy(transaction)
- * ```
  */
 export function copy<T>(object: T): T {
-  return JSON.parse(JSON.stringify(object))
+  return JSON.parse(JSON.stringify(object));
 }
 
 /**
  * Check if an error code indicates the request never reached the server.
  */
 function isPreConnectionError(error: any): boolean {
-  if (!error || !error.code) return false
-  return PRE_CONNECTION_ERRORS.some((code) => error.code.includes(code))
+  if (!error || !error.code) return false;
+  return PRE_CONNECTION_ERRORS.some((code) => error.code.includes(code));
 }
 
 /**
@@ -386,84 +387,34 @@ function isPreConnectionError(error: any): boolean {
  * Matches any known network/timeout error, or errors with no code (HTTP errors).
  */
 function shouldFailover(error: any): boolean {
-  if (!error) return true
+  if (!error) return true;
   // HTTP errors (from !response.ok) have no .code — they should trigger failover
-  if (!error.code) return true
-  return FAILOVER_ERRORS.some((code) => error.code.includes(code))
+  if (!error.code) return true;
+  return FAILOVER_ERRORS.some((code) => error.code.includes(code));
 }
 
 /**
  * Get the next node in the ordered list (wraps around).
  */
 function nextNode(nodes: string[], currentIndex: number): number {
-  return (currentIndex + 1) % nodes.length
+  return (currentIndex + 1) % nodes.length;
 }
 
 /**
  * Computes an exponential retry delay with random jitter.
- *
- * @param tries - Number of failed attempts or rounds already observed.
- * @param baseDelay - Initial delay in milliseconds.
- * @param maxDelay - Maximum exponential component in milliseconds.
- * @param jitter - Maximum random jitter to add in milliseconds.
- * @returns Delay in milliseconds.
- *
- * @remarks
- * Formula: `min(maxDelay, baseDelay * 2^tries) + random(0, jitter)`.
- * Jitter keeps many clients from retrying the same Hive RPC nodes in lockstep.
- *
- * @example
- * ```ts
- * const delay = exponentialBackoffWithJitter(2, 500, 10_000, 250)
- * ```
  */
 export function exponentialBackoffWithJitter(
   tries: number,
   baseDelay = 500,
   maxDelay = 10000,
-  jitter = 100
+  jitter = 100,
 ): number {
-  const delay = Math.min(maxDelay, baseDelay * Math.pow(2, tries))
-  return delay + Math.floor(Math.random() * jitter)
+  const delay = Math.min(maxDelay, baseDelay * Math.pow(2, tries));
+  return delay + Math.floor(Math.random() * jitter);
 }
 
 /**
  * Sends an RPC request with ordered node failover and health tracking.
- *
- * @param currentAddress - Currently active RPC endpoint.
- * @param allAddresses - Single endpoint or ordered failover endpoint list.
- * @param opts - Fetch options including request body and headers.
- * @param timeout - Overall retry timeout in milliseconds. `0` means unlimited.
- * @param failoverThreshold - Number of full endpoint rounds before giving up.
- * `0` means retry until `timeout` stops the call.
- * @param consoleOnFailover - Whether failover events should be logged.
- * @param backoff - Function returning the between-round delay.
- * @param fetchTimeout - Optional per-attempt timeout function.
- * @param retryContext - Optional API and broadcast-safety metadata.
- * @returns The JSON-RPC response and endpoint that produced it.
- *
- * @remarks
- * Read operations immediately rotate through healthy nodes and only back off
- * between full rounds. Broadcasts are intentionally stricter: Pollen retries
- * only pre-connection failures where the request certainly never reached a node,
- * preventing duplicate transfers, votes, or posts.
- *
- * @throws Error
- * Throws the last network, HTTP, timeout, or fetch error after timeout or
- * failover limits are reached.
- *
- * @example
- * ```ts
- * const { response, currentAddress } = await retryingFetch(
- *   'https://api.hive.blog',
- *   ['https://api.hive.blog', 'https://api.openhive.network'],
- *   opts,
- *   60_000,
- *   3,
- *   false,
- *   exponentialBackoffWithJitter
- * )
- * ```
  */
 export async function retryingFetch(
   currentAddress: string,
@@ -474,307 +425,217 @@ export async function retryingFetch(
   consoleOnFailover: boolean,
   backoff: (tries: number) => number,
   fetchTimeout?: (tries: number) => number,
-  retryContext?: RetryContext
+  retryContext?: RetryContext,
 ) {
-  const { healthTracker, api, isBroadcast } = retryContext || {}
-  const logFailover = retryContext?.consoleOnFailover ?? consoleOnFailover
+  const { healthTracker, api, isBroadcast } = retryContext || {};
+  const logFailover = retryContext?.consoleOnFailover ?? consoleOnFailover;
 
   // Build ordered node list: healthy nodes first, then unhealthy as fallback
-  let orderedNodes: string[]
+  let orderedNodes: string[];
   if (Array.isArray(allAddresses) && allAddresses.length > 1) {
     orderedNodes = healthTracker
       ? healthTracker.getOrderedNodes(allAddresses, api)
-      : [...allAddresses]
+      : [...allAddresses];
   } else {
-    orderedNodes = Array.isArray(allAddresses) ? allAddresses : [allAddresses]
+    orderedNodes = Array.isArray(allAddresses) ? allAddresses : [allAddresses];
   }
 
-  // Always start from the healthiest node (index 0 of the ordered list).
-  // The health tracker already sorted nodes with healthy ones first,
-  // so starting from 0 ensures we use the best available node.
-  let nodeIndex = 0
+  let nodeIndex = 0;
 
-  const totalNodes = orderedNodes.length
-  const startTime = Date.now()
-  let nodesTriedInRound = 0
-  let round = 0
-  let lastError: any
+  const totalNodes = orderedNodes.length;
+  const startTime = Date.now();
+  let nodesTriedInRound = 0;
+  let round = 0;
+  let lastError: any;
 
-  // tslint:disable-next-line: no-constant-condition
   while (true) {
-    const node = orderedNodes[nodeIndex]
+    const node = orderedNodes[nodeIndex];
 
     try {
-      // Skip nodes that are currently rate-limited
       if (healthTracker && healthTracker.isRateLimited(node)) {
-        lastError = new Error(`Node ${node} is rate-limited, skipping`)
-        if (healthTracker && api) healthTracker.recordFailure(node, api)
-        throw lastError
+        lastError = new Error(`Node ${node} is rate-limited, skipping`);
+        if (healthTracker && api) healthTracker.recordFailure(node, api);
+        throw lastError;
       }
 
       if (fetchTimeout) {
-        opts.timeout = fetchTimeout(nodesTriedInRound)
+        opts.timeout = fetchTimeout(nodesTriedInRound);
       }
 
-      const response = await fetch(node, opts)
+      const response = await fetch(node, opts);
 
       if (!response.ok) {
-        // Handle 429 — record rate limit and fail over immediately
         if (response.status === 429) {
-          const retryAfterHeader = response.headers?.get?.('retry-after')
-          const retryAfterSec = retryAfterHeader ? parseInt(retryAfterHeader, 10) : undefined
+          const retryAfterHeader = response.headers?.get?.("retry-after");
+          const retryAfterSec = retryAfterHeader ? parseInt(retryAfterHeader, 10) : undefined;
           if (healthTracker) {
-            healthTracker.recordRateLimit(node, !isNaN(retryAfterSec as number) ? retryAfterSec : undefined)
+            healthTracker.recordRateLimit(
+              node,
+              !isNaN(retryAfterSec as number) ? retryAfterSec : undefined,
+            );
           }
-          throw new Error(`HTTP 429: Too Many Requests`)
+          throw new Error(`HTTP 429: Too Many Requests`);
         }
 
-        // Handle 503 — don't parse JSON body, just fail over
         if (response.status === 503) {
-          if (healthTracker && api) healthTracker.recordFailure(node, api)
-          throw new Error(`HTTP 503: Service Temporarily Unavailable`)
+          if (healthTracker && api) healthTracker.recordFailure(node, api);
+          throw new Error(`HTTP 503: Service Temporarily Unavailable`);
         }
 
-        // Some Hive nodes return non-200 HTTP status (500, 502, etc.)
-        // but still include a valid JSON-RPC response in the body.
-        // This happens when a node is overloaded — it processes the transaction
-        // but returns an error HTTP status. For broadcasts, ignoring the body
-        // would cause the caller to think it failed, leading to double-posts.
         try {
-          const resJson = await response.json()
-          if (resJson.jsonrpc === '2.0') {
-            if (healthTracker && api) healthTracker.recordSuccess(node, api)
-            return { response: resJson, currentAddress: node }
+          const resJson = await response.json();
+          if (resJson.jsonrpc === "2.0") {
+            if (healthTracker && api) healthTracker.recordSuccess(node, api);
+            return { response: resJson, currentAddress: node };
           }
-        } catch {
-          // JSON parse failed, fall through to error handling
-        }
-        const statusText = response.statusText || `status code ${response.status}`
-        throw new Error(`HTTP ${response.status}: ${statusText}`)
+        } catch {}
+        const statusText = response.statusText || `status code ${response.status}`;
+        throw new Error(`HTTP ${response.status}: ${statusText}`);
       }
 
-      const responseJson = await response.json()
+      const responseJson = await response.json();
 
-      // Record success in health tracker
       if (healthTracker && api) {
-        healthTracker.recordSuccess(node, api)
+        healthTracker.recordSuccess(node, api);
       }
 
-      return { response: responseJson, currentAddress: node }
-
+      return { response: responseJson, currentAddress: node };
     } catch (error: any) {
-      lastError = error
+      lastError = error;
 
-      // Record failure in health tracker
       if (healthTracker && api) {
-        healthTracker.recordFailure(node, api)
+        healthTracker.recordFailure(node, api);
       }
 
-      // === BROADCAST SAFETY ===
-      // For broadcasts, only retry if the request definitely never reached the server.
-      // If there's any chance the server received it, throw immediately to prevent
-      // double-broadcasting (e.g. double transfers, double votes).
       if (isBroadcast) {
         if (isPreConnectionError(error) && totalNodes > 1) {
-          // Safe to try another node — request never left the client
-          nodeIndex = nextNode(orderedNodes, nodeIndex)
-          nodesTriedInRound++
+          nodeIndex = nextNode(orderedNodes, nodeIndex);
+          nodesTriedInRound++;
           if (nodesTriedInRound >= totalNodes) {
-            // Tried all nodes, give up for broadcasts
-            throw error
+            throw error;
           }
           if (logFailover) {
-            // tslint:disable-next-line: no-console
-            console.log(`Broadcast failover to: ${orderedNodes[nodeIndex]} (${error.code}, request never sent)`)
+            console.log(
+              `Broadcast failover to: ${orderedNodes[nodeIndex]} (${error.code}, request never sent)`,
+            );
           }
-          continue
+          continue;
         }
-        // Timeout, HTTP error, or unknown error — request may have been received.
-        // Do NOT retry. Throw immediately.
-        throw error
+        throw error;
       }
 
-      // === READ OPERATION FAILOVER ===
       if (!shouldFailover(error)) {
-        // Unrecognized error type — don't failover, throw immediately
-        throw error
+        throw error;
       }
 
-      // Small delay between node attempts within a round to prevent
-      // flooding all nodes when multiple concurrent requests fail over
       if (totalNodes > 1 && nodesTriedInRound > 0) {
-        await sleep(50 + Math.random() * 50) // 50-100ms jitter
+        await sleep(50 + Math.random() * 50);
       }
 
-      // Try next node immediately (no backoff within a round)
       if (totalNodes > 1) {
-        nodeIndex = nextNode(orderedNodes, nodeIndex)
-        nodesTriedInRound++
+        nodeIndex = nextNode(orderedNodes, nodeIndex);
+        nodesTriedInRound++;
 
         if (nodesTriedInRound >= totalNodes) {
-          // Completed a full round through all nodes
-          nodesTriedInRound = 0
-
-          // failoverThreshold=0 means retry forever (only timeout can stop it)
+          nodesTriedInRound = 0;
           if (failoverThreshold > 0) {
-            round++
+            round++;
             if (round >= failoverThreshold) {
-              error.message = `All ${totalNodes} nodes failed after ${failoverThreshold} rounds. ` +
-                `Last error: [${error.code || 'HTTP'}] ${error.message}. ` +
-                `Nodes: ${orderedNodes.join(', ')}`
-              throw error
+              error.message =
+                `All ${totalNodes} nodes failed after ${failoverThreshold} rounds. ` +
+                `Last error: [${error.code || "HTTP"}] ${error.message}. ` +
+                `Nodes: ${orderedNodes.join(", ")}`;
+              throw error;
             }
           }
-
-          // Check total timeout before starting next round
           if (timeout !== 0 && Date.now() - startTime > timeout) {
-            throw error
+            throw error;
           }
-
-          // Backoff between rounds (not between individual node attempts)
-          await sleep(backoff(round))
+          await sleep(backoff(round));
         }
 
         if (logFailover) {
-          // tslint:disable-next-line: no-console
-          console.log(`Switched Hive RPC: ${orderedNodes[nodeIndex]} (previous: ${node}, error: ${error.code || error.message})`)
+          console.log(
+            `Switched Hive RPC: ${orderedNodes[nodeIndex]} (previous: ${node}, error: ${error.code || error.message})`,
+          );
         }
       } else {
-        // Single node: use backoff and retry same node (legacy behavior)
         if (timeout !== 0 && Date.now() - startTime > timeout) {
-          throw error
+          throw error;
         }
-        await sleep(backoff(nodesTriedInRound++))
+        await sleep(backoff(nodesTriedInRound++));
       }
     }
   }
 }
 
-// Hack to be able to generate a valid witness_set_properties op
-// Can hopefully be removed when hived's JSON representation is fixed
-import { Asset, PriceType } from './chain/asset.js'
-import { WitnessSetPropertiesOperation } from './chain/operation.js'
-import { Serializer, Types } from './chain/serializer.js'
-import { PublicKey } from './crypto.js'
-/**
- * Friendly witness property values accepted by {@link buildWitnessUpdateOp}.
- *
- * @remarks
- * Hive expects `witness_set_properties` values as sorted serialized hex pairs.
- * This shape lets callers provide normal Pollen assets, prices, keys, and
- * numbers before the helper performs protocol serialization.
- *
- * @example
- * ```ts
- * const props: WitnessProps = {
- *   key: signingPublicKey,
- *   maximum_block_size: 65_536,
- *   url: 'https://example.com/witness'
- * }
- * ```
- */
+import { Asset, PriceType } from "./chain/asset.js";
+import { WitnessSetPropertiesOperation } from "./chain/operation.js";
+import { Serializer, Types } from "./chain/serializer.js";
+import { PublicKey } from "./crypto.js";
+
 export interface WitnessProps {
-  account_creation_fee?: string | Asset
-  account_subsidy_budget?: number // uint32_t
-  account_subsidy_decay?: number // uint32_t
-  key: PublicKey | string
-  maximum_block_size?: number // uint32_t
-  new_signing_key?: PublicKey | string | null
-  hbd_exchange_rate?: PriceType
-  hbd_interest_rate?: number // uint16_t
-  url?: string
+  account_creation_fee?: string | Asset;
+  account_subsidy_budget?: number; // uint32_t
+  account_subsidy_decay?: number; // uint32_t
+  key: PublicKey | string;
+  maximum_block_size?: number; // uint32_t
+  new_signing_key?: PublicKey | string | null;
+  hbd_exchange_rate?: PriceType;
+  hbd_interest_rate?: number; // uint16_t
+  url?: string;
 }
 
 const serialize = (serializer: Serializer, data: any) => {
-  const writer = new BinaryWriter()
-  serializer(writer, data)
-  return Buffer.from(writer.getBuffer()).toString('hex')
-}
+  const writer = new BinaryWriter();
+  serializer(writer, data);
+  return toHex(writer.getBuffer());
+};
 
-/**
- * Builds a Hive `witness_set_properties` operation from friendly property values.
- *
- * @param owner - Witness account name.
- * @param props - Witness properties to serialize into sorted hex pairs.
- * @returns A ready-to-broadcast `witness_set_properties` operation.
- *
- * @remarks
- * Hive expects witness property values to be pre-serialized hex strings in a
- * sorted flat map. This helper keeps that low-level representation out of
- * application code.
- *
- * @throws Error
- * Thrown when `props` contains an unsupported witness property.
- *
- * @example
- * ```ts
- * const op = buildWitnessUpdateOp('srbde-witness', {
- *   key: signingPublicKey,
- *   maximum_block_size: 65_536,
- *   url: 'https://example.com/witness'
- * })
- * ```
- */
 export const buildWitnessUpdateOp = (
   owner: string,
-  props: WitnessProps
+  props: WitnessProps,
 ): WitnessSetPropertiesOperation => {
   const data: WitnessSetPropertiesOperation[1] = {
     extensions: [],
     owner,
-    props: []
-  }
+    props: [],
+  };
   for (const key of Object.keys(props)) {
-    let type: Serializer
+    let type: Serializer;
     switch (key) {
-      case 'key':
-      case 'new_signing_key':
-        type = Types.PublicKey
-        break
-      case 'account_subsidy_budget':
-      case 'account_subsidy_decay':
-      case 'maximum_block_size':
-        type = Types.UInt32
-        break
-      case 'hbd_interest_rate':
-        type = Types.UInt16
-        break
-      case 'url':
-        type = Types.String
-        break
-      case 'hbd_exchange_rate':
-        type = Types.Price
-        break
-      case 'account_creation_fee':
-        type = Types.Asset
-        break
+      case "key":
+      case "new_signing_key":
+        type = Types.PublicKey;
+        break;
+      case "account_subsidy_budget":
+      case "account_subsidy_decay":
+      case "maximum_block_size":
+        type = Types.UInt32;
+        break;
+      case "hbd_interest_rate":
+        type = Types.UInt16;
+        break;
+      case "url":
+        type = Types.String;
+        break;
+      case "hbd_exchange_rate":
+        type = Types.Price;
+        break;
+      case "account_creation_fee":
+        type = Types.Asset;
+        break;
       default:
-        throw new Error(`Unknown witness prop: ${key}`)
+        throw new Error(`Unknown witness prop: ${key}`);
     }
-    data.props.push([key, serialize(type, props[key])])
+    data.props.push([key, serialize(type, props[key])]);
   }
-  data.props.sort((a, b) => a[0].localeCompare(b[0]))
-  return ['witness_set_properties', data]
-}
+  data.props.sort((a, b) => a[0].localeCompare(b[0]));
+  return ["witness_set_properties", data];
+};
 
-/**
- * Mapping from Hive operation names to protocol operation ids.
- *
- * @remarks
- * This is primarily used with {@link makeBitMaskFilter} when filtering account
- * history by operation type.
- *
- * @example
- * ```ts
- * const mask = makeBitMaskFilter([
- *   operationOrders.transfer,
- *   operationOrders.claim_reward_balance
- * ])
- * ```
- */
 export const operationOrders = {
   vote: 0,
-  // tslint:disable-next-line: object-literal-sort-keys
   comment: 1,
   transfer: 2,
   transfer_to_vesting: 3,
@@ -859,50 +720,19 @@ export const operationOrders = {
   fill_collateralized_convert_request: 81,
   system_warning: 82,
   fill_recurrent_transfer: 83,
-  failed_recurrent_transfer: 84
-}
+  failed_recurrent_transfer: 84,
+};
 
-/**
- * Builds the two-word operation bitmask accepted by `get_account_history`.
- *
- * @param allowedOperations - Operation ids from {@link operationOrders}.
- * @returns Tuple-like low/high mask values as strings or `null`.
- *
- * @remarks
- * Hive splits operation history filters across two 64-bit masks. Pollen uses
- * native BigInt so the mask is reliable in all modern environments.
- *
- * @example
- * ```ts
- * const mask = makeBitMaskFilter([
- *   operationOrders.transfer,
- *   operationOrders.claim_reward_balance
- * ])
- *
- * const history = await client.database.getAccountHistory('srbde', -1, 100, mask)
- * ```
- */
 export function makeBitMaskFilter(allowedOperations: number[]) {
   return allowedOperations
     .reduce(redFunction, [0n, 0n])
-    .map((value) =>
-      value !== 0n ? value.toString() : null
-    )
+    .map((value) => (value !== 0n ? value.toString() : null));
 }
 
-const redFunction = (
-  [low, high]: [bigint, bigint],
-  allowedOperation: number
-): [bigint, bigint] => {
+const redFunction = ([low, high]: [bigint, bigint], allowedOperation: number): [bigint, bigint] => {
   if (allowedOperation < 64) {
-    return [
-      low | (1n << BigInt(allowedOperation)),
-      high
-    ]
+    return [low | (1n << BigInt(allowedOperation)), high];
   } else {
-    return [
-      low,
-      high | (1n << BigInt(allowedOperation - 64))
-    ]
+    return [low, high | (1n << BigInt(allowedOperation - 64))];
   }
-}
+};

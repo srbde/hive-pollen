@@ -33,13 +33,13 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Buffer } from 'buffer'
-import process from 'process'
+import { Buffer } from "buffer";
+import process from "process";
 
-if (typeof window !== 'undefined') {
-  ;(window as any).global = window
-  ;(window as any).Buffer = Buffer
-  ;(window as any).process = process
+if (typeof window !== "undefined") {
+  (window as any).global = window;
+  (window as any).Buffer = Buffer;
+  (window as any).process = process;
 }
 
 /**
@@ -56,4 +56,4 @@ if (typeof window !== 'undefined') {
  * const client = new Client('https://api.hive.blog')
  * ```
  */
-export * from './index.js'
+export * from "./index.js";

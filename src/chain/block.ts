@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Transaction } from './transaction.js'
+import { Transaction } from "./transaction.js";
 
 /**
  * Hive block header without the witness signature.
@@ -49,11 +49,11 @@ import { Transaction } from './transaction.js'
  * ```
  */
 export interface BlockHeader {
-    previous: string // block_id_type
-    timestamp: string // time_point_sec
-    witness: string
-    transaction_merkle_root: string // checksum_type
-    extensions: any[] // block_header_extensions_type
+  previous: string; // block_id_type
+  timestamp: string; // time_point_sec
+  witness: string;
+  transaction_merkle_root: string; // checksum_type
+  extensions: any[]; // block_header_extensions_type
 }
 
 /**
@@ -70,7 +70,7 @@ export interface BlockHeader {
  * ```
  */
 export interface SignedBlockHeader extends BlockHeader {
-    witness_signature: string // signature_type
+  witness_signature: string; // signature_type
 }
 
 /**
@@ -89,8 +89,8 @@ export interface SignedBlockHeader extends BlockHeader {
  * ```
  */
 export interface SignedBlock extends SignedBlockHeader {
-    block_id: string
-    signing_key: string
-    transaction_ids: string[]
-    transactions: Transaction[]
+  block_id: string;
+  signing_key: string;
+  transaction_ids: string[];
+  transactions: Transaction[];
 }

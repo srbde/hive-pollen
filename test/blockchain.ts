@@ -1,29 +1,76 @@
 import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
-;
 import assert from "assert";
 
-import {
-  Client,
-  SignedBlock,
-  AppliedOperation,
-  BlockchainMode
-} from "../src/index.js";
+import { Client, SignedBlock, AppliedOperation, BlockchainMode } from "../src/index.js";
 
 import { agent, TEST_NODE } from "./_common.js";
 
-describe("blockchain", function() {
-  
-  
-
+describe("blockchain", function () {
   const client = new Client(TEST_NODE, { agent });
 
   const expectedIds = [
     "0000000109833ce528d5bbfb3f6225b39ee10086",
-    "00000002ed04e3c3def0238f693931ee7eebbdf1"
+    "00000002ed04e3c3def0238f693931ee7eebbdf1",
   ];
-  const expectedOps = ["vote","effective_comment_vote","vote","effective_comment_vote","comment","vote","effective_comment_vote","vote","effective_comment_vote","vote","effective_comment_vote","vote","effective_comment_vote","custom_json","producer_reward","comment_payout_update","author_reward","comment_reward","comment_payout_update","comment_payout_update","comment_payout_update","fill_vesting_withdraw","comment","comment","vote","effective_comment_vote","vote","effective_comment_vote","vote","effective_comment_vote","vote","effective_comment_vote","comment","custom_json","custom_json","custom_json","custom_json","claim_reward_balance","custom_json","vote","effective_comment_vote","comment","comment_options","custom_json","vote","effective_comment_vote","producer_reward","comment_payout_update","comment_payout_update","curation_reward","author_reward","comment_reward","comment_payout_update","comment_payout_update","fill_vesting_withdraw"];
+  const expectedOps = [
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "comment",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "custom_json",
+    "producer_reward",
+    "comment_payout_update",
+    "author_reward",
+    "comment_reward",
+    "comment_payout_update",
+    "comment_payout_update",
+    "comment_payout_update",
+    "fill_vesting_withdraw",
+    "comment",
+    "comment",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "vote",
+    "effective_comment_vote",
+    "comment",
+    "custom_json",
+    "custom_json",
+    "custom_json",
+    "custom_json",
+    "claim_reward_balance",
+    "custom_json",
+    "vote",
+    "effective_comment_vote",
+    "comment",
+    "comment_options",
+    "custom_json",
+    "vote",
+    "effective_comment_vote",
+    "producer_reward",
+    "comment_payout_update",
+    "comment_payout_update",
+    "curation_reward",
+    "author_reward",
+    "comment_reward",
+    "comment_payout_update",
+    "comment_payout_update",
+    "fill_vesting_withdraw",
+  ];
 
-  it("should yield blocks", async function() {
+  it("should yield blocks", async function () {
     let ids: string[] = [];
     for await (const block of client.blockchain.getBlocks({ from: 1, to: 2 })) {
       ids.push(block.block_id);
@@ -31,7 +78,7 @@ describe("blockchain", function() {
     assert.deepEqual(ids, expectedIds);
   }, 30000);
 
-  it("should stream blocks", async function() {
+  it("should stream blocks", async function () {
     await new Promise((resolve, reject) => {
       const stream = client.blockchain.getBlockStream({ from: 1, to: 2 });
       let ids: string[] = [];
@@ -46,22 +93,22 @@ describe("blockchain", function() {
     });
   }, 30000);
 
-  it("should yield operations", async function() {
+  it("should yield operations", async function () {
     let ops: string[] = [];
     for await (const operation of client.blockchain.getOperations({
       from: 13300000,
-      to: 13300001
+      to: 13300001,
     })) {
       ops.push(operation.op[0]);
     }
     assert.deepEqual(ops, expectedOps);
   }, 30000);
 
-  it("should stream operations", async function() {
+  it("should stream operations", async function () {
     await new Promise((resolve, reject) => {
       const stream = client.blockchain.getOperationsStream({
         from: 13300000,
-        to: 13300001
+        to: 13300001,
       });
       let ops: string[] = [];
       stream.on("data", (operation: AppliedOperation) => {
@@ -95,23 +142,23 @@ describe("blockchain", function() {
   //   }
   // });
 
-  it("should handle errors on stream", async function() {
+  it("should handle errors on stream", async function () {
     await new Promise((resolve, reject) => {
       const stream = client.blockchain.getBlockStream(Number.MAX_VALUE);
       stream.on("data", () => {
         assert(false, "unexpected stream data");
       });
-      stream.on("error", error => {
+      stream.on("error", (error) => {
         resolve(undefined);
       });
     });
   });
 
-  it("should get block number stream", async function() {
+  it("should get block number stream", async function () {
     const current = await client.blockchain.getCurrentBlockNum();
     await new Promise(async (resolve, reject) => {
       const stream = client.blockchain.getBlockNumberStream();
-      stream.on("data", num => {
+      stream.on("data", (num) => {
         assert(num >= current);
         resolve(undefined);
       });
@@ -119,13 +166,10 @@ describe("blockchain", function() {
     });
   });
 
-  it("should get current block header", async function() {
+  it("should get current block header", async function () {
     const now = Date.now();
     const header = await client.blockchain.getCurrentBlockHeader();
     const ts = new Date(header.timestamp + "Z").getTime();
-    assert(
-      Math.abs(ts / 1000 - now / 1000) < 120,
-      "blockheader timestamp too old"
-    );
+    assert(Math.abs(ts / 1000 - now / 1000) < 120, "blockheader timestamp too old");
   });
 });

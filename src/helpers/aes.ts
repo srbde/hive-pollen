@@ -1,12 +1,8 @@
-import assert from 'assert'
-import {
-  createCipheriv,
-  createDecipheriv,
-  createHash,
-  randomBytes
-} from 'crypto'
-import { PrivateKey, PublicKey } from '../crypto.js'
-import { BinaryReader, BinaryWriter } from '../utils.js'
+import assert from "assert";
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from "crypto";
+import { PrivateKey, PublicKey } from "../crypto.js";
+import { BinaryReader, BinaryWriter, concat } from "../utils.js";
+import { sha256 as nobleSha256, sha512 as nobleSha512 } from "@noble/hashes/sha2.js";
 
 /**
  * Encrypts a binary memo payload with Hive memo key agreement.
@@ -30,10 +26,10 @@ import { BinaryReader, BinaryWriter } from '../utils.js'
 export const encrypt = (
   private_key: PrivateKey,
   public_key: PublicKey,
-  message: Buffer,
-  nonce: string | bigint = uniqueNonce()
-): { nonce: bigint; message: Buffer; checksum: number } => 
-  crypt(private_key, public_key, nonce, message)
+  message: Uint8Array,
+  nonce: string | bigint = uniqueNonce(),
+): { nonce: bigint; message: Uint8Array; checksum: number } =>
+  crypt(private_key, public_key, nonce, message);
 
 /**
  * Decrypts a binary memo payload with Hive memo key agreement.
@@ -57,79 +53,80 @@ export const decrypt = (
   private_key: PrivateKey,
   public_key: PublicKey,
   nonce: string | bigint,
-  message: Buffer,
-  checksum: number
-): Buffer => crypt(private_key, public_key, nonce, message, checksum).message
+  message: Uint8Array,
+  checksum: number,
+): Uint8Array => crypt(private_key, public_key, nonce, message, checksum).message;
 
 /**
- * @arg {Buffer} message - Encrypted or plain text message (see checksum)
+ * @arg {Uint8Array} message - Encrypted or plain text message (see checksum)
  * @arg {number} checksum - shared secret checksum (null to encrypt, non-null to decrypt)
  */
 const crypt = (
   private_key: PrivateKey,
   public_key: PublicKey,
   nonce: string | bigint,
-  message: Buffer,
-  checksum?: number
+  message: Uint8Array,
+  checksum?: number,
 ): {
-  nonce: bigint
-  message: Buffer
-  checksum: number
+  nonce: bigint;
+  message: Uint8Array;
+  checksum: number;
 } => {
-  const nonceL = BigInt(nonce.toString())
-  const S = private_key.get_shared_secret(public_key)
-  
-  const writer = new BinaryWriter()
-  writer.writeUint64(nonceL)
-  writer.writeBytes(S)
-  const ebuf = Buffer.from(writer.getBuffer())
+  const nonceL = BigInt(nonce.toString());
+  const S = private_key.get_shared_secret(public_key);
 
-  const encryption_key = createHash('sha512').update(ebuf).digest()
-  const iv = encryption_key.slice(32, 48)
-  const tag = encryption_key.slice(0, 32)
+  const writer = new BinaryWriter();
+  writer.writeUint64(nonceL);
+  writer.writeBytes(S);
+  const ebuf = writer.getBuffer();
+
+  const encryption_key = nobleSha512(ebuf);
+  const iv = encryption_key.slice(32, 48);
+  const tag = encryption_key.slice(0, 32);
 
   // check if first 64 bit of sha256 hash treated as uint64_t truncated to 32 bits.
-  const check = createHash('sha256').update(encryption_key).digest().slice(0, 4)
-  const reader = new BinaryReader(new Uint8Array(check))
-  const check32 = reader.readUint32()
+  const check = nobleSha256(encryption_key).slice(0, 4);
+  const reader = new BinaryReader(check);
+  const check32 = reader.readUint32();
 
+  let result: Uint8Array;
   if (checksum) {
     if (check32 !== checksum) {
-      throw new Error('Invalid key')
+      throw new Error("Invalid key");
     }
-    message = cryptoJsDecrypt(message, tag, iv)
+    result = cryptoJsDecrypt(message, tag, iv);
   } else {
-    message = cryptoJsEncrypt(message, tag, iv)
+    result = cryptoJsEncrypt(message, tag, iv);
   }
   return {
     checksum: check32,
-    message,
-    nonce: nonceL
-  }
-}
+    message: result,
+    nonce: nonceL,
+  };
+};
 
 /**
  * Encrypt a message using AES-256-CBC.
  */
-const cryptoJsEncrypt = (message: Buffer, key: Buffer, iv: Buffer): Buffer => {
-  const cipher = createCipheriv('aes-256-cbc', key, iv)
-  return Buffer.concat([cipher.update(message), cipher.final()])
-}
+const cryptoJsEncrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
+  const cipher = createCipheriv("aes-256-cbc", key, iv);
+  return concat([cipher.update(message), cipher.final()]);
+};
 
 /**
  * Decrypt a message using AES-256-CBC.
  */
-const cryptoJsDecrypt = (message: Buffer, key: Buffer, iv: Buffer): Buffer => {
-  const decipher = createDecipheriv('aes-256-cbc', key, iv)
-  return Buffer.concat([decipher.update(message), decipher.final()])
-}
+const cryptoJsDecrypt = (message: Uint8Array, key: Uint8Array, iv: Uint8Array): Uint8Array => {
+  const decipher = createDecipheriv("aes-256-cbc", key, iv);
+  return concat([decipher.update(message), decipher.final()]);
+};
 
 /**
  * Node code to generate a unique 64-bit nonce.
  */
 const uniqueNonce = () => {
-  const entropy = randomBytes(2)
-  let long = BigInt(Date.now())
-  long = (long << 16n) | BigInt(entropy.readUInt16BE(0))
-  return long
-}
+  const entropy = randomBytes(2);
+  let long = BigInt(Date.now());
+  long = (long << 16n) | BigInt((entropy[0] << 8) | entropy[1]);
+  return long;
+};

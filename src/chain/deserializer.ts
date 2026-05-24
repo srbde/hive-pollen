@@ -1,5 +1,5 @@
-import { BinaryReader } from '../utils.js'
-import { PublicKey } from '../crypto.js'
+import { BinaryReader } from "../utils.js";
+import { PublicKey } from "../crypto.js";
 
 /**
  * Function signature for reading one Hive protocol value from a binary reader.
@@ -13,48 +13,50 @@ import { PublicKey } from '../crypto.js'
  *
  * @example
  * ```ts
- * const memo = types.EncryptedMemoD(buffer)
+ * const memo = types.EncryptedMemoD(bytes)
  * console.log(memo.from.toString())
  * ```
  */
-export type Deserializer = (reader: BinaryReader) => any
+export type Deserializer = (reader: BinaryReader) => any;
 
 const PublicKeyDeserializer = (reader: BinaryReader) => {
-  const bytes = reader.readBytes(33)
-  return PublicKey.fromBuffer(Buffer.from(bytes))
-}
+  const bytes = reader.readBytes(33);
+  return PublicKey.fromBuffer(bytes);
+};
 
-const UInt64Deserializer = (reader: BinaryReader) => reader.readUint64()
+const UInt64Deserializer = (reader: BinaryReader) => reader.readUint64();
 
-const UInt32Deserializer = (reader: BinaryReader) => reader.readUint32()
+const UInt32Deserializer = (reader: BinaryReader) => reader.readUint32();
 
 const BinaryDeserializer = (reader: BinaryReader) => {
-  return Buffer.from(reader.readBytes(reader.readVarint32()))
-}
+  return reader.readBytes(reader.readVarint32());
+};
 
-const BufferDeserializer = (keyDeserializers: [string, Deserializer][]) => (
-  buffer: Uint8Array | Buffer
-) => {
-  const reader = new BinaryReader(buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer))
-  const obj: any = {}
-  for (const [key, deserializer] of keyDeserializers) {
-    try {
-      obj[key] = deserializer(reader)
-    } catch (error: any) {
-      error.message = `${key}: ${error.message}`
-      throw error
+const BufferDeserializer =
+  (keyDeserializers: [string, Deserializer][]) => (buffer: Uint8Array | BinaryReader) => {
+    const reader =
+      typeof (buffer as any).readBytes === "function"
+        ? (buffer as BinaryReader)
+        : new BinaryReader(buffer as Uint8Array);
+    const obj: any = {};
+    for (const [key, deserializer] of keyDeserializers) {
+      try {
+        obj[key] = deserializer(reader);
+      } catch (error: any) {
+        error.message = `${key}: ${error.message}`;
+        throw error;
+      }
     }
-  }
-  return obj
-}
+    return obj;
+  };
 
 const EncryptedMemoDeserializer: any = BufferDeserializer([
-  ['from', PublicKeyDeserializer],
-  ['to', PublicKeyDeserializer],
-  ['nonce', UInt64Deserializer],
-  ['check', UInt32Deserializer],
-  ['encrypted', BinaryDeserializer]
-])
+  ["from", PublicKeyDeserializer],
+  ["to", PublicKeyDeserializer],
+  ["nonce", UInt64Deserializer],
+  ["check", UInt32Deserializer],
+  ["encrypted", BinaryDeserializer],
+]);
 
 /**
  * Hive protocol deserializer registry.
@@ -66,10 +68,10 @@ const EncryptedMemoDeserializer: any = BufferDeserializer([
  *
  * @example
  * ```ts
- * const decoded = types.EncryptedMemoD(Buffer.from(bytes))
+ * const decoded = types.EncryptedMemoD(bytes)
  * console.log(decoded.nonce.toString())
  * ```
  */
 export const types = {
-  EncryptedMemoD: EncryptedMemoDeserializer
-}
+  EncryptedMemoD: EncryptedMemoDeserializer,
+};

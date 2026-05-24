@@ -2,10 +2,10 @@
  * Hivemind database query wrapper
  */
 
-import { Account } from '../chain/account.js'
-import { Discussion } from '../chain/comment.js'
-import { CommunityDetail, Notifications } from '../chain/hivemind.js'
-import { Client } from './../client.js'
+import { Account } from "../chain/account.js";
+import { Discussion } from "../chain/comment.js";
+import { CommunityDetail, Notifications } from "../chain/hivemind.js";
+import { Client } from "./../client.js";
 
 /**
  * Query options for ranked Hivemind post feeds.
@@ -25,30 +25,30 @@ import { Client } from './../client.js'
  * ```
  */
 export interface PostsQuery {
-    /**
-     * Number of posts to fetch
-     */
-    limit?: number
-    /**
-     * Sorting posts
-     */
-    sort: 'trending' | 'hot' | 'created' | 'promoted' | 'payout' | 'payout_comments' | 'muted'
-    /**
-     * Filtering with tags
-     */
-    tag?: string[] | string
-    /**
-     * Observer account
-     */
-    observer?: string
-    /**
-     * Paginating last post author
-     */
-    start_author?: string
-    /**
-     * Paginating last post permlink
-     */
-    start_permlink?: string
+  /**
+   * Number of posts to fetch
+   */
+  limit?: number;
+  /**
+   * Sorting posts
+   */
+  sort: "trending" | "hot" | "created" | "promoted" | "payout" | "payout_comments" | "muted";
+  /**
+   * Filtering with tags
+   */
+  tag?: string[] | string;
+  /**
+   * Observer account
+   */
+  observer?: string;
+  /**
+   * Paginating last post author
+   */
+  start_author?: string;
+  /**
+   * Paginating last post permlink
+   */
+  start_permlink?: string;
 }
 
 /**
@@ -66,17 +66,17 @@ export interface PostsQuery {
  * }
  * ```
  */
-export interface AccountPostsQuery extends Omit<PostsQuery, 'sort'> {
-    account: string
-    sort: 'posts'
+export interface AccountPostsQuery extends Omit<PostsQuery, "sort"> {
+  account: string;
+  sort: "posts";
 }
 
 /**
  * Query options for fetching a single community.
  */
 export interface CommunityQuery {
-    name: string
-    observer: string
+  name: string;
+  observer: string;
 }
 
 /**
@@ -87,7 +87,7 @@ export interface CommunityQuery {
  * other community team assignments.
  */
 export interface CommunityRolesQuery {
-    community: string
+  community: string;
 }
 
 /**
@@ -102,9 +102,9 @@ export interface CommunityRolesQuery {
  * ```
  */
 export interface AccountNotifsQuery {
-    account: Account['name']
-    limit: number
-    type?: 'new_community' | 'pin_post'
+  account: Account["name"];
+  limit: number;
+  type?: "new_community" | "pin_post";
 }
 
 /**
@@ -119,22 +119,22 @@ export interface AccountNotifsQuery {
  * ```
  */
 export interface ListCommunitiesQuery {
-    /**
-     * Paginating last
-     */
-    last?: string
-    /**
-     * Number of communities to fetch
-     */
-    limit: number
-    /**
-     * To be developed, not ready yet
-     */
-    query?: string | any
-    /**
-     * Observer account
-     */
-    observer?: Account['name']
+  /**
+   * Paginating last
+   */
+  last?: string;
+  /**
+   * Number of communities to fetch
+   */
+  limit: number;
+  /**
+   * To be developed, not ready yet
+   */
+  query?: string | any;
+  /**
+   * Observer account
+   */
+  observer?: Account["name"];
 }
 
 /**
@@ -158,164 +158,164 @@ export interface ListCommunitiesQuery {
  * ```
  */
 export class HivemindAPI {
-    /**
-     * Creates a Hivemind helper bound to a client.
-     *
-     * @param client - Client used to call the bridge API namespace.
-     */
-    constructor(readonly client: Client) { }
+  /**
+   * Creates a Hivemind helper bound to a client.
+   *
+   * @param client - Client used to call the bridge API namespace.
+   */
+  constructor(readonly client: Client) {}
 
-    /**
-     * Sends a raw bridge API call.
-     *
-     * @param method - Bridge method name.
-     * @param params - Method-specific named parameters.
-     * @returns The decoded bridge result.
-     *
-     * @throws RPCError
-     * Thrown when the active node does not expose bridge or rejects the request.
-     *
-     * @example
-     * ```ts
-     * const posts = await client.hivemind.call('get_ranked_posts', {
-     *   sort: 'hot',
-     *   tag: 'hive-139531',
-     *   limit: 5
-     * })
-     * ```
-     */
-    public call(method: string, params?: any) {
-        return this.client.call('bridge', method, params)
-    }
+  /**
+   * Sends a raw bridge API call.
+   *
+   * @param method - Bridge method name.
+   * @param params - Method-specific named parameters.
+   * @returns The decoded bridge result.
+   *
+   * @throws RPCError
+   * Thrown when the active node does not expose bridge or rejects the request.
+   *
+   * @example
+   * ```ts
+   * const posts = await client.hivemind.call('get_ranked_posts', {
+   *   sort: 'hot',
+   *   tag: 'hive-139531',
+   *   limit: 5
+   * })
+   * ```
+   */
+  public call(method: string, params?: any) {
+    return this.client.call("bridge", method, params);
+  }
 
-    /**
-     * Fetches ranked posts from Hivemind.
-     *
-     * @param options - Sort, tag/community, pagination, observer, and limit
-     * settings.
-     * @returns Discussion records ordered by the selected ranking mode.
-     *
-     * @throws RPCError
-     * Thrown when bridge rejects the ranking query.
-     *
-     * @example
-     * ```ts
-     * const posts = await client.hivemind.getRankedPosts({
-     *   sort: 'created',
-     *   tag: 'hive-139531',
-     *   limit: 20,
-     *   observer: 'srbde'
-     * })
-     * ```
-     */
-    public getRankedPosts(options: PostsQuery): Promise<Discussion[]> {
-        return this.call('get_ranked_posts', options)
-    }
+  /**
+   * Fetches ranked posts from Hivemind.
+   *
+   * @param options - Sort, tag/community, pagination, observer, and limit
+   * settings.
+   * @returns Discussion records ordered by the selected ranking mode.
+   *
+   * @throws RPCError
+   * Thrown when bridge rejects the ranking query.
+   *
+   * @example
+   * ```ts
+   * const posts = await client.hivemind.getRankedPosts({
+   *   sort: 'created',
+   *   tag: 'hive-139531',
+   *   limit: 20,
+   *   observer: 'srbde'
+   * })
+   * ```
+   */
+  public getRankedPosts(options: PostsQuery): Promise<Discussion[]> {
+    return this.call("get_ranked_posts", options);
+  }
 
-    /**
-     * Fetches posts authored or surfaced by a specific account.
-     *
-     * @param options - Account, pagination, observer, and limit settings.
-     * @returns Discussion records from the account's post feed.
-     *
-     * @throws RPCError
-     * Thrown when bridge rejects the account-post query.
-     *
-     * @example
-     * ```ts
-     * const posts = await client.hivemind.getAccountPosts({
-     *   account: 'srbde',
-     *   sort: 'posts',
-     *   limit: 10
-     * })
-     * ```
-     */
-    public getAccountPosts(options: AccountPostsQuery): Promise<Discussion[]> {
-        return this.call('get_account_posts', options)
-    }
+  /**
+   * Fetches posts authored or surfaced by a specific account.
+   *
+   * @param options - Account, pagination, observer, and limit settings.
+   * @returns Discussion records from the account's post feed.
+   *
+   * @throws RPCError
+   * Thrown when bridge rejects the account-post query.
+   *
+   * @example
+   * ```ts
+   * const posts = await client.hivemind.getAccountPosts({
+   *   account: 'srbde',
+   *   sort: 'posts',
+   *   limit: 10
+   * })
+   * ```
+   */
+  public getAccountPosts(options: AccountPostsQuery): Promise<Discussion[]> {
+    return this.call("get_account_posts", options);
+  }
 
-    /**
-     * Fetches community metadata from Hivemind.
-     *
-     * @param options - Community name and observer account.
-     * @returns Community detail records including roles, subscribers, and
-     * display metadata.
-     *
-     * @throws RPCError
-     * Thrown when the community cannot be read.
-     *
-     * @example
-     * ```ts
-     * const [community] = await client.hivemind.getCommunity({
-     *   name: 'hive-139531',
-     *   observer: 'srbde'
-     * })
-     *
-     * console.log(community.title)
-     * ```
-     */
-    public getCommunity(options: CommunityQuery): Promise<CommunityDetail[]> {
-        return this.call('get_community', options)
-    }
+  /**
+   * Fetches community metadata from Hivemind.
+   *
+   * @param options - Community name and observer account.
+   * @returns Community detail records including roles, subscribers, and
+   * display metadata.
+   *
+   * @throws RPCError
+   * Thrown when the community cannot be read.
+   *
+   * @example
+   * ```ts
+   * const [community] = await client.hivemind.getCommunity({
+   *   name: 'hive-139531',
+   *   observer: 'srbde'
+   * })
+   *
+   * console.log(community.title)
+   * ```
+   */
+  public getCommunity(options: CommunityQuery): Promise<CommunityDetail[]> {
+    return this.call("get_community", options);
+  }
 
-    /**
-     * Lists communities followed by an account.
-     *
-     * @param account - Account name or bridge-compatible account parameter.
-     * @returns Subscription records containing community and role information.
-     *
-     * @throws RPCError
-     * Thrown when bridge rejects the subscription lookup.
-     *
-     * @example
-     * ```ts
-     * const subscriptions = await client.hivemind.listAllSubscriptions('srbde')
-     * console.log(subscriptions)
-     * ```
-     */
-    public listAllSubscriptions(account: Account['name'] | object): Promise<Discussion[]> {
-        return this.call('list_all_subscriptions', account)
-    }
+  /**
+   * Lists communities followed by an account.
+   *
+   * @param account - Account name or bridge-compatible account parameter.
+   * @returns Subscription records containing community and role information.
+   *
+   * @throws RPCError
+   * Thrown when bridge rejects the subscription lookup.
+   *
+   * @example
+   * ```ts
+   * const subscriptions = await client.hivemind.listAllSubscriptions('srbde')
+   * console.log(subscriptions)
+   * ```
+   */
+  public listAllSubscriptions(account: Account["name"] | object): Promise<Discussion[]> {
+    return this.call("list_all_subscriptions", account);
+  }
 
-    /**
-     * Fetches an account's Hivemind notification feed.
-     *
-     * @param options - Account, limit, and optional notification type filter.
-     * @returns Notification records for the account.
-     *
-     * @throws RPCError
-     * Thrown when bridge rejects the notification query.
-     *
-     * @example
-     * ```ts
-     * const notifications = await client.hivemind.getAccountNotifications({
-     *   account: 'srbde',
-     *   limit: 25
-     * })
-     * ```
-     */
-    public getAccountNotifications(options?: AccountNotifsQuery): Promise<Notifications[]> {
-        return this.call('account_notifications', options)
-    }
+  /**
+   * Fetches an account's Hivemind notification feed.
+   *
+   * @param options - Account, limit, and optional notification type filter.
+   * @returns Notification records for the account.
+   *
+   * @throws RPCError
+   * Thrown when bridge rejects the notification query.
+   *
+   * @example
+   * ```ts
+   * const notifications = await client.hivemind.getAccountNotifications({
+   *   account: 'srbde',
+   *   limit: 25
+   * })
+   * ```
+   */
+  public getAccountNotifications(options?: AccountNotifsQuery): Promise<Notifications[]> {
+    return this.call("account_notifications", options);
+  }
 
-    /**
-     * Lists communities known to Hivemind.
-     *
-     * @param options - Pagination, limit, query, and observer settings.
-     * @returns Community detail records.
-     *
-     * @throws RPCError
-     * Thrown when bridge rejects the community list query.
-     *
-     * @example
-     * ```ts
-     * const communities = await client.hivemind.listCommunities({
-     *   limit: 20,
-     *   observer: 'srbde'
-     * })
-     * ```
-     */
-    public listCommunities(options: ListCommunitiesQuery): Promise<CommunityDetail[]> {
-        return this.call('list_communities', options)
-    }
+  /**
+   * Lists communities known to Hivemind.
+   *
+   * @param options - Pagination, limit, query, and observer settings.
+   * @returns Community detail records.
+   *
+   * @throws RPCError
+   * Thrown when bridge rejects the community list query.
+   *
+   * @example
+   * ```ts
+   * const communities = await client.hivemind.listCommunities({
+   *   limit: 20,
+   *   observer: 'srbde'
+   * })
+   * ```
+   */
+  public listCommunities(options: ListCommunitiesQuery): Promise<CommunityDetail[]> {
+    return this.call("list_communities", options);
+  }
 }

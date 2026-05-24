@@ -1,14 +1,10 @@
 import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
-;
 import assert from "assert";
 
 import { Client, Asset, Transaction, PrivateKey } from "../src/index.js";
 import { getTestnetAccounts, randomString, agent, TEST_NODE } from "./_common.js";
 
-describe("rc_api", function() {
-  
-  
-
+describe("rc_api", function () {
   const client = Client.testnet({ agent });
   let serverConfig: { [key: string]: boolean | string | number };
   const liveClient = new Client(TEST_NODE, { agent });
@@ -20,19 +16,19 @@ describe("rc_api", function() {
 
   // _calculateManabar max_mana: number, { current_mana, last_update_time }
 
-  it("calculateVPMana", function() {
+  it("calculateVPMana", function () {
     let account: any = {
       name: "therealwolf",
       voting_manabar: {
         current_mana: 130168665536029,
-        last_update_time: Date.now() / 1000
+        last_update_time: Date.now() / 1000,
       },
       vesting_shares: "80241942 VESTS",
       delegated_vesting_shares: "60666472 VESTS",
       received_vesting_shares: "191002659 VESTS",
       vesting_withdraw_rate: 0,
       to_withdraw: 0,
-      withdrawn: 0
+      withdrawn: 0,
     };
 
     let bar = client.rc.calculateVPMana(account);
@@ -42,19 +38,19 @@ describe("rc_api", function() {
     assert.equal(bar.percentage, 10000);
   });
 
-  it("calculateRCMana", function() {
+  it("calculateRCMana", function () {
     let rc_account = {
       account: "therealwolf",
       rc_manabar: {
         current_mana: "100000",
-        last_update_time: 1537064449
+        last_update_time: 1537064449,
       },
       max_rc_creation_adjustment: {
         amount: "500",
         precision: 3,
-        nai: "@@000000021"
+        nai: "@@000000021",
       },
-      max_rc: "1000000"
+      max_rc: "1000000",
     };
 
     let bar = client.rc.calculateRCMana(rc_account);

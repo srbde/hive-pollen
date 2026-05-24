@@ -47,4 +47,4 @@
  * const client = new Client('https://api.hive.blog')
  * ```
  */
-export * from './index.js'
+export * from "./index.js";

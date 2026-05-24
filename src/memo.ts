@@ -1,9 +1,9 @@
-import { base58 as bs58 } from '@scure/base'
-import { types } from './chain/deserializer.js'
-import { Types } from './chain/serializer.js'
-import { PrivateKey, PublicKey } from './crypto.js'
-import * as Aes from './helpers/aes.js'
-import { BinaryReader, BinaryWriter } from './utils.js'
+import { base58 as bs58 } from "@scure/base";
+import { types } from "./chain/deserializer.js";
+import { Types } from "./chain/serializer.js";
+import { PrivateKey, PublicKey } from "./crypto.js";
+import * as Aes from "./helpers/aes.js";
+import { BinaryReader, BinaryWriter } from "./utils.js";
 
 /**
  * Encodes a Hive memo, encrypting messages that begin with `#`.
@@ -34,38 +34,33 @@ const encode = (
   private_key: PrivateKey | string,
   public_key: PublicKey | string,
   memo: string,
-  testNonce?: string
+  testNonce?: string,
 ): string => {
-  if (!memo.startsWith('#')) {
-    return memo
+  if (!memo.startsWith("#")) {
+    return memo;
   }
-  memo = memo.substring(1)
-  checkEncryption()
-  private_key = toPrivateObj(private_key)
-  public_key = toPublicObj(public_key)
-  
-  const writer = new BinaryWriter()
-  writer.writeString(memo)
-  const memoBuffer = Buffer.from(writer.getBuffer())
+  memo = memo.substring(1);
+  checkEncryption();
+  private_key = toPrivateObj(private_key);
+  public_key = toPublicObj(public_key);
 
-  const { nonce, message, checksum } = Aes.encrypt(
-    private_key,
-    public_key,
-    memoBuffer,
-    testNonce
-  )
-  
-  const writer2 = new BinaryWriter()
+  const writer = new BinaryWriter();
+  writer.writeString(memo);
+  const memoBuffer = writer.getBuffer();
+
+  const { nonce, message, checksum } = Aes.encrypt(private_key, public_key, memoBuffer, testNonce);
+
+  const writer2 = new BinaryWriter();
   Types.EncryptedMemo(writer2, {
     check: checksum,
     encrypted: message,
     from: private_key.createPublic(),
     nonce,
-    to: public_key
-  })
-  const data = Buffer.from(writer2.getBuffer())
-  return '#' + bs58.encode(data)
-}
+    to: public_key,
+  });
+  const data = writer2.getBuffer();
+  return "#" + bs58.encode(data);
+};
 
 /**
  * Decodes a Hive memo, decrypting messages that begin with `#`.
@@ -92,56 +87,54 @@ const encode = (
  * ```
  */
 const decode = (private_key: PrivateKey | string, memo: string): string => {
-  if (!memo.startsWith('#')) {
-    return memo
+  if (!memo.startsWith("#")) {
+    return memo;
   }
-  memo = memo.substring(1)
-  checkEncryption()
-  private_key = toPrivateObj(private_key)
-  const decodedMemo = bs58.decode(memo)
-  let memoBuffer: any = types.EncryptedMemoD(Buffer.from(decodedMemo))
-  const { from, to, nonce, check, encrypted } = memoBuffer
-  const pubkey = private_key.createPublic().toString()
+  memo = memo.substring(1);
+  checkEncryption();
+  private_key = toPrivateObj(private_key);
+  const decodedMemo = bs58.decode(memo);
+  const memoBuffer: any = types.EncryptedMemoD(new BinaryReader(decodedMemo));
+  const { from, to, nonce, check, encrypted } = memoBuffer;
+  const pubkey = private_key.createPublic().toString();
   const otherpub =
-    pubkey === new PublicKey(from.key).toString()
-      ? new PublicKey(to.key)
-      : new PublicKey(from.key)
-  
-  const decrypted = Aes.decrypt(private_key, otherpub, nonce, encrypted, check)
-  const reader = new BinaryReader(new Uint8Array(decrypted))
+    pubkey === new PublicKey(from.key).toString() ? new PublicKey(to.key) : new PublicKey(from.key);
+
+  const decrypted = Aes.decrypt(private_key, otherpub, nonce, encrypted, check);
+  const reader = new BinaryReader(decrypted);
   try {
-    return '#' + reader.readString()
+    return "#" + reader.readString();
   } catch (e: any) {
     // Sender did not length-prefix the memo
-    return '#' + Buffer.from(decrypted).toString('utf-8')
+    return "#" + new TextDecoder().decode(decrypted);
   }
-}
+};
 
-let encodeTest: boolean | undefined
+let encodeTest: boolean | undefined;
 const checkEncryption: any = () => {
   if (encodeTest === undefined) {
-    let plaintext: string | undefined
-    encodeTest = true // prevent infinate looping
+    let plaintext: string | undefined;
+    encodeTest = true; // prevent infinate looping
     try {
-      const wif = '5JdeC9P7Pbd1uGdFVEsJ41EkEnADbbHGq6p1BwFxm6txNBsQnsw'
-      const pubkey = 'STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA'
-      const cyphertext = encode(wif, pubkey, '#memo爱')
-      plaintext = decode(wif, cyphertext)
+      const wif = "5JdeC9P7Pbd1uGdFVEsJ41EkEnADbbHGq6p1BwFxm6txNBsQnsw";
+      const pubkey = "STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA";
+      const cyphertext = encode(wif, pubkey, "#memo爱");
+      plaintext = decode(wif, cyphertext);
     } catch (e: any) {
-      throw new Error(e.message || String(e))
+      throw new Error(e.message || String(e));
     } finally {
-      encodeTest = plaintext === '#memo爱'
+      encodeTest = plaintext === "#memo爱";
     }
   }
   if (encodeTest === false) {
-    throw new Error('This environment does not support encryption.')
+    throw new Error("This environment does not support encryption.");
   }
-}
+};
 
 const toPrivateObj = (o: any): PrivateKey =>
-  o ? (o.key ? o : PrivateKey.fromString(o)) : o /* null or undefined*/
+  o ? (o.key ? o : PrivateKey.fromString(o)) : o; /* null or undefined*/
 const toPublicObj = (o: any): PublicKey =>
-  o ? (o.key ? o : PublicKey.fromString(o)) : o /* null or undefined*/
+  o ? (o.key ? o : PublicKey.fromString(o)) : o; /* null or undefined*/
 
 /**
  * Hive encrypted memo helper.
@@ -162,5 +155,5 @@ const toPublicObj = (o: any): PublicKey =>
  */
 export const Memo = {
   decode,
-  encode
-}
+  encode,
+};

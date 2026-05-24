@@ -1,5 +1,4 @@
 import { describe, it, beforeAll, beforeEach, afterAll, afterEach, expect, vi } from "vitest";
-;
 import assert from "assert";
 import { randomBytes } from "crypto";
 
@@ -9,50 +8,46 @@ const { Asset, PrivateKey, Client, HexBuffer } = ds;
 
 import { getTestnetAccounts, randomString, agent } from "./_common.js";
 
-describe("operations", function() {
-  
-  
-
+describe("operations", function () {
   const client = Client.testnet({ agent });
 
-  let acc1: { username: string; password: string },
-    acc2: { username: string; password: string };
+  let acc1: { username: string; password: string }, acc2: { username: string; password: string };
   let acc1Key: ds.PrivateKey;
-  beforeAll(async function() {
+  beforeAll(async function () {
     const accounts = await getTestnetAccounts();
     if (accounts && accounts.length >= 2) {
-        [acc1, acc2] = accounts;
-        acc1Key = PrivateKey.fromLogin(acc1.username, acc1.password, "active");
+      [acc1, acc2] = accounts;
+      acc1Key = PrivateKey.fromLogin(acc1.username, acc1.password, "active");
     }
   });
 
-  it("should delegate vesting shares", async function() {
+  it("should delegate vesting shares", async function () {
     if (!acc1 || !acc2) {
-        console.warn('Skipping delegateVestingShares test due to missing testnet accounts');
-        return;
+      console.warn("Skipping delegateVestingShares test due to missing testnet accounts");
+      return;
     }
     const [user1] = await client.database.getAccounts([acc1.username]);
     const currentDelegation = Asset.from(user1.received_vesting_shares);
     const newDelegation = Asset.from(
       currentDelegation.amount >= 100 ? 0 : 100 + Math.random() * 100,
-      "VESTS"
+      "VESTS",
     );
     const result = await client.broadcast.delegateVestingShares(
       {
         delegator: acc1.username,
         delegatee: acc2.username,
-        vesting_shares: newDelegation
+        vesting_shares: newDelegation,
       },
-      acc1Key
+      acc1Key,
     );
     const [user2] = await client.database.getAccounts([acc2.username]);
     assert.equal(user2.received_vesting_shares, newDelegation.toString());
   }, 60000);
 
-  it("should send custom", async function() {
+  it("should send custom", async function () {
     if (!acc1) {
-        console.warn('Skipping send custom test due to missing testnet accounts');
-        return;
+      console.warn("Skipping send custom test due to missing testnet accounts");
+      return;
     }
     const props = await client.database.getDynamicGlobalProperties();
     const op: ds.CustomOperation = [
@@ -60,8 +55,8 @@ describe("operations", function() {
       {
         required_auths: [acc1.username],
         id: ~~(Math.random() * 65535),
-        data: randomBytes(512)
-      }
+        data: randomBytes(512),
+      },
     ];
     const rv = await client.broadcast.sendOperations([op], acc1Key);
     const tx = await client.database.getTransaction(rv.id);
@@ -70,10 +65,10 @@ describe("operations", function() {
     assert.equal(rop[1].data, HexBuffer.from(op[1].data).toString());
   }, 60000);
 
-  it("should send custom json", async function() {
+  it("should send custom json", async function () {
     if (!acc1) {
-        console.warn('Skipping send custom json test due to missing testnet accounts');
-        return;
+      console.warn("Skipping send custom json test due to missing testnet accounts");
+      return;
     }
     const data = { test: 123, string: "unicode🐳" };
     const rv = await client.broadcast.json(
@@ -81,18 +76,18 @@ describe("operations", function() {
         required_auths: [acc1.username],
         required_posting_auths: [],
         id: "something",
-        json: JSON.stringify(data)
+        json: JSON.stringify(data),
       },
-      acc1Key
+      acc1Key,
     );
     const tx = await client.database.getTransaction(rv.id);
     assert.deepEqual(JSON.parse(tx.operations[0][1].json), data);
   }, 60000);
 
-  it("should transfer hive", async function() {
+  it("should transfer hive", async function () {
     if (!acc1 || !acc2) {
-        console.warn('Skipping transfer hive test due to missing testnet accounts');
-        return;
+      console.warn("Skipping transfer hive test due to missing testnet accounts");
+      return;
     }
     const [acc2bf] = await client.database.getAccounts([acc2.username]);
     await client.broadcast.transfer(
@@ -100,9 +95,9 @@ describe("operations", function() {
         from: acc1.username,
         to: acc2.username,
         amount: "0.001 HIVE",
-        memo: "Hej på dig!"
+        memo: "Hej på dig!",
       },
-      acc1Key
+      acc1Key,
     );
     const [acc2af] = await client.database.getAccounts([acc2.username]);
     const old_bal = Asset.from(acc2bf.balance);
@@ -110,10 +105,10 @@ describe("operations", function() {
     assert.equal(new_bal.subtract(old_bal).toString(), "0.001 HIVE");
   }, 60000);
 
-  it("should create account and post with options", async function() {
+  it("should create account and post with options", async function () {
     if (!acc1) {
-        console.warn('Skipping create account test due to missing testnet accounts');
-        return;
+      console.warn("Skipping create account test due to missing testnet accounts");
+      return;
     }
     const username = "pollen-" + randomString(12);
     const password = randomString(32);
@@ -122,18 +117,23 @@ describe("operations", function() {
         username,
         password,
         creator: acc1.username,
-        metadata: { date: new Date() }
+        metadata: { date: new Date() },
       },
-      acc1Key
+      acc1Key,
     );
-    await client.broadcast.sendOperations([[
-      'transfer_to_vesting',
-      {
-        amount: '100.000 HIVE',
-        from: acc1.username,
-        to: username
-      }
-    ]], acc1Key)
+    await client.broadcast.sendOperations(
+      [
+        [
+          "transfer_to_vesting",
+          {
+            amount: "100.000 HIVE",
+            from: acc1.username,
+            to: username,
+          },
+        ],
+      ],
+      acc1Key,
+    );
     const [newAcc] = await client.database.getAccounts([username]);
     assert.equal(newAcc.name, username);
     const postingWif = PrivateKey.fromLogin(username, password, "posting");
@@ -152,7 +152,7 @@ describe("operations", function() {
         permlink,
         title: "Hello world!",
         body: `My password is: ${password}`,
-        json_metadata: JSON.stringify({ tags: ["test", "hello"] })
+        json_metadata: JSON.stringify({ tags: ["test", "hello"] }),
       },
       {
         permlink,
@@ -161,51 +161,42 @@ describe("operations", function() {
         allow_curation_rewards: true,
         percent_hbd: 0,
         max_accepted_payout: Asset.from(10, "HBD"),
-        extensions: [
-          [0, { beneficiaries: [{ weight: 10000, account: acc1.username }] }]
-        ]
+        extensions: [[0, { beneficiaries: [{ weight: 10000, account: acc1.username }] }]],
       },
-      postingWif
+      postingWif,
     );
 
-    const post = await client.call("condenser_api", "get_content", [
-      username,
-      permlink
-    ]);
-    assert.deepEqual(post.beneficiaries, [
-      { account: acc1.username, weight: 10000 }
-    ]);
+    const post = await client.call("condenser_api", "get_content", [username, permlink]);
+    assert.deepEqual(post.beneficiaries, [{ account: acc1.username, weight: 10000 }]);
     assert.equal(post.max_accepted_payout, "10.000 HBD");
     assert.equal(post.allow_votes, true);
   }, 90000);
 
-  it("should update account", async function() {
+  it("should update account", async function () {
     if (!acc1) {
-        console.warn('Skipping update account test due to missing testnet accounts');
-        return;
+      console.warn("Skipping update account test due to missing testnet accounts");
+      return;
     }
     const key = PrivateKey.fromLogin(acc1.username, acc1.password, "active");
     const foo = Math.random();
     const rv = await client.broadcast.updateAccount(
       {
         account: acc1.username,
-        memo_key: PrivateKey.fromLogin(
-          acc1.username,
-          acc1.password,
-          "memo"
-        ).createPublic(client.addressPrefix),
-        json_metadata: JSON.stringify({ foo })
+        memo_key: PrivateKey.fromLogin(acc1.username, acc1.password, "memo").createPublic(
+          client.addressPrefix,
+        ),
+        json_metadata: JSON.stringify({ foo }),
       },
-      key
+      key,
     );
     const [acc] = await client.database.getAccounts([acc1.username]);
     assert.deepEqual({ foo }, JSON.parse(acc.json_metadata));
   }, 60000);
 
-  it("should create account custom auths", async function() {
+  it("should create account custom auths", async function () {
     if (!acc1) {
-        console.warn('Skipping create account custom auths test due to missing testnet accounts');
-        return;
+      console.warn("Skipping create account custom auths test due to missing testnet accounts");
+      return;
     }
     const key = PrivateKey.fromLogin(acc1.username, acc1.password, "active");
 
@@ -213,26 +204,18 @@ describe("operations", function() {
     const password = randomString(32);
     const metadata = { my_password_is: password };
 
-    const ownerKey = PrivateKey.fromLogin(
-      username,
-      password,
-      "owner"
-    ).createPublic(client.addressPrefix);
-    const activeKey = PrivateKey.fromLogin(
-      username,
-      password,
-      "active"
-    ).createPublic(client.addressPrefix);
-    const postingKey = PrivateKey.fromLogin(
-      username,
-      password,
-      "posting"
-    ).createPublic(client.addressPrefix);
-    const memoKey = PrivateKey.fromLogin(
-      username,
-      password,
-      "memo"
-    ).createPublic(client.addressPrefix);
+    const ownerKey = PrivateKey.fromLogin(username, password, "owner").createPublic(
+      client.addressPrefix,
+    );
+    const activeKey = PrivateKey.fromLogin(username, password, "active").createPublic(
+      client.addressPrefix,
+    );
+    const postingKey = PrivateKey.fromLogin(username, password, "posting").createPublic(
+      client.addressPrefix,
+    );
+    const memoKey = PrivateKey.fromLogin(username, password, "memo").createPublic(
+      client.addressPrefix,
+    );
     await client.broadcast.createTestAccount(
       {
         creator: acc1.username,
@@ -243,23 +226,23 @@ describe("operations", function() {
           posting: {
             weight_threshold: 1,
             account_auths: [],
-            key_auths: [[postingKey, 1]]
+            key_auths: [[postingKey, 1]],
           },
-          memoKey
+          memoKey,
         },
-        metadata
+        metadata,
       },
-      key
+      key,
     );
     const [newAccount] = await client.database.getAccounts([username]);
     assert.equal(newAccount.name, username);
     assert.equal(newAccount.memo_key, memoKey);
   }, 90000);
 
-  it("should create account and calculate fees", async function() {
+  it("should create account and calculate fees", async function () {
     if (!acc1) {
-        console.warn('Skipping account creation fees test due to missing testnet accounts');
-        return;
+      console.warn("Skipping account creation fees test due to missing testnet accounts");
+      return;
     }
     const password = randomString(32);
     const metadata = { my_password_is: password };
@@ -275,9 +258,9 @@ describe("operations", function() {
         metadata,
         creator,
         username: "pollen-" + randomString(12),
-        delegation: 0
+        delegation: 0,
       },
-      acc1Key
+      acc1Key,
     );
 
     // fee (no RC used) and no delegation
@@ -287,9 +270,9 @@ describe("operations", function() {
         metadata,
         creator,
         username: "pollen-" + randomString(12),
-        fee: creationFee
+        fee: creationFee,
       },
-      acc1Key
+      acc1Key,
     );
 
     // fee plus delegation
@@ -299,47 +282,44 @@ describe("operations", function() {
         creator,
         username: "pollen-" + randomString(12),
         fee: creationFee,
-        delegation: Asset.from(1000, "VESTS")
+        delegation: Asset.from(1000, "VESTS"),
       },
-      acc1Key
+      acc1Key,
     );
 
     // invalid (inexact) fee must fail
     try {
       await client.broadcast.createTestAccount(
         { password, metadata, creator, username: "pollen-foo", fee: "1.111 HIVE" },
-        acc1Key
+        acc1Key,
       );
       assert(false, "should not be reached");
     } catch (error: any) {
-      assert.equal(
-        error.message,
-        "Fee must be exactly " + creationFee.toString()
-      );
+      assert.equal(error.message, "Fee must be exactly " + creationFee.toString());
     }
   }, 120000);
 
-  it("should change recovery account", async function() {
+  it("should change recovery account", async function () {
     if (!acc1 || !acc2) {
-        console.warn('Skipping change recovery account test due to missing testnet accounts');
-        return;
+      console.warn("Skipping change recovery account test due to missing testnet accounts");
+      return;
     }
     const op: ds.ChangeRecoveryAccountOperation = [
       "change_recovery_account",
       {
         account_to_recover: acc1.username,
         new_recovery_account: acc2.username,
-        extensions: []
-      }
+        extensions: [],
+      },
     ];
     const key = PrivateKey.fromLogin(acc1.username, acc1.password, "owner");
     await client.broadcast.sendOperations([op], key);
   }, 60000);
 
-  it("should report overproduction", async function() {
+  it("should report overproduction", async function () {
     if (!acc1) {
-        console.warn('Skipping report overproduction test due to missing testnet accounts');
-        return;
+      console.warn("Skipping report overproduction test due to missing testnet accounts");
+      return;
     }
     const b1 = await client.database.getBlock(10);
     const b2 = await client.database.getBlock(11);
@@ -349,17 +329,14 @@ describe("operations", function() {
       {
         reporter: acc1.username,
         first_block: b1,
-        second_block: b2
-      }
+        second_block: b2,
+      },
     ];
     try {
       await client.broadcast.sendOperations([op], acc1Key);
       assert(false);
     } catch (error: any) {
-      assert.equal(
-        error.message,
-        "first_block.signee() == second_block.signee(): "
-      );
+      assert.equal(error.message, "first_block.signee() == second_block.signee(): ");
     }
   }, 60000);
 });

@@ -33,24 +33,26 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import assert from 'assert'
-import { RPCError } from './errors.js'
-import packageVersion from './version.js'
+import assert from "assert";
+import { RPCError } from "./errors.js";
+import packageVersion from "./version.js";
 
-import { Blockchain } from './helpers/blockchain.js'
-import { BroadcastAPI } from './helpers/broadcast.js'
-import { DatabaseAPI } from './helpers/database.js'
-import { HivemindAPI } from './helpers/hivemind.js'
-import {AccountByKeyAPI} from './helpers/key.js'
-import { RCAPI } from './helpers/rc.js'
-import {TransactionStatusAPI} from './helpers/transaction.js'
-import { NodeHealthTracker, HealthTrackerOptions } from './health-tracker.js'
+import { Blockchain } from "./helpers/blockchain.js";
+import { BroadcastAPI } from "./helpers/broadcast.js";
+import { DatabaseAPI } from "./helpers/database.js";
+import { HivemindAPI } from "./helpers/hivemind.js";
+import { AccountByKeyAPI } from "./helpers/key.js";
+import { RCAPI } from "./helpers/rc.js";
+import { TransactionStatusAPI } from "./helpers/transaction.js";
+import { NodeHealthTracker, HealthTrackerOptions } from "./health-tracker.js";
 import {
-    copy,
-    exponentialBackoffWithJitter,
-    retryingFetch,
-    waitForEvent
-} from './utils.js'
+  copy,
+  exponentialBackoffWithJitter,
+  retryingFetch,
+  waitForEvent,
+  fromHex,
+  toHex,
+} from "./utils.js";
 
 /**
  * Published Pollen package version.
@@ -66,7 +68,7 @@ import {
  * console.log(`Running Pollen ${VERSION}`)
  * ```
  */
-export const VERSION = packageVersion
+export const VERSION = packageVersion;
 
 /**
  * Main Hive network chain id as a 32-byte buffer.
@@ -80,13 +82,12 @@ export const VERSION = packageVersion
  * ```ts
  * import { DEFAULT_CHAIN_ID } from '@srbde/pollen'
  *
- * console.log(DEFAULT_CHAIN_ID.toString('hex'))
+ * console.log(toHex(DEFAULT_CHAIN_ID))
  * ```
  */
-export const DEFAULT_CHAIN_ID = Buffer.from(
-    'beeab0de00000000000000000000000000000000000000000000000000000000',
-    'hex'
-)
+export const DEFAULT_CHAIN_ID = fromHex(
+  "beeab0de00000000000000000000000000000000000000000000000000000000",
+);
 
 /**
  * Main Hive network public-key address prefix.
@@ -95,55 +96,55 @@ export const DEFAULT_CHAIN_ID = Buffer.from(
  * Hive-compatible public keys are rendered with a network prefix. Mainnet uses
  * `STM`, and custom networks can override this through {@link ClientOptions}.
  */
-export const DEFAULT_ADDRESS_PREFIX = 'STM'
+export const DEFAULT_ADDRESS_PREFIX = "STM";
 
 interface RPCRequest {
-    /**
-     * Request sequence number.
-     */
-    id: number | string
-    /**
-     * RPC method.
-     */
-    method: 'call' | 'notice' | 'callback'
-    /**
-     * Array of parameters to pass to the method.
-     */
-    jsonrpc: '2.0'
-    params: any[]
+  /**
+   * Request sequence number.
+   */
+  id: number | string;
+  /**
+   * RPC method.
+   */
+  method: "call" | "notice" | "callback";
+  /**
+   * Array of parameters to pass to the method.
+   */
+  jsonrpc: "2.0";
+  params: any[];
 }
 
 interface RPCCall extends RPCRequest {
-    method: 'call' | any
-    /**
-     * 1. API to call, you can pass either the numerical id of the API you get
-     *    from calling 'get_api_by_name' or the name directly as a string.
-     * 2. Method to call on that API.
-     * 3. Arguments to pass to the method.
-     */
-    params: [number | string, string, any[]]
+  method: "call" | any;
+  /**
+   * 1. API to call, you can pass either the numerical id of the API you get
+   *    from calling 'get_api_by_name' or the name directly as a string.
+   * 2. Method to call on that API.
+   * 3. Arguments to pass to the method.
+   */
+  params: [number | string, string, any[]];
 }
 
 interface RPCErrorData {
-    code: number
-    message: string
-    data?: any
+  code: number;
+  message: string;
+  data?: any;
 }
 
 interface RPCResponse {
-    /**
-     * Response sequence number, corresponding to request sequence number.
-     */
-    id: number
-    error?: RPCErrorData
-    result?: any
+  /**
+   * Response sequence number, corresponding to request sequence number.
+   */
+  id: number;
+  error?: RPCErrorData;
+  result?: any;
 }
 
 interface PendingRequest {
-    request: RPCRequest
-    timer: NodeJS.Timer | undefined
-    resolve: (response: any) => void
-    reject: (error: Error) => void
+  request: RPCRequest;
+  timer: NodeJS.Timer | undefined;
+  resolve: (response: any) => void;
+  reject: (error: Error) => void;
 }
 
 /**
@@ -170,56 +171,56 @@ interface PendingRequest {
  * ```
  */
 export interface ClientOptions {
-    /**
-     * Hive chain id. Defaults to main hive network:
-     * need the new id?
-     * `beeab0de00000000000000000000000000000000000000000000000000000000`
-     *
-     */
-    chainId?: string
-    /**
-     * Hive address prefix. Defaults to main network:
-     * `STM`
-     */
-    addressPrefix?: string
-    /**
-     * Send timeout, how long to wait in milliseconds before giving
-     * up on a rpc call. Note that this is not an exact timeout,
-     * no in-flight requests will be aborted, they will just not
-     * be retried any more past the timeout.
-     * Can be set to 0 to retry forever. Defaults to 60 * 1000 ms.
-     */
-    timeout?: number
+  /**
+   * Hive chain id. Defaults to main hive network:
+   * need the new id?
+   * `beeab0de00000000000000000000000000000000000000000000000000000000`
+   *
+   */
+  chainId?: string;
+  /**
+   * Hive address prefix. Defaults to main network:
+   * `STM`
+   */
+  addressPrefix?: string;
+  /**
+   * Send timeout, how long to wait in milliseconds before giving
+   * up on a rpc call. Note that this is not an exact timeout,
+   * no in-flight requests will be aborted, they will just not
+   * be retried any more past the timeout.
+   * Can be set to 0 to retry forever. Defaults to 60 * 1000 ms.
+   */
+  timeout?: number;
 
-    /**
-     * Specifies the amount of times the urls (RPC nodes) should be
-     * iterated and retried in case of timeout errors.
-     * (important) Requires url parameter to be an array (string[])!
-     * Can be set to 0 to iterate and retry forever. Defaults to 3 rounds.
-     */
-    failoverThreshold?: number
+  /**
+   * Specifies the amount of times the urls (RPC nodes) should be
+   * iterated and retried in case of timeout errors.
+   * (important) Requires url parameter to be an array (string[])!
+   * Can be set to 0 to iterate and retry forever. Defaults to 3 rounds.
+   */
+  failoverThreshold?: number;
 
-    /**
-     * Whether a console.log should be made when RPC failed over to another one
-     */
-    consoleOnFailover?: boolean
+  /**
+   * Whether a console.log should be made when RPC failed over to another one
+   */
+  consoleOnFailover?: boolean;
 
-    /**
-     * Retry backoff function, returns milliseconds. Defaults to Pollen's
-     * jittered exponential backoff.
-     */
-    backoff?: (tries: number) => number
-    /**
-     * Node.js http(s) agent, use if you want http keep-alive.
-     * Defaults to using https.globalAgent.
-     * @see https://nodejs.org/api/http.html#http_new_agent_options.
-     */
-    agent?: any // https.Agent
-    /**
-     * Options for the node health tracker.
-     * Controls cooldown periods, stale block thresholds, etc.
-     */
-    healthTrackerOptions?: HealthTrackerOptions
+  /**
+   * Retry backoff function, returns milliseconds. Defaults to Pollen's
+   * jittered exponential backoff.
+   */
+  backoff?: (tries: number) => number;
+  /**
+   * Node.js http(s) agent, use if you want http keep-alive.
+   * Defaults to using https.globalAgent.
+   * @see https://nodejs.org/api/http.html#http_new_agent_options.
+   */
+  agent?: any; // https.Agent
+  /**
+   * Options for the node health tracker.
+   * Controls cooldown periods, stale block thresholds, etc.
+   */
+  healthTrackerOptions?: HealthTrackerOptions;
 }
 
 /**
@@ -246,339 +247,328 @@ export interface ClientOptions {
  * @see {@link RPCError}
  */
 export class Client {
-    /**
-     * Client options, *read-only*.
-     */
-    public readonly options: ClientOptions
+  /**
+   * Client options, *read-only*.
+   */
+  public readonly options: ClientOptions;
 
-    /**
-     * Address to Hive RPC server.
-     * String or String[] *read-only*
-     */
-    public address: string | string[]
+  /**
+   * Address to Hive RPC server.
+   * String or String[] *read-only*
+   */
+  public address: string | string[];
 
-    /**
-     * Database API helper.
-     */
-    public readonly database: DatabaseAPI
+  /**
+   * Database API helper.
+   */
+  public readonly database: DatabaseAPI;
 
-    /**
-     * RC API helper.
-     */
-    public readonly rc: RCAPI
+  /**
+   * RC API helper.
+   */
+  public readonly rc: RCAPI;
 
-    /**
-     * Broadcast API helper.
-     */
-    public readonly broadcast: BroadcastAPI
+  /**
+   * Broadcast API helper.
+   */
+  public readonly broadcast: BroadcastAPI;
 
-    /**
-     * Blockchain helper.
-     */
-    public readonly blockchain: Blockchain
+  /**
+   * Blockchain helper.
+   */
+  public readonly blockchain: Blockchain;
 
-    /**
-     * Hivemind helper.
-     */
-    public readonly hivemind: HivemindAPI
+  /**
+   * Hivemind helper.
+   */
+  public readonly hivemind: HivemindAPI;
 
-    /**
-     * Accounts by key API helper.
-     */
-    public readonly keys: AccountByKeyAPI
+  /**
+   * Accounts by key API helper.
+   */
+  public readonly keys: AccountByKeyAPI;
 
-    /**
-     * Transaction status API helper.
-     */
-    public readonly transaction: TransactionStatusAPI
+  /**
+   * Transaction status API helper.
+   */
+  public readonly transaction: TransactionStatusAPI;
 
-    /**
-     * Node health tracker for smart failover.
-     * Tracks per-node, per-API health and head block freshness.
-     */
-    public readonly healthTracker: NodeHealthTracker
+  /**
+   * Node health tracker for smart failover.
+   * Tracks per-node, per-API health and head block freshness.
+   */
+  public readonly healthTracker: NodeHealthTracker;
 
-    /**
-     * Chain ID for current network.
-     */
-    public readonly chainId: Buffer
+  /**
+   * Chain ID for current network.
+   */
+  public readonly chainId: Uint8Array;
 
-    /**
-     * Address prefix for current network.
-     */
-    public readonly addressPrefix: string
+  /**
+   * Address prefix for current network.
+   */
+  public readonly addressPrefix: string;
 
-    private timeout: number
-    private backoff: typeof defaultBackoff
+  private timeout: number;
+  private backoff: typeof defaultBackoff;
 
-    private failoverThreshold: number
+  private failoverThreshold: number;
 
-    private consoleOnFailover: boolean
+  private consoleOnFailover: boolean;
 
-    public currentAddress: string
+  public currentAddress: string;
 
-    /**
-     * Creates a client for one or more Hive RPC endpoints.
-     *
-     * @param address - RPC endpoint URL or ordered failover list. For example,
-     * `https://api.hive.blog` or `['https://api.hive.blog', 'https://api.openhive.network']`.
-     * @param options - Network identity and resilience settings.
-     *
-     * @remarks
-     * The first endpoint becomes the active node. When calls fail, Pollen uses
-     * the configured backoff and health tracker to move across the endpoint
-     * list without requiring callers to recreate helper objects.
-     *
-     * @throws AssertionError
-     * Thrown when `options.chainId` is not exactly 32 bytes after hex decoding.
-     *
-     * @example
-     * ```ts
-     * import { Client } from '@srbde/pollen'
-     *
-     * const client = new Client(
-     *   ['https://api.hive.blog', 'https://api.deathwing.me'],
-     *   { timeout: 30_000, failoverThreshold: 2 }
-     * )
-     *
-     * const accounts = await client.database.getAccounts(['srbde'])
-     * console.log(accounts[0].balance)
-     * ```
-     */
-    constructor(address: string | string[], options: ClientOptions = {}) {
-        this.currentAddress = Array.isArray(address) ? address[0] : address
-        this.address = address
-        this.options = options
+  /**
+   * Creates a client for one or more Hive RPC endpoints.
+   *
+   * @param address - RPC endpoint URL or ordered failover list. For example,
+   * `https://api.hive.blog` or `['https://api.hive.blog', 'https://api.openhive.network']`.
+   * @param options - Network identity and resilience settings.
+   *
+   * @remarks
+   * The first endpoint becomes the active node. When calls fail, Pollen uses
+   * the configured backoff and health tracker to move across the endpoint
+   * list without requiring callers to recreate helper objects.
+   *
+   * @throws AssertionError
+   * Thrown when `options.chainId` is not exactly 32 bytes after hex decoding.
+   *
+   * @example
+   * ```ts
+   * import { Client } from '@srbde/pollen'
+   *
+   * const client = new Client(
+   *   ['https://api.hive.blog', 'https://api.deathwing.me'],
+   *   { timeout: 30_000, failoverThreshold: 2 }
+   * )
+   *
+   * const accounts = await client.database.getAccounts(['srbde'])
+   * console.log(accounts[0].balance)
+   * ```
+   */
+  constructor(address: string | string[], options: ClientOptions = {}) {
+    this.currentAddress = Array.isArray(address) ? address[0] : address;
+    this.address = address;
+    this.options = options;
 
-        this.chainId = options.chainId
-            ? Buffer.from(options.chainId, 'hex')
-            : DEFAULT_CHAIN_ID
-        assert.equal(this.chainId.length, 32, 'invalid chain id')
-        this.addressPrefix = options.addressPrefix || DEFAULT_ADDRESS_PREFIX
+    this.chainId = options.chainId ? fromHex(options.chainId) : DEFAULT_CHAIN_ID;
+    assert.equal(this.chainId.length, 32, "invalid chain id");
+    this.addressPrefix = options.addressPrefix || DEFAULT_ADDRESS_PREFIX;
 
-        this.timeout = options.timeout || 60 * 1000
-        this.backoff = options.backoff || defaultBackoff
-        this.failoverThreshold = options.failoverThreshold || 3
-        this.consoleOnFailover = options.consoleOnFailover || false
+    this.timeout = options.timeout || 60 * 1000;
+    this.backoff = options.backoff || defaultBackoff;
+    this.failoverThreshold = options.failoverThreshold || 3;
+    this.consoleOnFailover = options.consoleOnFailover || false;
 
-        this.healthTracker = new NodeHealthTracker(options.healthTrackerOptions)
-        this.database = new DatabaseAPI(this)
-        this.broadcast = new BroadcastAPI(this)
-        this.blockchain = new Blockchain(this)
-        this.rc = new RCAPI(this)
-        this.hivemind = new HivemindAPI(this)
-        this.keys = new AccountByKeyAPI(this)
-        this.transaction = new TransactionStatusAPI(this)
+    this.healthTracker = new NodeHealthTracker(options.healthTrackerOptions);
+    this.database = new DatabaseAPI(this);
+    this.broadcast = new BroadcastAPI(this);
+    this.blockchain = new Blockchain(this);
+    this.rc = new RCAPI(this);
+    this.hivemind = new HivemindAPI(this);
+    this.keys = new AccountByKeyAPI(this);
+    this.transaction = new TransactionStatusAPI(this);
+  }
+
+  /**
+   * Creates a client preconfigured for the public Hive testnet.
+   *
+   * @param options - Optional client settings copied into the testnet
+   * configuration.
+   * @returns A {@link Client} targeting `https://api.fake.openhive.network`
+   * with the testnet chain id.
+   *
+   * @remarks
+   * This helper preserves transport options such as custom HTTP agents while
+   * replacing chain identity values so test transactions cannot be confused
+   * with mainnet signatures.
+   *
+   * @example
+   * ```ts
+   * import { Client } from '@srbde/pollen'
+   *
+   * const testnet = Client.testnet({ timeout: 20_000 })
+   * const props = await testnet.database.getDynamicGlobalProperties()
+   * console.log(props.head_block_number)
+   * ```
+   */
+  public static testnet(options?: ClientOptions) {
+    let opts: ClientOptions = {};
+    if (options) {
+      opts = copy(options);
+      opts.agent = options.agent;
     }
 
-    /**
-     * Creates a client preconfigured for the public Hive testnet.
-     *
-     * @param options - Optional client settings copied into the testnet
-     * configuration.
-     * @returns A {@link Client} targeting `https://api.fake.openhive.network`
-     * with the testnet chain id.
-     *
-     * @remarks
-     * This helper preserves transport options such as custom HTTP agents while
-     * replacing chain identity values so test transactions cannot be confused
-     * with mainnet signatures.
-     *
-     * @example
-     * ```ts
-     * import { Client } from '@srbde/pollen'
-     *
-     * const testnet = Client.testnet({ timeout: 20_000 })
-     * const props = await testnet.database.getDynamicGlobalProperties()
-     * console.log(props.head_block_number)
-     * ```
-     */
-    public static testnet(options?: ClientOptions) {
-        let opts: ClientOptions = {}
-        if (options) {
-            opts = copy(options)
-            opts.agent = options.agent
-        }
+    opts.addressPrefix = "STM";
+    opts.chainId = "4200000000000000000000000000000000000000000000000000000000000000";
+    return new Client("https://api.fake.openhive.network", opts);
+  }
 
-        opts.addressPrefix = 'STM'
-        opts.chainId = '4200000000000000000000000000000000000000000000000000000000000000'
-        return new Client('https://api.fake.openhive.network', opts)
+  /**
+   * Sends a JSON-RPC request through the configured failover transport.
+   *
+   * @param api - API namespace to call, such as `condenser_api`.
+   * @param method - Method within the API namespace, such as
+   * `get_dynamic_global_properties`.
+   * @param params - Positional RPC parameters. Defaults to an empty array.
+   * @returns The decoded `result` member returned by the RPC node.
+   *
+   * @remarks
+   * The transport serializes Buffers as Hive-compatible hex strings, applies
+   * jittered retry backoff, tracks API-specific node failures, and passively
+   * records head-block freshness from `get_dynamic_global_properties`
+   * responses. Broadcast calls skip the short per-fetch timeout because they
+   * must not be retried as aggressively as read-only calls.
+   *
+   * @throws RPCError
+   * Thrown when the node returns a JSON-RPC error. The `info` property carries
+   * the original error data when the node provides it.
+   * @throws AssertionError
+   * Thrown when the response id does not match the request id.
+   *
+   * @example
+   * ```ts
+   * import { Client } from '@srbde/pollen'
+   *
+   * const client = new Client('https://api.hive.blog')
+   * const config = await client.call('condenser_api', 'get_config')
+   *
+   * console.log(config.HIVE_BLOCK_INTERVAL)
+   * ```
+   *
+   * @see {@link retryingFetch}
+   * @see {@link NodeHealthTracker}
+   */
+  public async call(api: string, method: string, params: any = []): Promise<any> {
+    const isBroadcast =
+      api === "network_broadcast_api" || method.startsWith("broadcast_transaction");
+
+    const request: RPCCall = {
+      id: 0,
+      jsonrpc: "2.0",
+      method: api + "." + method,
+      params,
+    };
+    const body = JSON.stringify(request, (key, value) => {
+      // encode bytes as hex strings instead of an array of bytes
+      if (value instanceof Uint8Array) {
+        return toHex(value);
+      }
+      return value;
+    });
+    const opts: any = {
+      body,
+      cache: "no-cache",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      mode: "cors",
+    };
+
+    // Self is not defined within Node environments
+    // This check is needed because the user agent cannot be set in a browser
+    if (typeof self === undefined) {
+      opts.headers = {
+        "User-Agent": `pollen/${packageVersion}`,
+      };
     }
 
-    /**
-     * Sends a JSON-RPC request through the configured failover transport.
-     *
-     * @param api - API namespace to call, such as `condenser_api`.
-     * @param method - Method within the API namespace, such as
-     * `get_dynamic_global_properties`.
-     * @param params - Positional RPC parameters. Defaults to an empty array.
-     * @returns The decoded `result` member returned by the RPC node.
-     *
-     * @remarks
-     * The transport serializes Buffers as Hive-compatible hex strings, applies
-     * jittered retry backoff, tracks API-specific node failures, and passively
-     * records head-block freshness from `get_dynamic_global_properties`
-     * responses. Broadcast calls skip the short per-fetch timeout because they
-     * must not be retried as aggressively as read-only calls.
-     *
-     * @throws RPCError
-     * Thrown when the node returns a JSON-RPC error. The `info` property carries
-     * the original error data when the node provides it.
-     * @throws AssertionError
-     * Thrown when the response id does not match the request id.
-     *
-     * @example
-     * ```ts
-     * import { Client } from '@srbde/pollen'
-     *
-     * const client = new Client('https://api.hive.blog')
-     * const config = await client.call('condenser_api', 'get_config')
-     *
-     * console.log(config.HIVE_BLOCK_INTERVAL)
-     * ```
-     *
-     * @see {@link retryingFetch}
-     * @see {@link NodeHealthTracker}
-     */
-    public async call(
-        api: string,
-        method: string,
-        params: any = []
-    ): Promise<any> {
-        const isBroadcast =
-            api === 'network_broadcast_api' ||
-            method.startsWith('broadcast_transaction')
-
-        const request: RPCCall = {
-            id: 0,
-            jsonrpc: '2.0',
-            method: api + '.' + method,
-            params
-        }
-        const body = JSON.stringify(request, (key, value) => {
-            // encode Buffers as hex strings instead of an array of bytes
-            if (value && typeof value === 'object' && value.type === 'Buffer') {
-                return Buffer.from(value.data).toString('hex')
-            }
-            return value
-        })
-        const opts: any = {
-            body,
-            cache: 'no-cache',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            mode: 'cors',
-        }
-
-        // Self is not defined within Node environments
-        // This check is needed because the user agent cannot be set in a browser
-        if (typeof self === undefined) {
-            opts.headers = {
-                'User-Agent': `pollen/${packageVersion}`
-            }
-        }
-
-        if (this.options.agent) {
-            opts.agent = this.options.agent
-        }
-        let fetchTimeout: any
-        if (!isBroadcast) {
-            // bit of a hack to work around some nodes high error rates
-            // only effective in node.js (until timeout spec lands in browsers)
-            fetchTimeout = (tries: number) => (tries + 1) * 500
-        }
-
-        const { response, currentAddress }: { response: RPCResponse; currentAddress: string } =
-            await retryingFetch(
-                this.currentAddress,
-                this.address,
-                opts,
-                this.timeout,
-                this.failoverThreshold,
-                this.consoleOnFailover,
-                this.backoff,
-                fetchTimeout,
-                {
-                    healthTracker: this.healthTracker,
-                    api,
-                    isBroadcast,
-                    consoleOnFailover: this.consoleOnFailover,
-                }
-            )
-
-        // After failover, change the currently active address
-        if (currentAddress !== this.currentAddress) { this.currentAddress = currentAddress }
-
-        // Passively track head block from get_dynamic_global_properties responses.
-        // This costs nothing — we just inspect data we already fetched.
-        if (
-            response.result &&
-            method === 'get_dynamic_global_properties' &&
-            response.result.head_block_number
-        ) {
-            this.healthTracker.updateHeadBlock(
-                currentAddress,
-                response.result.head_block_number
-            )
-        }
-
-        // Handle RPC-level errors.
-        // Unlike network errors, these mean the node responded but returned an error.
-        // We record it as an API-specific failure so the health tracker can
-        // deprioritize this node for this API in future calls.
-        if (response.error) {
-            const formatValue = (value: any) => {
-                switch (typeof value) {
-                    case 'object':
-                        return JSON.stringify(value)
-                    default:
-                        return String(value)
-                }
-            }
-            const { data } = response.error
-            let { message } = response.error
-            if (data && data.stack && data.stack.length > 0) {
-                const top = data.stack[0]
-                const topData = copy(top.data)
-                message = top.format.replace(
-                    /\$\{([a-z_]+)\}/gi,
-                    (match: string, key: string) => {
-                        let rv = match
-                        if (topData[key]) {
-                            rv = formatValue(topData[key])
-                            delete topData[key]
-                        }
-                        return rv
-                    }
-                )
-                const unformattedData = Object.keys(topData)
-                    .map((key) => ({ key, value: formatValue(topData[key]) }))
-                    .map((item) => `${item.key}=${item.value}`)
-                if (unformattedData.length > 0) {
-                    message += ' ' + unformattedData.join(' ')
-                }
-            }
-
-            // Track RPC errors that indicate node/plugin issues (not user errors).
-            // JSON-RPC error codes (response.error.code):
-            //   -32601 = Method not found (plugin not enabled on this node)
-            //   -32603 = Internal error (node issue)
-            //   -32003 = Hive assertion error (user error — bad params, invalid account)
-            // Only API/plugin errors should be tracked, and only as API-specific failures
-            // (not global node failures) since other APIs on this node may work fine.
-            const rpcCode = response.error.code
-            if (rpcCode === -32601 || rpcCode === -32603) {
-                this.healthTracker.recordApiFailure(currentAddress, api)
-            }
-
-            throw new RPCError(message, data)
-        }
-        assert.equal(response.id, request.id, 'got invalid response id')
-        return response.result
+    if (this.options.agent) {
+      opts.agent = this.options.agent;
     }
+    let fetchTimeout: any;
+    if (!isBroadcast) {
+      // bit of a hack to work around some nodes high error rates
+      // only effective in node.js (until timeout spec lands in browsers)
+      fetchTimeout = (tries: number) => (tries + 1) * 500;
+    }
+
+    const { response, currentAddress }: { response: RPCResponse; currentAddress: string } =
+      await retryingFetch(
+        this.currentAddress,
+        this.address,
+        opts,
+        this.timeout,
+        this.failoverThreshold,
+        this.consoleOnFailover,
+        this.backoff,
+        fetchTimeout,
+        {
+          healthTracker: this.healthTracker,
+          api,
+          isBroadcast,
+          consoleOnFailover: this.consoleOnFailover,
+        },
+      );
+
+    // After failover, change the currently active address
+    if (currentAddress !== this.currentAddress) {
+      this.currentAddress = currentAddress;
+    }
+
+    // Passively track head block from get_dynamic_global_properties responses.
+    // This costs nothing — we just inspect data we already fetched.
+    if (
+      response.result &&
+      method === "get_dynamic_global_properties" &&
+      response.result.head_block_number
+    ) {
+      this.healthTracker.updateHeadBlock(currentAddress, response.result.head_block_number);
+    }
+
+    // Handle RPC-level errors.
+    // Unlike network errors, these mean the node responded but returned an error.
+    // We record it as an API-specific failure so the health tracker can
+    // deprioritize this node for this API in future calls.
+    if (response.error) {
+      const formatValue = (value: any) => {
+        switch (typeof value) {
+          case "object":
+            return JSON.stringify(value);
+          default:
+            return String(value);
+        }
+      };
+      const { data } = response.error;
+      let { message } = response.error;
+      if (data && data.stack && data.stack.length > 0) {
+        const top = data.stack[0];
+        const topData = copy(top.data);
+        message = top.format.replace(/\$\{([a-z_]+)\}/gi, (match: string, key: string) => {
+          let rv = match;
+          if (topData[key]) {
+            rv = formatValue(topData[key]);
+            delete topData[key];
+          }
+          return rv;
+        });
+        const unformattedData = Object.keys(topData)
+          .map((key) => ({ key, value: formatValue(topData[key]) }))
+          .map((item) => `${item.key}=${item.value}`);
+        if (unformattedData.length > 0) {
+          message += " " + unformattedData.join(" ");
+        }
+      }
+
+      // Track RPC errors that indicate node/plugin issues (not user errors).
+      // JSON-RPC error codes (response.error.code):
+      //   -32601 = Method not found (plugin not enabled on this node)
+      //   -32603 = Internal error (node issue)
+      //   -32003 = Hive assertion error (user error — bad params, invalid account)
+      // Only API/plugin errors should be tracked, and only as API-specific failures
+      // (not global node failures) since other APIs on this node may work fine.
+      const rpcCode = response.error.code;
+      if (rpcCode === -32601 || rpcCode === -32603) {
+        this.healthTracker.recordApiFailure(currentAddress, api);
+      }
+
+      throw new RPCError(message, data);
+    }
+    assert.equal(response.id, request.id, "got invalid response id");
+    return response.result;
+  }
 }
 
 /**
@@ -596,5 +586,4 @@ export class Client {
  * const delayMs = defaultBackoff(3)
  * ```
  */
-const defaultBackoff = (tries: number): number =>
-    exponentialBackoffWithJitter(tries)
+const defaultBackoff = (tries: number): number => exponentialBackoffWithJitter(tries);

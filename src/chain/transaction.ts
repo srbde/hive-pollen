@@ -33,7 +33,7 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
-import { Operation } from './operation.js'
+import { Operation } from "./operation.js";
 
 /**
  * Unsigned Hive transaction ready for serialization and signing.
@@ -55,27 +55,27 @@ import { Operation } from './operation.js'
  * ```
  */
 export interface Transaction {
-    /**
-     * Lower 16 bits of the referenced head block number.
-     */
-    ref_block_num: number
-    /**
-     * Prefix extracted from the referenced block id.
-     */
-    ref_block_prefix: number
-    /**
-     * UTC expiration timestamp without a trailing timezone suffix.
-     */
-    expiration: string
-    /**
-     * Ordered operation list executed atomically by the chain.
-     */
-    operations: Operation[]
-    /**
-     * Transaction extension values. Hive currently expects this to be empty for
-     * the operations supported by Pollen.
-     */
-    extensions: any[]
+  /**
+   * Lower 16 bits of the referenced head block number.
+   */
+  ref_block_num: number;
+  /**
+   * Prefix extracted from the referenced block id.
+   */
+  ref_block_prefix: number;
+  /**
+   * UTC expiration timestamp without a trailing timezone suffix.
+   */
+  expiration: string;
+  /**
+   * Ordered operation list executed atomically by the chain.
+   */
+  operations: Operation[];
+  /**
+   * Transaction extension values. Hive currently expects this to be empty for
+   * the operations supported by Pollen.
+   */
+  extensions: any[];
 }
 
 /**
@@ -92,10 +92,10 @@ export interface Transaction {
  * ```
  */
 export interface SignedTransaction extends Transaction {
-    /**
-     * Hex-encoded recoverable signatures.
-     */
-    signatures: string[]
+  /**
+   * Hex-encoded recoverable signatures.
+   */
+  signatures: string[];
 }
 
 /**
@@ -112,20 +112,20 @@ export interface SignedTransaction extends Transaction {
  * ```
  */
 export interface TransactionConfirmation {
-    /**
-     * Transaction id.
-     */
-    id: string // transaction_id_type
-    /**
-     * Block number that accepted the transaction.
-     */
-    block_num: number // int32_t
-    /**
-     * Transaction index within the accepting block.
-     */
-    trx_num: number // int32_t
-    /**
-     * Whether the node considered the transaction expired.
-     */
-    expired: boolean
+  /**
+   * Transaction id.
+   */
+  id: string; // transaction_id_type
+  /**
+   * Block number that accepted the transaction.
+   */
+  block_num: number; // int32_t
+  /**
+   * Transaction index within the accepting block.
+   */
+  trx_num: number; // int32_t
+  /**
+   * Whether the node considered the transaction expired.
+   */
+  expired: boolean;
 }
