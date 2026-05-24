@@ -23,9 +23,6 @@ importers:
       cross-fetch:
         specifier: ^4.1.0
         version: 4.1.0
-      jsbi:
-        specifier: ^4.3.2
-        version: 4.3.2
       node-fetch:
         specifier: ^2.7.0
         version: 2.7.0
@@ -1636,9 +1633,6 @@ packages:
 
   js-tokens@10.0.0:
     resolution: {integrity: sha512-lM/UBzQmfJRo9ABXbPWemivdCW8V2G8FHaHdypQaIy523snUjog0W71ayWXTjiR+ixeMyVHN2XcpnTd/liPg/Q==}
-
-  jsbi@4.3.2:
-    resolution: {integrity: sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew==}
 
   lightningcss-android-arm64@1.32.0:
     resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
@@ -3648,8 +3642,6 @@ snapshots:
       istanbul-lib-report: 3.0.1
 
   js-tokens@10.0.0: {}
-
-  jsbi@4.3.2: {}
 
   lightningcss-android-arm64@1.32.0:
     optional: true

@@ -140,21 +140,21 @@ export class BinaryWriter {
     this.cursor += 4
   }
 
-  public writeInt64(value: number | string | JSBI) {
+  public writeInt64(value: number | string | bigint) {
     this.ensureCapacity(8)
-    const val = JSBI.BigInt(value.toString())
-    const low = JSBI.toNumber(JSBI.bitwiseAnd(val, JSBI.BigInt(0xffffffff)))
-    const high = JSBI.toNumber(JSBI.signedRightShift(val, JSBI.BigInt(32)))
+    const val = BigInt(value.toString())
+    const low = Number(val & 0xffffffffn)
+    const high = Number(val >> 32n)
     new DataView(this.buffer.buffer).setUint32(this.cursor, low, true)
     new DataView(this.buffer.buffer).setUint32(this.cursor + 4, high, true)
     this.cursor += 8
   }
 
-  public writeUint64(value: number | string | JSBI) {
+  public writeUint64(value: number | string | bigint) {
     this.ensureCapacity(8)
-    const val = JSBI.BigInt(value.toString())
-    const low = JSBI.toNumber(JSBI.bitwiseAnd(val, JSBI.BigInt(0xffffffff)))
-    const high = JSBI.toNumber(JSBI.signedRightShift(val, JSBI.BigInt(32)))
+    const val = BigInt(value.toString())
+    const low = Number(val & 0xffffffffn)
+    const high = Number(val >> 32n)
     new DataView(this.buffer.buffer).setUint32(this.cursor, low, true)
     new DataView(this.buffer.buffer).setUint32(this.cursor + 4, high, true)
     this.cursor += 8
@@ -238,17 +238,14 @@ export class BinaryReader {
     return val
   }
 
-  public readInt64(): JSBI {
-    const low = this.view.getUint32(this.cursor, true)
-    const high = this.view.getUint32(this.cursor + 4, true)
+  public readInt64(): bigint {
+    const low = BigInt(this.view.getUint32(this.cursor, true))
+    const high = BigInt(this.view.getUint32(this.cursor + 4, true))
     this.cursor += 8
-    return JSBI.add(
-      JSBI.BigInt(low),
-      JSBI.leftShift(JSBI.BigInt(high), JSBI.BigInt(32))
-    )
+    return low + (high << 32n)
   }
 
-  public readUint64(): JSBI {
+  public readUint64(): bigint {
     return this.readInt64()
   }
 
@@ -760,7 +757,6 @@ export const buildWitnessUpdateOp = (
   return ['witness_set_properties', data]
 }
 
-import JSBI from 'jsbi'
 /**
  * Mapping from Hive operation names to protocol operation ids.
  *
@@ -874,8 +870,7 @@ export const operationOrders = {
  *
  * @remarks
  * Hive splits operation history filters across two 64-bit masks. Pollen uses
- * JSBI so the mask is reliable in browsers that lack native bigint support in
- * older targets.
+ * native BigInt so the mask is reliable in all modern environments.
  *
  * @example
  * ```ts
@@ -889,31 +884,25 @@ export const operationOrders = {
  */
 export function makeBitMaskFilter(allowedOperations: number[]) {
   return allowedOperations
-    .reduce(redFunction, [JSBI.BigInt(0), JSBI.BigInt(0)])
+    .reduce(redFunction, [0n, 0n])
     .map((value) =>
-      JSBI.notEqual(value, JSBI.BigInt(0)) ? value.toString() : null
+      value !== 0n ? value.toString() : null
     )
 }
 
 const redFunction = (
-  [low, high]: [JSBI, JSBI],
+  [low, high]: [bigint, bigint],
   allowedOperation: number
-): [JSBI, JSBI] => {
+): [bigint, bigint] => {
   if (allowedOperation < 64) {
     return [
-      JSBI.bitwiseOr(
-        low,
-        JSBI.leftShift(JSBI.BigInt(1), JSBI.BigInt(allowedOperation))
-      ),
+      low | (1n << BigInt(allowedOperation)),
       high
     ]
   } else {
     return [
       low,
-      JSBI.bitwiseOr(
-        high,
-        JSBI.leftShift(JSBI.BigInt(1), JSBI.BigInt(allowedOperation - 64))
-      )
+      high | (1n << BigInt(allowedOperation - 64))
     ]
   }
 }
