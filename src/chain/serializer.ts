@@ -39,6 +39,23 @@ import { Asset } from './asset.js'
 import { HexBuffer } from './misc.js'
 import { Operation } from './operation.js'
 
+/**
+ * Function signature for writing one Hive protocol value to a binary buffer.
+ *
+ * @param buffer - Destination binary writer.
+ * @param data - Value to serialize.
+ *
+ * @remarks
+ * Serializers are intentionally composable. Complex operation serializers are
+ * built by combining primitive serializers for numbers, strings, assets,
+ * public keys, arrays, options, and objects.
+ *
+ * @example
+ * ```ts
+ * const writer = new BinaryWriter()
+ * Types.String(writer, 'pollen')
+ * ```
+ */
 export type Serializer = (buffer: BinaryWriter, data: any) => void
 
 const VoidSerializer = (buffer: BinaryWriter) => {
@@ -96,8 +113,10 @@ const StaticVariantSerializer = (itemSerializers: Serializer[]) => (
 
 /**
  * Serialize asset.
- * @note This looses precision for amounts larger than 2^53-1/10^precision.
- *       Should not be a problem in real-word usage.
+ *
+ * @remarks
+ * This loses precision for amounts larger than 2^53-1/10^precision.
+ * Should not be a problem in real-world usage.
  */
 const AssetSerializer = (buffer: BinaryWriter, data: Asset | string | number) => {
   const asset = Asset.from(data).steem_symbols()
@@ -651,7 +670,29 @@ const EncryptedMemoSerializer = ObjectSerializer([
   ['encrypted', BinarySerializer()]
 ])
 
-
+/**
+ * Hive protocol serializer registry.
+ *
+ * @remarks
+ * `Types` is the internal engine behind transaction signing, transaction id
+ * generation, memo envelopes, and witness property encoding. Each member writes
+ * one Hive-compatible value into a {@link BinaryWriter}. The object is exported
+ * for advanced protocol tooling, but most applications should use higher-level
+ * helpers such as `client.broadcast`.
+ *
+ * @example
+ * ```ts
+ * const writer = new BinaryWriter()
+ * Types.Transaction(writer, transaction)
+ *
+ * const bytes = writer.getBuffer()
+ * ```
+ *
+ * @throws Error
+ * Individual serializers throw when a value cannot be represented in the
+ * expected Hive wire format, such as a binary field with the wrong byte length
+ * or an operation name with no registered serializer.
+ */
 export const Types = {
   Array: ArraySerializer,
   Asset: AssetSerializer,

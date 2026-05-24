@@ -6,7 +6,20 @@
 
 # Class: Authority
 
-Defined in: [src/chain/account.ts:45](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L45)
+Defined in: [src/chain/account.ts:74](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L74)
+
+Convenience wrapper for Hive owner, active, and posting authorities.
+
+## Remarks
+
+`Authority` can be created from a single public key for simple one-signature
+accounts or from a full weighted authority object for multisig setups.
+
+## Example
+
+```ts
+const posting = Authority.from(postingPublicKey)
+```
 
 ## Implements
 
@@ -16,15 +29,19 @@ Defined in: [src/chain/account.ts:45](https://github.com/TheCrazyGM/dhive/blob/b
 
 ### Constructor
 
-> **new Authority**(`__namedParameters`): `Authority`
+> **new Authority**(`authority`): `Authority`
 
-Defined in: [src/chain/account.ts:50](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L50)
+Defined in: [src/chain/account.ts:84](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L84)
+
+Creates an authority from explicit threshold and auth lists.
 
 #### Parameters
 
-##### \_\_namedParameters
+##### authority
 
 [`AuthorityType`](../interfaces/AuthorityType.md)
+
+Raw authority fields from Hive.
 
 #### Returns
 
@@ -36,7 +53,7 @@ Defined in: [src/chain/account.ts:50](https://github.com/TheCrazyGM/dhive/blob/b
 
 > **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L47)
+Defined in: [src/chain/account.ts:76](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L76)
 
 #### Implementation of
 
@@ -48,7 +65,7 @@ Defined in: [src/chain/account.ts:47](https://github.com/TheCrazyGM/dhive/blob/b
 
 > **key\_auths**: \[`string` \| [`PublicKey`](PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:48](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L48)
+Defined in: [src/chain/account.ts:77](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L77)
 
 #### Implementation of
 
@@ -60,7 +77,7 @@ Defined in: [src/chain/account.ts:48](https://github.com/TheCrazyGM/dhive/blob/b
 
 > **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L46)
+Defined in: [src/chain/account.ts:75](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L75)
 
 #### Implementation of
 
@@ -72,9 +89,9 @@ Defined in: [src/chain/account.ts:46](https://github.com/TheCrazyGM/dhive/blob/b
 
 > `static` **from**(`value`): `Authority`
 
-Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/account.ts#L59)
+Defined in: [src/chain/account.ts:102](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/account.ts#L102)
 
-Convenience to create a new instance from PublicKey or authority object.
+Normalizes a public key or raw authority into an Authority.
 
 #### Parameters
 
@@ -82,6 +99,17 @@ Convenience to create a new instance from PublicKey or authority object.
 
 `string` \| [`AuthorityType`](../interfaces/AuthorityType.md) \| [`PublicKey`](PublicKey.md)
 
+Public key string, [PublicKey](PublicKey.md), existing authority, or
+raw authority object.
+
 #### Returns
 
 `Authority`
+
+A normalized authority.
+
+#### Example
+
+```ts
+const authority = Authority.from('STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA')
+```

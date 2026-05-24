@@ -9,6 +9,25 @@ import { PrivateKey, PublicKey } from '../crypto.js'
 import { BinaryReader, BinaryWriter } from '../utils.js'
 import JSBI from 'jsbi'
 
+/**
+ * Encrypts a binary memo payload with Hive memo key agreement.
+ *
+ * @param private_key - Sender memo private key.
+ * @param public_key - Recipient memo public key.
+ * @param message - Serialized plaintext memo bytes.
+ * @param nonce - Optional nonce string for deterministic tests.
+ * @returns Nonce, ciphertext, and checksum for an encrypted memo envelope.
+ *
+ * @remarks
+ * The AES key is derived from the secp256k1 shared secret and nonce, matching
+ * Hive's encrypted memo convention. Application code should normally use
+ * `Memo.encode`, which handles string framing and base58 packaging.
+ *
+ * @example
+ * ```ts
+ * const encrypted = encrypt(senderMemoKey, recipientMemoPublicKey, memoBytes)
+ * ```
+ */
 export const encrypt = (
   private_key: PrivateKey,
   public_key: PublicKey,
@@ -16,6 +35,24 @@ export const encrypt = (
   nonce = uniqueNonce()
 ): any => crypt(private_key, public_key, nonce, message)
 
+/**
+ * Decrypts a binary memo payload with Hive memo key agreement.
+ *
+ * @param private_key - Recipient or sender memo private key.
+ * @param public_key - Counterparty memo public key.
+ * @param nonce - Memo nonce from the encrypted envelope.
+ * @param message - Ciphertext bytes.
+ * @param checksum - Shared-secret checksum from the encrypted envelope.
+ * @returns Decrypted memo bytes.
+ *
+ * @throws Error
+ * Thrown when the checksum does not match the derived shared secret.
+ *
+ * @example
+ * ```ts
+ * const plaintext = decrypt(memoKey, otherMemoPublicKey, nonce, encrypted, check)
+ * ```
+ */
 export const decrypt = (
   private_key: PrivateKey,
   public_key: PublicKey,
@@ -68,9 +105,24 @@ const crypt = (
 }
 
 /**
- * This method does not use a checksum, the returned data must be validated some other way.
- * @arg {string|Buffer} ciphertext - binary format
- * @return {Buffer} the decrypted message
+ * Decrypts AES-256-CBC bytes without memo checksum validation.
+ *
+ * @param message - Ciphertext bytes.
+ * @param tag - AES key bytes.
+ * @param iv - Initialization vector.
+ * @returns Decrypted bytes.
+ *
+ * @remarks
+ * This is a low-level primitive. Call {@link decrypt} for Hive memo payloads so
+ * the shared-secret checksum is validated before plaintext is trusted.
+ *
+ * @throws AssertionError
+ * Thrown when `message` is missing.
+ *
+ * @example
+ * ```ts
+ * const plaintext = cryptoJsDecrypt(ciphertext, key, iv)
+ * ```
  */
 export const cryptoJsDecrypt = (message: Buffer, tag: Buffer, iv: Buffer): Buffer => {
   assert(message, 'Missing cipher text')
@@ -79,9 +131,24 @@ export const cryptoJsDecrypt = (message: Buffer, tag: Buffer, iv: Buffer): Buffe
 }
 
 /**
- * This method does not use a checksum, the returned data must be validated some other way.
- * @arg {string|Buffer} plaintext - binary format
- * @return {Buffer} binary
+ * Encrypts bytes with AES-256-CBC without adding a memo checksum.
+ *
+ * @param message - Plaintext bytes.
+ * @param tag - AES key bytes.
+ * @param iv - Initialization vector.
+ * @returns Ciphertext bytes.
+ *
+ * @remarks
+ * This is a low-level primitive. Call {@link encrypt} for Hive memo payloads so
+ * Pollen derives the key and returns the checksum expected by the memo envelope.
+ *
+ * @throws AssertionError
+ * Thrown when `message` is missing.
+ *
+ * @example
+ * ```ts
+ * const ciphertext = cryptoJsEncrypt(plaintext, key, iv)
+ * ```
  */
 export const cryptoJsEncrypt = (message: Buffer, tag: Buffer, iv: Buffer): Buffer => {
   assert(message, 'Missing plain text')

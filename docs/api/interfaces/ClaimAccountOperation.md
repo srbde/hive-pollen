@@ -6,9 +6,15 @@
 
 # Interface: ClaimAccountOperation
 
-Defined in: [src/chain/operation.ts:270](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L270)
+Defined in: [src/chain/operation.ts:401](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L401)
 
-Generic operation.
+Claims a discounted account creation ticket.
+
+## Remarks
+
+Claimed tickets can later be consumed by
+[CreateClaimedAccountOperation](CreateClaimedAccountOperation.md). A zero fee is valid when the chain has
+free account subsidies available.
 
 ## Extends
 
@@ -20,7 +26,7 @@ Generic operation.
 
 > **0**: `"claim_account"`
 
-Defined in: [src/chain/operation.ts:271](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L271)
+Defined in: [src/chain/operation.ts:402](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L402)
 
 #### Overrides
 
@@ -32,7 +38,7 @@ Defined in: [src/chain/operation.ts:271](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:272](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L272)
+Defined in: [src/chain/operation.ts:403](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L403)
 
 #### creator
 

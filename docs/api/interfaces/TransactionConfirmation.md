@@ -6,7 +6,21 @@
 
 # Interface: TransactionConfirmation
 
-Defined in: [src/chain/transaction.ts:50](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/transaction.ts#L50)
+Defined in: [src/chain/transaction.ts:114](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/transaction.ts#L114)
+
+Confirmation returned after broadcasting a transaction.
+
+## Remarks
+
+The local transaction id is added by Pollen after signing, while block and
+transaction indexes are supplied by the RPC node when available.
+
+## Example
+
+```ts
+const confirmation = await client.broadcast.transfer(transfer, activeKey)
+console.log(confirmation.id, confirmation.block_num)
+```
 
 ## Properties
 
@@ -14,7 +28,9 @@ Defined in: [src/chain/transaction.ts:50](https://github.com/TheCrazyGM/dhive/bl
 
 > **block\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:52](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/transaction.ts#L52)
+Defined in: [src/chain/transaction.ts:122](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/transaction.ts#L122)
+
+Block number that accepted the transaction.
 
 ***
 
@@ -22,7 +38,9 @@ Defined in: [src/chain/transaction.ts:52](https://github.com/TheCrazyGM/dhive/bl
 
 > **expired**: `boolean`
 
-Defined in: [src/chain/transaction.ts:54](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/transaction.ts#L54)
+Defined in: [src/chain/transaction.ts:130](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/transaction.ts#L130)
+
+Whether the node considered the transaction expired.
 
 ***
 
@@ -30,7 +48,9 @@ Defined in: [src/chain/transaction.ts:54](https://github.com/TheCrazyGM/dhive/bl
 
 > **id**: `string`
 
-Defined in: [src/chain/transaction.ts:51](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/transaction.ts#L51)
+Defined in: [src/chain/transaction.ts:118](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/transaction.ts#L118)
+
+Transaction id.
 
 ***
 
@@ -38,4 +58,6 @@ Defined in: [src/chain/transaction.ts:51](https://github.com/TheCrazyGM/dhive/bl
 
 > **trx\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:53](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/transaction.ts#L53)
+Defined in: [src/chain/transaction.ts:126](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/transaction.ts#L126)
+
+Transaction index within the accepting block.

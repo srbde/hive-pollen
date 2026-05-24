@@ -6,9 +6,26 @@
 
 # Interface: Operation
 
-Defined in: [src/chain/operation.ts:139](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L139)
+Defined in: [src/chain/operation.ts:175](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L175)
 
-Generic operation.
+Generic Hive operation tuple.
+
+## Remarks
+
+Position `0` is the operation name; position `1` is the payload object. Use
+the specific operation interfaces when constructing transactions so TypeScript
+can validate the payload shape.
+
+## Example
+
+```ts
+const op: Operation = ['transfer', {
+  from: 'srbde',
+  to: 'alice',
+  amount: '1.000 HIVE',
+  memo: 'Pollen'
+}]
+```
 
 ## Extended by
 
@@ -67,7 +84,7 @@ Generic operation.
 
 > **0**: [`OperationName`](../type-aliases/OperationName.md) \| [`VirtualOperationName`](../type-aliases/VirtualOperationName.md)
 
-Defined in: [src/chain/operation.ts:140](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L140)
+Defined in: [src/chain/operation.ts:176](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L176)
 
 ***
 
@@ -75,7 +92,7 @@ Defined in: [src/chain/operation.ts:140](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:141](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L141)
+Defined in: [src/chain/operation.ts:177](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L177)
 
 #### Index Signature
 

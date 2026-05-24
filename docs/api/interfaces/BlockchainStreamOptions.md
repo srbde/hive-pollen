@@ -6,7 +6,25 @@
 
 # Interface: BlockchainStreamOptions
 
-Defined in: [src/helpers/blockchain.ts:50](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L50)
+Defined in: [src/helpers/blockchain.ts:76](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L76)
+
+Controls the block range and finality policy used by blockchain streams.
+
+## Example
+
+```ts
+import { BlockchainMode, Client } from '@srbde/pollen'
+
+const client = new Client('https://api.hive.blog')
+
+for await (const block of client.blockchain.getBlocks({
+  from: 90_000_000,
+  to: 90_000_010,
+  mode: BlockchainMode.Irreversible
+})) {
+  console.log(block.block_id)
+}
+```
 
 ## Properties
 
@@ -14,7 +32,7 @@ Defined in: [src/helpers/blockchain.ts:50](https://github.com/TheCrazyGM/dhive/b
 
 > `optional` **from?**: `number`
 
-Defined in: [src/helpers/blockchain.ts:54](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L54)
+Defined in: [src/helpers/blockchain.ts:80](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L80)
 
 Start block number, inclusive. If omitted generation will start from current block height.
 
@@ -24,7 +42,7 @@ Start block number, inclusive. If omitted generation will start from current blo
 
 > `optional` **mode?**: [`BlockchainMode`](../enumerations/BlockchainMode.md)
 
-Defined in: [src/helpers/blockchain.ts:63](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L63)
+Defined in: [src/helpers/blockchain.ts:89](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L89)
 
 Streaming mode, if set to `Latest` may include blocks that are not applied to the final chain.
 Defaults to `Irreversible`.
@@ -35,6 +53,6 @@ Defaults to `Irreversible`.
 
 > `optional` **to?**: `number`
 
-Defined in: [src/helpers/blockchain.ts:58](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L58)
+Defined in: [src/helpers/blockchain.ts:84](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L84)
 
 End block number, inclusive. If omitted stream will continue indefinitely.

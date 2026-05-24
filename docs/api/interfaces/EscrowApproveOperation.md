@@ -6,7 +6,7 @@
 
 # Interface: EscrowApproveOperation
 
-Defined in: [src/chain/operation.ts:417](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L417)
+Defined in: [src/chain/operation.ts:617](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L617)
 
 The agent and to accounts must approve an escrow transaction for it to be valid on
 the blockchain. Once a part approves the escrow, the cannot revoke their approval.
@@ -22,7 +22,7 @@ Subsequent escrow approve operations, regardless of the approval, will be reject
 
 > **0**: `"escrow_approve"`
 
-Defined in: [src/chain/operation.ts:418](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L418)
+Defined in: [src/chain/operation.ts:618](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L618)
 
 #### Overrides
 
@@ -34,7 +34,7 @@ Defined in: [src/chain/operation.ts:418](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:419](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L419)
+Defined in: [src/chain/operation.ts:619](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L619)
 
 #### agent
 

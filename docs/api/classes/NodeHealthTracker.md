@@ -6,7 +6,28 @@
 
 # Class: NodeHealthTracker
 
-Defined in: [src/health-tracker.ts:75](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L75)
+Defined in: [src/health-tracker.ts:112](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L112)
+
+Tracks per-node health for resilient Hive RPC failover.
+
+## Remarks
+
+`NodeHealthTracker` separates global node failures from API/plugin-specific
+failures. A node missing `rc_api` can be deprioritized for RC calls while
+remaining available for database reads. It also tracks rate-limit cooldowns
+and stale head-block data so Pollen can prefer fresher nodes.
+
+## Example
+
+```ts
+const tracker = new NodeHealthTracker({ staleBlockThreshold: 20 })
+tracker.recordSuccess('https://api.hive.blog', 'condenser_api')
+
+const ordered = tracker.getOrderedNodes([
+  'https://api.hive.blog',
+  'https://api.openhive.network'
+])
+```
 
 ## Constructors
 
@@ -14,13 +35,17 @@ Defined in: [src/health-tracker.ts:75](https://github.com/TheCrazyGM/dhive/blob/
 
 > **new NodeHealthTracker**(`options?`): `NodeHealthTracker`
 
-Defined in: [src/health-tracker.ts:88](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L88)
+Defined in: [src/health-tracker.ts:130](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L130)
+
+Creates a health tracker with optional cooldown and freshness tuning.
 
 #### Parameters
 
 ##### options?
 
 [`HealthTrackerOptions`](../interfaces/HealthTrackerOptions.md) = `{}`
+
+Health tracker thresholds and cooldown durations.
 
 #### Returns
 
@@ -32,13 +57,24 @@ Defined in: [src/health-tracker.ts:88](https://github.com/TheCrazyGM/dhive/blob/
 
 > **getHealthSnapshot**(): `Map`\<`string`, \{ `apiFailures`: `Record`\<`string`, \{ `count`: `number`; \}\>; `consecutiveFailures`: `number`; `headBlock`: `number`; `healthy`: `boolean`; \}\>
 
-Defined in: [src/health-tracker.ts:268](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L268)
+Defined in: [src/health-tracker.ts:408](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L408)
 
-Get a snapshot of current health state for diagnostics.
+Returns a diagnostic snapshot of tracked node health.
 
 #### Returns
 
 `Map`\<`string`, \{ `apiFailures`: `Record`\<`string`, \{ `count`: `number`; \}\>; `consecutiveFailures`: `number`; `headBlock`: `number`; `healthy`: `boolean`; \}\>
+
+A map keyed by node URL with failure counts, head block, API
+failure counts, and current health.
+
+#### Example
+
+```ts
+for (const [node, health] of tracker.getHealthSnapshot()) {
+  console.log(node, health.healthy)
+}
+```
 
 ***
 
@@ -46,10 +82,9 @@ Get a snapshot of current health state for diagnostics.
 
 > **getOrderedNodes**(`allNodes`, `api?`): `string`[]
 
-Defined in: [src/health-tracker.ts:241](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L241)
+Defined in: [src/health-tracker.ts:366](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L366)
 
-Return nodes ordered by health for a specific API call.
-Healthy nodes come first (preserving original order), then unhealthy nodes as fallback.
+Orders endpoint URLs by current health for an API call.
 
 #### Parameters
 
@@ -57,13 +92,26 @@ Healthy nodes come first (preserving original order), then unhealthy nodes as fa
 
 `string`[]
 
+Endpoints in caller-preferred order.
+
 ##### api?
 
 `string`
 
+Optional API namespace for plugin-specific health.
+
 #### Returns
 
 `string`[]
+
+Healthy nodes first, preserving relative order, followed by
+unhealthy nodes as fallback.
+
+#### Example
+
+```ts
+const ordered = tracker.getOrderedNodes(nodes, 'condenser_api')
+```
 
 ***
 
@@ -71,9 +119,9 @@ Healthy nodes come first (preserving original order), then unhealthy nodes as fa
 
 > **isNodeHealthy**(`node`, `api?`): `boolean`
 
-Defined in: [src/health-tracker.ts:194](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L194)
+Defined in: [src/health-tracker.ts:310](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L310)
 
-Check if a node is considered healthy for a given API.
+Checks whether a node should be preferred for a given API.
 
 #### Parameters
 
@@ -81,13 +129,25 @@ Check if a node is considered healthy for a given API.
 
 `string`
 
+RPC endpoint URL.
+
 ##### api?
 
 `string`
 
+Optional API namespace for plugin-specific health.
+
 #### Returns
 
 `boolean`
+
+True when the node is not cooling down, rate-limited, or stale.
+
+#### Example
+
+```ts
+const healthy = tracker.isNodeHealthy('https://api.hive.blog', 'bridge')
+```
 
 ***
 
@@ -95,9 +155,9 @@ Check if a node is considered healthy for a given API.
 
 > **isRateLimited**(`node`): `boolean`
 
-Defined in: [src/health-tracker.ts:153](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L153)
+Defined in: [src/health-tracker.ts:237](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L237)
 
-Check if a node is currently rate-limited (429 cooldown active).
+Checks whether a node is currently in a rate-limit cooldown.
 
 #### Parameters
 
@@ -105,9 +165,21 @@ Check if a node is currently rate-limited (429 cooldown active).
 
 `string`
 
+RPC endpoint URL.
+
 #### Returns
 
 `boolean`
+
+True when a prior 429 cooldown has not expired.
+
+#### Example
+
+```ts
+if (!tracker.isRateLimited(node)) {
+  // node can be attempted
+}
+```
 
 ***
 
@@ -115,11 +187,9 @@ Check if a node is currently rate-limited (429 cooldown active).
 
 > **recordApiFailure**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:164](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L164)
+Defined in: [src/health-tracker.ts:259](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L259)
 
-Record an API/plugin-specific failure (e.g. "method not found", "plugin not enabled").
-Only increments the per-API counter, NOT the global consecutive failure counter.
-This prevents a node with a disabled plugin from being penalized for all APIs.
+Records an API/plugin-specific failure.
 
 #### Parameters
 
@@ -127,13 +197,29 @@ This prevents a node with a disabled plugin from being penalized for all APIs.
 
 `string`
 
+RPC endpoint URL.
+
 ##### api
 
 `string`
 
+API namespace that failed.
+
 #### Returns
 
 `void`
+
+#### Remarks
+
+This does not increment the global node failure counter. It is designed for
+cases such as `method not found` where one plugin is disabled but other APIs
+on the same node may still be healthy.
+
+#### Example
+
+```ts
+tracker.recordApiFailure('https://api.hive.blog', 'transaction_status_api')
+```
 
 ***
 
@@ -141,10 +227,9 @@ This prevents a node with a disabled plugin from being penalized for all APIs.
 
 > **recordFailure**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:127](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L127)
+Defined in: [src/health-tracker.ts:191](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L191)
 
-Record a network-level failure (timeout, connection refused, HTTP error).
-Increments both the global consecutive failure counter and the API-specific counter.
+Records a network-level failure for a node and API.
 
 #### Parameters
 
@@ -152,13 +237,28 @@ Increments both the global consecutive failure counter and the API-specific coun
 
 `string`
 
+RPC endpoint URL.
+
 ##### api
 
 `string`
 
+API namespace that failed.
+
 #### Returns
 
 `void`
+
+#### Remarks
+
+Network failures increment both the global consecutive failure count and the
+API-specific failure count because they make the whole endpoint suspect.
+
+#### Example
+
+```ts
+tracker.recordFailure('https://api.hive.blog', 'bridge')
+```
 
 ***
 
@@ -166,10 +266,9 @@ Increments both the global consecutive failure counter and the API-specific coun
 
 > **recordRateLimit**(`node`, `retryAfterSeconds?`): `void`
 
-Defined in: [src/health-tracker.ts:140](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L140)
+Defined in: [src/health-tracker.ts:214](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L214)
 
-Record that a node returned HTTP 429 (Too Many Requests).
-The node will be skipped until the rate limit expires.
+Records that a node returned HTTP 429.
 
 #### Parameters
 
@@ -177,15 +276,28 @@ The node will be skipped until the rate limit expires.
 
 `string`
 
+RPC endpoint URL.
+
 ##### retryAfterSeconds?
 
 `number`
 
-Value from the Retry-After header, or undefined to use default.
+Optional `Retry-After` header value in seconds.
 
 #### Returns
 
 `void`
+
+#### Remarks
+
+Rate-limited nodes are skipped until their cooldown expires. If the server
+omits `Retry-After`, Pollen uses `defaultRateLimitMs`.
+
+#### Example
+
+```ts
+tracker.recordRateLimit('https://api.hive.blog', 10)
+```
 
 ***
 
@@ -193,10 +305,9 @@ Value from the Retry-After header, or undefined to use default.
 
 > **recordSuccess**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:117](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L117)
+Defined in: [src/health-tracker.ts:170](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L170)
 
-Record a successful call to a node for a specific API.
-Clears consecutive failure counter and API-specific failures for this API.
+Records a successful call to a node for a specific API.
 
 #### Parameters
 
@@ -204,13 +315,28 @@ Clears consecutive failure counter and API-specific failures for this API.
 
 `string`
 
+RPC endpoint URL.
+
 ##### api
 
 `string`
 
+API namespace that succeeded.
+
 #### Returns
 
 `void`
+
+#### Remarks
+
+Success clears the global consecutive failure counter and any API-specific
+failures for the namespace that just succeeded.
+
+#### Example
+
+```ts
+tracker.recordSuccess('https://api.hive.blog', 'condenser_api')
+```
 
 ***
 
@@ -218,13 +344,19 @@ Clears consecutive failure counter and API-specific failures for this API.
 
 > **reset**(): `void`
 
-Defined in: [src/health-tracker.ts:259](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L259)
+Defined in: [src/health-tracker.ts:389](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L389)
 
-Reset all health tracking data.
+Clears all tracked health, rate-limit, and freshness data.
 
 #### Returns
 
 `void`
+
+#### Example
+
+```ts
+tracker.reset()
+```
 
 ***
 
@@ -232,10 +364,9 @@ Reset all health tracking data.
 
 > **updateHeadBlock**(`node`, `headBlock`): `void`
 
-Defined in: [src/health-tracker.ts:180](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/health-tracker.ts#L180)
+Defined in: [src/health-tracker.ts:287](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/health-tracker.ts#L287)
 
-Update head block number for a node.
-Called passively when get_dynamic_global_properties responses are observed.
+Updates the last observed head block number for a node.
 
 #### Parameters
 
@@ -243,10 +374,26 @@ Called passively when get_dynamic_global_properties responses are observed.
 
 `string`
 
+RPC endpoint URL.
+
 ##### headBlock
 
 `number`
 
+Head block number reported by the node.
+
 #### Returns
 
 `void`
+
+#### Remarks
+
+The client calls this passively when
+`get_dynamic_global_properties` responses are observed, allowing failover to
+prefer nodes that are not lagging behind the best known head.
+
+#### Example
+
+```ts
+tracker.updateHeadBlock('https://api.hive.blog', 90_000_000)
+```

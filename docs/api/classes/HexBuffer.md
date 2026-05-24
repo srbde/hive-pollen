@@ -6,9 +6,21 @@
 
 # Class: HexBuffer
 
-Defined in: [src/chain/misc.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L46)
+Defined in: [src/chain/misc.ts:61](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L61)
 
 Buffer wrapper that serializes to a hex-encoded string.
+
+## Remarks
+
+Hive APIs frequently represent binary values as hex strings. `HexBuffer`
+keeps binary data available for serializers while rendering cleanly in JSON.
+
+## Example
+
+```ts
+const bytes = HexBuffer.from('deadbeef')
+console.log(bytes.toJSON())
+```
 
 ## Constructors
 
@@ -16,13 +28,17 @@ Buffer wrapper that serializes to a hex-encoded string.
 
 > **new HexBuffer**(`buffer`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L47)
+Defined in: [src/chain/misc.ts:67](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L67)
+
+Creates a hex-buffer wrapper around a Node buffer.
 
 #### Parameters
 
 ##### buffer
 
 `Buffer`
+
+Raw binary data.
 
 #### Returns
 
@@ -34,7 +50,9 @@ Defined in: [src/chain/misc.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > **buffer**: `Buffer`
 
-Defined in: [src/chain/misc.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L47)
+Defined in: [src/chain/misc.ts:67](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L67)
+
+Raw binary data.
 
 ## Methods
 
@@ -42,7 +60,7 @@ Defined in: [src/chain/misc.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > **toJSON**(): `string`
 
-Defined in: [src/chain/misc.ts:68](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L68)
+Defined in: [src/chain/misc.ts:96](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L96)
 
 #### Returns
 
@@ -54,7 +72,7 @@ Defined in: [src/chain/misc.ts:68](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > **toString**(`encoding?`): `string`
 
-Defined in: [src/chain/misc.ts:64](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L64)
+Defined in: [src/chain/misc.ts:92](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L92)
 
 #### Parameters
 
@@ -72,9 +90,9 @@ Defined in: [src/chain/misc.ts:64](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > `static` **from**(`value`): `HexBuffer`
 
-Defined in: [src/chain/misc.ts:52](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L52)
+Defined in: [src/chain/misc.ts:80](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L80)
 
-Convenience to create a new HexBuffer, does not copy data if value passed is already a buffer.
+Normalizes hex, bytes, or an existing wrapper into a HexBuffer.
 
 #### Parameters
 
@@ -82,6 +100,16 @@ Convenience to create a new HexBuffer, does not copy data if value passed is alr
 
 `string` \| `number`[] \| `HexBuffer` \| `Buffer`\<`ArrayBufferLike`\>
 
+Buffer, existing wrapper, byte array, or hex string.
+
 #### Returns
 
 `HexBuffer`
+
+A hex-buffer wrapper.
+
+#### Example
+
+```ts
+const buffer = HexBuffer.from([0xde, 0xad, 0xbe, 0xef])
+```

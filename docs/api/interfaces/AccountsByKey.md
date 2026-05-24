@@ -6,7 +6,7 @@
 
 # Interface: AccountsByKey
 
-Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/key.ts#L9)
+Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/key.ts#L9)
 
 ## Properties
 
@@ -14,4 +14,11 @@ Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > **accounts**: `string`[][]
 
-Defined in: [src/helpers/key.ts:10](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/key.ts#L10)
+Defined in: [src/helpers/key.ts:17](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/key.ts#L17)
+
+Account names grouped by the queried public key order.
+
+#### Remarks
+
+Each inner array contains the accounts that reference the corresponding
+public key in owner or active authorities.

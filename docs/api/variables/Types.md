@@ -8,7 +8,9 @@
 
 > `const` **Types**: `object`
 
-Defined in: [src/chain/serializer.ts:655](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/serializer.ts#L655)
+Defined in: [src/chain/serializer.ts:696](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/serializer.ts#L696)
+
+Hive protocol serializer registry.
 
 ## Type Declaration
 
@@ -46,10 +48,10 @@ Serialize asset.
 
 `void`
 
-#### Note
+#### Remarks
 
-This looses precision for amounts larger than 2^53-1/10^precision.
-      Should not be a problem in real-word usage.
+This loses precision for amounts larger than 2^53-1/10^precision.
+Should not be a problem in real-world usage.
 
 ### Authority
 
@@ -436,3 +438,27 @@ This looses precision for amounts larger than 2^53-1/10^precision.
 #### Returns
 
 `never`
+
+## Remarks
+
+`Types` is the internal engine behind transaction signing, transaction id
+generation, memo envelopes, and witness property encoding. Each member writes
+one Hive-compatible value into a [BinaryWriter](../@srbde/namespaces/utils/classes/BinaryWriter.md). The object is exported
+for advanced protocol tooling, but most applications should use higher-level
+helpers such as `client.broadcast`.
+
+## Example
+
+```ts
+const writer = new BinaryWriter()
+Types.Transaction(writer, transaction)
+
+const bytes = writer.getBuffer()
+```
+
+## Throws
+
+Error
+Individual serializers throw when a value cannot be represented in the
+expected Hive wire format, such as a binary field with the wrong byte length
+or an operation name with no registered serializer.

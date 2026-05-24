@@ -6,7 +6,7 @@
 
 # Enumeration: BlockchainMode
 
-Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L39)
+Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L39)
 
 ## Enumeration Members
 
@@ -14,9 +14,14 @@ Defined in: [src/helpers/blockchain.ts:39](https://github.com/TheCrazyGM/dhive/b
 
 > **Irreversible**: `0`
 
-Defined in: [src/helpers/blockchain.ts:43](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L43)
+Defined in: [src/helpers/blockchain.ts:47](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L47)
 
-Only get irreversible blocks.
+Stream only blocks that the Hive consensus protocol has made irreversible.
+
+#### Remarks
+
+This is the safest mode for indexing, accounting, and other workflows that
+must not react to a block that can still be replaced by a fork.
 
 ***
 
@@ -24,6 +29,11 @@ Only get irreversible blocks.
 
 > **Latest**: `1`
 
-Defined in: [src/helpers/blockchain.ts:47](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/blockchain.ts#L47)
+Defined in: [src/helpers/blockchain.ts:55](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/blockchain.ts#L55)
 
-Get all blocks.
+Stream from the latest head block, including blocks that are still reversible.
+
+#### Remarks
+
+Use this mode when low latency matters more than finality. Applications
+should be prepared to reconcile forked blocks when consuming latest mode.

@@ -6,9 +6,30 @@
 
 # Interface: AccountCreateOperation
 
-Defined in: [src/chain/operation.ts:154](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L154)
+Defined in: [src/chain/operation.ts:225](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L225)
 
-Generic operation.
+Legacy paid account creation operation.
+
+## Remarks
+
+This operation creates an account by paying `fee` directly. Modern Hive
+account creation often uses claimed account tickets through
+[ClaimAccountOperation](ClaimAccountOperation.md) and [CreateClaimedAccountOperation](CreateClaimedAccountOperation.md).
+
+## Example
+
+```ts
+const op: AccountCreateOperation = ['account_create', {
+  fee: '3.000 HIVE',
+  creator: 'srbde',
+  new_account_name: 'new-user',
+  owner,
+  active,
+  posting,
+  memo_key,
+  json_metadata: '{}'
+}]
+```
 
 ## Extends
 
@@ -20,7 +41,7 @@ Generic operation.
 
 > **0**: `"account_create"`
 
-Defined in: [src/chain/operation.ts:155](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L155)
+Defined in: [src/chain/operation.ts:226](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L226)
 
 #### Overrides
 
@@ -32,7 +53,7 @@ Defined in: [src/chain/operation.ts:155](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:156](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L156)
+Defined in: [src/chain/operation.ts:227](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L227)
 
 #### active
 

@@ -36,7 +36,17 @@
 import { Transaction } from './transaction.js'
 
 /**
- * Unsigned block header.
+ * Hive block header without the witness signature.
+ *
+ * @remarks
+ * Block headers link blocks through `previous`, identify the producing witness,
+ * and commit to the transaction list through the transaction Merkle root.
+ *
+ * @example
+ * ```ts
+ * const header = await client.database.getBlockHeader(90_000_000)
+ * console.log(header.witness, header.timestamp)
+ * ```
  */
 export interface BlockHeader {
     previous: string // block_id_type
@@ -47,14 +57,36 @@ export interface BlockHeader {
 }
 
 /**
- * Signed block header.
+ * Hive block header plus witness signature.
+ *
+ * @remarks
+ * Witness signatures prove that the scheduled witness produced the block using
+ * its active block-signing key.
+ *
+ * @example
+ * ```ts
+ * const block = await client.database.getBlock(90_000_000)
+ * console.log(block.witness_signature)
+ * ```
  */
 export interface SignedBlockHeader extends BlockHeader {
     witness_signature: string // signature_type
 }
 
 /**
- * Full signed block.
+ * Full Hive signed block including transactions.
+ *
+ * @remarks
+ * This is the primary unit consumed by indexers. It carries the signed header,
+ * transaction ids, and the deserialized transactions in block order.
+ *
+ * @example
+ * ```ts
+ * const block = await client.database.getBlock(90_000_000)
+ * for (const transaction of block.transactions) {
+ *   console.log(transaction.operations.length)
+ * }
+ * ```
  */
 export interface SignedBlock extends SignedBlockHeader {
     block_id: string

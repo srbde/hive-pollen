@@ -6,9 +6,9 @@
 
 # Interface: ConvertOperation
 
-Defined in: [src/chain/operation.ts:312](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L312)
+Defined in: [src/chain/operation.ts:473](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L473)
 
-Generic operation.
+Converts HBD to HIVE through the standard conversion request flow.
 
 ## Extends
 
@@ -20,7 +20,7 @@ Generic operation.
 
 > **0**: `"convert"`
 
-Defined in: [src/chain/operation.ts:313](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L313)
+Defined in: [src/chain/operation.ts:474](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L474)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:313](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:314](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L314)
+Defined in: [src/chain/operation.ts:475](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L475)
 
 #### amount
 

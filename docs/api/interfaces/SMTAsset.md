@@ -6,7 +6,7 @@
 
 # Interface: SMTAsset
 
-Defined in: [src/chain/asset.ts:38](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L38)
+Defined in: [src/chain/asset.ts:38](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L38)
 
 ## Properties
 
@@ -14,7 +14,9 @@ Defined in: [src/chain/asset.ts:38](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **amount**: `string` \| `number`
 
-Defined in: [src/chain/asset.ts:39](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L39)
+Defined in: [src/chain/asset.ts:42](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L42)
+
+Integer amount in the token's smallest precision unit.
 
 ***
 
@@ -22,7 +24,9 @@ Defined in: [src/chain/asset.ts:39](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **nai**: `string`
 
-Defined in: [src/chain/asset.ts:41](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L41)
+Defined in: [src/chain/asset.ts:50](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L50)
+
+Numeric asset identifier assigned by Hive's SMT protocol.
 
 ***
 
@@ -30,4 +34,6 @@ Defined in: [src/chain/asset.ts:41](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **precision**: `number`
 
-Defined in: [src/chain/asset.ts:40](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L40)
+Defined in: [src/chain/asset.ts:46](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L46)
+
+Number of decimal places used by the token.

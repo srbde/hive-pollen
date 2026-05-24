@@ -6,9 +6,9 @@
 
 # Interface: UpdateProposalOperation
 
-Defined in: [src/chain/operation.ts:934](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L934)
+Defined in: [src/chain/operation.ts:1206](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1206)
 
-Generic operation.
+Updates mutable fields on an existing DHF proposal.
 
 ## Extends
 
@@ -20,7 +20,7 @@ Generic operation.
 
 > **0**: `"update_proposal"`
 
-Defined in: [src/chain/operation.ts:935](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L935)
+Defined in: [src/chain/operation.ts:1207](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1207)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:935](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:936](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L936)
+Defined in: [src/chain/operation.ts:1208](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1208)
 
 #### creator
 

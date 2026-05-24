@@ -8,6 +8,12 @@
 
 > **Bignum** = `string`
 
-Defined in: [src/chain/misc.ts:41](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L41)
+Defined in: [src/chain/misc.ts:46](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L46)
 
-Large number that may be unsafe to represent natively in JavaScript.
+Large integer returned as a string to avoid JavaScript precision loss.
+
+## Example
+
+```ts
+const value: Bignum = props.max_virtual_bandwidth
+```

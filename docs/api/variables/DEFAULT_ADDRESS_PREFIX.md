@@ -8,6 +8,11 @@
 
 > `const` **DEFAULT\_ADDRESS\_PREFIX**: `"STM"` = `'STM'`
 
-Defined in: [src/client.ts:71](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/client.ts#L71)
+Defined in: [src/client.ts:98](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/client.ts#L98)
 
-Main Hive network address prefix.
+Main Hive network public-key address prefix.
+
+## Remarks
+
+Hive-compatible public keys are rendered with a network prefix. Mainnet uses
+`STM`, and custom networks can override this through [ClientOptions](../interfaces/ClientOptions.md).

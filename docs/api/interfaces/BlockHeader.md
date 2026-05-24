@@ -6,9 +6,21 @@
 
 # Interface: BlockHeader
 
-Defined in: [src/chain/block.ts:41](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L41)
+Defined in: [src/chain/block.ts:51](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L51)
 
-Unsigned block header.
+Hive block header without the witness signature.
+
+## Remarks
+
+Block headers link blocks through `previous`, identify the producing witness,
+and commit to the transaction list through the transaction Merkle root.
+
+## Example
+
+```ts
+const header = await client.database.getBlockHeader(90_000_000)
+console.log(header.witness, header.timestamp)
+```
 
 ## Extended by
 
@@ -20,7 +32,7 @@ Unsigned block header.
 
 > **extensions**: `any`[]
 
-Defined in: [src/chain/block.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L46)
+Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L56)
 
 ***
 
@@ -28,7 +40,7 @@ Defined in: [src/chain/block.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:42](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L42)
+Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L52)
 
 ***
 
@@ -36,7 +48,7 @@ Defined in: [src/chain/block.ts:42](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:43](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L43)
+Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L53)
 
 ***
 
@@ -44,7 +56,7 @@ Defined in: [src/chain/block.ts:43](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:45](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L45)
+Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L55)
 
 ***
 
@@ -52,4 +64,4 @@ Defined in: [src/chain/block.ts:45](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:44](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L44)
+Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L54)

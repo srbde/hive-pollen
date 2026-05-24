@@ -6,9 +6,9 @@
 
 # Interface: CustomBinaryOperation
 
-Defined in: [src/chain/operation.ts:347](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L347)
+Defined in: [src/chain/operation.ts:517](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L517)
 
-Generic operation.
+Binary custom operation supporting owner, active, posting, and authority auths.
 
 ## Extends
 
@@ -20,7 +20,7 @@ Generic operation.
 
 > **0**: `"custom_binary"`
 
-Defined in: [src/chain/operation.ts:348](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L348)
+Defined in: [src/chain/operation.ts:518](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L518)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:348](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:349](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L349)
+Defined in: [src/chain/operation.ts:519](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L519)
 
 #### data
 

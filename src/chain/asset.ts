@@ -36,13 +36,27 @@
 import assert from 'assert'
 
 export interface SMTAsset {
+  /**
+   * Integer amount in the token's smallest precision unit.
+   */
   amount: string | number
+  /**
+   * Number of decimal places used by the token.
+   */
   precision: number
+  /**
+   * Numeric asset identifier assigned by Hive's SMT protocol.
+   */
   nai: string
 }
 
 /**
- * Asset symbol string.
+ * Asset symbol supported by Hive-compatible asset serialization.
+ *
+ * @example
+ * ```ts
+ * const symbol: AssetSymbol = 'HIVE'
+ * ```
  */
 export type AssetSymbol =
   | 'HIVE'
@@ -54,16 +68,48 @@ export type AssetSymbol =
   | 'SBD'
 
 /**
- * Class representing a hive asset, e.g. `1.000 HIVE` or `12.112233 VESTS`.
+ * Immutable representation of a Hive asset amount and symbol.
+ *
+ * @remarks
+ * Hive serializes liquid assets at three decimal places and VESTS at six.
+ * `Asset` keeps arithmetic symbol-aware so accidental HIVE/HBD/VESTS mixing is
+ * caught before a transaction is signed.
+ *
+ * @example
+ * ```ts
+ * const balance = Asset.from('12.345 HIVE')
+ * const payout = balance.add('1.000 HIVE')
+ *
+ * console.log(payout.toString())
+ * ```
  */
 export class Asset {
+  /**
+   * Creates an asset from an amount and symbol.
+   *
+   * @param amount - Numeric amount in display units.
+   * @param symbol - Hive asset symbol.
+   */
   constructor(
     public readonly amount: number,
     public readonly symbol: AssetSymbol
   ) {}
 
   /**
-   * Create a new Asset instance from a string, e.g. `42.000 HIVE`.
+   * Parses a Hive asset string.
+   *
+   * @param string - Asset string such as `42.000 HIVE`.
+   * @param expectedSymbol - Optional symbol guard.
+   * @returns A parsed {@link Asset}.
+   *
+   * @throws Error
+   * Thrown when the string has an unsupported symbol, a non-numeric amount, or
+   * a symbol that does not match `expectedSymbol`.
+   *
+   * @example
+   * ```ts
+   * const amount = Asset.fromString('42.000 HIVE', 'HIVE')
+   * ```
    */
   public static fromString(string: string, expectedSymbol?: AssetSymbol) {
     const [amountString, symbol] = string.split(' ')
@@ -85,9 +131,21 @@ export class Asset {
   }
 
   /**
-   * Convenience to create new Asset.
-   * @param symbol Symbol to use when created from number. Will also be used to validate
-   *               the asset, throws if the passed value has a different symbol than this.
+   * Normalizes an asset-like value into an {@link Asset}.
+   *
+   * @param value - Asset instance, asset string, or numeric amount.
+   * @param symbol - Symbol to use for numeric values and to validate asset
+   * strings or existing instances.
+   * @returns A normalized asset.
+   *
+   * @throws Error
+   * Thrown when the value cannot be parsed or fails the symbol guard.
+   *
+   * @example
+   * ```ts
+   * const fee = Asset.from(3, 'HIVE')
+   * const balance = Asset.from('10.000 HBD', 'HBD')
+   * ```
    */
   public static from(value: string | Asset | number, symbol?: AssetSymbol) {
     if (value instanceof Asset) {
@@ -107,7 +165,19 @@ export class Asset {
   }
 
   /**
-   * Return the smaller of the two assets.
+   * Returns the smaller of two same-symbol assets.
+   *
+   * @param a - First asset.
+   * @param b - Second asset.
+   * @returns The asset with the lower amount.
+   *
+   * @throws AssertionError
+   * Thrown when the two assets use different symbols.
+   *
+   * @example
+   * ```ts
+   * const capped = Asset.min(requested, available)
+   * ```
    */
   public static min(a: Asset, b: Asset) {
     assert(
@@ -118,7 +188,19 @@ export class Asset {
   }
 
   /**
-   * Return the larger of the two assets.
+   * Returns the larger of two same-symbol assets.
+   *
+   * @param a - First asset.
+   * @param b - Second asset.
+   * @returns The asset with the higher amount.
+   *
+   * @throws AssertionError
+   * Thrown when the two assets use different symbols.
+   *
+   * @example
+   * ```ts
+   * const required = Asset.max(minimumFee, offeredFee)
+   * ```
    */
   public static max(a: Asset, b: Asset) {
     assert(
@@ -129,7 +211,14 @@ export class Asset {
   }
 
   /**
-   * Return asset precision.
+   * Resolves the display precision for this asset symbol.
+   *
+   * @returns `3` for liquid Hive-family assets and `6` for VESTS.
+   *
+   * @example
+   * ```ts
+   * Asset.from('1.000000 VESTS').getPrecision()
+   * ```
    */
   public getPrecision(): number {
     switch (this.symbol) {
@@ -146,8 +235,20 @@ export class Asset {
   }
 
   /**
-   * Returns a representation of this asset using STEEM/SBD symbols
-   * as required by the Hive blockchain protocol-level serialization.
+   * Converts display Hive symbols to protocol serialization symbols.
+   *
+   * @returns An asset using `STEEM` for `HIVE` and `SBD` for `HBD`, or this
+   * asset unchanged for symbols that already serialize directly.
+   *
+   * @remarks
+   * Hive inherited protocol-level asset symbols from Steem. Pollen keeps public
+   * APIs Hive-native while mapping to legacy wire symbols during serialization.
+   *
+   * @example
+   * ```ts
+   * const wireAsset = Asset.from('1.000 HIVE').steem_symbols()
+   * console.log(wireAsset.toString()) // 1.000 STEEM
+   * ```
    */
   public steem_symbols(): Asset {
     switch (this.symbol) {
@@ -161,14 +262,32 @@ export class Asset {
   }
 
   /**
-   * Return a string representation of this asset, e.g. `42.000 HIVE`.
+   * Renders the asset using Hive display precision.
+   *
+   * @returns Asset string such as `42.000 HIVE`.
+   *
+   * @example
+   * ```ts
+   * Asset.from(42, 'HIVE').toString()
+   * ```
    */
   public toString(): string {
     return `${this.amount.toFixed(this.getPrecision())} ${this.symbol}`
   }
 
   /**
-   * Return a new Asset instance with amount added.
+   * Adds another amount with the same symbol.
+   *
+   * @param amount - Asset-like amount to add.
+   * @returns A new asset containing the sum.
+   *
+   * @throws AssertionError
+   * Thrown when `amount` uses a different symbol.
+   *
+   * @example
+   * ```ts
+   * const total = Asset.from('1.000 HIVE').add('2.500 HIVE')
+   * ```
    */
   public add(amount: Asset | string | number): Asset {
     const other = Asset.from(amount, this.symbol)
@@ -177,7 +296,18 @@ export class Asset {
   }
 
   /**
-   * Return a new Asset instance with amount subtracted.
+   * Subtracts another amount with the same symbol.
+   *
+   * @param amount - Asset-like amount to subtract.
+   * @returns A new asset containing the difference.
+   *
+   * @throws AssertionError
+   * Thrown when `amount` uses a different symbol.
+   *
+   * @example
+   * ```ts
+   * const remaining = Asset.from('5.000 HIVE').subtract('1.250 HIVE')
+   * ```
    */
   public subtract(amount: Asset | string | number): Asset {
     const other = Asset.from(amount, this.symbol)
@@ -189,7 +319,18 @@ export class Asset {
   }
 
   /**
-   * Return a new Asset with the amount multiplied by factor.
+   * Multiplies this asset amount by another same-symbol amount.
+   *
+   * @param factor - Asset-like factor.
+   * @returns A new asset containing the product.
+   *
+   * @throws AssertionError
+   * Thrown when `factor` uses a different symbol.
+   *
+   * @example
+   * ```ts
+   * const doubled = Asset.from('2.000 HIVE').multiply('2.000 HIVE')
+   * ```
    */
   public multiply(factor: Asset | string | number): Asset {
     const other = Asset.from(factor, this.symbol)
@@ -201,7 +342,18 @@ export class Asset {
   }
 
   /**
-   * Return a new Asset with the amount divided.
+   * Divides this asset amount by another same-symbol amount.
+   *
+   * @param divisor - Asset-like divisor.
+   * @returns A new asset containing the quotient.
+   *
+   * @throws AssertionError
+   * Thrown when `divisor` uses a different symbol.
+   *
+   * @example
+   * ```ts
+   * const half = Asset.from('2.000 HIVE').divide('2.000 HIVE')
+   * ```
    */
   public divide(divisor: Asset | string | number): Asset {
     const other = Asset.from(divisor, this.symbol)
@@ -220,27 +372,50 @@ export class Asset {
   }
 }
 
+/**
+ * Value accepted anywhere Pollen needs a Hive price ratio.
+ *
+ * @example
+ * ```ts
+ * const feed: PriceType = {
+ *   base: '1.000 HIVE',
+ *   quote: '0.300 HBD'
+ * }
+ * ```
+ */
 export type PriceType = Price | { base: Asset | string; quote: Asset | string }
 
 /**
- * Represents quotation of the relative value of asset against another asset.
- * Similar to 'currency pair' used to determine value of currencies.
+ * Price ratio between two different Hive assets.
  *
- *  For example:
- *  1 EUR / 1.25 USD where:
- *  1 EUR is an asset specified as a base
- *  1.25 USD us an asset specified as a qute
+ * @remarks
+ * `Price` behaves like a currency pair: `base` is expressed relative to
+ * `quote`. Witness feeds commonly describe how much HBD one HIVE is worth.
  *
- *  can determine value of EUR against USD.
+ * @example
+ * ```ts
+ * const price = Price.from({
+ *   base: '1.000 HIVE',
+ *   quote: '0.300 HBD'
+ * })
+ *
+ * const hbd = price.convert(Asset.from('10.000 HIVE'))
+ * ```
  */
 export class Price {
   /**
-   * @param base  - represents a value of the price object to be expressed relatively to quote
-   *                asset. Cannot have amount == 0 if you want to build valid price.
-   * @param quote - represents an relative asset. Cannot have amount == 0, otherwise
-   *                asertion fail.
+   * Creates a price ratio from non-zero base and quote assets.
    *
-   * Both base and quote shall have different symbol defined.
+   * @param base - Asset being priced.
+   * @param quote - Relative asset used to express the price.
+   *
+   * @throws AssertionError
+   * Thrown when either amount is zero or both assets use the same symbol.
+   *
+   * @example
+   * ```ts
+   * const price = new Price(Asset.from('1.000 HIVE'), Asset.from('0.300 HBD'))
+   * ```
    */
   constructor(public readonly base: Asset, public readonly quote: Asset) {
     assert(
@@ -254,7 +429,15 @@ export class Price {
   }
 
   /**
-   * Convenience to create new Price.
+   * Normalizes a price-like value into a {@link Price}.
+   *
+   * @param value - Existing price or object containing base and quote assets.
+   * @returns A normalized price.
+   *
+   * @example
+   * ```ts
+   * const price = Price.from({ base: '1.000 HIVE', quote: '0.300 HBD' })
+   * ```
    */
   public static from(value: PriceType) {
     if (value instanceof Price) {
@@ -265,15 +448,32 @@ export class Price {
   }
 
   /**
-   * Return a string representation of this price pair.
+   * Renders the price pair.
+   *
+   * @returns String in `base:quote` form.
+   *
+   * @example
+   * ```ts
+   * price.toString()
+   * ```
    */
   public toString() {
     return `${this.base}:${this.quote}`
   }
 
   /**
-   * Return a new Asset with the price converted between the symbols in the pair.
-   * Throws if passed asset symbol is not base or quote.
+   * Converts an asset between the price pair's two symbols.
+   *
+   * @param asset - Asset using either the base or quote symbol.
+   * @returns Converted asset using the opposite symbol.
+   *
+   * @throws Error
+   * Thrown when `asset.symbol` is not part of this price pair.
+   *
+   * @example
+   * ```ts
+   * const hbd = price.convert(Asset.from('10.000 HIVE'))
+   * ```
    */
   public convert(asset: Asset) {
     if (asset.symbol === this.base.symbol) {

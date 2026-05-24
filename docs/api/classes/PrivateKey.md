@@ -6,9 +6,26 @@
 
 # Class: PrivateKey
 
-Defined in: [src/crypto.ts:253](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L253)
+Defined in: [src/crypto.ts:341](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L341)
 
-ECDSA (secp256k1) private key.
+Hive private key backed by the secp256k1 elliptic curve.
+
+## Remarks
+
+Private keys sign transaction digests, derive Hive public keys, and produce
+memo shared secrets. Pollen uses Noble secp256k1 for validation, signing, and
+ECDH-style point multiplication instead of legacy curve packages.
+
+## Example
+
+```ts
+import { PrivateKey } from '@srbde/pollen'
+
+const key = PrivateKey.fromString(process.env.HIVE_ACTIVE_KEY!)
+const publicKey = key.createPublic()
+
+console.log(publicKey.toString())
+```
 
 ## Constructors
 
@@ -16,7 +33,7 @@ ECDSA (secp256k1) private key.
 
 > **new PrivateKey**(`key`): `PrivateKey`
 
-Defined in: [src/crypto.ts:256](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L256)
+Defined in: [src/crypto.ts:344](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L344)
 
 #### Parameters
 
@@ -34,7 +51,7 @@ Defined in: [src/crypto.ts:256](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > **secret**: `Buffer`
 
-Defined in: [src/crypto.ts:254](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L254)
+Defined in: [src/crypto.ts:342](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L342)
 
 ## Methods
 
@@ -42,9 +59,9 @@ Defined in: [src/crypto.ts:254](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > **createPublic**(`prefix?`): [`PublicKey`](PublicKey.md)
 
-Defined in: [src/crypto.ts:324](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L324)
+Defined in: [src/crypto.ts:481](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L481)
 
-Derive the public key for this private key.
+Derives the compressed public key for this private key.
 
 #### Parameters
 
@@ -52,9 +69,19 @@ Derive the public key for this private key.
 
 `string`
 
+Optional network prefix for the rendered public key.
+
 #### Returns
 
 [`PublicKey`](PublicKey.md)
+
+A [PublicKey](PublicKey.md) matching this secret.
+
+#### Example
+
+```ts
+const publicKey = privateKey.createPublic('STM')
+```
 
 ***
 
@@ -62,9 +89,9 @@ Derive the public key for this private key.
 
 > **get\_shared\_secret**(`public_key`): `Buffer`
 
-Defined in: [src/crypto.ts:348](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L348)
+Defined in: [src/crypto.ts:524](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L524)
 
-Get shared secret for memo cryptography
+Derives the shared secret used by encrypted Hive memos.
 
 #### Parameters
 
@@ -72,9 +99,24 @@ Get shared secret for memo cryptography
 
 [`PublicKey`](PublicKey.md)
 
+Counterparty memo public key.
+
 #### Returns
 
 `Buffer`
+
+SHA-512 hash of the secp256k1 ECDH x-coordinate.
+
+#### Remarks
+
+The returned bytes feed the AES memo helper; callers normally use
+`Memo.encode` and `Memo.decode` instead of handling this secret directly.
+
+#### Example
+
+```ts
+const shared = memoPrivateKey.get_shared_secret(recipientMemoPublicKey)
+```
 
 ***
 
@@ -82,7 +124,7 @@ Get shared secret for memo cryptography
 
 > **inspect**(): `string`
 
-Defined in: [src/crypto.ts:340](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L340)
+Defined in: [src/crypto.ts:504](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L504)
 
 Used by `utils.inspect` and `console.log` in node.js. Does not show the full key
 to get the full encoded key you need to explicitly call [toString](#tostring).
@@ -97,7 +139,7 @@ to get the full encoded key you need to explicitly call [toString](#tostring).
 
 > **multiply**(`pub`): `Buffer`
 
-Defined in: [src/crypto.ts:301](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L301)
+Defined in: [src/crypto.ts:438](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L438)
 
 #### Parameters
 
@@ -115,9 +157,9 @@ Defined in: [src/crypto.ts:301](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > **sign**(`message`): [`Signature`](Signature.md)
 
-Defined in: [src/crypto.ts:311](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L311)
+Defined in: [src/crypto.ts:460](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L460)
 
-Sign message.
+Signs a 32-byte digest with this private key.
 
 #### Parameters
 
@@ -125,11 +167,25 @@ Sign message.
 
 `Buffer`
 
-32-byte message.
+Digest to sign.
 
 #### Returns
 
 [`Signature`](Signature.md)
+
+A compact recoverable signature.
+
+#### Remarks
+
+Pollen feeds Noble secp256k1 deterministic extra entropy and retries until
+the signature is canonical for Hive transaction acceptance.
+
+#### Example
+
+```ts
+const digest = cryptoUtils.sha256(Buffer.from('nectar'))
+const signature = privateKey.sign(digest)
+```
 
 ***
 
@@ -137,13 +193,21 @@ Sign message.
 
 > **toString**(): `string`
 
-Defined in: [src/crypto.ts:332](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L332)
+Defined in: [src/crypto.ts:496](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L496)
 
-Return a WIF-encoded representation of the key.
+Renders the private key as a WIF string.
 
 #### Returns
 
 `string`
+
+Base58Check key with Hive's WIF network marker.
+
+#### Example
+
+```ts
+const wif = privateKey.toString()
+```
 
 ***
 
@@ -151,9 +215,9 @@ Return a WIF-encoded representation of the key.
 
 > `static` **from**(`value`): `PrivateKey`
 
-Defined in: [src/crypto.ts:267](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L267)
+Defined in: [src/crypto.ts:366](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L366)
 
-Convenience to create a new instance from WIF string or buffer.
+Normalizes a WIF string or raw secret buffer into a private key.
 
 #### Parameters
 
@@ -161,9 +225,24 @@ Convenience to create a new instance from WIF string or buffer.
 
 `string` \| `Buffer`\<`ArrayBufferLike`\>
 
+WIF-encoded key string or 32-byte secret buffer.
+
 #### Returns
 
 `PrivateKey`
+
+A validated PrivateKey.
+
+#### Throws
+
+AssertionError
+Thrown when the key bytes are not a valid secp256k1 secret.
+
+#### Example
+
+```ts
+const key = PrivateKey.from(process.env.HIVE_ACTIVE_KEY!)
+```
 
 ***
 
@@ -171,9 +250,9 @@ Convenience to create a new instance from WIF string or buffer.
 
 > `static` **fromLogin**(`username`, `password`, `role?`): `PrivateKey`
 
-Defined in: [src/crypto.ts:292](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L292)
+Defined in: [src/crypto.ts:429](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L429)
 
-Create key from username and password.
+Derives a Hive role key from an account name and master password.
 
 #### Parameters
 
@@ -181,17 +260,37 @@ Create key from username and password.
 
 `string`
 
+Hive account name.
+
 ##### password
 
 `string`
+
+Account master password.
 
 ##### role?
 
 [`KeyRole`](../type-aliases/KeyRole.md) = `'active'`
 
+Authority role to derive. Defaults to `active`.
+
 #### Returns
 
 `PrivateKey`
+
+The deterministic role private key.
+
+#### Remarks
+
+Hive's conventional derivation concatenates account name, role, and master
+password before hashing. Pollen preserves that behavior for compatibility
+with existing Hive wallets.
+
+#### Example
+
+```ts
+const postingKey = PrivateKey.fromLogin('srbde', masterPassword, 'posting')
+```
 
 ***
 
@@ -199,9 +298,9 @@ Create key from username and password.
 
 > `static` **fromSeed**(`seed`): `PrivateKey`
 
-Defined in: [src/crypto.ts:285](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L285)
+Defined in: [src/crypto.ts:407](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L407)
 
-Create a new instance from a seed.
+Derives a private key by hashing an arbitrary seed string.
 
 #### Parameters
 
@@ -209,9 +308,24 @@ Create a new instance from a seed.
 
 `string`
 
+Deterministic seed material.
+
 #### Returns
 
 `PrivateKey`
+
+A private key derived from `sha256(seed)`.
+
+#### Remarks
+
+This is useful for deterministic test fixtures. For production accounts,
+prefer importing existing account keys or using Hive's login derivation.
+
+#### Example
+
+```ts
+const fixtureKey = PrivateKey.fromSeed('pollen:test:active')
+```
 
 ***
 
@@ -219,9 +333,9 @@ Create a new instance from a seed.
 
 > `static` **fromString**(`wif`): `PrivateKey`
 
-Defined in: [src/crypto.ts:278](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L278)
+Defined in: [src/crypto.ts:388](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L388)
 
-Create a new instance from a WIF-encoded key.
+Parses a WIF-encoded Hive private key.
 
 #### Parameters
 
@@ -229,6 +343,21 @@ Create a new instance from a WIF-encoded key.
 
 `string`
 
+Base58Check private key string.
+
 #### Returns
 
 `PrivateKey`
+
+A validated private key.
+
+#### Throws
+
+AssertionError
+Thrown when the network marker, checksum, or key bytes are invalid.
+
+#### Example
+
+```ts
+const activeKey = PrivateKey.fromString(process.env.HIVE_ACTIVE_KEY!)
+```

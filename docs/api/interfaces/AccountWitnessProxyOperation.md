@@ -6,9 +6,14 @@
 
 # Interface: AccountWitnessProxyOperation
 
-Defined in: [src/chain/operation.ts:199](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L199)
+Defined in: [src/chain/operation.ts:300](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L300)
 
-Generic operation.
+Sets or clears the witness voting proxy for an account.
+
+## Remarks
+
+When a proxy is set, the account delegates witness-vote influence to another
+account instead of voting witnesses directly.
 
 ## Extends
 
@@ -20,7 +25,7 @@ Generic operation.
 
 > **0**: `"account_witness_proxy"`
 
-Defined in: [src/chain/operation.ts:200](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L200)
+Defined in: [src/chain/operation.ts:301](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L301)
 
 #### Overrides
 
@@ -32,7 +37,7 @@ Defined in: [src/chain/operation.ts:200](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:201](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L201)
+Defined in: [src/chain/operation.ts:302](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L302)
 
 #### account
 

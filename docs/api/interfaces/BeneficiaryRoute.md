@@ -6,7 +6,22 @@
 
 # Interface: BeneficiaryRoute
 
-Defined in: [src/chain/comment.ts:93](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/comment.ts#L93)
+Defined in: [src/chain/comment.ts:142](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/comment.ts#L142)
+
+Beneficiary payout route attached to comment options.
+
+## Remarks
+
+Weights are expressed in hundredths of a percent: `10000` means 100%.
+
+## Example
+
+```ts
+const beneficiary: BeneficiaryRoute = {
+  account: 'srbde',
+  weight: 500
+}
+```
 
 ## Properties
 
@@ -14,7 +29,7 @@ Defined in: [src/chain/comment.ts:93](https://github.com/TheCrazyGM/dhive/blob/b
 
 > **account**: `string`
 
-Defined in: [src/chain/comment.ts:94](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/comment.ts#L94)
+Defined in: [src/chain/comment.ts:143](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/comment.ts#L143)
 
 ***
 
@@ -22,4 +37,4 @@ Defined in: [src/chain/comment.ts:94](https://github.com/TheCrazyGM/dhive/blob/b
 
 > **weight**: `number`
 
-Defined in: [src/chain/comment.ts:95](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/comment.ts#L95)
+Defined in: [src/chain/comment.ts:144](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/comment.ts#L144)

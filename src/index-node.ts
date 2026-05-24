@@ -33,4 +33,18 @@
  * in the design, construction, operation or maintenance of any military facility.
  */
 
+/**
+ * Node.js entry point for Pollen.
+ *
+ * @remarks
+ * The package root resolves to this module for Node consumers. It re-exports
+ * the shared API surface while preserving Node-oriented package metadata.
+ *
+ * @example
+ * ```ts
+ * import { Client } from '@srbde/pollen'
+ *
+ * const client = new Client('https://api.hive.blog')
+ * ```
+ */
 export * from './index.js'

@@ -6,7 +6,7 @@
 
 # Interface: RequestAccountRecoveryOperation
 
-Defined in: [src/chain/operation.ts:679](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L679)
+Defined in: [src/chain/operation.ts:887](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L887)
 
 All account recovery requests come from a listed recovery account. This
 is secure based on the assumption that only a trusted account should be
@@ -44,7 +44,7 @@ the recover account operation.
 
 > **0**: `"request_account_recovery"`
 
-Defined in: [src/chain/operation.ts:680](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L680)
+Defined in: [src/chain/operation.ts:888](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L888)
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: [src/chain/operation.ts:680](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:681](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L681)
+Defined in: [src/chain/operation.ts:889](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L889)
 
 #### account\_to\_recover
 

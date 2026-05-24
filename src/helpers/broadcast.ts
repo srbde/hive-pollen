@@ -57,6 +57,24 @@ import {
 import { Client } from './../client.js'
 import { cryptoUtils, PrivateKey, PublicKey } from './../crypto.js'
 
+/**
+ * Options used by {@link BroadcastAPI.createTestAccount}.
+ *
+ * @remarks
+ * Tests can either provide a master password, letting Pollen derive role keys
+ * with Hive's login convention, or provide explicit authorities for deterministic
+ * account fixtures.
+ *
+ * @example
+ * ```ts
+ * const options: CreateAccountOptions = {
+ *   username: 'pollen-dev',
+ *   password: 'correct horse battery staple',
+ *   creator: 'initminer',
+ *   metadata: { app: 'pollen-tests' }
+ * }
+ * ```
+ */
 export interface CreateAccountOptions {
   /**
    * Username for the new account.
@@ -97,6 +115,39 @@ export interface CreateAccountOptions {
   metadata?: { [key: string]: any }
 }
 
+/**
+ * Helper for signing and broadcasting Hive operations.
+ *
+ * @remarks
+ * `BroadcastAPI` turns typed operation payloads into signed Hive transactions,
+ * derives TAPOS reference fields from the current head block, and submits the
+ * signed transaction through the configured client. Signing uses Pollen's Noble
+ * secp256k1-backed crypto layer through {@link cryptoUtils} for modern audited
+ * primitives.
+ *
+ * @example
+ * ```ts
+ * import { Client, PrivateKey } from '@srbde/pollen'
+ *
+ * const client = new Client('https://api.hive.blog')
+ * const key = PrivateKey.fromString(process.env.HIVE_ACTIVE_KEY!)
+ *
+ * const confirmation = await client.broadcast.transfer(
+ *   {
+ *     from: 'srbde',
+ *     to: 'alice',
+ *     amount: '0.001 HIVE',
+ *     memo: 'Pollen transfer'
+ *   },
+ *   key
+ * )
+ *
+ * console.log(confirmation.id)
+ * ```
+ *
+ * @see {@link cryptoUtils.signTransaction}
+ * @see {@link Client.call}
+ */
 export class BroadcastAPI {
   /**
    * How many milliseconds in the future to set the expiry time to when
@@ -104,12 +155,41 @@ export class BroadcastAPI {
    */
   public expireTime = 60 * 1000
 
+  /**
+   * Creates a broadcast helper bound to a client.
+   *
+   * @param client - Client used for chain-property reads and transaction
+   * submission.
+   */
   constructor(readonly client: Client) {}
 
   /**
-   * Broadcast a comment, also used to create a new top level post.
-   * @param comment The comment/post.
-   * @param key Private posting key of comment author.
+   * Broadcasts a Hive `comment` operation.
+   *
+   * @param comment - Comment payload. Empty `parent_author` creates a top-level
+   * post; a populated `parent_author` creates a reply.
+   * @param key - Private posting key for `comment.author`.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when the node rejects the transaction, the posting authority is
+   * missing, or the comment payload violates chain rules.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.comment(
+   *   {
+   *     parent_author: '',
+   *     parent_permlink: 'hive-139531',
+   *     author: 'srbde',
+   *     permlink: 'hello-pollen',
+   *     title: 'Hello Pollen',
+   *     body: 'Published through the Pollen SDK.',
+   *     json_metadata: JSON.stringify({ tags: ['hive-139531'] })
+   *   },
+   *   postingKey
+   * )
+   * ```
    */
   public async comment(comment: CommentOperation[1], key: PrivateKey) {
     const op: Operation = ['comment', comment]
@@ -117,10 +197,33 @@ export class BroadcastAPI {
   }
 
   /**
-   * Broadcast a comment and set the options.
-   * @param comment The comment/post.
-   * @param options The comment/post options.
-   * @param key Private posting key of comment author.
+   * Broadcasts a comment together with its payout and beneficiary options.
+   *
+   * @param comment - Comment or post payload.
+   * @param options - Matching `comment_options` payload for the same author and
+   * permlink.
+   * @param key - Private posting key for the comment author.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @remarks
+   * Sending both operations in one transaction prevents a post from briefly
+   * existing with default payout settings.
+   *
+   * @throws RPCError
+   * Thrown when either operation fails chain validation.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.commentWithOptions(comment, {
+   *   author: comment.author,
+   *   permlink: comment.permlink,
+   *   max_accepted_payout: '1000000.000 HBD',
+   *   percent_hbd: 10000,
+   *   allow_votes: true,
+   *   allow_curation_rewards: true,
+   *   extensions: []
+   * }, postingKey)
+   * ```
    */
   public async commentWithOptions(
     comment: CommentOperation[1],
@@ -135,9 +238,28 @@ export class BroadcastAPI {
   }
 
   /**
-   * Broadcast a vote.
-   * @param vote The vote to send.
-   * @param key Private posting key of the voter.
+   * Broadcasts a vote operation.
+   *
+   * @param vote - Vote payload including voter, author, permlink, and weight.
+   * @param key - Private posting key for `vote.voter`.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when the vote is outside chain limits or the posting authority is
+   * invalid.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.vote(
+   *   {
+   *     voter: 'srbde',
+   *     author: 'alice',
+   *     permlink: 'field-notes',
+   *     weight: 10_000
+   *   },
+   *   postingKey
+   * )
+   * ```
    */
   public async vote(vote: VoteOperation[1], key: PrivateKey) {
     const op: Operation = ['vote', vote]
@@ -145,9 +267,28 @@ export class BroadcastAPI {
   }
 
   /**
-   * Broadcast a transfer.
-   * @param data The transfer operation payload.
-   * @param key Private active key of sender.
+   * Broadcasts a liquid HIVE or HBD transfer.
+   *
+   * @param data - Transfer payload with sender, recipient, amount, and memo.
+   * @param key - Private active key for `data.from`.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when the sender lacks funds, active authority is missing, or the node
+   * rejects the transaction.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.transfer(
+   *   {
+   *     from: 'srbde',
+   *     to: 'alice',
+   *     amount: '1.000 HIVE',
+   *     memo: 'Invoice 42'
+   *   },
+   *   activeKey
+   * )
+   * ```
    */
   public async transfer(data: TransferOperation[1], key: PrivateKey) {
     const op: Operation = ['transfer', data]
@@ -155,9 +296,29 @@ export class BroadcastAPI {
   }
 
   /**
-   * Broadcast custom JSON.
-   * @param data The custom_json operation payload.
-   * @param key Private posting or active key.
+   * Broadcasts a `custom_json` operation for application-level protocols.
+   *
+   * @param data - Custom JSON payload, including id, required authorities, and
+   * serialized JSON string.
+   * @param key - Private posting or active key matching the required authority
+   * arrays.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when authority requirements are not met or the payload is invalid.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.json(
+   *   {
+   *     required_auths: [],
+   *     required_posting_auths: ['srbde'],
+   *     id: 'pollen.demo',
+   *     json: JSON.stringify({ nectar: 'ready' })
+   *   },
+   *   postingKey
+   * )
+   * ```
    */
   public async json(data: CustomJsonOperation[1], key: PrivateKey) {
     const op: Operation = ['custom_json', data]
@@ -165,9 +326,38 @@ export class BroadcastAPI {
   }
 
   /**
-   * Create a new account on testnet.
-   * @param options New account options.
-   * @param key Private active key of account creator.
+   * Creates and optionally delegates to a new account in test environments.
+   *
+   * @param options - New account name, authority source, creator, fee, optional
+   * delegation, and metadata.
+   * @param key - Private active key for `options.creator`.
+   * @returns Transaction confirmation for the claim/create/delegate transaction.
+   *
+   * @remarks
+   * This helper is intentionally guarded for test suites. It can derive owner,
+   * active, posting, and memo keys from a password or accept explicit authority
+   * objects when tests need deterministic key material.
+   *
+   * @throws AssertionError
+   * Thrown when called outside a Mocha-style test environment.
+   * @throws Error
+   * Thrown when neither `password` nor `auths` is supplied, or when the provided
+   * account-creation fee does not match chain properties.
+   * @throws RPCError
+   * Thrown when the chain rejects the account creation transaction.
+   *
+   * @example
+   * ```ts
+   * await testnet.broadcast.createTestAccount(
+   *   {
+   *     username: 'pollen-dev',
+   *     password: 'correct horse battery staple',
+   *     creator: 'initminer',
+   *     metadata: { app: 'pollen-tests' }
+   *   },
+   *   initminerActiveKey
+   * )
+   * ```
    */
   public async createTestAccount(
     options: CreateAccountOptions,
@@ -273,10 +463,31 @@ export class BroadcastAPI {
   }
 
   /**
-   * Update account.
-   * @param data The account_update payload.
-   * @param key The private key of the account affected, should be the corresponding
-   *            key level or higher for updating account authorities.
+   * Broadcasts an `account_update` operation.
+   *
+   * @param data - Account update payload, including optional authorities,
+   * memo key, and JSON metadata.
+   * @param key - Private key with sufficient authority for the fields being
+   * changed.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when the update lacks required authority or violates account rules.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.updateAccount(
+   *   {
+   *     account: 'srbde',
+   *     memo_key: memoPublicKey,
+   *     json_metadata: JSON.stringify({ profile: { name: 'SRBDE' } }),
+   *     owner: undefined,
+   *     active: undefined,
+   *     posting: undefined
+   *   },
+   *   activeKey
+   * )
+   * ```
    */
   public async updateAccount(data: AccountUpdateOperation[1], key: PrivateKey) {
     const op: Operation = ['account_update', data]
@@ -284,16 +495,34 @@ export class BroadcastAPI {
   }
 
   /**
-   * Delegate vesting shares from one account to the other. The vesting shares are still owned
-   * by the original account, but content voting rights and bandwidth allocation are transferred
-   * to the receiving account. This sets the delegation to `vesting_shares`, increasing it or
-   * decreasing it as needed. (i.e. a delegation of 0 removes the delegation)
+   * Delegates vesting shares from one account to another.
    *
-   * When a delegation is removed the shares are placed in limbo for a week to prevent a satoshi
-   * of VESTS from voting on the same content twice.
+   * @param options - Delegation payload containing delegator, delegatee, and
+   * vesting share amount.
+   * @param key - Private active key for `options.delegator`.
+   * @returns Transaction confirmation containing the generated transaction id.
    *
-   * @param options Delegation options.
-   * @param key Private active key of the delegator.
+   * @remarks
+   * Delegated VESTS remain owned by the delegator, but voting influence and
+   * resource capacity move to the delegatee. Setting `vesting_shares` to zero
+   * removes the delegation; removed shares enter the protocol cooldown period
+   * before they can vote again.
+   *
+   * @throws RPCError
+   * Thrown when the delegator lacks active authority, the asset is invalid, or
+   * the chain rejects the delegation.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.delegateVestingShares(
+   *   {
+   *     delegator: 'srbde',
+   *     delegatee: 'alice',
+   *     vesting_shares: '100.000000 VESTS'
+   *   },
+   *   activeKey
+   * )
+   * ```
    */
   public async delegateVestingShares(
     options: DelegateVestingSharesOperation[1],
@@ -304,9 +533,32 @@ export class BroadcastAPI {
   }
 
   /**
-   * Sign and broadcast transaction with operations to the network. Throws if the transaction expires.
-   * @param operations List of operations to send.
-   * @param key Private key(s) used to sign transaction.
+   * Builds, signs, and broadcasts a transaction containing one or more operations.
+   *
+   * @param operations - Ordered Hive operations to include in the transaction.
+   * @param key - Private key or keys required by the operation authorities.
+   * @returns Transaction confirmation containing the generated transaction id.
+   *
+   * @remarks
+   * Pollen reads dynamic global properties to derive TAPOS reference fields,
+   * assigns an expiration based on {@link expireTime}, signs with the client's
+   * chain id, and submits the final signed transaction.
+   *
+   * @throws RPCError
+   * Thrown when property lookup or transaction broadcast fails.
+   *
+   * @example
+   * ```ts
+   * await client.broadcast.sendOperations(
+   *   [['vote', {
+   *     voter: 'srbde',
+   *     author: 'alice',
+   *     permlink: 'field-notes',
+   *     weight: 5_000
+   *   }]],
+   *   postingKey
+   * )
+   * ```
    */
   public async sendOperations(
     operations: Operation[],
@@ -341,7 +593,23 @@ export class BroadcastAPI {
   }
 
   /**
-   * Sign a transaction with key(s).
+   * Signs a transaction with one or more private keys.
+   *
+   * @param transaction - Unsigned transaction with TAPOS fields and expiration.
+   * @param key - Private key or keys required by the transaction authorities.
+   * @returns The signed transaction with compact ECDSA signatures.
+   *
+   * @remarks
+   * The signature digest includes the client's chain id, preventing signatures
+   * from being replayed across Hive-compatible networks.
+   *
+   * @example
+   * ```ts
+   * const signed = client.broadcast.sign(transaction, activeKey)
+   * console.log(signed.signatures)
+   * ```
+   *
+   * @see {@link cryptoUtils.signTransaction}
    */
   public sign(
     transaction: Transaction,
@@ -351,7 +619,20 @@ export class BroadcastAPI {
   }
 
   /**
-   * Broadcast a signed transaction to the network.
+   * Broadcasts an already signed transaction to the active RPC node.
+   *
+   * @param transaction - Signed transaction ready for network submission.
+   * @returns Node confirmation enriched with the locally generated transaction id.
+   *
+   * @throws RPCError
+   * Thrown when the node rejects the signed transaction.
+   *
+   * @example
+   * ```ts
+   * const signed = client.broadcast.sign(transaction, activeKey)
+   * const confirmation = await client.broadcast.send(signed)
+   * console.log(confirmation.id)
+   * ```
    */
   public async send(
     transaction: SignedTransaction
@@ -362,7 +643,19 @@ export class BroadcastAPI {
   }
 
   /**
-   * Convenience for calling `condenser_api`.
+   * Sends a raw broadcast-related condenser API call.
+   *
+   * @param method - Condenser method name.
+   * @param params - Positional method parameters.
+   * @returns The decoded RPC result.
+   *
+   * @throws RPCError
+   * Thrown when the node rejects the RPC call.
+   *
+   * @example
+   * ```ts
+   * const result = await client.broadcast.call('broadcast_transaction', [signed])
+   * ```
    */
   public call(method: string, params?: any[]) {
     return this.client.call('condenser_api', method, params)

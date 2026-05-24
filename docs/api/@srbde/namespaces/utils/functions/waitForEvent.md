@@ -8,9 +8,9 @@
 
 > **waitForEvent**\<`T`\>(`emitter`, `eventName`): `Promise`\<`T`\>
 
-Defined in: [src/utils.ts:249](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L249)
+Defined in: [src/utils.ts:297](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L297)
 
-Return a promise that will resove when a specific event is emitted.
+Resolves the next time an event emitter emits a specific event.
 
 ## Type Parameters
 
@@ -24,10 +24,22 @@ Return a promise that will resove when a specific event is emitted.
 
 `EventEmitter`
 
+Event emitter or stream to observe.
+
 ### eventName
 
 `string` \| `symbol`
 
+Event name or symbol to wait for.
+
 ## Returns
 
 `Promise`\<`T`\>
+
+A promise for the first emitted event payload.
+
+## Example
+
+```ts
+await waitForEvent(stream, 'drain')
+```

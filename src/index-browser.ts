@@ -42,4 +42,18 @@ if (typeof window !== 'undefined') {
   ;(window as any).process = process
 }
 
+/**
+ * Browser entry point for Pollen.
+ *
+ * @remarks
+ * This module installs the minimal `Buffer`, `process`, and `global` shims
+ * needed by the browser bundle before re-exporting the main API surface.
+ *
+ * @example
+ * ```ts
+ * import { Client } from '@srbde/pollen/browser'
+ *
+ * const client = new Client('https://api.hive.blog')
+ * ```
+ */
 export * from './index.js'

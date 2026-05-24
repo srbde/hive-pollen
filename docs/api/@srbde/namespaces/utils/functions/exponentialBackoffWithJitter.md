@@ -8,10 +8,9 @@
 
 > **exponentialBackoffWithJitter**(`tries`, `baseDelay?`, `maxDelay?`, `jitter?`): `number`
 
-Defined in: [src/utils.ts:328](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L328)
+Defined in: [src/utils.ts:423](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L423)
 
-Standard exponential backoff with jitter.
-Formula: min(maxDelay, (base * 2^tries)) + random(0, jitter)
+Computes an exponential retry delay with random jitter.
 
 ## Parameters
 
@@ -19,18 +18,39 @@ Formula: min(maxDelay, (base * 2^tries)) + random(0, jitter)
 
 `number`
 
+Number of failed attempts or rounds already observed.
+
 ### baseDelay?
 
 `number` = `500`
+
+Initial delay in milliseconds.
 
 ### maxDelay?
 
 `number` = `10000`
 
+Maximum exponential component in milliseconds.
+
 ### jitter?
 
 `number` = `100`
 
+Maximum random jitter to add in milliseconds.
+
 ## Returns
 
 `number`
+
+Delay in milliseconds.
+
+## Remarks
+
+Formula: `min(maxDelay, baseDelay * 2^tries) + random(0, jitter)`.
+Jitter keeps many clients from retrying the same Hive RPC nodes in lockstep.
+
+## Example
+
+```ts
+const delay = exponentialBackoffWithJitter(2, 500, 10_000, 250)
+```

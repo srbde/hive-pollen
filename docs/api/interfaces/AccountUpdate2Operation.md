@@ -6,9 +6,14 @@
 
 # Interface: AccountUpdate2Operation
 
-Defined in: [src/chain/operation.ts:887](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L887)
+Defined in: [src/chain/operation.ts:1143](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1143)
 
-Generic operation.
+Modern account update operation with posting JSON metadata.
+
+## Remarks
+
+This operation extends the legacy account update shape by allowing separate
+profile/application metadata in `posting_json_metadata`.
 
 ## Extends
 
@@ -20,7 +25,7 @@ Generic operation.
 
 > **0**: `"account_update2"`
 
-Defined in: [src/chain/operation.ts:888](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L888)
+Defined in: [src/chain/operation.ts:1144](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1144)
 
 #### Overrides
 
@@ -32,7 +37,7 @@ Defined in: [src/chain/operation.ts:888](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:889](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L889)
+Defined in: [src/chain/operation.ts:1145](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1145)
 
 #### account
 

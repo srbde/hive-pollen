@@ -6,9 +6,26 @@
 
 # Interface: CustomJsonOperation
 
-Defined in: [src/chain/operation.ts:362](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L362)
+Defined in: [src/chain/operation.ts:550](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L550)
 
-Generic operation.
+JSON custom operation used by Hive application protocols.
+
+## Remarks
+
+The `json` field must already be serialized. Posting authority is common for
+social protocols; active authority is used for protocols with financial or
+account-control implications.
+
+## Example
+
+```ts
+const op: CustomJsonOperation = ['custom_json', {
+  required_auths: [],
+  required_posting_auths: ['srbde'],
+  id: 'pollen.demo',
+  json: JSON.stringify({ ok: true })
+}]
+```
 
 ## Extends
 
@@ -20,7 +37,7 @@ Generic operation.
 
 > **0**: `"custom_json"`
 
-Defined in: [src/chain/operation.ts:363](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L363)
+Defined in: [src/chain/operation.ts:551](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L551)
 
 #### Overrides
 
@@ -32,7 +49,7 @@ Defined in: [src/chain/operation.ts:363](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:364](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L364)
+Defined in: [src/chain/operation.ts:552](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L552)
 
 #### id
 

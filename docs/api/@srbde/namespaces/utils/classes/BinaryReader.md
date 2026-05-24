@@ -6,9 +6,21 @@
 
 # Class: BinaryReader
 
-Defined in: [src/utils.ts:162](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L162)
+Defined in: [src/utils.ts:201](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L201)
 
-Native binary reader using Uint8Array.
+Little-endian byte reader used by Hive deserializers and memo decoding.
+
+## Remarks
+
+The reader mirrors [BinaryWriter](BinaryWriter.md) and advances an internal cursor as
+values are consumed. It is intentionally small and browser-safe.
+
+## Example
+
+```ts
+const reader = new BinaryReader(bytes)
+const memo = reader.readString()
+```
 
 ## Constructors
 
@@ -16,7 +28,7 @@ Native binary reader using Uint8Array.
 
 > **new BinaryReader**(`buffer`): `BinaryReader`
 
-Defined in: [src/utils.ts:166](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L166)
+Defined in: [src/utils.ts:205](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L205)
 
 #### Parameters
 
@@ -34,7 +46,7 @@ Defined in: [src/utils.ts:166](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readBytes**(`length`): `Uint8Array`
 
-Defined in: [src/utils.ts:235](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L235)
+Defined in: [src/utils.ts:274](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L274)
 
 #### Parameters
 
@@ -52,7 +64,7 @@ Defined in: [src/utils.ts:235](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readInt16**(): `number`
 
-Defined in: [src/utils.ts:178](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L178)
+Defined in: [src/utils.ts:217](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L217)
 
 #### Returns
 
@@ -64,7 +76,7 @@ Defined in: [src/utils.ts:178](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readInt32**(): `number`
 
-Defined in: [src/utils.ts:190](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L190)
+Defined in: [src/utils.ts:229](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L229)
 
 #### Returns
 
@@ -76,7 +88,7 @@ Defined in: [src/utils.ts:190](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readInt64**(): `JSBI`
 
-Defined in: [src/utils.ts:202](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L202)
+Defined in: [src/utils.ts:241](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L241)
 
 #### Returns
 
@@ -88,7 +100,7 @@ Defined in: [src/utils.ts:202](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readInt8**(): `number`
 
-Defined in: [src/utils.ts:170](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L170)
+Defined in: [src/utils.ts:209](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L209)
 
 #### Returns
 
@@ -100,7 +112,7 @@ Defined in: [src/utils.ts:170](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readString**(): `string`
 
-Defined in: [src/utils.ts:228](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L228)
+Defined in: [src/utils.ts:267](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L267)
 
 #### Returns
 
@@ -112,7 +124,7 @@ Defined in: [src/utils.ts:228](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readUint16**(): `number`
 
-Defined in: [src/utils.ts:184](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L184)
+Defined in: [src/utils.ts:223](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L223)
 
 #### Returns
 
@@ -124,7 +136,7 @@ Defined in: [src/utils.ts:184](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readUint32**(): `number`
 
-Defined in: [src/utils.ts:196](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L196)
+Defined in: [src/utils.ts:235](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L235)
 
 #### Returns
 
@@ -136,7 +148,7 @@ Defined in: [src/utils.ts:196](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readUint64**(): `JSBI`
 
-Defined in: [src/utils.ts:212](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L212)
+Defined in: [src/utils.ts:251](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L251)
 
 #### Returns
 
@@ -148,7 +160,7 @@ Defined in: [src/utils.ts:212](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readUint8**(): `number`
 
-Defined in: [src/utils.ts:174](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L174)
+Defined in: [src/utils.ts:213](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L213)
 
 #### Returns
 
@@ -160,7 +172,7 @@ Defined in: [src/utils.ts:174](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **readVarint32**(): `number`
 
-Defined in: [src/utils.ts:216](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L216)
+Defined in: [src/utils.ts:255](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L255)
 
 #### Returns
 
@@ -172,7 +184,7 @@ Defined in: [src/utils.ts:216](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 > **skip**(`length`): `void`
 
-Defined in: [src/utils.ts:241](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/utils.ts#L241)
+Defined in: [src/utils.ts:280](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/utils.ts#L280)
 
 #### Parameters
 

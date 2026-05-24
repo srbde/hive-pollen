@@ -6,9 +6,25 @@
 
 # Interface: VoteOperation
 
-Defined in: [src/chain/operation.ts:811](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L811)
+Defined in: [src/chain/operation.ts:1060](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1060)
 
-Generic operation.
+Casts, updates, or removes a vote on a post or comment.
+
+## Remarks
+
+Weight is a signed integer where `10000` is a full upvote, `0` removes the
+vote, and negative values are downvotes.
+
+## Example
+
+```ts
+const op: VoteOperation = ['vote', {
+  voter: 'srbde',
+  author: 'alice',
+  permlink: 'field-notes',
+  weight: 10_000
+}]
+```
 
 ## Extends
 
@@ -20,7 +36,7 @@ Generic operation.
 
 > **0**: `"vote"`
 
-Defined in: [src/chain/operation.ts:812](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L812)
+Defined in: [src/chain/operation.ts:1061](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1061)
 
 #### Overrides
 
@@ -32,7 +48,7 @@ Defined in: [src/chain/operation.ts:812](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:813](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L813)
+Defined in: [src/chain/operation.ts:1062](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1062)
 
 #### author
 

@@ -8,7 +8,9 @@
 
 > `const` **Memo**: `object`
 
-Defined in: [src/memo.ts:109](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/memo.ts#L109)
+Defined in: [src/memo.ts:163](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/memo.ts#L163)
+
+Hive encrypted memo helper.
 
 ## Type Declaration
 
@@ -16,7 +18,7 @@ Defined in: [src/memo.ts:109](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f4
 
 > **decode**: (`private_key`, `memo`) => `string`
 
-Encrypted memo/message decryption
+Decodes a Hive memo, decrypting messages that begin with `#`.
 
 #### Parameters
 
@@ -24,23 +26,46 @@ Encrypted memo/message decryption
 
 `string` \| [`PrivateKey`](../classes/PrivateKey.md)
 
-Private memo key of recipient
+Recipient or sender memo private key, either as a
+[PrivateKey](../classes/PrivateKey.md) instance or WIF string.
 
 ##### memo
 
 `string`
 
-Encrypted message/memo
+Memo text or encrypted memo payload.
 
 #### Returns
 
 `string`
+
+The original memo text. Encrypted memos remain `#`-prefixed after
+decryption to preserve Hive memo semantics.
+
+#### Remarks
+
+The decryptor determines the counterparty public key from the encrypted memo
+envelope, derives the AES key through the memo shared secret, and supports
+legacy payloads that were not length-prefixed.
+
+#### Throws
+
+Error
+Thrown when the runtime cannot support memo encryption, the key is invalid,
+or AES checksum validation fails.
+
+#### Example
+
+```ts
+const plaintext = Memo.decode(recipientMemoKey, encryptedMemo)
+console.log(plaintext)
+```
 
 ### encode
 
 > **encode**: (`private_key`, `public_key`, `memo`, `testNonce?`) => `string`
 
-Memo/Any message encoding using AES (aes-cbc algorithm)
+Encodes a Hive memo, encrypting messages that begin with `#`.
 
 #### Parameters
 
@@ -48,26 +73,64 @@ Memo/Any message encoding using AES (aes-cbc algorithm)
 
 `string` \| [`PrivateKey`](../classes/PrivateKey.md)
 
-Private memo key of sender
+Sender memo private key, either as a [PrivateKey](../classes/PrivateKey.md)
+instance or WIF string.
 
 ##### public\_key
 
 `string` \| [`PublicKey`](../classes/PublicKey.md)
 
-public memo key of recipient
+Recipient memo public key, either as a [PublicKey](../classes/PublicKey.md)
+instance or Hive public-key string.
 
 ##### memo
 
 `string`
 
-message to be encrypted
+Plain memo text. Only values beginning with `#` are encrypted;
+unprefixed memos are returned unchanged.
 
 ##### testNonce?
 
 `string`
 
-nonce with high entropy
+Optional deterministic nonce used by tests.
 
 #### Returns
 
 `string`
+
+The original plaintext memo or a `#`-prefixed encrypted memo payload.
+
+#### Remarks
+
+Pollen serializes the memo with its binary writer before AES-CBC encryption so
+Unicode text and Hive's encrypted memo structure round-trip consistently.
+
+#### Throws
+
+Error
+Thrown when the runtime cannot support memo encryption or key conversion
+fails.
+
+#### Example
+
+```ts
+const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, '#hello nectar')
+```
+
+## Remarks
+
+`Memo` exposes the two operations most applications need: encode before
+broadcasting a transfer memo and decode after reading a transfer memo from
+account history. The helper follows Hive's convention that only memos
+beginning with `#` are encrypted.
+
+## Example
+
+```ts
+import { Memo } from '@srbde/pollen'
+
+const encrypted = Memo.encode(senderMemoKey, recipientMemoPublicKey, '#for your eyes')
+const plaintext = Memo.decode(recipientMemoKey, encrypted)
+```

@@ -6,7 +6,28 @@
 
 # Class: HivemindAPI
 
-Defined in: [src/helpers/hivemind.ts:79](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L79)
+Defined in: [src/helpers/hivemind.ts:160](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L160)
+
+Helper for Hive Hivemind and bridge API reads.
+
+## Remarks
+
+Hivemind powers social data that is not stored directly in block operations:
+ranked posts, community metadata, subscriptions, and notification feeds. This
+helper routes calls through the `bridge` API namespace used by modern Hive
+front ends.
+
+## Example
+
+```ts
+const posts = await client.hivemind.getRankedPosts({
+  sort: 'trending',
+  tag: 'hive-139531',
+  limit: 10
+})
+
+console.log(posts.map((post) => post.title))
+```
 
 ## Constructors
 
@@ -14,13 +35,17 @@ Defined in: [src/helpers/hivemind.ts:79](https://github.com/TheCrazyGM/dhive/blo
 
 > **new HivemindAPI**(`client`): `HivemindAPI`
 
-Defined in: [src/helpers/hivemind.ts:80](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L80)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L166)
+
+Creates a Hivemind helper bound to a client.
 
 #### Parameters
 
 ##### client
 
 [`Client`](Client.md)
+
+Client used to call the bridge API namespace.
 
 #### Returns
 
@@ -32,7 +57,9 @@ Defined in: [src/helpers/hivemind.ts:80](https://github.com/TheCrazyGM/dhive/blo
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/hivemind.ts:80](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L80)
+Defined in: [src/helpers/hivemind.ts:166](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L166)
+
+Client used to call the bridge API namespace.
 
 ## Methods
 
@@ -40,9 +67,9 @@ Defined in: [src/helpers/hivemind.ts:80](https://github.com/TheCrazyGM/dhive/blo
 
 > **call**(`method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/hivemind.ts:87](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L87)
+Defined in: [src/helpers/hivemind.ts:187](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L187)
 
-Convenience of calling hivemind api
+Sends a raw bridge API call.
 
 #### Parameters
 
@@ -50,13 +77,34 @@ Convenience of calling hivemind api
 
 `string`
 
+Bridge method name.
+
 ##### params?
 
 `any`
 
+Method-specific named parameters.
+
 #### Returns
 
 `Promise`\<`any`\>
+
+The decoded bridge result.
+
+#### Throws
+
+RPCError
+Thrown when the active node does not expose bridge or rejects the request.
+
+#### Example
+
+```ts
+const posts = await client.hivemind.call('get_ranked_posts', {
+  sort: 'hot',
+  tag: 'hive-139531',
+  limit: 5
+})
+```
 
 ***
 
@@ -64,19 +112,37 @@ Convenience of calling hivemind api
 
 > **getAccountNotifications**(`options?`): `Promise`\<[`Notifications`](../interfaces/Notifications.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:129](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L129)
+Defined in: [src/helpers/hivemind.ts:297](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L297)
 
-Get particular account notifications feed
+Fetches an account's Hivemind notification feed.
 
 #### Parameters
 
 ##### options?
 
-`AccountNotifsQuery`
+[`AccountNotifsQuery`](../interfaces/AccountNotifsQuery.md)
+
+Account, limit, and optional notification type filter.
 
 #### Returns
 
 `Promise`\<[`Notifications`](../interfaces/Notifications.md)[]\>
+
+Notification records for the account.
+
+#### Throws
+
+RPCError
+Thrown when bridge rejects the notification query.
+
+#### Example
+
+```ts
+const notifications = await client.hivemind.getAccountNotifications({
+  account: 'srbde',
+  limit: 25
+})
+```
 
 ***
 
@@ -84,19 +150,38 @@ Get particular account notifications feed
 
 > **getAccountPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:103](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L103)
+Defined in: [src/helpers/hivemind.ts:233](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L233)
 
-Get posts by particular account from Hivemind
+Fetches posts authored or surfaced by a specific account.
 
 #### Parameters
 
 ##### options
 
-`AccountPostsQuery`
+[`AccountPostsQuery`](../interfaces/AccountPostsQuery.md)
+
+Account, pagination, observer, and limit settings.
 
 #### Returns
 
 `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
+
+Discussion records from the account's post feed.
+
+#### Throws
+
+RPCError
+Thrown when bridge rejects the account-post query.
+
+#### Example
+
+```ts
+const posts = await client.hivemind.getAccountPosts({
+  account: 'srbde',
+  sort: 'posts',
+  limit: 10
+})
+```
 
 ***
 
@@ -104,20 +189,40 @@ Get posts by particular account from Hivemind
 
 > **getCommunity**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:112](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L112)
+Defined in: [src/helpers/hivemind.ts:257](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L257)
 
-Get community details such as who are the admin,
-moderators, how many subscribers, etc..
+Fetches community metadata from Hivemind.
 
 #### Parameters
 
 ##### options
 
-`CommunityQuery`
+[`CommunityQuery`](../interfaces/CommunityQuery.md)
+
+Community name and observer account.
 
 #### Returns
 
 `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
+
+Community detail records including roles, subscribers, and
+display metadata.
+
+#### Throws
+
+RPCError
+Thrown when the community cannot be read.
+
+#### Example
+
+```ts
+const [community] = await client.hivemind.getCommunity({
+  name: 'hive-139531',
+  observer: 'srbde'
+})
+
+console.log(community.title)
+```
 
 ***
 
@@ -125,19 +230,40 @@ moderators, how many subscribers, etc..
 
 > **getRankedPosts**(`options`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:95](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L95)
+Defined in: [src/helpers/hivemind.ts:211](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L211)
 
-Get trending, hot, recent community posts from Hivemind
+Fetches ranked posts from Hivemind.
 
 #### Parameters
 
 ##### options
 
-`PostsQuery`
+[`PostsQuery`](../interfaces/PostsQuery.md)
+
+Sort, tag/community, pagination, observer, and limit
+settings.
 
 #### Returns
 
 `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
+
+Discussion records ordered by the selected ranking mode.
+
+#### Throws
+
+RPCError
+Thrown when bridge rejects the ranking query.
+
+#### Example
+
+```ts
+const posts = await client.hivemind.getRankedPosts({
+  sort: 'created',
+  tag: 'hive-139531',
+  limit: 20,
+  observer: 'srbde'
+})
+```
 
 ***
 
@@ -145,9 +271,9 @@ Get trending, hot, recent community posts from Hivemind
 
 > **listAllSubscriptions**(`account`): `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:121](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L121)
+Defined in: [src/helpers/hivemind.ts:276](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L276)
 
-List all subscriptions by particular account
+Lists communities followed by an account.
 
 #### Parameters
 
@@ -155,13 +281,25 @@ List all subscriptions by particular account
 
 `string` \| `object`
 
-the account you want to query
+Account name or bridge-compatible account parameter.
 
 #### Returns
 
 `Promise`\<[`Discussion`](../interfaces/Discussion.md)[]\>
 
-return role, what community the account joined
+Subscription records containing community and role information.
+
+#### Throws
+
+RPCError
+Thrown when bridge rejects the subscription lookup.
+
+#### Example
+
+```ts
+const subscriptions = await client.hivemind.listAllSubscriptions('srbde')
+console.log(subscriptions)
+```
 
 ***
 
@@ -169,16 +307,34 @@ return role, what community the account joined
 
 > **listCommunities**(`options`): `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
 
-Defined in: [src/helpers/hivemind.ts:137](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/hivemind.ts#L137)
+Defined in: [src/helpers/hivemind.ts:318](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/hivemind.ts#L318)
 
-List all available communities on hivemind
+Lists communities known to Hivemind.
 
 #### Parameters
 
 ##### options
 
-`ListCommunitiesQuery`
+[`ListCommunitiesQuery`](../interfaces/ListCommunitiesQuery.md)
+
+Pagination, limit, query, and observer settings.
 
 #### Returns
 
 `Promise`\<[`CommunityDetail`](../interfaces/CommunityDetail.md)[]\>
+
+Community detail records.
+
+#### Throws
+
+RPCError
+Thrown when bridge rejects the community list query.
+
+#### Example
+
+```ts
+const communities = await client.hivemind.listCommunities({
+  limit: 20,
+  observer: 'srbde'
+})
+```

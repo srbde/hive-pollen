@@ -6,7 +6,7 @@
 
 # Interface: ResetAccountOperation
 
-Defined in: [src/chain/operation.ts:706](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L706)
+Defined in: [src/chain/operation.ts:914](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L914)
 
 This operation allows recovery_account to change account_to_reset's owner authority to
 new_owner_authority after 60 days of inactivity.
@@ -21,7 +21,7 @@ new_owner_authority after 60 days of inactivity.
 
 > **0**: `"reset_account"`
 
-Defined in: [src/chain/operation.ts:707](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L707)
+Defined in: [src/chain/operation.ts:915](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L915)
 
 #### Overrides
 
@@ -33,7 +33,7 @@ Defined in: [src/chain/operation.ts:707](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:708](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L708)
+Defined in: [src/chain/operation.ts:916](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L916)
 
 #### account\_to\_reset
 

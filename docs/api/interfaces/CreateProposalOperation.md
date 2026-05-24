@@ -6,9 +6,14 @@
 
 # Interface: CreateProposalOperation
 
-Defined in: [src/chain/operation.ts:901](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L901)
+Defined in: [src/chain/operation.ts:1164](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1164)
 
-Generic operation.
+Creates a Decentralized Hive Fund proposal.
+
+## Remarks
+
+Proposal payments are made to `receiver` between `start_date` and `end_date`
+when the proposal receives sufficient stake-weighted approval.
 
 ## Extends
 
@@ -20,7 +25,7 @@ Generic operation.
 
 > **0**: `"create_proposal"`
 
-Defined in: [src/chain/operation.ts:902](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L902)
+Defined in: [src/chain/operation.ts:1165](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1165)
 
 #### Overrides
 
@@ -32,7 +37,7 @@ Defined in: [src/chain/operation.ts:902](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:903](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L903)
+Defined in: [src/chain/operation.ts:1166](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1166)
 
 #### creator
 

@@ -6,9 +6,9 @@
 
 # Interface: CollateralizedConvertOperation
 
-Defined in: [src/chain/operation.ts:946](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L946)
+Defined in: [src/chain/operation.ts:1221](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1221)
 
-Generic operation.
+Converts HIVE to HBD through the collateralized conversion flow.
 
 ## Extends
 
@@ -20,7 +20,7 @@ Generic operation.
 
 > **0**: `"collateralized_convert"`
 
-Defined in: [src/chain/operation.ts:947](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L947)
+Defined in: [src/chain/operation.ts:1222](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1222)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:947](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:948](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L948)
+Defined in: [src/chain/operation.ts:1223](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1223)
 
 #### amount
 

@@ -6,9 +6,28 @@
 
 # Interface: RecurrentTransferOperation
 
-Defined in: [src/chain/operation.ts:955](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L955)
+Defined in: [src/chain/operation.ts:1250](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1250)
 
-Generic operation.
+Schedules a recurring transfer.
+
+## Remarks
+
+`recurrence` is the interval in hours and `executions` is the number of
+times the transfer should execute.
+
+## Example
+
+```ts
+const op: RecurrentTransferOperation = ['recurrent_transfer', {
+  from: 'srbde',
+  to: 'alice',
+  amount: '1.000 HIVE',
+  memo: 'monthly support',
+  recurrence: 720,
+  executions: 3,
+  extensions: []
+}]
+```
 
 ## Extends
 
@@ -20,7 +39,7 @@ Generic operation.
 
 > **0**: `"recurrent_transfer"`
 
-Defined in: [src/chain/operation.ts:956](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L956)
+Defined in: [src/chain/operation.ts:1251](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1251)
 
 #### Overrides
 
@@ -32,7 +51,7 @@ Defined in: [src/chain/operation.ts:956](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:957](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L957)
+Defined in: [src/chain/operation.ts:1252](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L1252)
 
 #### amount
 

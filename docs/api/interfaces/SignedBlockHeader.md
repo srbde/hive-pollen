@@ -6,9 +6,21 @@
 
 # Interface: SignedBlockHeader
 
-Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L52)
+Defined in: [src/chain/block.ts:72](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L72)
 
-Signed block header.
+Hive block header plus witness signature.
+
+## Remarks
+
+Witness signatures prove that the scheduled witness produced the block using
+its active block-signing key.
+
+## Example
+
+```ts
+const block = await client.database.getBlock(90_000_000)
+console.log(block.witness_signature)
+```
 
 ## Extends
 
@@ -24,7 +36,7 @@ Signed block header.
 
 > **extensions**: `any`[]
 
-Defined in: [src/chain/block.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L46)
+Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L56)
 
 #### Inherited from
 
@@ -36,7 +48,7 @@ Defined in: [src/chain/block.ts:46](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:42](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L42)
+Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L52)
 
 #### Inherited from
 
@@ -48,7 +60,7 @@ Defined in: [src/chain/block.ts:42](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:43](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L43)
+Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L53)
 
 #### Inherited from
 
@@ -60,7 +72,7 @@ Defined in: [src/chain/block.ts:43](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:45](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L45)
+Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L55)
 
 #### Inherited from
 
@@ -72,7 +84,7 @@ Defined in: [src/chain/block.ts:45](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:44](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L44)
+Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L54)
 
 #### Inherited from
 
@@ -84,4 +96,4 @@ Defined in: [src/chain/block.ts:44](https://github.com/TheCrazyGM/dhive/blob/b74
 
 > **witness\_signature**: `string`
 
-Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/block.ts#L53)
+Defined in: [src/chain/block.ts:73](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/block.ts#L73)

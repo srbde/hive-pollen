@@ -34,14 +34,32 @@
  */
 
 import * as utils from './utils.js'
+/**
+ * Utility namespace containing byte writers, retry helpers, streams, and
+ * witness-property builders.
+ *
+ * @remarks
+ * Pollen exports utilities as a namespace to keep the primary API focused on
+ * the client and chain models while still exposing protocol tools for advanced
+ * integrations.
+ *
+ * @example
+ * ```ts
+ * import { utils } from '@srbde/pollen'
+ *
+ * const mask = utils.makeBitMaskFilter([utils.operationOrders.transfer])
+ * ```
+ */
 export { utils }
 export { NodeHealthTracker, HealthTrackerOptions } from './health-tracker.js'
 
 export * from './helpers/blockchain.js'
+export * from './helpers/broadcast.js'
 export * from './helpers/database.js'
 export * from './helpers/rc.js'
 export * from './helpers/key.js'
 export * from './helpers/hivemind.js'
+export * from './helpers/transaction.js'
 
 export * from './chain/account.js'
 export * from './chain/asset.js'
@@ -49,6 +67,7 @@ export * from './chain/block.js'
 export * from './chain/comment.js'
 export * from './chain/misc.js'
 export * from './chain/operation.js'
+export * from './chain/rc.js'
 export * from './chain/serializer.js'
 export * from './chain/transaction.js'
 export * from './chain/hivemind.js'

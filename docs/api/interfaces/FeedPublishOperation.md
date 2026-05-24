@@ -6,9 +6,14 @@
 
 # Interface: FeedPublishOperation
 
-Defined in: [src/chain/operation.ts:521](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L521)
+Defined in: [src/chain/operation.ts:728](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L728)
 
-Generic operation.
+Publishes a witness price feed.
+
+## Remarks
+
+Witness feeds influence the median HIVE/HBD price used by conversions and
+debt-ratio mechanics.
 
 ## Extends
 
@@ -20,7 +25,7 @@ Generic operation.
 
 > **0**: `"feed_publish"`
 
-Defined in: [src/chain/operation.ts:522](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L522)
+Defined in: [src/chain/operation.ts:729](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L729)
 
 #### Overrides
 
@@ -32,7 +37,7 @@ Defined in: [src/chain/operation.ts:522](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:523](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L523)
+Defined in: [src/chain/operation.ts:730](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L730)
 
 #### exchange\_rate
 

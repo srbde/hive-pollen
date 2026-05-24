@@ -6,17 +6,25 @@
 
 # Class: Price
 
-Defined in: [src/chain/asset.ts:236](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L236)
+Defined in: [src/chain/asset.ts:405](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L405)
 
-Represents quotation of the relative value of asset against another asset.
-Similar to 'currency pair' used to determine value of currencies.
+Price ratio between two different Hive assets.
 
- For example:
- 1 EUR / 1.25 USD where:
- 1 EUR is an asset specified as a base
- 1.25 USD us an asset specified as a qute
+## Remarks
 
- can determine value of EUR against USD.
+`Price` behaves like a currency pair: `base` is expressed relative to
+`quote`. Witness feeds commonly describe how much HBD one HIVE is worth.
+
+## Example
+
+```ts
+const price = Price.from({
+  base: '1.000 HIVE',
+  quote: '0.300 HBD'
+})
+
+const hbd = price.convert(Asset.from('10.000 HIVE'))
+```
 
 ## Constructors
 
@@ -24,7 +32,9 @@ Similar to 'currency pair' used to determine value of currencies.
 
 > **new Price**(`base`, `quote`): `Price`
 
-Defined in: [src/chain/asset.ts:245](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L245)
+Defined in: [src/chain/asset.ts:420](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L420)
+
+Creates a price ratio from non-zero base and quote assets.
 
 #### Parameters
 
@@ -32,21 +42,28 @@ Defined in: [src/chain/asset.ts:245](https://github.com/TheCrazyGM/dhive/blob/b7
 
 [`Asset`](Asset.md)
 
-represents a value of the price object to be expressed relatively to quote
-               asset. Cannot have amount == 0 if you want to build valid price.
+Asset being priced.
 
 ##### quote
 
 [`Asset`](Asset.md)
 
-represents an relative asset. Cannot have amount == 0, otherwise
-               asertion fail.
-
-Both base and quote shall have different symbol defined.
+Relative asset used to express the price.
 
 #### Returns
 
 `Price`
+
+#### Throws
+
+AssertionError
+Thrown when either amount is zero or both assets use the same symbol.
+
+#### Example
+
+```ts
+const price = new Price(Asset.from('1.000 HIVE'), Asset.from('0.300 HBD'))
+```
 
 ## Properties
 
@@ -54,10 +71,9 @@ Both base and quote shall have different symbol defined.
 
 > `readonly` **base**: [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:245](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L245)
+Defined in: [src/chain/asset.ts:420](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L420)
 
-represents a value of the price object to be expressed relatively to quote
-               asset. Cannot have amount == 0 if you want to build valid price.
+Asset being priced.
 
 ***
 
@@ -65,12 +81,9 @@ represents a value of the price object to be expressed relatively to quote
 
 > `readonly` **quote**: [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:245](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L245)
+Defined in: [src/chain/asset.ts:420](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L420)
 
-represents an relative asset. Cannot have amount == 0, otherwise
-               asertion fail.
-
-Both base and quote shall have different symbol defined.
+Relative asset used to express the price.
 
 ## Methods
 
@@ -78,10 +91,9 @@ Both base and quote shall have different symbol defined.
 
 > **convert**(`asset`): [`Asset`](Asset.md)
 
-Defined in: [src/chain/asset.ts:278](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L278)
+Defined in: [src/chain/asset.ts:478](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L478)
 
-Return a new Asset with the price converted between the symbols in the pair.
-Throws if passed asset symbol is not base or quote.
+Converts an asset between the price pair's two symbols.
 
 #### Parameters
 
@@ -89,9 +101,24 @@ Throws if passed asset symbol is not base or quote.
 
 [`Asset`](Asset.md)
 
+Asset using either the base or quote symbol.
+
 #### Returns
 
 [`Asset`](Asset.md)
+
+Converted asset using the opposite symbol.
+
+#### Throws
+
+Error
+Thrown when `asset.symbol` is not part of this price pair.
+
+#### Example
+
+```ts
+const hbd = price.convert(Asset.from('10.000 HIVE'))
+```
 
 ***
 
@@ -99,13 +126,21 @@ Throws if passed asset symbol is not base or quote.
 
 > **toString**(): `string`
 
-Defined in: [src/chain/asset.ts:270](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L270)
+Defined in: [src/chain/asset.ts:460](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L460)
 
-Return a string representation of this price pair.
+Renders the price pair.
 
 #### Returns
 
 `string`
+
+String in `base:quote` form.
+
+#### Example
+
+```ts
+price.toString()
+```
 
 ***
 
@@ -113,9 +148,9 @@ Return a string representation of this price pair.
 
 > `static` **from**(`value`): `Price`
 
-Defined in: [src/chain/asset.ts:259](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L259)
+Defined in: [src/chain/asset.ts:442](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L442)
 
-Convenience to create new Price.
+Normalizes a price-like value into a Price.
 
 #### Parameters
 
@@ -123,6 +158,16 @@ Convenience to create new Price.
 
 [`PriceType`](../type-aliases/PriceType.md)
 
+Existing price or object containing base and quote assets.
+
 #### Returns
 
 `Price`
+
+A normalized price.
+
+#### Example
+
+```ts
+const price = Price.from({ base: '1.000 HIVE', quote: '0.300 HBD' })
+```

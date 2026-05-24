@@ -6,7 +6,21 @@
 
 # Interface: VestingDelegation
 
-Defined in: [src/chain/misc.ts:99](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L99)
+Defined in: [src/chain/misc.ts:151](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L151)
+
+Vesting-share delegation from one account to another.
+
+## Remarks
+
+Delegated VESTS remain owned by the delegator but transfer voting influence
+and RC capacity to the delegatee until removed and cooled down.
+
+## Example
+
+```ts
+const delegations = await client.database.getVestingDelegations('srbde')
+console.log(delegations[0]?.delegatee)
+```
 
 ## Properties
 
@@ -14,7 +28,7 @@ Defined in: [src/chain/misc.ts:99](https://github.com/TheCrazyGM/dhive/blob/b74b
 
 > **delegatee**: `string`
 
-Defined in: [src/chain/misc.ts:111](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L111)
+Defined in: [src/chain/misc.ts:163](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L163)
 
 Account that is receiving vests from delegator.
 
@@ -24,7 +38,7 @@ Account that is receiving vests from delegator.
 
 > **delegator**: `string`
 
-Defined in: [src/chain/misc.ts:107](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L107)
+Defined in: [src/chain/misc.ts:159](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L159)
 
 Account that is delegating vests to delegatee.
 
@@ -34,7 +48,7 @@ Account that is delegating vests to delegatee.
 
 > **id**: `number`
 
-Defined in: [src/chain/misc.ts:103](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L103)
+Defined in: [src/chain/misc.ts:155](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L155)
 
 Delegation id.
 
@@ -44,7 +58,7 @@ Delegation id.
 
 > **min\_delegation\_time**: `string`
 
-Defined in: [src/chain/misc.ts:119](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L119)
+Defined in: [src/chain/misc.ts:171](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L171)
 
 Earliest date delegation can be removed.
 
@@ -54,6 +68,6 @@ Earliest date delegation can be removed.
 
 > **vesting\_shares**: `string` \| [`Asset`](../classes/Asset.md)
 
-Defined in: [src/chain/misc.ts:115](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L115)
+Defined in: [src/chain/misc.ts:167](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L167)
 
 Amount of VESTS delegated.

@@ -6,9 +6,14 @@
 
 # Interface: AccountCreateWithDelegationOperation
 
-Defined in: [src/chain/operation.ts:168](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L168)
+Defined in: [src/chain/operation.ts:246](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L246)
 
-Generic operation.
+Account creation operation that also delegates initial VESTS.
+
+## Remarks
+
+Delegation gives a new account immediate resource capacity without
+transferring ownership of the underlying vesting shares.
 
 ## Extends
 
@@ -20,7 +25,7 @@ Generic operation.
 
 > **0**: `"account_create_with_delegation"`
 
-Defined in: [src/chain/operation.ts:169](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L169)
+Defined in: [src/chain/operation.ts:247](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L247)
 
 #### Overrides
 
@@ -32,7 +37,7 @@ Defined in: [src/chain/operation.ts:169](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:170](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L170)
+Defined in: [src/chain/operation.ts:248](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L248)
 
 #### active
 

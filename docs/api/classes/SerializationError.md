@@ -6,9 +6,27 @@
 
 # Class: SerializationError
 
-Defined in: [src/errors.ts:34](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L34)
+Defined in: [src/errors.ts:95](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L95)
 
-Error thrown when serialization or deserialization fails.
+Error thrown when Hive binary serialization or deserialization fails.
+
+## Remarks
+
+Transaction signing, transaction id generation, and memo handling all depend
+on exact Hive wire encoding. This error indicates that a payload could not be
+represented in the expected binary format.
+
+## Example
+
+```ts
+try {
+  const signed = cryptoUtils.signTransaction(transaction, activeKey)
+} catch (error) {
+  if (error instanceof SerializationError) {
+    console.error('Invalid transaction shape', error.info)
+  }
+}
+```
 
 ## Extends
 
@@ -20,7 +38,9 @@ Error thrown when serialization or deserialization fails.
 
 > **new SerializationError**(`message`, `info?`): `SerializationError`
 
-Defined in: [src/errors.ts:35](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L35)
+Defined in: [src/errors.ts:102](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L102)
+
+Creates a serialization error.
 
 #### Parameters
 
@@ -28,9 +48,13 @@ Defined in: [src/errors.ts:35](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 `string`
 
+Human-readable serialization failure.
+
 ##### info?
 
 `any`
+
+Optional underlying cause or field-level context.
 
 #### Returns
 
@@ -58,7 +82,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `any`
 
-Defined in: [src/errors.ts:10](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L10)
+Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L26)
 
 #### Inherited from
 

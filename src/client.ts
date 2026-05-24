@@ -53,12 +53,35 @@ import {
 } from './utils.js'
 
 /**
- * Library version.
+ * Published Pollen package version.
+ *
+ * @remarks
+ * This value is generated from `package.json` during the build and is also used
+ * in Node request metadata so RPC operators can identify Pollen clients.
+ *
+ * @example
+ * ```ts
+ * import { VERSION } from '@srbde/pollen'
+ *
+ * console.log(`Running Pollen ${VERSION}`)
+ * ```
  */
 export const VERSION = packageVersion
 
 /**
- * Main Hive network chain id.
+ * Main Hive network chain id as a 32-byte buffer.
+ *
+ * @remarks
+ * The chain id is mixed into transaction signatures. Keeping the default here
+ * prevents signatures produced for Hive mainnet from being replayed on a
+ * different chain.
+ *
+ * @example
+ * ```ts
+ * import { DEFAULT_CHAIN_ID } from '@srbde/pollen'
+ *
+ * console.log(DEFAULT_CHAIN_ID.toString('hex'))
+ * ```
  */
 export const DEFAULT_CHAIN_ID = Buffer.from(
     'beeab0de00000000000000000000000000000000000000000000000000000000',
@@ -66,7 +89,11 @@ export const DEFAULT_CHAIN_ID = Buffer.from(
 )
 
 /**
- * Main Hive network address prefix.
+ * Main Hive network public-key address prefix.
+ *
+ * @remarks
+ * Hive-compatible public keys are rendered with a network prefix. Mainnet uses
+ * `STM`, and custom networks can override this through {@link ClientOptions}.
  */
 export const DEFAULT_ADDRESS_PREFIX = 'STM'
 
@@ -120,8 +147,27 @@ interface PendingRequest {
 }
 
 /**
- * RPC Client options
- * ------------------
+ * Configuration for a {@link Client} instance.
+ *
+ * @remarks
+ * Options control both protocol identity, such as `chainId` and
+ * `addressPrefix`, and resilience behavior, such as timeout, failover, and
+ * jittered backoff. A single configured client owns the Nectar helpers for
+ * database reads, broadcasting, RC, Hivemind, and transaction-status calls.
+ *
+ * @example
+ * ```ts
+ * import { Client } from '@srbde/pollen'
+ *
+ * const client = new Client(
+ *   ['https://api.hive.blog', 'https://api.openhive.network'],
+ *   {
+ *     timeout: 45_000,
+ *     failoverThreshold: 2,
+ *     consoleOnFailover: true
+ *   }
+ * )
+ * ```
  */
 export interface ClientOptions {
     /**
@@ -159,7 +205,8 @@ export interface ClientOptions {
     consoleOnFailover?: boolean
 
     /**
-     * Retry backoff function, returns milliseconds. Default = {@link defaultBackoff}.
+     * Retry backoff function, returns milliseconds. Defaults to Pollen's
+     * jittered exponential backoff.
      */
     backoff?: (tries: number) => number
     /**
@@ -176,9 +223,27 @@ export interface ClientOptions {
 }
 
 /**
- * RPC Client
- * ----------
- * Can be used in both node.js and the browser. Also see {@link ClientOptions}.
+ * High-level Hive RPC client used by every Pollen helper.
+ *
+ * @remarks
+ * `Client` centralizes JSON-RPC transport, node failover, API health tracking,
+ * network identity, and helper construction. It can run in Node.js or a browser
+ * bundle and exposes purpose-built helpers such as {@link DatabaseAPI},
+ * broadcasting, and {@link Blockchain} so application code rarely needs
+ * to assemble raw RPC payloads.
+ *
+ * @example
+ * ```ts
+ * import { Client } from '@srbde/pollen'
+ *
+ * const client = new Client('https://api.hive.blog')
+ * const props = await client.database.getDynamicGlobalProperties()
+ *
+ * console.log(`Hive head block: ${props.head_block_number}`)
+ * ```
+ *
+ * @see {@link ClientOptions}
+ * @see {@link RPCError}
  */
 export class Client {
     /**
@@ -253,9 +318,32 @@ export class Client {
     public currentAddress: string
 
     /**
-     * @param address The address to the Hive RPC server,
-     * e.g. `https://api.hive.blog`. or [`https://api.hive.blog`, `https://another.api.com`]
-     * @param options Client options.
+     * Creates a client for one or more Hive RPC endpoints.
+     *
+     * @param address - RPC endpoint URL or ordered failover list. For example,
+     * `https://api.hive.blog` or `['https://api.hive.blog', 'https://api.openhive.network']`.
+     * @param options - Network identity and resilience settings.
+     *
+     * @remarks
+     * The first endpoint becomes the active node. When calls fail, Pollen uses
+     * the configured backoff and health tracker to move across the endpoint
+     * list without requiring callers to recreate helper objects.
+     *
+     * @throws AssertionError
+     * Thrown when `options.chainId` is not exactly 32 bytes after hex decoding.
+     *
+     * @example
+     * ```ts
+     * import { Client } from '@srbde/pollen'
+     *
+     * const client = new Client(
+     *   ['https://api.hive.blog', 'https://api.deathwing.me'],
+     *   { timeout: 30_000, failoverThreshold: 2 }
+     * )
+     *
+     * const accounts = await client.database.getAccounts(['srbde'])
+     * console.log(accounts[0].balance)
+     * ```
      */
     constructor(address: string | string[], options: ClientOptions = {}) {
         this.currentAddress = Array.isArray(address) ? address[0] : address
@@ -284,7 +372,26 @@ export class Client {
     }
 
     /**
-     * Create a new client instance configured for the testnet.
+     * Creates a client preconfigured for the public Hive testnet.
+     *
+     * @param options - Optional client settings copied into the testnet
+     * configuration.
+     * @returns A {@link Client} targeting `https://api.fake.openhive.network`
+     * with the testnet chain id.
+     *
+     * @remarks
+     * This helper preserves transport options such as custom HTTP agents while
+     * replacing chain identity values so test transactions cannot be confused
+     * with mainnet signatures.
+     *
+     * @example
+     * ```ts
+     * import { Client } from '@srbde/pollen'
+     *
+     * const testnet = Client.testnet({ timeout: 20_000 })
+     * const props = await testnet.database.getDynamicGlobalProperties()
+     * console.log(props.head_block_number)
+     * ```
      */
     public static testnet(options?: ClientOptions) {
         let opts: ClientOptions = {}
@@ -299,12 +406,39 @@ export class Client {
     }
 
     /**
-     * Make a RPC call to the server.
+     * Sends a JSON-RPC request through the configured failover transport.
      *
-     * @param api     The API to call, e.g. `database_api`.
-     * @param method  The API method, e.g. `get_dynamic_global_properties`.
-     * @param params  Array of parameters to pass to the method, optional.
+     * @param api - API namespace to call, such as `condenser_api`.
+     * @param method - Method within the API namespace, such as
+     * `get_dynamic_global_properties`.
+     * @param params - Positional RPC parameters. Defaults to an empty array.
+     * @returns The decoded `result` member returned by the RPC node.
      *
+     * @remarks
+     * The transport serializes Buffers as Hive-compatible hex strings, applies
+     * jittered retry backoff, tracks API-specific node failures, and passively
+     * records head-block freshness from `get_dynamic_global_properties`
+     * responses. Broadcast calls skip the short per-fetch timeout because they
+     * must not be retried as aggressively as read-only calls.
+     *
+     * @throws RPCError
+     * Thrown when the node returns a JSON-RPC error. The `info` property carries
+     * the original error data when the node provides it.
+     * @throws AssertionError
+     * Thrown when the response id does not match the request id.
+     *
+     * @example
+     * ```ts
+     * import { Client } from '@srbde/pollen'
+     *
+     * const client = new Client('https://api.hive.blog')
+     * const config = await client.call('condenser_api', 'get_config')
+     *
+     * console.log(config.HIVE_BLOCK_INTERVAL)
+     * ```
+     *
+     * @see {@link retryingFetch}
+     * @see {@link NodeHealthTracker}
      */
     public async call(
         api: string,
@@ -448,8 +582,19 @@ export class Client {
 }
 
 /**
- * Default backoff function.
- * Exponential backoff with jitter.
+ * Returns Pollen's default retry delay for a failed RPC attempt.
+ *
+ * @param tries - Number of attempts already made.
+ * @returns A jittered exponential delay in milliseconds.
+ *
+ * @remarks
+ * Jitter prevents multiple clients from retrying in lockstep against the same
+ * RPC node, reducing thundering-herd behavior during transient outages.
+ *
+ * @example
+ * ```ts
+ * const delayMs = defaultBackoff(3)
+ * ```
  */
 const defaultBackoff = (tries: number): number =>
     exponentialBackoffWithJitter(tries)

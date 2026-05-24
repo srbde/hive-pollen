@@ -8,9 +8,9 @@
 
 > **getVests**(`account`, `subtract_delegated?`, `add_received?`): `number`
 
-Defined in: [src/chain/misc.ts:246](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/misc.ts#L246)
+Defined in: [src/chain/misc.ts:344](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/misc.ts#L344)
 
-Returns the vests of specified account. Default: Subtract delegated & add received
+Calculates an account's effective vesting shares.
 
 ## Parameters
 
@@ -18,14 +18,38 @@ Returns the vests of specified account. Default: Subtract delegated & add receiv
 
 [`Account`](../interfaces/Account.md)
 
+Account containing vesting, delegation, and withdrawal
+fields.
+
 ### subtract\_delegated?
 
 `boolean` = `true`
+
+Whether outgoing delegations should reduce the
+result.
 
 ### add\_received?
 
 `boolean` = `true`
 
+Whether incoming delegations should increase the
+result.
+
 ## Returns
 
 `number`
+
+Effective VESTS amount as a number.
+
+## Remarks
+
+The calculation subtracts pending power-down withdrawals, then optionally
+adjusts for delegated and received vesting shares. RC and voting mana helpers
+use this to derive maximum voting mana.
+
+## Example
+
+```ts
+const [account] = await client.database.getAccounts(['srbde'])
+const effectiveVests = getVests(account)
+```

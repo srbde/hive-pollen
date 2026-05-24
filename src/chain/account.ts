@@ -36,17 +36,51 @@
 import { PublicKey } from '../crypto.js'
 import { Asset } from './asset.js'
 
+/**
+ * Raw Hive authority object.
+ *
+ * @remarks
+ * Hive authorities combine weighted account references and public-key
+ * references. A transaction is authorized when collected signatures and nested
+ * authorities meet `weight_threshold`.
+ *
+ * @example
+ * ```ts
+ * const authority: AuthorityType = {
+ *   weight_threshold: 1,
+ *   account_auths: [],
+ *   key_auths: [[publicKey, 1]]
+ * }
+ * ```
+ */
 export interface AuthorityType {
   weight_threshold: number // uint32_t
   account_auths: [string, number][] // flat_map< account_name_type, uint16_t >
   key_auths: [string | PublicKey, number][] // flat_map< public_key_type, uint16_t >
 }
 
+/**
+ * Convenience wrapper for Hive owner, active, and posting authorities.
+ *
+ * @remarks
+ * `Authority` can be created from a single public key for simple one-signature
+ * accounts or from a full weighted authority object for multisig setups.
+ *
+ * @example
+ * ```ts
+ * const posting = Authority.from(postingPublicKey)
+ * ```
+ */
 export class Authority implements AuthorityType {
   public weight_threshold: number
   public account_auths: [string, number][]
   public key_auths: [string | PublicKey, number][]
 
+  /**
+   * Creates an authority from explicit threshold and auth lists.
+   *
+   * @param authority - Raw authority fields from Hive.
+   */
   constructor({ weight_threshold, account_auths, key_auths }: AuthorityType) {
     this.weight_threshold = weight_threshold
     this.account_auths = account_auths
@@ -54,7 +88,16 @@ export class Authority implements AuthorityType {
   }
 
   /**
-   * Convenience to create a new instance from PublicKey or authority object.
+   * Normalizes a public key or raw authority into an {@link Authority}.
+   *
+   * @param value - Public key string, {@link PublicKey}, existing authority, or
+   * raw authority object.
+   * @returns A normalized authority.
+   *
+   * @example
+   * ```ts
+   * const authority = Authority.from('STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA')
+   * ```
    */
   public static from(value: string | PublicKey | AuthorityType) {
     if (value instanceof Authority) {
@@ -71,6 +114,21 @@ export class Authority implements AuthorityType {
   }
 }
 
+/**
+ * Core Hive account object returned by condenser account lookups.
+ *
+ * @remarks
+ * This shape includes authority keys, balances, savings balances, vesting
+ * state, voting state, recovery metadata, and historical counters. Use
+ * {@link ExtendedAccount} when condenser returns augmented social/history
+ * fields.
+ *
+ * @example
+ * ```ts
+ * const [account] = await client.database.getAccounts(['srbde'])
+ * console.log(account.balance, account.vesting_shares)
+ * ```
+ */
 export interface Account {
   id: number // account_id_type
   name: string // account_name_type
@@ -139,18 +197,31 @@ export interface Account {
   last_root_post: string // time_point_sec
 }
 
+/**
+ * Augmented account object returned by condenser `get_accounts`.
+ *
+ * @remarks
+ * Extended accounts add reputation, converted vesting balance, witness votes,
+ * and several legacy history collections used by social applications.
+ *
+ * @example
+ * ```ts
+ * const [account] = await client.database.getAccounts(['srbde'])
+ * console.log(account.reputation, account.witness_votes)
+ * ```
+ */
 export interface ExtendedAccount extends Account {
   /**
-   * Convert vesting_shares to vesting hive.
+   * Vesting shares converted to vesting HIVE for display.
    */
   vesting_balance: string | Asset
   reputation: string | number // share_type
   /**
-   * Transfer to/from vesting.
+   * Transfer and vesting operation history.
    */
   transfer_history: any[] // map<uint64_t,applied_operation>
   /**
-   * Limit order / cancel / fill.
+   * Limit order, cancel, and fill history.
    */
   market_history: any[] // map<uint64_t,applied_operation>
   post_history: any[] // map<uint64_t,applied_operation>

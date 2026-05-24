@@ -8,4 +8,15 @@
 
 > **PriceType** = [`Price`](../classes/Price.md) \| \{ `base`: [`Asset`](../classes/Asset.md) \| `string`; `quote`: [`Asset`](../classes/Asset.md) \| `string`; \}
 
-Defined in: [src/chain/asset.ts:223](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/asset.ts#L223)
+Defined in: [src/chain/asset.ts:386](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/asset.ts#L386)
+
+Value accepted anywhere Pollen needs a Hive price ratio.
+
+## Example
+
+```ts
+const feed: PriceType = {
+  base: '1.000 HIVE',
+  quote: '0.300 HBD'
+}
+```

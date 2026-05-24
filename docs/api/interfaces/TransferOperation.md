@@ -6,9 +6,25 @@
 
 # Interface: TransferOperation
 
-Defined in: [src/chain/operation.ts:748](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L748)
+Defined in: [src/chain/operation.ts:970](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L970)
 
 Transfers asset from one account to another.
+
+## Remarks
+
+Transfers require active authority from `from`. Use `Memo.encode` before
+broadcasting when the memo should be encrypted for the recipient.
+
+## Example
+
+```ts
+const op: TransferOperation = ['transfer', {
+  from: 'srbde',
+  to: 'alice',
+  amount: '1.000 HIVE',
+  memo: 'Invoice 42'
+}]
+```
 
 ## Extends
 
@@ -20,7 +36,7 @@ Transfers asset from one account to another.
 
 > **0**: `"transfer"`
 
-Defined in: [src/chain/operation.ts:749](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L749)
+Defined in: [src/chain/operation.ts:971](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L971)
 
 #### Overrides
 
@@ -32,7 +48,7 @@ Defined in: [src/chain/operation.ts:749](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:750](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L750)
+Defined in: [src/chain/operation.ts:972](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L972)
 
 #### amount
 

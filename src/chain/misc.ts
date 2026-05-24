@@ -36,18 +36,46 @@ import { Account } from './account.js'
 import { Asset, Price } from './asset.js'
 
 /**
- * Large number that may be unsafe to represent natively in JavaScript.
+ * Large integer returned as a string to avoid JavaScript precision loss.
+ *
+ * @example
+ * ```ts
+ * const value: Bignum = props.max_virtual_bandwidth
+ * ```
  */
 export type Bignum = string
 
 /**
  * Buffer wrapper that serializes to a hex-encoded string.
+ *
+ * @remarks
+ * Hive APIs frequently represent binary values as hex strings. `HexBuffer`
+ * keeps binary data available for serializers while rendering cleanly in JSON.
+ *
+ * @example
+ * ```ts
+ * const bytes = HexBuffer.from('deadbeef')
+ * console.log(bytes.toJSON())
+ * ```
  */
 export class HexBuffer {
+  /**
+   * Creates a hex-buffer wrapper around a Node buffer.
+   *
+   * @param buffer - Raw binary data.
+   */
   constructor(public buffer: Buffer) {}
 
   /**
-   * Convenience to create a new HexBuffer, does not copy data if value passed is already a buffer.
+   * Normalizes hex, bytes, or an existing wrapper into a {@link HexBuffer}.
+   *
+   * @param value - Buffer, existing wrapper, byte array, or hex string.
+   * @returns A hex-buffer wrapper.
+   *
+   * @example
+   * ```ts
+   * const buffer = HexBuffer.from([0xde, 0xad, 0xbe, 0xef])
+   * ```
    */
   public static from(value: Buffer | HexBuffer | number[] | string) {
     if (value instanceof HexBuffer) {
@@ -71,7 +99,17 @@ export class HexBuffer {
 }
 
 /**
- * Chain roperties that are decided by the witnesses.
+ * Chain properties voted on by Hive witnesses.
+ *
+ * @remarks
+ * Witnesses publish these values and the chain uses the median active-witness
+ * values for account creation fee, block capacity, and HBD interest.
+ *
+ * @example
+ * ```ts
+ * const props = await client.database.getChainProperties()
+ * console.log(props.account_creation_fee)
+ * ```
  */
 export interface ChainProperties {
   /**
@@ -80,8 +118,9 @@ export interface ChainProperties {
    * fee requires all accounts to have some kind of commitment to the network that includes the
    * ability to vote and make transactions.
    *
-   * @note This has to be multiplied by STEEMIT ? `CREATE_ACCOUNT_WITH_HIVE_MODIFIER`
-   *       (defined as 30 on the main chain) to get the minimum fee needed to create an account.
+   * @remarks
+   * This has to be multiplied by STEEMIT ? `CREATE_ACCOUNT_WITH_HIVE_MODIFIER`
+   * (defined as 30 on the main chain) to get the minimum fee needed to create an account.
    *
    */
   account_creation_fee: string | Asset
@@ -96,6 +135,19 @@ export interface ChainProperties {
   hbd_interest_rate: number // uint16_t
 }
 
+/**
+ * Vesting-share delegation from one account to another.
+ *
+ * @remarks
+ * Delegated VESTS remain owned by the delegator but transfer voting influence
+ * and RC capacity to the delegatee until removed and cooled down.
+ *
+ * @example
+ * ```ts
+ * const delegations = await client.database.getVestingDelegations('srbde')
+ * console.log(delegations[0]?.delegatee)
+ * ```
+ */
 export interface VestingDelegation {
   /**
    * Delegation id.
@@ -120,7 +172,18 @@ export interface VestingDelegation {
 }
 
 /**
- * Node state.
+ * Dynamic global chain state reported by a Hive RPC node.
+ *
+ * @remarks
+ * These values drive transaction TAPOS fields, stream cursors, supply displays,
+ * voting-power calculations, witness participation dashboards, and bandwidth
+ * estimates.
+ *
+ * @example
+ * ```ts
+ * const props = await client.database.getDynamicGlobalProperties()
+ * console.log(props.head_block_number, props.last_irreversible_block_num)
+ * ```
  */
 export interface DynamicGlobalProperties {
   id: number
@@ -186,7 +249,8 @@ export interface DynamicGlobalProperties {
    * Each witness posts what they think the maximum size should be as part of their witness
    * properties, the median size is chosen to be the maximum block size for the round.
    *
-   * @note the minimum value for maximum_block_size is defined by the protocol to prevent the
+   * @remarks
+   * The minimum value for maximum_block_size is defined by the protocol to prevent the
    * network from getting stuck by witnesses attempting to set this too low.
    */
   maximum_block_size: number
@@ -228,7 +292,22 @@ export interface DynamicGlobalProperties {
 }
 
 /**
- * Return the vesting share price.
+ * Calculates the HIVE/VESTS conversion price from global properties.
+ *
+ * @param props - Dynamic global properties containing total vesting fund and
+ * total vesting shares.
+ * @returns A price that converts between VESTS and HIVE.
+ *
+ * @remarks
+ * Hive expresses influence in VESTS while users often reason about powered-up
+ * HIVE. If either side of the vesting pool is zero, Pollen returns a neutral
+ * 1:1 fallback price to keep downstream math defined.
+ *
+ * @example
+ * ```ts
+ * const props = await client.database.getDynamicGlobalProperties()
+ * const vestingPrice = getVestingSharePrice(props)
+ * ```
  */
 export function getVestingSharePrice(props: DynamicGlobalProperties): Price {
   // empty string is needed to skip the type check error
@@ -241,7 +320,26 @@ export function getVestingSharePrice(props: DynamicGlobalProperties): Price {
 }
 
 /**
- * Returns the vests of specified account. Default: Subtract delegated & add received
+ * Calculates an account's effective vesting shares.
+ *
+ * @param account - Account containing vesting, delegation, and withdrawal
+ * fields.
+ * @param subtract_delegated - Whether outgoing delegations should reduce the
+ * result.
+ * @param add_received - Whether incoming delegations should increase the
+ * result.
+ * @returns Effective VESTS amount as a number.
+ *
+ * @remarks
+ * The calculation subtracts pending power-down withdrawals, then optionally
+ * adjusts for delegated and received vesting shares. RC and voting mana helpers
+ * use this to derive maximum voting mana.
+ *
+ * @example
+ * ```ts
+ * const [account] = await client.database.getAccounts(['srbde'])
+ * const effectiveVests = getVests(account)
+ * ```
  */
 export function getVests(
   account: Account,

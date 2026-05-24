@@ -45,7 +45,21 @@ const PRE_CONNECTION_ERRORS = ['ECONNREFUSED', 'ENOTFOUND', 'EHOSTUNREACH', 'EAI
 const FAILOVER_ERRORS = [...PRE_CONNECTION_ERRORS, 'timeout', 'database lock', 'CERT_HAS_EXPIRED', 'ECONNRESET', 'ERR_TLS_CERT_ALTNAME_INVALID', 'ETIMEDOUT', 'EPIPE', 'EPROTO']
 
 /**
- * Context for smart retry/failover decisions.
+ * Context for smart retry and failover decisions.
+ *
+ * @remarks
+ * The client passes this metadata into {@link retryingFetch} so the transport
+ * can distinguish read calls from broadcasts and record node health at the
+ * correct API granularity.
+ *
+ * @example
+ * ```ts
+ * const retryContext: RetryContext = {
+ *   healthTracker: client.healthTracker,
+ *   api: 'condenser_api',
+ *   isBroadcast: false
+ * }
+ * ```
  */
 export interface RetryContext {
   /** Health tracker instance for per-node, per-API tracking */
@@ -59,7 +73,22 @@ export interface RetryContext {
 }
 
 /**
- * Native binary writer using Uint8Array.
+ * Growable little-endian byte writer used by Hive serializers.
+ *
+ * @remarks
+ * Pollen uses this native `Uint8Array` writer instead of external byte-buffer
+ * libraries so Node and browser builds share the same serialization engine.
+ * Integer methods match Hive's wire format, and variable-length strings are
+ * encoded with a varint length prefix followed by UTF-8 bytes.
+ *
+ * @example
+ * ```ts
+ * const writer = new BinaryWriter()
+ * writer.writeString('pollen')
+ * writer.writeUint16(42)
+ *
+ * const bytes = writer.getBuffer()
+ * ```
  */
 export class BinaryWriter {
   private buffer: Uint8Array
@@ -157,7 +186,17 @@ export class BinaryWriter {
 }
 
 /**
- * Native binary reader using Uint8Array.
+ * Little-endian byte reader used by Hive deserializers and memo decoding.
+ *
+ * @remarks
+ * The reader mirrors {@link BinaryWriter} and advances an internal cursor as
+ * values are consumed. It is intentionally small and browser-safe.
+ *
+ * @example
+ * ```ts
+ * const reader = new BinaryReader(bytes)
+ * const memo = reader.readString()
+ * ```
  */
 export class BinaryReader {
   private view: DataView
@@ -244,7 +283,16 @@ export class BinaryReader {
 }
 
 /**
- * Return a promise that will resove when a specific event is emitted.
+ * Resolves the next time an event emitter emits a specific event.
+ *
+ * @param emitter - Event emitter or stream to observe.
+ * @param eventName - Event name or symbol to wait for.
+ * @returns A promise for the first emitted event payload.
+ *
+ * @example
+ * ```ts
+ * await waitForEvent(stream, 'drain')
+ * ```
  */
 export function waitForEvent<T>(
   emitter: EventEmitter,
@@ -256,7 +304,15 @@ export function waitForEvent<T>(
 }
 
 /**
- * Sleep for N milliseconds.
+ * Pauses execution for a fixed number of milliseconds.
+ *
+ * @param ms - Delay duration.
+ * @returns A promise that resolves after the timeout.
+ *
+ * @example
+ * ```ts
+ * await sleep(3000)
+ * ```
  */
 export function sleep(ms: number): Promise<void> {
   return new Promise<void>((resolve) => {
@@ -265,7 +321,20 @@ export function sleep(ms: number): Promise<void> {
 }
 
 /**
- * Return a stream that emits iterator values.
+ * Converts an async iterator into an object-mode readable stream.
+ *
+ * @param iterator - Async iterator whose values should be emitted.
+ * @returns A Node readable stream that respects backpressure.
+ *
+ * @remarks
+ * This bridge lets browser-friendly async generators power Node stream APIs
+ * used by older Hive indexing tools.
+ *
+ * @example
+ * ```ts
+ * const stream = iteratorStream(client.blockchain.getBlocks(90_000_000))
+ * stream.on('data', (block) => console.log(block.block_id))
+ * ```
  */
 export function iteratorStream<T>(
   iterator: AsyncIterableIterator<T>
@@ -289,7 +358,19 @@ export function iteratorStream<T>(
   return stream
 }
 /**
- * Return a deep copy of a JSON-serializable object.
+ * Creates a deep copy of a JSON-serializable object.
+ *
+ * @param object - Plain object, array, or value to clone.
+ * @returns A cloned value produced through JSON serialization.
+ *
+ * @remarks
+ * Pollen uses this for transaction and RPC payloads where the data model is
+ * already JSON-compatible.
+ *
+ * @example
+ * ```ts
+ * const txCopy = copy(transaction)
+ * ```
  */
 export function copy<T>(object: T): T {
   return JSON.parse(JSON.stringify(object))
@@ -322,8 +403,22 @@ function nextNode(nodes: string[], currentIndex: number): number {
 }
 
 /**
- * Standard exponential backoff with jitter.
- * Formula: min(maxDelay, (base * 2^tries)) + random(0, jitter)
+ * Computes an exponential retry delay with random jitter.
+ *
+ * @param tries - Number of failed attempts or rounds already observed.
+ * @param baseDelay - Initial delay in milliseconds.
+ * @param maxDelay - Maximum exponential component in milliseconds.
+ * @param jitter - Maximum random jitter to add in milliseconds.
+ * @returns Delay in milliseconds.
+ *
+ * @remarks
+ * Formula: `min(maxDelay, baseDelay * 2^tries) + random(0, jitter)`.
+ * Jitter keeps many clients from retrying the same Hive RPC nodes in lockstep.
+ *
+ * @example
+ * ```ts
+ * const delay = exponentialBackoffWithJitter(2, 500, 10_000, 250)
+ * ```
  */
 export function exponentialBackoffWithJitter(
   tries: number,
@@ -336,17 +431,42 @@ export function exponentialBackoffWithJitter(
 }
 
 /**
- * Smart fetch with immediate failover and per-node health tracking.
+ * Sends an RPC request with ordered node failover and health tracking.
  *
- * For read operations:
- * - On failure, immediately try the next healthy node (no backoff within a round)
- * - After trying all nodes once (one round), apply backoff before the next round
- * - Stop after failoverThreshold rounds
+ * @param currentAddress - Currently active RPC endpoint.
+ * @param allAddresses - Single endpoint or ordered failover endpoint list.
+ * @param opts - Fetch options including request body and headers.
+ * @param timeout - Overall retry timeout in milliseconds. `0` means unlimited.
+ * @param failoverThreshold - Number of full endpoint rounds before giving up.
+ * `0` means retry until `timeout` stops the call.
+ * @param consoleOnFailover - Whether failover events should be logged.
+ * @param backoff - Function returning the between-round delay.
+ * @param fetchTimeout - Optional per-attempt timeout function.
+ * @param retryContext - Optional API and broadcast-safety metadata.
+ * @returns The JSON-RPC response and endpoint that produced it.
  *
- * For broadcast operations:
- * - Only retry on pre-connection errors (ECONNREFUSED, ENOTFOUND, etc.)
- *   where we know the request never reached the server
- * - NEVER retry after timeout or response errors to prevent double-broadcasting
+ * @remarks
+ * Read operations immediately rotate through healthy nodes and only back off
+ * between full rounds. Broadcasts are intentionally stricter: Pollen retries
+ * only pre-connection failures where the request certainly never reached a node,
+ * preventing duplicate transfers, votes, or posts.
+ *
+ * @throws Error
+ * Throws the last network, HTTP, timeout, or fetch error after timeout or
+ * failover limits are reached.
+ *
+ * @example
+ * ```ts
+ * const { response, currentAddress } = await retryingFetch(
+ *   'https://api.hive.blog',
+ *   ['https://api.hive.blog', 'https://api.openhive.network'],
+ *   opts,
+ *   60_000,
+ *   3,
+ *   false,
+ *   exponentialBackoffWithJitter
+ * )
+ * ```
  */
 export async function retryingFetch(
   currentAddress: string,
@@ -539,6 +659,23 @@ import { Asset, PriceType } from './chain/asset.js'
 import { WitnessSetPropertiesOperation } from './chain/operation.js'
 import { Serializer, Types } from './chain/serializer.js'
 import { PublicKey } from './crypto.js'
+/**
+ * Friendly witness property values accepted by {@link buildWitnessUpdateOp}.
+ *
+ * @remarks
+ * Hive expects `witness_set_properties` values as sorted serialized hex pairs.
+ * This shape lets callers provide normal Pollen assets, prices, keys, and
+ * numbers before the helper performs protocol serialization.
+ *
+ * @example
+ * ```ts
+ * const props: WitnessProps = {
+ *   key: signingPublicKey,
+ *   maximum_block_size: 65_536,
+ *   url: 'https://example.com/witness'
+ * }
+ * ```
+ */
 export interface WitnessProps {
   account_creation_fee?: string | Asset
   account_subsidy_budget?: number // uint32_t
@@ -557,6 +694,30 @@ const serialize = (serializer: Serializer, data: any) => {
   return Buffer.from(writer.getBuffer()).toString('hex')
 }
 
+/**
+ * Builds a Hive `witness_set_properties` operation from friendly property values.
+ *
+ * @param owner - Witness account name.
+ * @param props - Witness properties to serialize into sorted hex pairs.
+ * @returns A ready-to-broadcast `witness_set_properties` operation.
+ *
+ * @remarks
+ * Hive expects witness property values to be pre-serialized hex strings in a
+ * sorted flat map. This helper keeps that low-level representation out of
+ * application code.
+ *
+ * @throws Error
+ * Thrown when `props` contains an unsupported witness property.
+ *
+ * @example
+ * ```ts
+ * const op = buildWitnessUpdateOp('srbde-witness', {
+ *   key: signingPublicKey,
+ *   maximum_block_size: 65_536,
+ *   url: 'https://example.com/witness'
+ * })
+ * ```
+ */
 export const buildWitnessUpdateOp = (
   owner: string,
   props: WitnessProps
@@ -600,6 +761,21 @@ export const buildWitnessUpdateOp = (
 }
 
 import JSBI from 'jsbi'
+/**
+ * Mapping from Hive operation names to protocol operation ids.
+ *
+ * @remarks
+ * This is primarily used with {@link makeBitMaskFilter} when filtering account
+ * history by operation type.
+ *
+ * @example
+ * ```ts
+ * const mask = makeBitMaskFilter([
+ *   operationOrders.transfer,
+ *   operationOrders.claim_reward_balance
+ * ])
+ * ```
+ */
 export const operationOrders = {
   vote: 0,
   // tslint:disable-next-line: object-literal-sort-keys
@@ -691,8 +867,25 @@ export const operationOrders = {
 }
 
 /**
- * Make bitmask filter to be used with getAccountHistory call
- * @param allowedOperations Array of operations index numbers
+ * Builds the two-word operation bitmask accepted by `get_account_history`.
+ *
+ * @param allowedOperations - Operation ids from {@link operationOrders}.
+ * @returns Tuple-like low/high mask values as strings or `null`.
+ *
+ * @remarks
+ * Hive splits operation history filters across two 64-bit masks. Pollen uses
+ * JSBI so the mask is reliable in browsers that lack native bigint support in
+ * older targets.
+ *
+ * @example
+ * ```ts
+ * const mask = makeBitMaskFilter([
+ *   operationOrders.transfer,
+ *   operationOrders.claim_reward_balance
+ * ])
+ *
+ * const history = await client.database.getAccountHistory('srbde', -1, 100, mask)
+ * ```
  */
 export function makeBitMaskFilter(allowedOperations: number[]) {
   return allowedOperations

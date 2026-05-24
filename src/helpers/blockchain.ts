@@ -38,15 +38,41 @@ import { iteratorStream, sleep } from './../utils.js'
 
 export enum BlockchainMode {
   /**
-   * Only get irreversible blocks.
+   * Stream only blocks that the Hive consensus protocol has made irreversible.
+   *
+   * @remarks
+   * This is the safest mode for indexing, accounting, and other workflows that
+   * must not react to a block that can still be replaced by a fork.
    */
   Irreversible,
   /**
-   * Get all blocks.
+   * Stream from the latest head block, including blocks that are still reversible.
+   *
+   * @remarks
+   * Use this mode when low latency matters more than finality. Applications
+   * should be prepared to reconcile forked blocks when consuming latest mode.
    */
   Latest
 }
 
+/**
+ * Controls the block range and finality policy used by blockchain streams.
+ *
+ * @example
+ * ```ts
+ * import { BlockchainMode, Client } from '@srbde/pollen'
+ *
+ * const client = new Client('https://api.hive.blog')
+ *
+ * for await (const block of client.blockchain.getBlocks({
+ *   from: 90_000_000,
+ *   to: 90_000_010,
+ *   mode: BlockchainMode.Irreversible
+ * })) {
+ *   console.log(block.block_id)
+ * }
+ * ```
+ */
 export interface BlockchainStreamOptions {
   /**
    * Start block number, inclusive. If omitted generation will start from current block height.
@@ -63,11 +89,53 @@ export interface BlockchainStreamOptions {
   mode?: BlockchainMode
 }
 
+/**
+ * Convenience helper for reading Hive blocks and operations as async iterators
+ * or Node streams.
+ *
+ * @remarks
+ * `Blockchain` builds on {@link DatabaseAPI} and adds polling, block-number
+ * range management, and finality selection. It is the preferred entry point for
+ * indexers and Resilience-style background workers that need a steady feed of
+ * blocks or operations without hand-writing polling loops.
+ *
+ * @example
+ * ```ts
+ * import { Client } from '@srbde/pollen'
+ *
+ * const client = new Client('https://api.hive.blog')
+ *
+ * for await (const op of client.blockchain.getOperations({ from: 90_000_000 })) {
+ *   console.log(op.op[0], op.trx_id)
+ * }
+ * ```
+ *
+ * @see {@link BlockchainStreamOptions}
+ * @see {@link DatabaseAPI.getBlock}
+ */
 export class Blockchain {
+  /**
+   * Creates a blockchain helper bound to a client.
+   *
+   * @param client - Client used for database API reads.
+   */
   constructor(readonly client: Client) {}
 
   /**
-   * Get latest block number.
+   * Resolves the current block number for the selected finality mode.
+   *
+   * @param mode - Whether to read the irreversible block number or the latest
+   * head block number.
+   * @returns The current Hive block number for the selected mode.
+   *
+   * @throws RPCError
+   * Thrown when the underlying `get_dynamic_global_properties` call fails.
+   *
+   * @example
+   * ```ts
+   * const irreversible = await client.blockchain.getCurrentBlockNum()
+   * const latest = await client.blockchain.getCurrentBlockNum(BlockchainMode.Latest)
+   * ```
    */
   public async getCurrentBlockNum(mode = BlockchainMode.Irreversible) {
     const props = await this.client.database.getDynamicGlobalProperties()
@@ -80,7 +148,19 @@ export class Blockchain {
   }
 
   /**
-   * Get latest block header.
+   * Fetches the current block header for the selected finality mode.
+   *
+   * @param mode - Optional finality mode. Defaults to irreversible blocks.
+   * @returns The Hive block header at the resolved current block number.
+   *
+   * @throws RPCError
+   * Thrown when the RPC node rejects either the properties or block-header call.
+   *
+   * @example
+   * ```ts
+   * const header = await client.blockchain.getCurrentBlockHeader()
+   * console.log(header.timestamp)
+   * ```
    */
   public async getCurrentBlockHeader(mode?: BlockchainMode) {
     return this.client.database.getBlockHeader(
@@ -89,15 +169,49 @@ export class Blockchain {
   }
 
   /**
-   * Get latest block.
+   * Fetches the current block for the selected finality mode.
+   *
+   * @param mode - Optional finality mode. Defaults to irreversible blocks.
+   * @returns The signed block at the resolved current block number.
+   *
+   * @throws RPCError
+   * Thrown when the RPC node rejects either the properties or block call.
+   *
+   * @example
+   * ```ts
+   * const block = await client.blockchain.getCurrentBlock()
+   * console.log(block.transactions.length)
+   * ```
    */
   public async getCurrentBlock(mode?: BlockchainMode) {
     return this.client.database.getBlock(await this.getCurrentBlockNum(mode))
   }
 
   /**
-   * Return a asynchronous block number iterator.
-   * @param options Feed options, can also be a block number to start from.
+   * Creates an async iterator that yields block numbers as they become available.
+   *
+   * @param options - Stream options, or a block number shorthand for `from`.
+   * @returns An async iterable of monotonically increasing block numbers.
+   *
+   * @remarks
+   * The iterator polls every three seconds, matching Hive block cadence. When
+   * `to` is omitted it continues indefinitely; when `from` is omitted it starts
+   * from the current block height for the selected mode.
+   *
+   * @throws Error
+   * Thrown when `from` is greater than the current block number.
+   * @throws RPCError
+   * Thrown when polling dynamic global properties fails.
+   *
+   * @example
+   * ```ts
+   * for await (const blockNum of client.blockchain.getBlockNumbers({
+   *   from: 90_000_000,
+   *   to: 90_000_005
+   * })) {
+   *   console.log(blockNum)
+   * }
+   * ```
    */
   public async *getBlockNumbers(options?: BlockchainStreamOptions | number) {
     // const config = await this.client.database.getConfig()
@@ -128,14 +242,36 @@ export class Blockchain {
   }
 
   /**
-   * Return a stream of block numbers, accepts same parameters as {@link getBlockNumbers}.
+   * Creates a Node readable stream of block numbers.
+   *
+   * @param options - Same options accepted by {@link getBlockNumbers}.
+   * @returns A stream backed by the async block-number iterator.
+   *
+   * @example
+   * ```ts
+   * const stream = client.blockchain.getBlockNumberStream(90_000_000)
+   * stream.on('data', (blockNum) => console.log(blockNum))
+   * ```
    */
   public getBlockNumberStream(options?: BlockchainStreamOptions | number) {
     return iteratorStream(this.getBlockNumbers(options))
   }
 
   /**
-   * Return a asynchronous block iterator, accepts same parameters as {@link getBlockNumbers}.
+   * Creates an async iterator that yields full signed blocks.
+   *
+   * @param options - Same options accepted by {@link getBlockNumbers}.
+   * @returns An async iterable of Hive signed blocks.
+   *
+   * @throws RPCError
+   * Thrown when block-number polling or block retrieval fails.
+   *
+   * @example
+   * ```ts
+   * for await (const block of client.blockchain.getBlocks(90_000_000)) {
+   *   console.log(block.witness, block.transactions.length)
+   * }
+   * ```
    */
   public async *getBlocks(options?: BlockchainStreamOptions | number) {
     for await (const num of this.getBlockNumbers(options)) {
@@ -144,14 +280,47 @@ export class Blockchain {
   }
 
   /**
-   * Return a stream of blocks, accepts same parameters as {@link getBlockNumbers}.
+   * Creates a Node readable stream of full signed blocks.
+   *
+   * @param options - Same options accepted by {@link getBlockNumbers}.
+   * @returns A stream backed by the async block iterator.
+   *
+   * @example
+   * ```ts
+   * client.blockchain
+   *   .getBlockStream({ from: 90_000_000 })
+   *   .on('data', (block) => console.log(block.block_id))
+   * ```
    */
   public getBlockStream(options?: BlockchainStreamOptions | number) {
     return iteratorStream(this.getBlocks(options))
   }
 
   /**
-   * Return a asynchronous operation iterator, accepts same parameters as {@link getBlockNumbers}.
+   * Creates an async iterator that yields applied operations from each block.
+   *
+   * @param options - Same options accepted by {@link getBlockNumbers}.
+   * @returns An async iterable of applied operations in chain order.
+   *
+   * @remarks
+   * This is the most direct way to build an operation indexer. Pollen reads each
+   * block's operation list through `get_ops_in_block` and yields individual
+   * applied-operation records so callers can filter by operation type.
+   *
+   * @throws RPCError
+   * Thrown when block-number polling or operation retrieval fails.
+   *
+   * @example
+   * ```ts
+   * for await (const applied of client.blockchain.getOperations({
+   *   from: 90_000_000,
+   *   to: 90_000_010
+   * })) {
+   *   if (applied.op[0] === 'transfer') {
+   *     console.log(applied.op[1])
+   *   }
+   * }
+   * ```
    */
   public async *getOperations(options?: BlockchainStreamOptions | number) {
     for await (const num of this.getBlockNumbers(options)) {
@@ -163,7 +332,16 @@ export class Blockchain {
   }
 
   /**
-   * Return a stream of operations, accepts same parameters as {@link getBlockNumbers}.
+   * Creates a Node readable stream of applied operations.
+   *
+   * @param options - Same options accepted by {@link getBlockNumbers}.
+   * @returns A stream backed by the async operation iterator.
+   *
+   * @example
+   * ```ts
+   * const stream = client.blockchain.getOperationsStream({ from: 90_000_000 })
+   * stream.on('data', (applied) => console.log(applied.op[0]))
+   * ```
    */
   public getOperationsStream(options?: BlockchainStreamOptions | number) {
     return iteratorStream(this.getOperations(options))

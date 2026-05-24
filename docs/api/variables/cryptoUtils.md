@@ -8,9 +8,9 @@
 
 > `const` **cryptoUtils**: `object`
 
-Defined in: [src/crypto.ts:455](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L455)
+Defined in: [src/crypto.ts:676](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L676)
 
-Misc crypto utility functions.
+Low-level cryptographic utility namespace.
 
 ## Type Declaration
 
@@ -164,7 +164,7 @@ Return sha256 hash of input.
 
 > **signTransaction**: (`transaction`, `keys`, `chainId`) => [`SignedTransaction`](../interfaces/SignedTransaction.md)
 
-Return copy of transaction with signature appended to signatures array.
+Returns a copy of a transaction with one or more signatures appended.
 
 #### Parameters
 
@@ -178,15 +178,30 @@ Transaction to sign.
 
 [`PrivateKey`](../classes/PrivateKey.md) \| [`PrivateKey`](../classes/PrivateKey.md)[]
 
-Key(s) to sign transaction with.
+Private key or keys to sign the transaction digest.
 
 ##### chainId?
 
 `Buffer` = `DEFAULT_CHAIN_ID`
 
+Chain id to include in the transaction digest.
+
 #### Returns
 
 [`SignedTransaction`](../interfaces/SignedTransaction.md)
+
+A signed transaction copy.
+
+#### Throws
+
+SerializationError
+Thrown when the transaction cannot be serialized before hashing.
+
+#### Example
+
+```ts
+const signed = cryptoUtils.signTransaction(transaction, activeKey, client.chainId)
+```
 
 ### transactionDigest
 
@@ -209,3 +224,18 @@ The chain id to use when creating the hash.
 #### Returns
 
 `Buffer`\<`ArrayBufferLike`\>
+
+## Remarks
+
+These helpers expose Hive-compatible hashing, key encoding, signature
+canonicality, transaction digesting, and transaction id generation. Most apps
+should prefer [PrivateKey](../classes/PrivateKey.md), [PublicKey](../classes/PublicKey.md), [Signature](../classes/Signature.md), and
+`client.broadcast`, but the namespace is useful for protocol tooling and
+educational examples in the Pollen documentation hub.
+
+## Example
+
+```ts
+const digest = cryptoUtils.transactionDigest(transaction, client.chainId)
+const signature = activeKey.sign(digest)
+```

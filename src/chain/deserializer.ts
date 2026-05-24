@@ -1,6 +1,22 @@
 import { BinaryReader } from '../utils.js'
 import { PublicKey } from '../crypto.js'
 
+/**
+ * Function signature for reading one Hive protocol value from a binary reader.
+ *
+ * @param reader - Source binary reader.
+ * @returns The decoded protocol value.
+ *
+ * @remarks
+ * Deserializers mirror the serializer registry for the limited binary payloads
+ * Pollen needs to decode, currently focused on encrypted memo envelopes.
+ *
+ * @example
+ * ```ts
+ * const memo = types.EncryptedMemoD(buffer)
+ * console.log(memo.from.toString())
+ * ```
+ */
 export type Deserializer = (reader: BinaryReader) => any
 
 const PublicKeyDeserializer = (reader: BinaryReader) => {
@@ -40,6 +56,20 @@ const EncryptedMemoDeserializer: any = BufferDeserializer([
   ['encrypted', BinaryDeserializer]
 ])
 
+/**
+ * Hive protocol deserializer registry.
+ *
+ * @remarks
+ * The exported registry intentionally stays small. Pollen primarily receives
+ * JSON from RPC nodes, but encrypted memos arrive as binary payloads nested
+ * inside base58 strings and need a dedicated decoder.
+ *
+ * @example
+ * ```ts
+ * const decoded = types.EncryptedMemoD(Buffer.from(bytes))
+ * console.log(decoded.nonce.toString())
+ * ```
+ */
 export const types = {
   EncryptedMemoD: EncryptedMemoDeserializer
 }

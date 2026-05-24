@@ -6,9 +6,27 @@
 
 # Class: PollenError
 
-Defined in: [src/errors.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L9)
+Defined in: [src/errors.ts:25](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L25)
 
-Base error class for all Pollen-related errors.
+Base error class for all Pollen-specific failures.
+
+## Remarks
+
+Pollen error classes preserve the original contextual payload on `info` so
+applications can log RPC details, serialization causes, or protocol metadata
+without parsing the message string.
+
+## Example
+
+```ts
+try {
+  await client.database.getAccounts(['srbde'])
+} catch (error) {
+  if (error instanceof PollenError) {
+    console.error(error.name, error.info)
+  }
+}
+```
 
 ## Extends
 
@@ -25,7 +43,9 @@ Base error class for all Pollen-related errors.
 
 > **new PollenError**(`message`, `info?`): `PollenError`
 
-Defined in: [src/errors.ts:12](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L12)
+Defined in: [src/errors.ts:34](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L34)
+
+Creates a Pollen error with optional structured context.
 
 #### Parameters
 
@@ -33,9 +53,13 @@ Defined in: [src/errors.ts:12](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f
 
 `string`
 
+Human-readable error message.
+
 ##### info?
 
 `any`
+
+Optional structured details from the failing subsystem.
 
 #### Returns
 
@@ -63,7 +87,7 @@ Defined in: node\_modules/.pnpm/typescript@5.9.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `any`
 
-Defined in: [src/errors.ts:10](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/errors.ts#L10)
+Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/errors.ts#L26)
 
 ***
 

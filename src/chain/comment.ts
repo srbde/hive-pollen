@@ -35,6 +35,25 @@
 
 import { Asset } from './asset.js'
 
+/**
+ * Core Hive comment object.
+ *
+ * @remarks
+ * Hive uses the same object for top-level posts and replies. A top-level post
+ * has an empty `parent_author`; replies point at a parent author and permlink.
+ * Payout, vote, and beneficiary fields are included because condenser combines
+ * social and reward state in this shape.
+ *
+ * @example
+ * ```ts
+ * const posts = await client.database.getDiscussions('trending', {
+ *   tag: 'hive-139531',
+ *   limit: 5
+ * })
+ *
+ * console.log(posts[0].author, posts[0].permlink)
+ * ```
+ */
 export interface Comment {
     id: number // comment_id_type
     category: string
@@ -73,7 +92,23 @@ export interface Comment {
 }
 
 /**
- * Discussion a.k.a. Post.
+ * Hivemind/condenser discussion record for posts and enriched comments.
+ *
+ * @remarks
+ * `Discussion` extends the base comment object with URL, root title, active
+ * votes, reblog data, pending payout values, and reputation fields used by Hive
+ * front ends.
+ *
+ * @example
+ * ```ts
+ * const [post] = await client.hivemind.getRankedPosts({
+ *   sort: 'hot',
+ *   tag: 'hive-139531',
+ *   limit: 1
+ * })
+ *
+ * console.log(post.url, post.pending_payout_value)
+ * ```
  */
 export interface Discussion extends Comment {
     url: string // /category/@rootauthor/root_permlink#author/permlink
@@ -90,6 +125,20 @@ export interface Discussion extends Comment {
     first_reblogged_on?: any // time_point_sec
 }
 
+/**
+ * Beneficiary payout route attached to comment options.
+ *
+ * @remarks
+ * Weights are expressed in hundredths of a percent: `10000` means 100%.
+ *
+ * @example
+ * ```ts
+ * const beneficiary: BeneficiaryRoute = {
+ *   account: 'srbde',
+ *   weight: 500
+ * }
+ * ```
+ */
 export interface BeneficiaryRoute {
     account: string // account_name_type
     weight: number // uint16_t

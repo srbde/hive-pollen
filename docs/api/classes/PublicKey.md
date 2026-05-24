@@ -6,9 +6,25 @@
 
 # Class: PublicKey
 
-Defined in: [src/crypto.ts:167](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L167)
+Defined in: [src/crypto.ts:192](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L192)
 
-ECDSA (secp256k1) public key.
+Hive public key backed by the secp256k1 elliptic curve.
+
+## Remarks
+
+Pollen validates key material with the Noble secp256k1 implementation and
+renders public keys with Hive's base58 plus RIPEMD-160 checksum format. The
+default prefix is mainnet `STM`, but custom networks can supply their own
+prefix when constructing or deriving keys.
+
+## Example
+
+```ts
+import { PublicKey } from '@srbde/pollen'
+
+const key = PublicKey.fromString('STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA')
+console.log(key.toString())
+```
 
 ## Constructors
 
@@ -16,7 +32,7 @@ ECDSA (secp256k1) public key.
 
 > **new PublicKey**(`key`, `prefix?`): `PublicKey`
 
-Defined in: [src/crypto.ts:171](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L171)
+Defined in: [src/crypto.ts:196](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L196)
 
 #### Parameters
 
@@ -38,7 +54,7 @@ Defined in: [src/crypto.ts:171](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > `readonly` **key**: `any`
 
-Defined in: [src/crypto.ts:172](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L172)
+Defined in: [src/crypto.ts:197](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L197)
 
 ***
 
@@ -46,7 +62,7 @@ Defined in: [src/crypto.ts:172](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > `readonly` **prefix**: `string` = `DEFAULT_ADDRESS_PREFIX`
 
-Defined in: [src/crypto.ts:173](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L173)
+Defined in: [src/crypto.ts:198](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L198)
 
 ***
 
@@ -54,7 +70,7 @@ Defined in: [src/crypto.ts:173](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > `readonly` **uncompressed**: `Buffer`
 
-Defined in: [src/crypto.ts:169](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L169)
+Defined in: [src/crypto.ts:194](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L194)
 
 ## Methods
 
@@ -62,7 +78,7 @@ Defined in: [src/crypto.ts:169](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > **inspect**(): `string`
 
-Defined in: [src/crypto.ts:243](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L243)
+Defined in: [src/crypto.ts:307](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L307)
 
 Used by `utils.inspect` and `console.log` in node.js.
 
@@ -76,7 +92,7 @@ Used by `utils.inspect` and `console.log` in node.js.
 
 > **toJSON**(): `string`
 
-Defined in: [src/crypto.ts:236](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L236)
+Defined in: [src/crypto.ts:300](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L300)
 
 Return JSON representation of this key, same as toString().
 
@@ -90,13 +106,21 @@ Return JSON representation of this key, same as toString().
 
 > **toString**(): `string`
 
-Defined in: [src/crypto.ts:229](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L229)
+Defined in: [src/crypto.ts:293](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L293)
 
-Return a WIF-encoded representation of the key.
+Renders the key as a Hive public-key string.
 
 #### Returns
 
 `string`
+
+Prefix plus base58-encoded key and checksum.
+
+#### Example
+
+```ts
+console.log(publicKey.toString())
+```
 
 ***
 
@@ -104,9 +128,9 @@ Return a WIF-encoded representation of the key.
 
 > **verify**(`message`, `signature`): `boolean`
 
-Defined in: [src/crypto.ts:217](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L217)
+Defined in: [src/crypto.ts:274](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L274)
 
-Verify a 32-byte signature.
+Verifies a compact ECDSA signature against a 32-byte digest.
 
 #### Parameters
 
@@ -114,7 +138,8 @@ Verify a 32-byte signature.
 
 `Buffer`
 
-32-byte message to verify.
+Digest that was signed. Pollen expects prehashed 32-byte
+data and passes `prehash: false` to Noble.
 
 ##### signature
 
@@ -126,15 +151,29 @@ Signature to verify.
 
 `boolean`
 
+True when the signature is valid for this public key.
+
+#### Remarks
+
+Invalid signature encodings return `false` rather than throwing, which keeps
+verification paths simple for API consumers checking user-provided data.
+
+#### Example
+
+```ts
+const signature = privateKey.sign(digest)
+const ok = privateKey.createPublic().verify(digest, signature)
+```
+
 ***
 
 ### from()
 
 > `static` **from**(`value`): `PublicKey`
 
-Defined in: [src/crypto.ts:204](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L204)
+Defined in: [src/crypto.ts:248](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L248)
 
-Create a new instance.
+Normalizes a public-key input into a PublicKey instance.
 
 #### Parameters
 
@@ -142,9 +181,19 @@ Create a new instance.
 
 `string` \| `PublicKey`
 
+Existing public key or Hive public-key string.
+
 #### Returns
 
 `PublicKey`
+
+`value` unchanged when it is already a key, otherwise a parsed key.
+
+#### Example
+
+```ts
+const key = PublicKey.from(account.memo_key)
+```
 
 ***
 
@@ -152,7 +201,7 @@ Create a new instance.
 
 > `static` **fromBuffer**(`key`): `any`
 
-Defined in: [src/crypto.ts:183](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L183)
+Defined in: [src/crypto.ts:208](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L208)
 
 #### Parameters
 
@@ -170,9 +219,9 @@ Defined in: [src/crypto.ts:183](https://github.com/TheCrazyGM/dhive/blob/b74b0c7
 
 > `static` **fromString**(`wif`): `PublicKey`
 
-Defined in: [src/crypto.ts:196](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/crypto.ts#L196)
+Defined in: [src/crypto.ts:232](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/crypto.ts#L232)
 
-Create a new instance from a WIF-encoded key.
+Creates a public key from its Hive string representation.
 
 #### Parameters
 
@@ -180,6 +229,21 @@ Create a new instance from a WIF-encoded key.
 
 `string`
 
+Public key string with a three-character network prefix.
+
 #### Returns
 
 `PublicKey`
+
+A validated PublicKey.
+
+#### Throws
+
+AssertionError
+Thrown when the prefix or RIPEMD-160 checksum is invalid.
+
+#### Example
+
+```ts
+const publicKey = PublicKey.fromString('STM8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA')
+```

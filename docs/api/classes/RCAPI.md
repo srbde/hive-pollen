@@ -6,7 +6,25 @@
 
 # Class: RCAPI
 
-Defined in: [src/helpers/rc.ts:8](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L8)
+Defined in: [src/helpers/rc.ts:25](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L25)
+
+Helper for Hive Resource Credit and voting mana calculations.
+
+## Remarks
+
+`RCAPI` reads `rc_api` data and converts Hive manabar state into current
+mana and percentage values. RC mana controls transaction capacity, while
+voting mana controls curation influence; both regenerate over Hive's
+five-day manabar window.
+
+## Example
+
+```ts
+const rc = await client.rc.getRCMana('srbde')
+const vp = await client.rc.getVPMana('srbde')
+
+console.log(rc.percentage / 100, vp.percentage / 100)
+```
 
 ## Constructors
 
@@ -14,13 +32,17 @@ Defined in: [src/helpers/rc.ts:8](https://github.com/TheCrazyGM/dhive/blob/b74b0
 
 > **new RCAPI**(`client`): `RCAPI`
 
-Defined in: [src/helpers/rc.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L9)
+Defined in: [src/helpers/rc.ts:31](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L31)
+
+Creates an RC helper bound to a client.
 
 #### Parameters
 
 ##### client
 
 [`Client`](Client.md)
+
+Client used to call `rc_api` and condenser account data.
 
 #### Returns
 
@@ -32,37 +54,50 @@ Defined in: [src/helpers/rc.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b0
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/rc.ts:9](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L9)
+Defined in: [src/helpers/rc.ts:31](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L31)
+
+Client used to call `rc_api` and condenser account data.
 
 ## Methods
 
 ### calculateRCMana()
 
-> **calculateRCMana**(`rc_account`): `Manabar`
+> **calculateRCMana**(`rc_account`): [`Manabar`](../interfaces/Manabar.md)
 
-Defined in: [src/helpers/rc.ts:60](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L60)
+Defined in: [src/helpers/rc.ts:175](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L175)
 
-Calculates the RC mana-data based on an RCAccount - findRCAccounts()
+Calculates current RC mana from an RC account record.
 
 #### Parameters
 
 ##### rc\_account
 
-`RCAccount`
+[`RCAccount`](../interfaces/RCAccount.md)
+
+Account record returned by [findRCAccounts](#findrcaccounts).
 
 #### Returns
 
-`Manabar`
+[`Manabar`](../interfaces/Manabar.md)
+
+Projected manabar state at the current wall-clock time.
+
+#### Example
+
+```ts
+const [rcAccount] = await client.rc.findRCAccounts(['srbde'])
+const mana = client.rc.calculateRCMana(rcAccount)
+```
 
 ***
 
 ### calculateVPMana()
 
-> **calculateVPMana**(`account`): `Manabar`
+> **calculateVPMana**(`account`): [`Manabar`](../interfaces/Manabar.md)
 
-Defined in: [src/helpers/rc.ts:70](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L70)
+Defined in: [src/helpers/rc.ts:195](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L195)
 
-Calculates the RC mana-data based on an Account - getAccounts()
+Calculates current voting mana from a condenser account record.
 
 #### Parameters
 
@@ -70,9 +105,21 @@ Calculates the RC mana-data based on an Account - getAccounts()
 
 [`Account`](../interfaces/Account.md)
 
+Account object containing vesting shares and voting
+manabar state.
+
 #### Returns
 
-`Manabar`
+[`Manabar`](../interfaces/Manabar.md)
+
+Projected voting manabar state at the current wall-clock time.
+
+#### Example
+
+```ts
+const [account] = await client.database.getAccounts(['srbde'])
+const mana = client.rc.calculateVPMana(account)
+```
 
 ***
 
@@ -80,9 +127,9 @@ Calculates the RC mana-data based on an Account - getAccounts()
 
 > **call**(`method`, `params?`): `Promise`\<`any`\>
 
-Defined in: [src/helpers/rc.ts:14](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L14)
+Defined in: [src/helpers/rc.ts:51](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L51)
 
-Convenience for calling `rc_api`.
+Sends a raw `rc_api` call through the parent client.
 
 #### Parameters
 
@@ -90,23 +137,43 @@ Convenience for calling `rc_api`.
 
 `string`
 
+RC API method name.
+
 ##### params?
 
 `any`
+
+Named parameter object accepted by the method.
 
 #### Returns
 
 `Promise`\<`any`\>
 
+The decoded RPC result.
+
+#### Throws
+
+RPCError
+Thrown when the active RPC node does not expose `rc_api` or rejects the
+request.
+
+#### Example
+
+```ts
+const result = await client.rc.call('find_rc_accounts', {
+  accounts: ['srbde']
+})
+```
+
 ***
 
 ### findRCAccounts()
 
-> **findRCAccounts**(`usernames`): `Promise`\<`RCAccount`[]\>
+> **findRCAccounts**(`usernames`): `Promise`\<[`RCAccount`](../interfaces/RCAccount.md)[]\>
 
-Defined in: [src/helpers/rc.ts:21](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L21)
+Defined in: [src/helpers/rc.ts:70](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L70)
 
-Returns RC data for array of usernames
+Fetches RC account records for one or more usernames.
 
 #### Parameters
 
@@ -114,19 +181,35 @@ Returns RC data for array of usernames
 
 `string`[]
 
+Account names to inspect.
+
 #### Returns
 
-`Promise`\<`RCAccount`[]\>
+`Promise`\<[`RCAccount`](../interfaces/RCAccount.md)[]\>
+
+RC account records including max RC and current RC manabar state.
+
+#### Throws
+
+RPCError
+Thrown when the node cannot serve `find_rc_accounts`.
+
+#### Example
+
+```ts
+const [rcAccount] = await client.rc.findRCAccounts(['srbde'])
+console.log(rcAccount.max_rc)
+```
 
 ***
 
 ### getRCMana()
 
-> **getRCMana**(`username`): `Promise`\<`Manabar`\>
+> **getRCMana**(`username`): `Promise`\<[`Manabar`](../interfaces/Manabar.md)\>
 
-Defined in: [src/helpers/rc.ts:42](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L42)
+Defined in: [src/helpers/rc.ts:131](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L131)
 
-Makes a API call and returns the RC mana-data for a specified username
+Fetches and calculates current RC mana for an account.
 
 #### Parameters
 
@@ -134,47 +217,98 @@ Makes a API call and returns the RC mana-data for a specified username
 
 `string`
 
+Account name to inspect.
+
 #### Returns
 
-`Promise`\<`Manabar`\>
+`Promise`\<[`Manabar`](../interfaces/Manabar.md)\>
+
+Manabar values with current mana, maximum mana, and percentage in
+hundredths of a percent.
+
+#### Remarks
+
+The calculation projects regeneration from the account's last RC manabar
+update to the current wall-clock time.
+
+#### Throws
+
+RPCError
+Thrown when RC account lookup fails.
+
+#### Example
+
+```ts
+const mana = await client.rc.getRCMana('srbde')
+console.log(`${mana.percentage / 100}% RC`)
+```
 
 ***
 
 ### getResourceParams()
 
-> **getResourceParams**(): `Promise`\<`RCParams`\>
+> **getResourceParams**(): `Promise`\<[`RCParams`](../interfaces/RCParams.md)\>
 
-Defined in: [src/helpers/rc.ts:28](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L28)
+Defined in: [src/helpers/rc.ts:89](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L89)
 
-Returns the global resource params
+Fetches global RC resource parameters.
 
 #### Returns
 
-`Promise`\<`RCParams`\>
+`Promise`\<[`RCParams`](../interfaces/RCParams.md)\>
+
+Chain-wide coefficients used to price CPU, state bytes, history,
+execution time, and market bandwidth.
+
+#### Throws
+
+RPCError
+Thrown when the node cannot serve `get_resource_params`.
+
+#### Example
+
+```ts
+const params = await client.rc.getResourceParams()
+console.log(params.resource_params)
+```
 
 ***
 
 ### getResourcePool()
 
-> **getResourcePool**(): `Promise`\<`RCPool`\>
+> **getResourcePool**(): `Promise`\<[`RCPool`](../interfaces/RCPool.md)\>
 
-Defined in: [src/helpers/rc.ts:35](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L35)
+Defined in: [src/helpers/rc.ts:107](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L107)
 
-Returns the global resource pool
+Fetches the current RC resource pool.
 
 #### Returns
 
-`Promise`\<`RCPool`\>
+`Promise`\<[`RCPool`](../interfaces/RCPool.md)\>
+
+Current pool levels for the chain's RC resource classes.
+
+#### Throws
+
+RPCError
+Thrown when the node cannot serve `get_resource_pool`.
+
+#### Example
+
+```ts
+const pool = await client.rc.getResourcePool()
+console.log(pool.resource_pool)
+```
 
 ***
 
 ### getVPMana()
 
-> **getVPMana**(`username`): `Promise`\<`Manabar`\>
+> **getVPMana**(`username`): `Promise`\<[`Manabar`](../interfaces/Manabar.md)\>
 
-Defined in: [src/helpers/rc.ts:50](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/helpers/rc.ts#L50)
+Defined in: [src/helpers/rc.ts:156](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/helpers/rc.ts#L156)
 
-Makes a API call and returns the VP mana-data for a specified username
+Fetches and calculates current voting mana for an account.
 
 #### Parameters
 
@@ -182,6 +316,28 @@ Makes a API call and returns the VP mana-data for a specified username
 
 `string`
 
+Account name to inspect.
+
 #### Returns
 
-`Promise`\<`Manabar`\>
+`Promise`\<[`Manabar`](../interfaces/Manabar.md)\>
+
+Voting manabar values with current mana, maximum mana, and
+percentage in hundredths of a percent.
+
+#### Remarks
+
+Maximum voting mana is derived from vesting shares, then regenerated across
+Hive's five-day voting manabar window.
+
+#### Throws
+
+RPCError
+Thrown when account lookup fails.
+
+#### Example
+
+```ts
+const mana = await client.rc.getVPMana('srbde')
+console.log(`${mana.percentage / 100}% voting mana`)
+```

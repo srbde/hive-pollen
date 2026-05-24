@@ -6,9 +6,28 @@
 
 # Interface: CommentOperation
 
-Defined in: [src/chain/operation.ts:282](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L282)
+Defined in: [src/chain/operation.ts:433](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L433)
 
-Generic operation.
+Creates or updates a post or reply.
+
+## Remarks
+
+Empty `parent_author` creates a top-level post. Non-empty `parent_author`
+creates a reply under the parent author/permlink pair.
+
+## Example
+
+```ts
+const op: CommentOperation = ['comment', {
+  parent_author: '',
+  parent_permlink: 'hive-139531',
+  author: 'srbde',
+  permlink: 'hello-pollen',
+  title: 'Hello Pollen',
+  body: 'Posted with Pollen.',
+  json_metadata: JSON.stringify({ tags: ['hive-139531'] })
+}]
+```
 
 ## Extends
 
@@ -20,7 +39,7 @@ Generic operation.
 
 > **0**: `"comment"`
 
-Defined in: [src/chain/operation.ts:283](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L283)
+Defined in: [src/chain/operation.ts:434](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L434)
 
 #### Overrides
 
@@ -32,7 +51,7 @@ Defined in: [src/chain/operation.ts:283](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:284](https://github.com/TheCrazyGM/dhive/blob/b74b0c7f43f7ec8f4907c94415601732f6ab35f2/src/chain/operation.ts#L284)
+Defined in: [src/chain/operation.ts:435](https://github.com/TheCrazyGM/dhive/blob/ebc8785ae8359da960ba5757e072e62d38bf0c05/src/chain/operation.ts#L435)
 
 #### author
 

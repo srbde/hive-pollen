@@ -41,8 +41,19 @@ import { BeneficiaryRoute } from './comment.js'
 import { ChainProperties, HexBuffer } from './misc.js'
 
 /**
- * Operation name.
- * Ref: https://gitlab.syncad.com/hive/hive/-/blob/master/libraries/protocol/include/hive/protocol/operations.hpp
+ * Name of a broadcastable Hive operation.
+ *
+ * @remarks
+ * The comments beside each union member preserve the protocol operation id used
+ * by the binary serializer. Pollen operation tuples use this string in position
+ * `0` and the operation payload in position `1`.
+ *
+ * @example
+ * ```ts
+ * const name: OperationName = 'transfer'
+ * ```
+ *
+ * @see https://gitlab.syncad.com/hive/hive/-/blob/master/libraries/protocol/include/hive/protocol/operations.hpp
  */
 export type OperationName =  // <id>
   | 'vote' // 0
@@ -95,7 +106,17 @@ export type OperationName =  // <id>
   | 'recurrent_transfer' // 49
 
 /**
- * Virtual operation name.
+ * Name of a virtual operation emitted by chain processing.
+ *
+ * @remarks
+ * Virtual operations cannot be broadcast directly. They appear in account and
+ * block operation history when the chain materializes rewards, fills orders,
+ * processes power-downs, or records system events.
+ *
+ * @example
+ * ```ts
+ * const virtualName: VirtualOperationName = 'author_reward'
+ * ```
  */
 export type VirtualOperationName =  // <id>
   | 'fill_convert_request' // last_regular + 1
@@ -134,13 +155,41 @@ export type VirtualOperationName =  // <id>
   | 'failed_recurrent_transfer' // last_regular + 35
 
 /**
- * Generic operation.
+ * Generic Hive operation tuple.
+ *
+ * @remarks
+ * Position `0` is the operation name; position `1` is the payload object. Use
+ * the specific operation interfaces when constructing transactions so TypeScript
+ * can validate the payload shape.
+ *
+ * @example
+ * ```ts
+ * const op: Operation = ['transfer', {
+ *   from: 'srbde',
+ *   to: 'alice',
+ *   amount: '1.000 HIVE',
+ *   memo: 'Pollen'
+ * }]
+ * ```
  */
 export interface Operation {
   0: OperationName | VirtualOperationName
   1: { [key: string]: any }
 }
 
+/**
+ * Operation record annotated with block and transaction position.
+ *
+ * @remarks
+ * `get_ops_in_block` and account-history calls return applied operations so
+ * indexers can preserve exact chain order and distinguish virtual operations.
+ *
+ * @example
+ * ```ts
+ * const operations = await client.database.getOperations(90_000_000)
+ * console.log(operations[0].block, operations[0].op[0])
+ * ```
+ */
 export interface AppliedOperation {
   trx_id: string
   block: number
@@ -151,6 +200,28 @@ export interface AppliedOperation {
   op: Operation
 }
 
+/**
+ * Legacy paid account creation operation.
+ *
+ * @remarks
+ * This operation creates an account by paying `fee` directly. Modern Hive
+ * account creation often uses claimed account tickets through
+ * {@link ClaimAccountOperation} and {@link CreateClaimedAccountOperation}.
+ *
+ * @example
+ * ```ts
+ * const op: AccountCreateOperation = ['account_create', {
+ *   fee: '3.000 HIVE',
+ *   creator: 'srbde',
+ *   new_account_name: 'new-user',
+ *   owner,
+ *   active,
+ *   posting,
+ *   memo_key,
+ *   json_metadata: '{}'
+ * }]
+ * ```
+ */
 export interface AccountCreateOperation extends Operation {
   0: 'account_create'
   1: {
@@ -165,6 +236,13 @@ export interface AccountCreateOperation extends Operation {
   }
 }
 
+/**
+ * Account creation operation that also delegates initial VESTS.
+ *
+ * @remarks
+ * Delegation gives a new account immediate resource capacity without
+ * transferring ownership of the underlying vesting shares.
+ */
 export interface AccountCreateWithDelegationOperation extends Operation {
   0: 'account_create_with_delegation'
   1: {
@@ -184,6 +262,22 @@ export interface AccountCreateWithDelegationOperation extends Operation {
   }
 }
 
+/**
+ * Updates account authorities, memo key, or legacy JSON metadata.
+ *
+ * @remarks
+ * Authority changes require the appropriate owner or active signatures. Use
+ * {@link AccountUpdate2Operation} when posting JSON metadata is needed.
+ *
+ * @example
+ * ```ts
+ * const op: AccountUpdateOperation = ['account_update', {
+ *   account: 'srbde',
+ *   memo_key,
+ *   json_metadata: '{}'
+ * }]
+ * ```
+ */
 export interface AccountUpdateOperation extends Operation {
   0: 'account_update' // 10
   1: {
@@ -196,6 +290,13 @@ export interface AccountUpdateOperation extends Operation {
   }
 }
 
+/**
+ * Sets or clears the witness voting proxy for an account.
+ *
+ * @remarks
+ * When a proxy is set, the account delegates witness-vote influence to another
+ * account instead of voting witnesses directly.
+ */
 export interface AccountWitnessProxyOperation extends Operation {
   0: 'account_witness_proxy' // 13
   1: {
@@ -204,6 +305,18 @@ export interface AccountWitnessProxyOperation extends Operation {
   }
 }
 
+/**
+ * Approves or removes a witness vote.
+ *
+ * @example
+ * ```ts
+ * const op: AccountWitnessVoteOperation = ['account_witness_vote', {
+ *   account: 'srbde',
+ *   witness: 'some-witness',
+ *   approve: true
+ * }]
+ * ```
+ */
 export interface AccountWitnessVoteOperation extends Operation {
   0: 'account_witness_vote' // 12
   1: {
@@ -213,6 +326,9 @@ export interface AccountWitnessVoteOperation extends Operation {
   }
 }
 
+/**
+ * Cancels a pending savings withdrawal request.
+ */
 export interface CancelTransferFromSavingsOperation extends Operation {
   0: 'cancel_transfer_from_savings' // 34
   1: {
@@ -257,6 +373,13 @@ export interface ChangeRecoveryAccountOperation extends Operation {
   }
 }
 
+/**
+ * Claims pending author, curation, and vesting rewards.
+ *
+ * @remarks
+ * Any reward field may be `0.000` in its respective asset. Hive requires the
+ * operation to name all three reward buckets explicitly.
+ */
 export interface ClaimRewardBalanceOperation extends Operation {
   0: 'claim_reward_balance' // 39
   1: {
@@ -267,6 +390,14 @@ export interface ClaimRewardBalanceOperation extends Operation {
   }
 }
 
+/**
+ * Claims a discounted account creation ticket.
+ *
+ * @remarks
+ * Claimed tickets can later be consumed by
+ * {@link CreateClaimedAccountOperation}. A zero fee is valid when the chain has
+ * free account subsidies available.
+ */
 export interface ClaimAccountOperation extends Operation {
   0: 'claim_account' // 22
   1: {
@@ -279,6 +410,26 @@ export interface ClaimAccountOperation extends Operation {
   }
 }
 
+/**
+ * Creates or updates a post or reply.
+ *
+ * @remarks
+ * Empty `parent_author` creates a top-level post. Non-empty `parent_author`
+ * creates a reply under the parent author/permlink pair.
+ *
+ * @example
+ * ```ts
+ * const op: CommentOperation = ['comment', {
+ *   parent_author: '',
+ *   parent_permlink: 'hive-139531',
+ *   author: 'srbde',
+ *   permlink: 'hello-pollen',
+ *   title: 'Hello Pollen',
+ *   body: 'Posted with Pollen.',
+ *   json_metadata: JSON.stringify({ tags: ['hive-139531'] })
+ * }]
+ * ```
+ */
 export interface CommentOperation extends Operation {
   0: 'comment' // 1
   1: {
@@ -292,6 +443,13 @@ export interface CommentOperation extends Operation {
   }
 }
 
+/**
+ * Sets payout, vote, curation, and beneficiary options for a comment.
+ *
+ * @remarks
+ * This usually travels in the same transaction as {@link CommentOperation} so a
+ * new post never exists with unintended payout settings.
+ */
 export interface CommentOptionsOperation extends Operation {
   0: 'comment_options' // 19
   1: {
@@ -309,6 +467,9 @@ export interface CommentOptionsOperation extends Operation {
   }
 }
 
+/**
+ * Converts HBD to HIVE through the standard conversion request flow.
+ */
 export interface ConvertOperation extends Operation {
   0: 'convert' // 8
   1: {
@@ -318,6 +479,9 @@ export interface ConvertOperation extends Operation {
   }
 }
 
+/**
+ * Consumes a claimed account ticket to create a new account.
+ */
 export interface CreateClaimedAccountOperation extends Operation {
   0: 'create_claimed_account' // 23
   1: {
@@ -335,6 +499,9 @@ export interface CreateClaimedAccountOperation extends Operation {
   }
 }
 
+/**
+ * Legacy binary custom operation requiring active authority.
+ */
 export interface CustomOperation extends Operation {
   0: 'custom' // 15
   1: {
@@ -344,6 +511,9 @@ export interface CustomOperation extends Operation {
   }
 }
 
+/**
+ * Binary custom operation supporting owner, active, posting, and authority auths.
+ */
 export interface CustomBinaryOperation extends Operation {
   0: 'custom_binary' // 35
   1: {
@@ -359,6 +529,24 @@ export interface CustomBinaryOperation extends Operation {
   }
 }
 
+/**
+ * JSON custom operation used by Hive application protocols.
+ *
+ * @remarks
+ * The `json` field must already be serialized. Posting authority is common for
+ * social protocols; active authority is used for protocols with financial or
+ * account-control implications.
+ *
+ * @example
+ * ```ts
+ * const op: CustomJsonOperation = ['custom_json', {
+ *   required_auths: [],
+ *   required_posting_auths: ['srbde'],
+ *   id: 'pollen.demo',
+ *   json: JSON.stringify({ ok: true })
+ * }]
+ * ```
+ */
 export interface CustomJsonOperation extends Operation {
   0: 'custom_json' // 18
   1: {
@@ -375,6 +563,9 @@ export interface CustomJsonOperation extends Operation {
   }
 }
 
+/**
+ * Enables or disables an account's ability to vote.
+ */
 export interface DeclineVotingRightsOperation extends Operation {
   0: 'decline_voting_rights' // 36
   1: {
@@ -383,6 +574,12 @@ export interface DeclineVotingRightsOperation extends Operation {
   }
 }
 
+/**
+ * Delegates vesting shares from one account to another.
+ *
+ * @remarks
+ * Set `vesting_shares` to `0.000000 VESTS` to remove an existing delegation.
+ */
 export interface DelegateVestingSharesOperation extends Operation {
   0: 'delegate_vesting_shares' // 40
   1: {
@@ -401,6 +598,9 @@ export interface DelegateVestingSharesOperation extends Operation {
   }
 }
 
+/**
+ * Deletes a comment or post when chain rules allow it.
+ */
 export interface DeleteCommentOperation extends Operation {
   0: 'delete_comment' // 17
   1: {
@@ -518,6 +718,13 @@ export interface EscrowTransferOperation extends Operation {
   }
 }
 
+/**
+ * Publishes a witness price feed.
+ *
+ * @remarks
+ * Witness feeds influence the median HIVE/HBD price used by conversions and
+ * debt-ratio mechanics.
+ */
 export interface FeedPublishOperation extends Operation {
   0: 'feed_publish' // 7
   1: {
@@ -567,6 +774,7 @@ export interface LimitOrderCreate2Operation extends Operation {
     expiration: string // time_point_sec
   }
 }
+
 /**
  * Recover an account to a new authority using a previous authority and verification
  * of the recovery account as proof of identity. This operation can only succeed
@@ -744,6 +952,20 @@ export interface SetWithdrawVestingRouteOperation extends Operation {
 
 /**
  * Transfers asset from one account to another.
+ *
+ * @remarks
+ * Transfers require active authority from `from`. Use `Memo.encode` before
+ * broadcasting when the memo should be encrypted for the recipient.
+ *
+ * @example
+ * ```ts
+ * const op: TransferOperation = ['transfer', {
+ *   from: 'srbde',
+ *   to: 'alice',
+ *   amount: '1.000 HIVE',
+ *   memo: 'Invoice 42'
+ * }]
+ * ```
  */
 export interface TransferOperation extends Operation {
   0: 'transfer' // 2
@@ -767,6 +989,13 @@ export interface TransferOperation extends Operation {
   }
 }
 
+/**
+ * Withdraws funds from savings to liquid balance after the savings delay.
+ *
+ * @remarks
+ * The request can be cancelled with {@link CancelTransferFromSavingsOperation}
+ * before it completes.
+ */
 export interface TransferFromSavingsOperation extends Operation {
   0: 'transfer_from_savings' // 33
   1: {
@@ -778,6 +1007,9 @@ export interface TransferFromSavingsOperation extends Operation {
   }
 }
 
+/**
+ * Moves liquid HIVE or HBD into an account's savings balance.
+ */
 export interface TransferToSavingsOperation extends Operation {
   0: 'transfer_to_savings' // 32
   1: {
@@ -808,6 +1040,23 @@ export interface TransferToVestingOperation extends Operation {
   }
 }
 
+/**
+ * Casts, updates, or removes a vote on a post or comment.
+ *
+ * @remarks
+ * Weight is a signed integer where `10000` is a full upvote, `0` removes the
+ * vote, and negative values are downvotes.
+ *
+ * @example
+ * ```ts
+ * const op: VoteOperation = ['vote', {
+ *   voter: 'srbde',
+ *   author: 'alice',
+ *   permlink: 'field-notes',
+ *   weight: 10_000
+ * }]
+ * ```
+ */
 export interface VoteOperation extends Operation {
   0: 'vote' // 0
   1: {
@@ -884,6 +1133,13 @@ export interface WitnessSetPropertiesOperation extends Operation {
   }
 }
 
+/**
+ * Modern account update operation with posting JSON metadata.
+ *
+ * @remarks
+ * This operation extends the legacy account update shape by allowing separate
+ * profile/application metadata in `posting_json_metadata`.
+ */
 export interface AccountUpdate2Operation extends Operation {
   0: 'account_update2' // 43
   1: {
@@ -898,6 +1154,13 @@ export interface AccountUpdate2Operation extends Operation {
   }
 }
 
+/**
+ * Creates a Decentralized Hive Fund proposal.
+ *
+ * @remarks
+ * Proposal payments are made to `receiver` between `start_date` and `end_date`
+ * when the proposal receives sufficient stake-weighted approval.
+ */
 export interface CreateProposalOperation extends Operation {
   0: 'create_proposal' // 44
   1: {
@@ -912,6 +1175,9 @@ export interface CreateProposalOperation extends Operation {
   }
 }
 
+/**
+ * Approves or removes approvals for DHF proposal ids.
+ */
 export interface UpdateProposalVotesOperation extends Operation {
   0: 'update_proposal_votes' // 45
   1: {
@@ -922,6 +1188,9 @@ export interface UpdateProposalVotesOperation extends Operation {
   }
 }
 
+/**
+ * Removes DHF proposals owned by an account.
+ */
 export interface RemoveProposalOperation extends Operation {
   0: 'remove_proposal' // 46
   1: {
@@ -931,6 +1200,9 @@ export interface RemoveProposalOperation extends Operation {
   }
 }
 
+/**
+ * Updates mutable fields on an existing DHF proposal.
+ */
 export interface UpdateProposalOperation extends Operation {
   0: 'update_proposal' // 47
   1: {
@@ -943,6 +1215,9 @@ export interface UpdateProposalOperation extends Operation {
   }
 }
 
+/**
+ * Converts HIVE to HBD through the collateralized conversion flow.
+ */
 export interface CollateralizedConvertOperation extends Operation {
   0: 'collateralized_convert' // 48
   1: {
@@ -952,6 +1227,26 @@ export interface CollateralizedConvertOperation extends Operation {
   }
 }
 
+/**
+ * Schedules a recurring transfer.
+ *
+ * @remarks
+ * `recurrence` is the interval in hours and `executions` is the number of
+ * times the transfer should execute.
+ *
+ * @example
+ * ```ts
+ * const op: RecurrentTransferOperation = ['recurrent_transfer', {
+ *   from: 'srbde',
+ *   to: 'alice',
+ *   amount: '1.000 HIVE',
+ *   memo: 'monthly support',
+ *   recurrence: 720,
+ *   executions: 3,
+ *   extensions: []
+ * }]
+ * ```
+ */
 export interface RecurrentTransferOperation extends Operation {
   0: 'recurrent_transfer' // 49
   1: {
