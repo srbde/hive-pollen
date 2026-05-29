@@ -6,7 +6,7 @@
 
 # Class: SerializationError
 
-Defined in: [src/errors.ts:95](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L95)
+Defined in: [src/errors.ts:95](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L95)
 
 Error thrown when Hive binary serialization or deserialization fails.
 
@@ -38,7 +38,7 @@ try {
 
 > **new SerializationError**(`message`, `info?`): `SerializationError`
 
-Defined in: [src/errors.ts:102](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L102)
+Defined in: [src/errors.ts:102](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L102)
 
 Creates a serialization error.
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `unknown`
 
-Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L26)
+Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L26)
 
 #### Inherited from
 

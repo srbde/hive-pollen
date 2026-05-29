@@ -6,7 +6,7 @@
 
 # Class: AccountByKeyAPI
 
-Defined in: [src/helpers/key.ts:33](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L33)
+Defined in: [src/helpers/key.ts:33](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L33)
 
 Helper for resolving Hive accounts by authority public key.
 
@@ -28,7 +28,7 @@ console.log(references.accounts[0])
 
 > **new AccountByKeyAPI**(`client`): `AccountByKeyAPI`
 
-Defined in: [src/helpers/key.ts:39](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L39)
+Defined in: [src/helpers/key.ts:39](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L39)
 
 Creates an account-by-key helper bound to a client.
 
@@ -50,7 +50,7 @@ Client used to call `account_by_key_api`.
 
 > `readonly` **client**: [`Client`](Client.md)
 
-Defined in: [src/helpers/key.ts:39](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L39)
+Defined in: [src/helpers/key.ts:39](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L39)
 
 Client used to call `account_by_key_api`.
 
@@ -60,7 +60,7 @@ Client used to call `account_by_key_api`.
 
 > **call**\<`T`\>(`method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/helpers/key.ts:58](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L58)
+Defined in: [src/helpers/key.ts:58](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L58)
 
 Sends a raw `account_by_key_api` call.
 
@@ -109,7 +109,7 @@ const result = await client.keys.call('get_key_references', {
 
 > **getKeyReferences**(`keys`): `Promise`\<[`AccountsByKey`](../interfaces/AccountsByKey.md)\>
 
-Defined in: [src/helpers/key.ts:85](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L85)
+Defined in: [src/helpers/key.ts:85](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L85)
 
 Fetches accounts that reference the supplied public keys.
 

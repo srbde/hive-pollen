@@ -6,7 +6,7 @@
 
 # Interface: AuthorityType
 
-Defined in: [src/chain/account.ts:57](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/account.ts#L57)
+Defined in: [src/chain/account.ts:57](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/account.ts#L57)
 
 Raw Hive authority object.
 
@@ -32,7 +32,7 @@ const authority: AuthorityType = {
 
 > **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/account.ts#L59)
+Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/account.ts#L59)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/chain/account.ts:59](https://github.com/TheCrazyGM/dhive/blob/a
 
 > **key\_auths**: \[`string` \| [`PublicKey`](../classes/PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:60](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/account.ts#L60)
+Defined in: [src/chain/account.ts:60](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/account.ts#L60)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/chain/account.ts:60](https://github.com/TheCrazyGM/dhive/blob/a
 
 > **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:58](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/account.ts#L58)
+Defined in: [src/chain/account.ts:58](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/account.ts#L58)

@@ -6,7 +6,7 @@
 
 # Class: Asset
 
-Defined in: [src/chain/asset.ts:79](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L79)
+Defined in: [src/chain/asset.ts:79](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L79)
 
 Immutable representation of a Hive asset amount and symbol.
 
@@ -31,7 +31,7 @@ console.log(payout.toString())
 
 > **new Asset**(`amount`, `symbol`): `Asset`
 
-Defined in: [src/chain/asset.ts:86](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L86)
+Defined in: [src/chain/asset.ts:86](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L86)
 
 Creates an asset from an amount and symbol.
 
@@ -59,7 +59,7 @@ Hive asset symbol.
 
 > `readonly` **amount**: `number`
 
-Defined in: [src/chain/asset.ts:87](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L87)
+Defined in: [src/chain/asset.ts:87](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L87)
 
 Numeric amount in display units.
 
@@ -69,7 +69,7 @@ Numeric amount in display units.
 
 > `readonly` **symbol**: [`AssetSymbol`](../type-aliases/AssetSymbol.md)
 
-Defined in: [src/chain/asset.ts:88](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L88)
+Defined in: [src/chain/asset.ts:88](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L88)
 
 Hive asset symbol.
 
@@ -79,7 +79,7 @@ Hive asset symbol.
 
 > **add**(`amount`): `Asset`
 
-Defined in: [src/chain/asset.ts:273](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L273)
+Defined in: [src/chain/asset.ts:273](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L273)
 
 Adds another amount with the same symbol.
 
@@ -114,7 +114,7 @@ const total = Asset.from('1.000 HIVE').add('2.500 HIVE')
 
 > **divide**(`divisor`): `Asset`
 
-Defined in: [src/chain/asset.ts:333](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L333)
+Defined in: [src/chain/asset.ts:333](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L333)
 
 Divides this asset amount by another same-symbol amount.
 
@@ -149,7 +149,7 @@ const half = Asset.from('2.000 HIVE').divide('2.000 HIVE')
 
 > **getPrecision**(): `number`
 
-Defined in: [src/chain/asset.ts:204](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L204)
+Defined in: [src/chain/asset.ts:204](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L204)
 
 Resolves the display precision for this asset symbol.
 
@@ -171,7 +171,7 @@ Asset.from('1.000000 VESTS').getPrecision()
 
 > **multiply**(`factor`): `Asset`
 
-Defined in: [src/chain/asset.ts:313](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L313)
+Defined in: [src/chain/asset.ts:313](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L313)
 
 Multiplies this asset amount by another same-symbol amount.
 
@@ -206,7 +206,7 @@ const doubled = Asset.from('2.000 HIVE').multiply('2.000 HIVE')
 
 > **steem\_symbols**(): `Asset`
 
-Defined in: [src/chain/asset.ts:234](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L234)
+Defined in: [src/chain/asset.ts:234](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L234)
 
 Converts display Hive symbols to protocol serialization symbols.
 
@@ -235,7 +235,7 @@ console.log(wireAsset.toString()) // 1.000 STEEM
 
 > **subtract**(`amount`): `Asset`
 
-Defined in: [src/chain/asset.ts:293](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L293)
+Defined in: [src/chain/asset.ts:293](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L293)
 
 Subtracts another amount with the same symbol.
 
@@ -270,7 +270,7 @@ const remaining = Asset.from('5.000 HIVE').subtract('1.250 HIVE')
 
 > **toJSON**(): `string`
 
-Defined in: [src/chain/asset.ts:342](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L342)
+Defined in: [src/chain/asset.ts:342](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L342)
 
 For JSON serialization, same as toString().
 
@@ -284,7 +284,7 @@ For JSON serialization, same as toString().
 
 > **toString**(): `string`
 
-Defined in: [src/chain/asset.ts:255](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L255)
+Defined in: [src/chain/asset.ts:255](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L255)
 
 Renders the asset using Hive display precision.
 
@@ -306,7 +306,7 @@ Asset.from(42, 'HIVE').toString()
 
 > `static` **from**(`value`, `symbol?`): `Asset`
 
-Defined in: [src/chain/asset.ts:139](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L139)
+Defined in: [src/chain/asset.ts:139](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L139)
 
 Normalizes an asset-like value into an Asset.
 
@@ -349,7 +349,7 @@ const balance = Asset.from('10.000 HBD', 'HBD')
 
 > `static` **fromString**(`string`, `expectedSymbol?`): `Asset`
 
-Defined in: [src/chain/asset.ts:107](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L107)
+Defined in: [src/chain/asset.ts:107](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L107)
 
 Parses a Hive asset string.
 
@@ -391,7 +391,7 @@ const amount = Asset.fromString('42.000 HIVE', 'HIVE')
 
 > `static` **max**(`a`, `b`): `Asset`
 
-Defined in: [src/chain/asset.ts:189](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L189)
+Defined in: [src/chain/asset.ts:189](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L189)
 
 Returns the larger of two same-symbol assets.
 
@@ -432,7 +432,7 @@ const required = Asset.max(minimumFee, offeredFee)
 
 > `static` **min**(`a`, `b`): `Asset`
 
-Defined in: [src/chain/asset.ts:169](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/asset.ts#L169)
+Defined in: [src/chain/asset.ts:169](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L169)
 
 Returns the smaller of two same-symbol assets.
 

@@ -6,7 +6,7 @@
 
 # Interface: AccountsByKey
 
-Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L9)
+Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/helpers/key.ts:9](https://github.com/TheCrazyGM/dhive/blob/ae49
 
 > **accounts**: `string`[][]
 
-Defined in: [src/helpers/key.ts:17](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/helpers/key.ts#L17)
+Defined in: [src/helpers/key.ts:17](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/helpers/key.ts#L17)
 
 Account names grouped by the queried public key order.
 

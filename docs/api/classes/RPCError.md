@@ -6,7 +6,7 @@
 
 # Class: RPCError
 
-Defined in: [src/errors.ts:62](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L62)
+Defined in: [src/errors.ts:62](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L62)
 
 Error thrown when a Hive RPC node returns a JSON-RPC error.
 
@@ -39,7 +39,7 @@ try {
 
 > **new RPCError**(`message`, `info?`): `RPCError`
 
-Defined in: [src/errors.ts:69](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L69)
+Defined in: [src/errors.ts:69](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L69)
 
 Creates an RPC error.
 
@@ -83,7 +83,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `unknown`
 
-Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/errors.ts#L26)
+Defined in: [src/errors.ts:26](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/errors.ts#L26)
 
 #### Inherited from
 

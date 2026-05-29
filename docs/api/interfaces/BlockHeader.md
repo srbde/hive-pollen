@@ -6,7 +6,7 @@
 
 # Interface: BlockHeader
 
-Defined in: [src/chain/block.ts:51](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L51)
+Defined in: [src/chain/block.ts:51](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L51)
 
 Hive block header without the witness signature.
 
@@ -32,7 +32,7 @@ console.log(header.witness, header.timestamp)
 
 > **extensions**: `unknown`[]
 
-Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L56)
+Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L56)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/chain/block.ts:56](https://github.com/TheCrazyGM/dhive/blob/ae4
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L52)
+Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L52)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/block.ts:52](https://github.com/TheCrazyGM/dhive/blob/ae4
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L53)
+Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L53)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/chain/block.ts:53](https://github.com/TheCrazyGM/dhive/blob/ae4
 
 > **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L55)
+Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L55)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [src/chain/block.ts:55](https://github.com/TheCrazyGM/dhive/blob/ae4
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/block.ts#L54)
+Defined in: [src/chain/block.ts:54](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/block.ts#L54)

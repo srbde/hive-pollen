@@ -6,7 +6,7 @@
 
 # Interface: SetWithdrawVestingRouteOperation
 
-Defined in: [src/chain/operation.ts:1046](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1046)
+Defined in: [src/chain/operation.ts:1046](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1046)
 
 Allows an account to setup a vesting withdraw but with the additional
 request for the funds to be transferred directly to another account's
@@ -24,7 +24,7 @@ vests to hive and back, guaranteeing they maintain their value.
 
 > **0**: `"set_withdraw_vesting_route"`
 
-Defined in: [src/chain/operation.ts:1047](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1047)
+Defined in: [src/chain/operation.ts:1047](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1047)
 
 #### Overrides
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/operation.ts:1047](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1048](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1048)
+Defined in: [src/chain/operation.ts:1048](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1048)
 
 #### auto\_vest
 

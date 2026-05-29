@@ -6,7 +6,7 @@
 
 # Interface: WithdrawVestingOperation
 
-Defined in: [src/chain/operation.ts:1188](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1188)
+Defined in: [src/chain/operation.ts:1188](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1188)
 
 At any given point in time an account can be withdrawing from their
 vesting shares. A user may change the number of shares they wish to
@@ -29,7 +29,7 @@ This operation is not valid if the user has no vesting shares.
 
 > **0**: `"withdraw_vesting"`
 
-Defined in: [src/chain/operation.ts:1189](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1189)
+Defined in: [src/chain/operation.ts:1189](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1189)
 
 #### Overrides
 
@@ -41,7 +41,7 @@ Defined in: [src/chain/operation.ts:1189](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1190](https://github.com/TheCrazyGM/dhive/blob/ae4989e28e0cf43ae59af4e3ad2b2a9309e6596e/src/chain/operation.ts#L1190)
+Defined in: [src/chain/operation.ts:1190](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1190)
 
 #### account
 
