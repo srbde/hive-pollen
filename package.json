@@ -1,6 +1,6 @@
 {
   "name": "@srbde/pollen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Modern, secure, and zero-dependency TypeScript SDK for the Hive blockchain",
   "keywords": [
     "blockchain",
@@ -21,12 +21,13 @@
     "type": "git",
     "url": "git+https://github.com/srbde/hive-pollen.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "bin": {
     "pollen": "./lib/src/index-node.js"
   },
+  "files": [
+    "dist",
+    "lib"
+  ],
   "type": "module",
   "main": "./lib/src/index-node.js",
   "browser": "./dist/pollen.js",
@@ -40,6 +41,9 @@
       "types": "./lib/src/index-browser.d.ts",
       "import": "./lib/src/index-browser.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "prebuild": "mkdir -p lib dist docs",
