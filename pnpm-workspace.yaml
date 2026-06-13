@@ -6,10 +6,13 @@ allowBuilds:
   core-js: true
   esbuild: true
 
+minimumReleaseAgeExclude:
+  - esbuild@0.28.1
+
 onlyBuiltDependencies:
   - core-js
   - esbuild
 
 overrides:
-  esbuild@<=0.24.2: '>=0.25.0'
+  esbuild: ^0.28.1
   vite@<=6.4.1: '>=6.4.2'
