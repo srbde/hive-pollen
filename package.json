@@ -1,6 +1,6 @@
 {
   "name": "@srbde/pollen",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Modern, secure, and zero-dependency TypeScript SDK for the Hive blockchain",
   "keywords": [
     "blockchain",
