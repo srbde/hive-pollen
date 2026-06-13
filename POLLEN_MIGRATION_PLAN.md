@@ -65,6 +65,10 @@ This document outlines the strategic roadmap for **`@srbde/pollen`**.
 - [x] **Operation Enrichment:** Document every field of every operation using the "Documentation Architect" persona.
 - [x] **Validation Layer:** (Optional) Implement Zod-like runtime validation for incoming RPC data to ensure type integrity.
 
+## 📌 Post-v1 Community Feedback
+
+- [ ] **Multi-operation transaction helper:** A Hive user asked whether Pollen can add new features while staying backward compatible, specifically a public interface for sending multiple operations in one transaction. Preserve the existing `client.broadcast.transfer(...)`, `vote(...)`, `comment(...)`, etc. helpers, but consider adding a new additive API such as `client.broadcast.operations([...], key)` or a transaction-builder-style helper for batching operations into a single signed transaction.
+
 ---
 
 _Document updated on Sunday, May 24, 2026. All phases completed. Ready for Pollen v1.0.0 release!_
