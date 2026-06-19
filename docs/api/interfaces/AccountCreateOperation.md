@@ -6,7 +6,7 @@
 
 # Interface: AccountCreateOperation
 
-Defined in: [src/chain/operation.ts:328](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L328)
+Defined in: [src/chain/operation.ts:328](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L328)
 
 Legacy paid account creation operation.
 
@@ -41,7 +41,7 @@ const op: AccountCreateOperation = ['account_create', {
 
 > **0**: `"account_create"`
 
-Defined in: [src/chain/operation.ts:329](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L329)
+Defined in: [src/chain/operation.ts:329](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L329)
 
 #### Overrides
 
@@ -53,7 +53,7 @@ Defined in: [src/chain/operation.ts:329](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:330](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L330)
+Defined in: [src/chain/operation.ts:330](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L330)
 
 #### active
 

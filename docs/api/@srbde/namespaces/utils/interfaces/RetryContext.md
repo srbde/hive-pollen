@@ -6,7 +6,7 @@
 
 # Interface: RetryContext
 
-Defined in: [src/utils.ts:57](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/utils.ts#L57)
+Defined in: [src/utils.ts:57](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L57)
 
 Context for smart retry and failover decisions.
 
@@ -16,7 +16,7 @@ Context for smart retry and failover decisions.
 
 > `optional` **api?**: `string`
 
-Defined in: [src/utils.ts:59](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/utils.ts#L59)
+Defined in: [src/utils.ts:59](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L59)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/utils.ts:59](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe
 
 > `optional` **consoleOnFailover?**: `boolean`
 
-Defined in: [src/utils.ts:61](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/utils.ts#L61)
+Defined in: [src/utils.ts:61](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L61)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [src/utils.ts:61](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe
 
 > `optional` **healthTracker?**: [`NodeHealthTracker`](../../../../classes/NodeHealthTracker.md)
 
-Defined in: [src/utils.ts:58](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/utils.ts#L58)
+Defined in: [src/utils.ts:58](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L58)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [src/utils.ts:58](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe
 
 > `optional` **isBroadcast?**: `boolean`
 
-Defined in: [src/utils.ts:60](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/utils.ts#L60)
+Defined in: [src/utils.ts:60](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L60)

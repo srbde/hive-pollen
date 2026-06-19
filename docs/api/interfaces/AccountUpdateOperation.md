@@ -6,7 +6,7 @@
 
 # Interface: AccountUpdateOperation
 
-Defined in: [src/chain/operation.ts:384](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L384)
+Defined in: [src/chain/operation.ts:384](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L384)
 
 Updates account authorities, memo key, or legacy JSON metadata.
 
@@ -35,7 +35,7 @@ const op: AccountUpdateOperation = ['account_update', {
 
 > **0**: `"account_update"`
 
-Defined in: [src/chain/operation.ts:385](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L385)
+Defined in: [src/chain/operation.ts:385](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L385)
 
 #### Overrides
 
@@ -47,7 +47,7 @@ Defined in: [src/chain/operation.ts:385](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:386](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L386)
+Defined in: [src/chain/operation.ts:386](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L386)
 
 #### account
 

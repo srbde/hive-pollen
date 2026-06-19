@@ -6,7 +6,7 @@
 
 # Interface: AccountWitnessVoteOperation
 
-Defined in: [src/chain/operation.ts:423](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L423)
+Defined in: [src/chain/operation.ts:423](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L423)
 
 Approves or removes a witness vote.
 
@@ -30,7 +30,7 @@ const op: AccountWitnessVoteOperation = ['account_witness_vote', {
 
 > **0**: `"account_witness_vote"`
 
-Defined in: [src/chain/operation.ts:424](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L424)
+Defined in: [src/chain/operation.ts:424](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L424)
 
 #### Overrides
 
@@ -42,7 +42,7 @@ Defined in: [src/chain/operation.ts:424](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:425](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L425)
+Defined in: [src/chain/operation.ts:425](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L425)
 
 #### account
 

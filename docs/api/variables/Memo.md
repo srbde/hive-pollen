@@ -8,7 +8,7 @@
 
 > `const` **Memo**: `object`
 
-Defined in: [src/memo.ts:156](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/memo.ts#L156)
+Defined in: [src/memo.ts:156](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/memo.ts#L156)
 
 Hive encrypted memo helper.
 

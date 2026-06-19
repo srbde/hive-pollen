@@ -6,7 +6,7 @@
 
 # Interface: OperationTuple
 
-Defined in: [src/chain/operation.ts:184](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L184)
+Defined in: [src/chain/operation.ts:184](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L184)
 
 Generic Hive operation tuple.
 
@@ -127,7 +127,7 @@ const op: Operation = ['transfer', {
 
 > **0**: [`OperationName`](../type-aliases/OperationName.md) \| [`VirtualOperationName`](../type-aliases/VirtualOperationName.md)
 
-Defined in: [src/chain/operation.ts:185](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L185)
+Defined in: [src/chain/operation.ts:185](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L185)
 
 ***
 
@@ -135,7 +135,7 @@ Defined in: [src/chain/operation.ts:185](https://github.com/TheCrazyGM/dhive/blo
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:186](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L186)
+Defined in: [src/chain/operation.ts:186](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L186)
 
 #### Index Signature
 

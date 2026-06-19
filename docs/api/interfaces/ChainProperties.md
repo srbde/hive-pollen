@@ -6,7 +6,7 @@
 
 # Interface: ChainProperties
 
-Defined in: [src/chain/misc.ts:120](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/misc.ts#L120)
+Defined in: [src/chain/misc.ts:120](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L120)
 
 Chain properties voted on by Hive witnesses.
 
@@ -28,7 +28,7 @@ console.log(props.account_creation_fee)
 
 > **account\_creation\_fee**: `string` \| [`Asset`](../classes/Asset.md)
 
-Defined in: [src/chain/misc.ts:132](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/misc.ts#L132)
+Defined in: [src/chain/misc.ts:132](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L132)
 
 This fee, paid in HIVE, is converted into VESTING SHARES for the new account. Accounts
 without vesting shares cannot earn usage rations and therefore are powerless. This minimum
@@ -46,7 +46,7 @@ This has to be multiplied by STEEMIT ? `CREATE_ACCOUNT_WITH_HIVE_MODIFIER`
 
 > **hbd\_interest\_rate**: `number`
 
-Defined in: [src/chain/misc.ts:141](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/misc.ts#L141)
+Defined in: [src/chain/misc.ts:141](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L141)
 
 The HBD interest percentage rate decided by witnesses, expressed 0 to 10000.
 
@@ -56,7 +56,7 @@ The HBD interest percentage rate decided by witnesses, expressed 0 to 10000.
 
 > **maximum\_block\_size**: `number`
 
-Defined in: [src/chain/misc.ts:137](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/misc.ts#L137)
+Defined in: [src/chain/misc.ts:137](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L137)
 
 This witnesses vote for the maximum_block_size which is used by the network
 to tune rate limiting and capacity.

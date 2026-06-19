@@ -6,7 +6,7 @@
 
 # Interface: Manabar
 
-Defined in: [src/chain/rc.ts:117](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/rc.ts#L117)
+Defined in: [src/chain/rc.ts:117](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L117)
 
 Projected manabar value returned by Pollen mana helpers.
 
@@ -28,7 +28,7 @@ console.log(`${mana.percentage / 100}%`)
 
 > **current\_mana**: `number`
 
-Defined in: [src/chain/rc.ts:118](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/rc.ts#L118)
+Defined in: [src/chain/rc.ts:118](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L118)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/rc.ts:118](https://github.com/TheCrazyGM/dhive/blob/b11ca
 
 > **max\_mana**: `number`
 
-Defined in: [src/chain/rc.ts:119](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/rc.ts#L119)
+Defined in: [src/chain/rc.ts:119](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L119)
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [src/chain/rc.ts:119](https://github.com/TheCrazyGM/dhive/blob/b11ca
 
 > **percentage**: `number`
 
-Defined in: [src/chain/rc.ts:120](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/rc.ts#L120)
+Defined in: [src/chain/rc.ts:120](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L120)

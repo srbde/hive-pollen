@@ -6,7 +6,7 @@
 
 # Interface: TransferOperation
 
-Defined in: [src/chain/operation.ts:1073](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1073)
+Defined in: [src/chain/operation.ts:1073](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1073)
 
 Transfers asset from one account to another.
 
@@ -36,7 +36,7 @@ const op: TransferOperation = ['transfer', {
 
 > **0**: `"transfer"`
 
-Defined in: [src/chain/operation.ts:1074](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1074)
+Defined in: [src/chain/operation.ts:1074](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1074)
 
 #### Overrides
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/operation.ts:1074](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1075](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1075)
+Defined in: [src/chain/operation.ts:1075](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1075)
 
 #### amount
 

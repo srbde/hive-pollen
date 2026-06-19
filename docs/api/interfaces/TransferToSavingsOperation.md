@@ -6,7 +6,7 @@
 
 # Interface: TransferToSavingsOperation
 
-Defined in: [src/chain/operation.ts:1116](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1116)
+Defined in: [src/chain/operation.ts:1116](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1116)
 
 Moves liquid HIVE or HBD into an account's savings balance.
 
@@ -20,7 +20,7 @@ Moves liquid HIVE or HBD into an account's savings balance.
 
 > **0**: `"transfer_to_savings"`
 
-Defined in: [src/chain/operation.ts:1117](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1117)
+Defined in: [src/chain/operation.ts:1117](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1117)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:1117](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1118](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1118)
+Defined in: [src/chain/operation.ts:1118](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1118)
 
 #### amount
 

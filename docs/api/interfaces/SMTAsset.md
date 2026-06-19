@@ -6,7 +6,7 @@
 
 # Interface: SMTAsset
 
-Defined in: [src/chain/asset.ts:38](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L38)
+Defined in: [src/chain/asset.ts:38](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/asset.ts#L38)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/chain/asset.ts:38](https://github.com/TheCrazyGM/dhive/blob/b11
 
 > **amount**: `string` \| `number`
 
-Defined in: [src/chain/asset.ts:42](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L42)
+Defined in: [src/chain/asset.ts:42](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/asset.ts#L42)
 
 Integer amount in the token's smallest precision unit.
 
@@ -24,7 +24,7 @@ Integer amount in the token's smallest precision unit.
 
 > **nai**: `string`
 
-Defined in: [src/chain/asset.ts:50](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L50)
+Defined in: [src/chain/asset.ts:50](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/asset.ts#L50)
 
 Numeric asset identifier assigned by Hive's SMT protocol.
 
@@ -34,6 +34,6 @@ Numeric asset identifier assigned by Hive's SMT protocol.
 
 > **precision**: `number`
 
-Defined in: [src/chain/asset.ts:46](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/asset.ts#L46)
+Defined in: [src/chain/asset.ts:46](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/asset.ts#L46)
 
 Number of decimal places used by the token.

@@ -6,7 +6,7 @@
 
 # Interface: HealthTrackerOptions
 
-Defined in: [src/health-tracker.ts:53](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L53)
+Defined in: [src/health-tracker.ts:53](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L53)
 
 Tuning options for Pollen's RPC node health tracker.
 
@@ -32,7 +32,7 @@ const client = new Client(['https://api.hive.blog', 'https://api.openhive.networ
 
 > `optional` **apiCooldownMs?**: `number`
 
-Defined in: [src/health-tracker.ts:63](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L63)
+Defined in: [src/health-tracker.ts:63](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L63)
 
 How long (ms) to deprioritize a node for a specific API after failures.
 Default: 60 seconds.
@@ -43,7 +43,7 @@ Default: 60 seconds.
 
 > `optional` **defaultRateLimitMs?**: `number`
 
-Defined in: [src/health-tracker.ts:89](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L89)
+Defined in: [src/health-tracker.ts:89](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L89)
 
 Default duration (ms) to skip a node after receiving a 429 response,
 used when the server doesn't provide a Retry-After header.
@@ -55,7 +55,7 @@ Default: 10 seconds.
 
 > `optional` **headBlockTtlMs?**: `number`
 
-Defined in: [src/health-tracker.ts:83](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L83)
+Defined in: [src/health-tracker.ts:83](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L83)
 
 How long (ms) head block data remains valid for staleness checks.
 Default: 2 minutes.
@@ -66,7 +66,7 @@ Default: 2 minutes.
 
 > `optional` **maxApiFailuresBeforeCooldown?**: `number`
 
-Defined in: [src/health-tracker.ts:73](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L73)
+Defined in: [src/health-tracker.ts:73](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L73)
 
 Number of API-specific failures before deprioritizing for that API.
 Default: 2.
@@ -77,7 +77,7 @@ Default: 2.
 
 > `optional` **maxFailuresBeforeCooldown?**: `number`
 
-Defined in: [src/health-tracker.ts:68](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L68)
+Defined in: [src/health-tracker.ts:68](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L68)
 
 Number of consecutive failures before a node enters cooldown.
 Default: 3.
@@ -88,7 +88,7 @@ Default: 3.
 
 > `optional` **nodeCooldownMs?**: `number`
 
-Defined in: [src/health-tracker.ts:58](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L58)
+Defined in: [src/health-tracker.ts:58](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L58)
 
 How long (ms) to deprioritize a node after consecutive failures.
 Default: 30 seconds.
@@ -99,7 +99,7 @@ Default: 30 seconds.
 
 > `optional` **staleBlockThreshold?**: `number`
 
-Defined in: [src/health-tracker.ts:78](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/health-tracker.ts#L78)
+Defined in: [src/health-tracker.ts:78](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L78)
 
 How many blocks behind the best known head block a node can be
 before being considered stale. Default: 30.

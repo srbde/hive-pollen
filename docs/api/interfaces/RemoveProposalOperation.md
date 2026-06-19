@@ -6,7 +6,7 @@
 
 # Interface: RemoveProposalOperation
 
-Defined in: [src/chain/operation.ts:1297](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1297)
+Defined in: [src/chain/operation.ts:1297](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1297)
 
 Removes DHF proposals owned by an account.
 
@@ -20,7 +20,7 @@ Removes DHF proposals owned by an account.
 
 > **0**: `"remove_proposal"`
 
-Defined in: [src/chain/operation.ts:1298](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1298)
+Defined in: [src/chain/operation.ts:1298](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1298)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:1298](https://github.com/TheCrazyGM/dhive/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1299](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/operation.ts#L1299)
+Defined in: [src/chain/operation.ts:1299](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1299)
 
 #### extensions
 

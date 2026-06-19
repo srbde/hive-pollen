@@ -6,7 +6,7 @@
 
 # Interface: CommunityDetail
 
-Defined in: [src/chain/hivemind.ts:18](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L18)
+Defined in: [src/chain/hivemind.ts:18](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L18)
 
 Community metadata returned by Hivemind bridge calls.
 
@@ -32,7 +32,7 @@ console.log(community.title, community.subscribers)
 
 > **about**: `string`
 
-Defined in: [src/chain/hivemind.ts:22](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L22)
+Defined in: [src/chain/hivemind.ts:22](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L22)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/chain/hivemind.ts:22](https://github.com/TheCrazyGM/dhive/blob/
 
 > `optional` **admins?**: `string`[]
 
-Defined in: [src/chain/hivemind.ts:37](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L37)
+Defined in: [src/chain/hivemind.ts:37](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L37)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/hivemind.ts:37](https://github.com/TheCrazyGM/dhive/blob/
 
 > **avatar\_url**: `string`
 
-Defined in: [src/chain/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L31)
+Defined in: [src/chain/hivemind.ts:31](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L31)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/chain/hivemind.ts:31](https://github.com/TheCrazyGM/dhive/blob/
 
 > **context**: `object`
 
-Defined in: [src/chain/hivemind.ts:32](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L32)
+Defined in: [src/chain/hivemind.ts:32](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L32)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [src/chain/hivemind.ts:32](https://github.com/TheCrazyGM/dhive/blob/
 
 > **created\_at**: `string`
 
-Defined in: [src/chain/hivemind.ts:30](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L30)
+Defined in: [src/chain/hivemind.ts:30](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L30)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [src/chain/hivemind.ts:30](https://github.com/TheCrazyGM/dhive/blob/
 
 > **description**: `string`
 
-Defined in: [src/chain/hivemind.ts:33](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L33)
+Defined in: [src/chain/hivemind.ts:33](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L33)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [src/chain/hivemind.ts:33](https://github.com/TheCrazyGM/dhive/blob/
 
 > **flag\_text**: `string`
 
-Defined in: [src/chain/hivemind.ts:34](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L34)
+Defined in: [src/chain/hivemind.ts:34](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L34)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [src/chain/hivemind.ts:34](https://github.com/TheCrazyGM/dhive/blob/
 
 > **id**: `number`
 
-Defined in: [src/chain/hivemind.ts:19](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L19)
+Defined in: [src/chain/hivemind.ts:19](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L19)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [src/chain/hivemind.ts:19](https://github.com/TheCrazyGM/dhive/blob/
 
 > **is\_nsfw**: `false`
 
-Defined in: [src/chain/hivemind.ts:25](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L25)
+Defined in: [src/chain/hivemind.ts:25](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L25)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [src/chain/hivemind.ts:25](https://github.com/TheCrazyGM/dhive/blob/
 
 > **lang**: `string`
 
-Defined in: [src/chain/hivemind.ts:23](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L23)
+Defined in: [src/chain/hivemind.ts:23](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L23)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [src/chain/hivemind.ts:23](https://github.com/TheCrazyGM/dhive/blob/
 
 > **name**: `string`
 
-Defined in: [src/chain/hivemind.ts:20](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L20)
+Defined in: [src/chain/hivemind.ts:20](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L20)
 
 ***
 
@@ -120,7 +120,7 @@ Defined in: [src/chain/hivemind.ts:20](https://github.com/TheCrazyGM/dhive/blob/
 
 > **num\_authors**: `number`
 
-Defined in: [src/chain/hivemind.ts:29](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L29)
+Defined in: [src/chain/hivemind.ts:29](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L29)
 
 ***
 
@@ -128,7 +128,7 @@ Defined in: [src/chain/hivemind.ts:29](https://github.com/TheCrazyGM/dhive/blob/
 
 > **num\_pending**: `number`
 
-Defined in: [src/chain/hivemind.ts:28](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L28)
+Defined in: [src/chain/hivemind.ts:28](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L28)
 
 ***
 
@@ -136,7 +136,7 @@ Defined in: [src/chain/hivemind.ts:28](https://github.com/TheCrazyGM/dhive/blob/
 
 > **settings**: `object`
 
-Defined in: [src/chain/hivemind.ts:35](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L35)
+Defined in: [src/chain/hivemind.ts:35](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L35)
 
 ***
 
@@ -144,7 +144,7 @@ Defined in: [src/chain/hivemind.ts:35](https://github.com/TheCrazyGM/dhive/blob/
 
 > **subscribers**: `number`
 
-Defined in: [src/chain/hivemind.ts:26](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L26)
+Defined in: [src/chain/hivemind.ts:26](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L26)
 
 ***
 
@@ -152,7 +152,7 @@ Defined in: [src/chain/hivemind.ts:26](https://github.com/TheCrazyGM/dhive/blob/
 
 > **sum\_pending**: `number`
 
-Defined in: [src/chain/hivemind.ts:27](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L27)
+Defined in: [src/chain/hivemind.ts:27](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L27)
 
 ***
 
@@ -160,7 +160,7 @@ Defined in: [src/chain/hivemind.ts:27](https://github.com/TheCrazyGM/dhive/blob/
 
 > `optional` **team?**: `string`[]
 
-Defined in: [src/chain/hivemind.ts:36](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L36)
+Defined in: [src/chain/hivemind.ts:36](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L36)
 
 ***
 
@@ -168,7 +168,7 @@ Defined in: [src/chain/hivemind.ts:36](https://github.com/TheCrazyGM/dhive/blob/
 
 > **title**: `string`
 
-Defined in: [src/chain/hivemind.ts:21](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L21)
+Defined in: [src/chain/hivemind.ts:21](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L21)
 
 ***
 
@@ -176,4 +176,4 @@ Defined in: [src/chain/hivemind.ts:21](https://github.com/TheCrazyGM/dhive/blob/
 
 > **type\_id**: `number`
 
-Defined in: [src/chain/hivemind.ts:24](https://github.com/TheCrazyGM/dhive/blob/b11ca17fe4533aecca91cbd8e7d1c7dfb4f2dff3/src/chain/hivemind.ts#L24)
+Defined in: [src/chain/hivemind.ts:24](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/hivemind.ts#L24)
