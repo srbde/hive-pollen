@@ -150,7 +150,11 @@ export class DatabaseAPI {
   /**
    * Sends a raw condenser API call through the parent client.
    *
-   * @param method - Condenser method name, without an API prefix.
+   * @param method - Bare condenser method name **without** the `condenser_api.`
+   * prefix. This helper automatically prepends `condenser_api.` before
+   * forwarding the call, so including the prefix yourself will produce a
+   * double-prefixed method name (e.g. `condenser_api.condenser_api.foo`) that
+   * every node will reject with an `RPCError: Unable to map request to endpoint`.
    * @param params - Positional parameters for the method.
    * @returns The decoded RPC result.
    *
@@ -159,8 +163,17 @@ export class DatabaseAPI {
    *
    * @example
    * ```ts
+   * // Correct — 'condenser_api.' is added automatically
    * const result = await client.database.call('get_config')
    * console.log(result.HIVE_BLOCK_INTERVAL)
+   *
+   * // Also correct
+   * const votes = await client.database.call('list_proposal_votes', [
+   *   [], 100, 'by_voter_proposal', 'ascending', 'votable'
+   * ])
+   *
+   * // Wrong — sends condenser_api.condenser_api.list_proposal_votes → RPCError
+   * const votes = await client.database.call('condenser_api.list_proposal_votes', [...])
    * ```
    */
   public call<T = unknown>(method: string, params?: unknown[]) {
