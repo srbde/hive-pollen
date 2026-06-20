@@ -310,70 +310,95 @@
       .book-side-title.bids { color: var(--bid-color); }
       .book-side-title.asks { color: var(--ask-color); }
 
-      .book-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.825rem;
-        font-family: var(--font-mono);
+      .book-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
       }
 
-      .book-table th {
-        text-align: right;
+      .book-header {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        padding: 0.5rem 0.75rem;
         color: var(--text-secondary);
-        font-weight: 500;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         font-size: 0.75rem;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 0.25rem;
       }
 
-      .book-table th:first-child { text-align: left; }
+      .book-header-cell {
+        text-align: right;
+      }
+
+      .book-header-cell:first-child {
+        text-align: left;
+      }
 
       .book-row {
         position: relative;
-        cursor: pointer;
-        transition: background 0.1s ease;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.825rem;
+        font-family: var(--font-mono);
+        border-radius: 4px;
+        align-items: center;
+        transition: background 0.15s ease;
+        overflow: hidden;
       }
 
       .book-row:hover {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .book-cell {
+        position: relative;
+        z-index: 2;
+        text-align: right;
+      }
+
+      .book-cell:first-child {
+        text-align: left;
+      }
+
+      .book-cell.price {
+        font-weight: 600;
+      }
+
+      .bids .price {
+        color: var(--bid-color);
+      }
+
+      .asks .price {
+        color: var(--ask-color);
+      }
+
+      .book-cell.seller {
+        color: #64748b;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .book-depth-bar {
         position: absolute;
-        top: 2px;
-        bottom: 2px;
-        right: 0;
+        top: 0;
+        bottom: 0;
         z-index: 1;
-        opacity: 0.08;
         pointer-events: none;
-        border-radius: 2px;
         transition: width 0.3s ease;
       }
 
       .bids .book-depth-bar {
-        background-color: var(--bid-color);
+        right: 0;
+        background: linear-gradient(to left, rgba(0, 245, 212, 0.12), rgba(0, 245, 212, 0));
       }
 
       .asks .book-depth-bar {
-        background-color: var(--ask-color);
-      }
-
-      .book-table td {
-        padding: 0.35rem 0;
-        text-align: right;
-        position: relative;
-        z-index: 2;
-      }
-
-      .book-table td:first-child { text-align: left; }
-
-      .book-table .price { font-weight: 600; }
-      .bids .price { color: var(--bid-color); }
-      .asks .price { color: var(--ask-color); }
-
-      .book-table .seller {
-        color: #64748b;
-        font-size: 0.75rem;
+        left: 0;
+        background: linear-gradient(to right, rgba(255, 0, 127, 0.12), rgba(255, 0, 127, 0));
       }
 
       /* Trade History Table */
@@ -549,18 +574,14 @@
                 <span>Bids (Buys)</span>
                 <span id="bid-depth-total">Total: 0 HIVE</span>
               </div>
-              <table class="book-table">
-                <thead>
-                  <tr>
-                    <th style="width: 35%">Price (HBD)</th>
-                    <th style="width: 35%; text-align: right">Size (HIVE)</th>
-                    <th style="width: 30%; text-align: right">Buyer</th>
-                  </tr>
-                </thead>
-                <tbody id="bids-body">
-                  <tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">Loading bids...</td></tr>
-                </tbody>
-              </table>
+              <div class="book-header">
+                <div class="book-header-cell">Price (HBD)</div>
+                <div class="book-header-cell">Size (HIVE)</div>
+                <div class="book-header-cell">Buyer</div>
+              </div>
+              <div class="book-list" id="bids-body">
+                <div style="text-align: center; color: var(--text-secondary); padding: 1rem;">Loading bids...</div>
+              </div>
             </div>
 
             <!-- Asks -->
@@ -569,18 +590,14 @@
                 <span>Asks (Sells)</span>
                 <span id="ask-depth-total">Total: 0 HIVE</span>
               </div>
-              <table class="book-table">
-                <thead>
-                  <tr>
-                    <th style="width: 35%">Price (HBD)</th>
-                    <th style="width: 35%; text-align: right">Size (HIVE)</th>
-                    <th style="width: 30%; text-align: right">Seller</th>
-                  </tr>
-                </thead>
-                <tbody id="asks-body">
-                  <tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">Loading asks...</td></tr>
-                </tbody>
-              </table>
+              <div class="book-header">
+                <div class="book-header-cell">Price (HBD)</div>
+                <div class="book-header-cell">Size (HIVE)</div>
+                <div class="book-header-cell">Seller</div>
+              </div>
+              <div class="book-list" id="asks-body">
+                <div style="text-align: center; color: var(--text-secondary); padding: 1rem;">Loading asks...</div>
+              </div>
             </div>
           </div>
         </section>
@@ -785,34 +802,34 @@
 
         // Render Bids
         if (bidsWithDepth.length === 0) {
-          elements.bidsBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">No active bids</td></tr>`;
+          elements.bidsBody.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 1rem;">No active bids</div>`;
         } else {
           elements.bidsBody.innerHTML = bidsWithDepth.map(b => {
             const pct = (b.depth / maxBidDepth) * 100;
             return `
-              <tr class="book-row">
-                <td class="price">${b.price.toFixed(4)}</td>
-                <td>${b.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</td>
-                <td class="seller">${b.seller}</td>
+              <div class="book-row">
+                <div class="book-cell price">${b.price.toFixed(4)}</div>
+                <div class="book-cell">${b.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</div>
+                <div class="book-cell seller">${b.seller}</div>
                 <div class="book-depth-bar" style="width: ${pct}%"></div>
-              </tr>
+              </div>
             `;
           }).join("");
         }
 
         // Render Asks
         if (asksWithDepth.length === 0) {
-          elements.asksBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">No active asks</td></tr>`;
+          elements.asksBody.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 1rem;">No active asks</div>`;
         } else {
           elements.asksBody.innerHTML = asksWithDepth.map(a => {
             const pct = (a.depth / maxAskDepth) * 100;
             return `
-              <tr class="book-row">
-                <td class="price">${a.price.toFixed(4)}</td>
-                <td>${a.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</td>
-                <td class="seller">${a.seller}</td>
+              <div class="book-row">
+                <div class="book-cell price">${a.price.toFixed(4)}</div>
+                <div class="book-cell">${a.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</div>
+                <div class="book-cell seller">${a.seller}</div>
                 <div class="book-depth-bar" style="width: ${pct}%"></div>
-              </tr>
+              </div>
             `;
           }).join("");
         }
