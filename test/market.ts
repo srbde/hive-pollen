@@ -129,4 +129,15 @@ describe("market history api and database helpers", () => {
       expect(entry.op[0]).toBe("fill_order");
     }
   }, 30000);
+
+  it("Client.fromNectarflower", async () => {
+    const dynamicClient = await Client.fromNectarflower({ agent });
+    assert(dynamicClient);
+    assert(Array.isArray(dynamicClient.address));
+    assert(dynamicClient.address.length > 0);
+    // Verify it can make calls
+    const props = await dynamicClient.database.getDynamicGlobalProperties();
+    assert(props);
+    assert(typeof props.head_block_number === "number");
+  }, 30000);
 });

@@ -411,6 +411,39 @@ export class Client {
   }
 
   /**
+   * Creates a Client instance initialized with healthy nodes fetched dynamically
+   * from nectarflower's on-chain metadata.
+   *
+   * @param options - Additional options for the client.
+   * @param bootstrapNodes - Optional list of bootstrap nodes to fetch metadata from.
+   * Defaults to mainnet public nodes.
+   *
+   * @example
+   * ```ts
+   * import { Client } from '@srbde/pollen'
+   *
+   * const client = await Client.fromNectarflower()
+   * const props = await client.database.getDynamicGlobalProperties()
+   * console.log(props.head_block_number)
+   * ```
+   */
+  public static async fromNectarflower(
+    options?: ClientOptions,
+    bootstrapNodes: string | string[] = ["https://api.hive.blog", "https://api.syncad.com"],
+  ): Promise<Client> {
+    const bootstrapClient = new Client(bootstrapNodes, options);
+    const accounts = await bootstrapClient.database.getAccounts(["nectarflower"]);
+    if (!accounts || accounts.length === 0) {
+      throw new Error("Failed to fetch nectarflower account metadata");
+    }
+    const meta = JSON.parse(accounts[0].json_metadata);
+    if (!meta || !Array.isArray(meta.nodes) || meta.nodes.length === 0) {
+      throw new Error("Invalid nectarflower node metadata structure");
+    }
+    return new Client(meta.nodes, options);
+  }
+
+  /**
    * Sends a JSON-RPC request through the configured failover transport.
    *
    * @param api - API namespace to call, such as `condenser_api`.
