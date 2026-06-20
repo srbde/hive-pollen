@@ -6,7 +6,7 @@
 
 # Interface: RequestAccountRecoveryOperation
 
-Defined in: [src/chain/operation.ts:990](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L990)
+Defined in: [src/chain/operation.ts:990](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L990)
 
 All account recovery requests come from a listed recovery account. This
 is secure based on the assumption that only a trusted account should be
@@ -44,7 +44,7 @@ the recover account operation.
 
 > **0**: `"request_account_recovery"`
 
-Defined in: [src/chain/operation.ts:991](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L991)
+Defined in: [src/chain/operation.ts:991](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L991)
 
 #### Overrides
 
@@ -56,7 +56,7 @@ Defined in: [src/chain/operation.ts:991](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:992](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L992)
+Defined in: [src/chain/operation.ts:992](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L992)
 
 #### account\_to\_recover
 

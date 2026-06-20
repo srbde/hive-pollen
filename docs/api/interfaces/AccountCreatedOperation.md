@@ -6,7 +6,7 @@
 
 # Interface: AccountCreatedOperation
 
-Defined in: [src/chain/operation.ts:1655](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1655)
+Defined in: [src/chain/operation.ts:1655](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1655)
 
 Generic Hive operation tuple.
 
@@ -37,7 +37,7 @@ const op: Operation = ['transfer', {
 
 > **0**: `"account_created"`
 
-Defined in: [src/chain/operation.ts:1656](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1656)
+Defined in: [src/chain/operation.ts:1656](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1656)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/chain/operation.ts:1656](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1657](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1657)
+Defined in: [src/chain/operation.ts:1657](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1657)
 
 #### creator
 

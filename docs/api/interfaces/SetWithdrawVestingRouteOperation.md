@@ -6,7 +6,7 @@
 
 # Interface: SetWithdrawVestingRouteOperation
 
-Defined in: [src/chain/operation.ts:1046](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1046)
+Defined in: [src/chain/operation.ts:1046](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1046)
 
 Allows an account to setup a vesting withdraw but with the additional
 request for the funds to be transferred directly to another account's
@@ -24,7 +24,7 @@ vests to hive and back, guaranteeing they maintain their value.
 
 > **0**: `"set_withdraw_vesting_route"`
 
-Defined in: [src/chain/operation.ts:1047](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1047)
+Defined in: [src/chain/operation.ts:1047](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1047)
 
 #### Overrides
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/operation.ts:1047](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1048](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1048)
+Defined in: [src/chain/operation.ts:1048](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1048)
 
 #### auto\_vest
 

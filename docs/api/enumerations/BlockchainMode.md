@@ -6,7 +6,7 @@
 
 # Enumeration: BlockchainMode
 
-Defined in: [src/helpers/blockchain.ts:39](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/blockchain.ts#L39)
+Defined in: [src/helpers/blockchain.ts:39](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/blockchain.ts#L39)
 
 ## Enumeration Members
 
@@ -14,7 +14,7 @@ Defined in: [src/helpers/blockchain.ts:39](https://github.com/srbde/hive-pollen/
 
 > **Irreversible**: `0`
 
-Defined in: [src/helpers/blockchain.ts:47](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/blockchain.ts#L47)
+Defined in: [src/helpers/blockchain.ts:47](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/blockchain.ts#L47)
 
 Stream only blocks that the Hive consensus protocol has made irreversible.
 
@@ -29,7 +29,7 @@ must not react to a block that can still be replaced by a fork.
 
 > **Latest**: `1`
 
-Defined in: [src/helpers/blockchain.ts:55](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/blockchain.ts#L55)
+Defined in: [src/helpers/blockchain.ts:55](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/blockchain.ts#L55)
 
 Stream from the latest head block, including blocks that are still reversible.
 

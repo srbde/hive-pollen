@@ -6,7 +6,7 @@
 
 # Interface: DeleteCommentOperation
 
-Defined in: [src/chain/operation.ts:707](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L707)
+Defined in: [src/chain/operation.ts:707](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L707)
 
 Deletes a comment or post when chain rules allow it.
 
@@ -20,7 +20,7 @@ Deletes a comment or post when chain rules allow it.
 
 > **0**: `"delete_comment"`
 
-Defined in: [src/chain/operation.ts:708](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L708)
+Defined in: [src/chain/operation.ts:708](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L708)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:708](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:709](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L709)
+Defined in: [src/chain/operation.ts:709](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L709)
 
 #### author
 

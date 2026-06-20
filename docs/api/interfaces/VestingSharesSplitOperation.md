@@ -6,7 +6,7 @@
 
 # Interface: VestingSharesSplitOperation
 
-Defined in: [src/chain/operation.ts:1646](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1646)
+Defined in: [src/chain/operation.ts:1646](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1646)
 
 Generic Hive operation tuple.
 
@@ -37,7 +37,7 @@ const op: Operation = ['transfer', {
 
 > **0**: `"vesting_shares_split"`
 
-Defined in: [src/chain/operation.ts:1647](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1647)
+Defined in: [src/chain/operation.ts:1647](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1647)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/chain/operation.ts:1647](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1648](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1648)
+Defined in: [src/chain/operation.ts:1648](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1648)
 
 #### owner
 

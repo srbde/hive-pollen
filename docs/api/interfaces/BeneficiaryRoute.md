@@ -6,7 +6,7 @@
 
 # Interface: BeneficiaryRoute
 
-Defined in: [src/chain/comment.ts:151](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L151)
+Defined in: [src/chain/comment.ts:151](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L151)
 
 Beneficiary payout route attached to comment options.
 
@@ -29,7 +29,7 @@ const beneficiary: BeneficiaryRoute = {
 
 > **account**: `string`
 
-Defined in: [src/chain/comment.ts:152](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L152)
+Defined in: [src/chain/comment.ts:152](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L152)
 
 ***
 
@@ -37,4 +37,4 @@ Defined in: [src/chain/comment.ts:152](https://github.com/srbde/hive-pollen/blob
 
 > **weight**: `number`
 
-Defined in: [src/chain/comment.ts:153](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L153)
+Defined in: [src/chain/comment.ts:153](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L153)

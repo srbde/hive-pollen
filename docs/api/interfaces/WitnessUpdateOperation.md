@@ -6,7 +6,7 @@
 
 # Interface: WitnessUpdateOperation
 
-Defined in: [src/chain/operation.ts:1213](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1213)
+Defined in: [src/chain/operation.ts:1213](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1213)
 
 Users who wish to become a witness must pay a fee acceptable to
 the current witnesses to apply for the position and allow voting
@@ -31,7 +31,7 @@ producing blocks.
 
 > **0**: `"witness_update"`
 
-Defined in: [src/chain/operation.ts:1214](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1214)
+Defined in: [src/chain/operation.ts:1214](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1214)
 
 #### Overrides
 
@@ -43,7 +43,7 @@ Defined in: [src/chain/operation.ts:1214](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1215](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1215)
+Defined in: [src/chain/operation.ts:1215](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1215)
 
 #### block\_signing\_key
 

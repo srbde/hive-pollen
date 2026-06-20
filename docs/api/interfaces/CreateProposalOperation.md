@@ -6,7 +6,7 @@
 
 # Interface: CreateProposalOperation
 
-Defined in: [src/chain/operation.ts:1267](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1267)
+Defined in: [src/chain/operation.ts:1267](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1267)
 
 Creates a Decentralized Hive Fund proposal.
 
@@ -25,7 +25,7 @@ when the proposal receives sufficient stake-weighted approval.
 
 > **0**: `"create_proposal"`
 
-Defined in: [src/chain/operation.ts:1268](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1268)
+Defined in: [src/chain/operation.ts:1268](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1268)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:1268](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1269](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1269)
+Defined in: [src/chain/operation.ts:1269](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1269)
 
 #### creator
 

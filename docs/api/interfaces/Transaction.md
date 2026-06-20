@@ -6,7 +6,7 @@
 
 # Interface: Transaction
 
-Defined in: [src/chain/transaction.ts:57](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L57)
+Defined in: [src/chain/transaction.ts:57](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L57)
 
 Unsigned Hive transaction ready for serialization and signing.
 
@@ -38,7 +38,7 @@ const transaction: Transaction = {
 
 > **expiration**: `string`
 
-Defined in: [src/chain/transaction.ts:69](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L69)
+Defined in: [src/chain/transaction.ts:69](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L69)
 
 UTC expiration timestamp without a trailing timezone suffix.
 
@@ -48,7 +48,7 @@ UTC expiration timestamp without a trailing timezone suffix.
 
 > **extensions**: `unknown`[]
 
-Defined in: [src/chain/transaction.ts:78](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L78)
+Defined in: [src/chain/transaction.ts:78](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L78)
 
 Transaction extension values. Hive currently expects this to be empty for
 the operations supported by Pollen.
@@ -59,7 +59,7 @@ the operations supported by Pollen.
 
 > **operations**: [`Operation`](../type-aliases/Operation.md)[]
 
-Defined in: [src/chain/transaction.ts:73](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L73)
+Defined in: [src/chain/transaction.ts:73](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L73)
 
 Ordered operation list executed atomically by the chain.
 
@@ -69,7 +69,7 @@ Ordered operation list executed atomically by the chain.
 
 > **ref\_block\_num**: `number`
 
-Defined in: [src/chain/transaction.ts:61](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L61)
+Defined in: [src/chain/transaction.ts:61](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L61)
 
 Lower 16 bits of the referenced head block number.
 
@@ -79,6 +79,6 @@ Lower 16 bits of the referenced head block number.
 
 > **ref\_block\_prefix**: `number`
 
-Defined in: [src/chain/transaction.ts:65](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/transaction.ts#L65)
+Defined in: [src/chain/transaction.ts:65](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/transaction.ts#L65)
 
 Prefix extracted from the referenced block id.

@@ -6,7 +6,7 @@
 
 # Interface: AccountCreateWithDelegationOperation
 
-Defined in: [src/chain/operation.ts:349](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L349)
+Defined in: [src/chain/operation.ts:349](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L349)
 
 Account creation operation that also delegates initial VESTS.
 
@@ -25,7 +25,7 @@ transferring ownership of the underlying vesting shares.
 
 > **0**: `"account_create_with_delegation"`
 
-Defined in: [src/chain/operation.ts:350](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L350)
+Defined in: [src/chain/operation.ts:350](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L350)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:350](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:351](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L351)
+Defined in: [src/chain/operation.ts:351](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L351)
 
 #### active
 

@@ -80,6 +80,7 @@
     "esbuild": "^0.28.1",
     "husky": "^9.1.7",
     "lorem-ipsum": "^3.0.0",
+    "oxc-minify": "^0.137.0",
     "oxfmt": "^0.51.0",
     "oxlint": "^1.70.0",
     "typedoc": "^0.28.19",

@@ -6,7 +6,7 @@
 
 # Interface: TransferToVestingOperation
 
-Defined in: [src/chain/operation.ts:1134](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1134)
+Defined in: [src/chain/operation.ts:1134](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1134)
 
 This operation converts HIVE into VFS (Vesting Fund Shares) at
 the current exchange rate. With this operation it is possible to
@@ -24,7 +24,7 @@ pre-fund new accounts with vesting shares.
 
 > **0**: `"transfer_to_vesting"`
 
-Defined in: [src/chain/operation.ts:1135](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1135)
+Defined in: [src/chain/operation.ts:1135](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1135)
 
 #### Overrides
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/operation.ts:1135](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1136](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1136)
+Defined in: [src/chain/operation.ts:1136](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1136)
 
 #### amount
 

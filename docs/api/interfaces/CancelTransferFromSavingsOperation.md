@@ -6,7 +6,7 @@
 
 # Interface: CancelTransferFromSavingsOperation
 
-Defined in: [src/chain/operation.ts:435](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L435)
+Defined in: [src/chain/operation.ts:435](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L435)
 
 Cancels a pending savings withdrawal request.
 
@@ -20,7 +20,7 @@ Cancels a pending savings withdrawal request.
 
 > **0**: `"cancel_transfer_from_savings"`
 
-Defined in: [src/chain/operation.ts:436](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L436)
+Defined in: [src/chain/operation.ts:436](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L436)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:436](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:437](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L437)
+Defined in: [src/chain/operation.ts:437](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L437)
 
 #### from
 

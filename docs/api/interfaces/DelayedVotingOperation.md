@@ -6,7 +6,7 @@
 
 # Interface: DelayedVotingOperation
 
-Defined in: [src/chain/operation.ts:1566](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1566)
+Defined in: [src/chain/operation.ts:1566](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1566)
 
 Generic Hive operation tuple.
 
@@ -37,7 +37,7 @@ const op: Operation = ['transfer', {
 
 > **0**: `"delayed_voting"`
 
-Defined in: [src/chain/operation.ts:1567](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1567)
+Defined in: [src/chain/operation.ts:1567](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1567)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/chain/operation.ts:1567](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1568](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1568)
+Defined in: [src/chain/operation.ts:1568](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1568)
 
 #### voter
 

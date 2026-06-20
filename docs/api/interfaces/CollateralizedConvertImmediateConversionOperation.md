@@ -6,7 +6,7 @@
 
 # Interface: CollateralizedConvertImmediateConversionOperation
 
-Defined in: [src/chain/operation.ts:1735](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1735)
+Defined in: [src/chain/operation.ts:1735](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1735)
 
 Generic Hive operation tuple.
 
@@ -37,7 +37,7 @@ const op: Operation = ['transfer', {
 
 > **0**: `"collateralized_convert_immediate_conversion"`
 
-Defined in: [src/chain/operation.ts:1736](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1736)
+Defined in: [src/chain/operation.ts:1736](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1736)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/chain/operation.ts:1736](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1737](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1737)
+Defined in: [src/chain/operation.ts:1737](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1737)
 
 #### hbd\_out
 

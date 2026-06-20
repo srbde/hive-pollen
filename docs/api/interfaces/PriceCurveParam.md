@@ -6,7 +6,7 @@
 
 # Interface: PriceCurveParam
 
-Defined in: [src/chain/rc.ts:53](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L53)
+Defined in: [src/chain/rc.ts:53](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/rc.ts#L53)
 
 Curve coefficients used to convert resource usage into RC cost.
 
@@ -16,7 +16,7 @@ Curve coefficients used to convert resource usage into RC cost.
 
 > **coeff\_a**: `string`
 
-Defined in: [src/chain/rc.ts:54](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L54)
+Defined in: [src/chain/rc.ts:54](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/rc.ts#L54)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/chain/rc.ts:54](https://github.com/srbde/hive-pollen/blob/cc8a3
 
 > **coeff\_b**: `string`
 
-Defined in: [src/chain/rc.ts:55](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L55)
+Defined in: [src/chain/rc.ts:55](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/rc.ts#L55)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/chain/rc.ts:55](https://github.com/srbde/hive-pollen/blob/cc8a3
 
 > **shift**: `number`
 
-Defined in: [src/chain/rc.ts:56](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/rc.ts#L56)
+Defined in: [src/chain/rc.ts:56](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/rc.ts#L56)

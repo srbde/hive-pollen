@@ -8,7 +8,7 @@
 
 > **iteratorStream**\<`T`\>(`iterator`): `ReadableStream`\<`T`\>
 
-Defined in: [src/utils.ts:416](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L416)
+Defined in: [src/utils.ts:416](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/utils.ts#L416)
 
 Converts an async iterator into a native Web ReadableStream.
 

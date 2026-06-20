@@ -8,7 +8,7 @@
 
 > **getVestingSharePrice**(`props`): [`Price`](../classes/Price.md)
 
-Defined in: [src/chain/misc.ts:318](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L318)
+Defined in: [src/chain/misc.ts:318](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L318)
 
 Calculates the HIVE/VESTS conversion price from global properties.
 

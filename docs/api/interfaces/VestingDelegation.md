@@ -6,7 +6,7 @@
 
 # Interface: VestingDelegation
 
-Defined in: [src/chain/misc.ts:157](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L157)
+Defined in: [src/chain/misc.ts:157](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L157)
 
 Vesting-share delegation from one account to another.
 
@@ -28,7 +28,7 @@ console.log(delegations[0]?.delegatee)
 
 > **delegatee**: `string`
 
-Defined in: [src/chain/misc.ts:169](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L169)
+Defined in: [src/chain/misc.ts:169](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L169)
 
 Account that is receiving vests from delegator.
 
@@ -38,7 +38,7 @@ Account that is receiving vests from delegator.
 
 > **delegator**: `string`
 
-Defined in: [src/chain/misc.ts:165](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L165)
+Defined in: [src/chain/misc.ts:165](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L165)
 
 Account that is delegating vests to delegatee.
 
@@ -48,7 +48,7 @@ Account that is delegating vests to delegatee.
 
 > **id**: `number`
 
-Defined in: [src/chain/misc.ts:161](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L161)
+Defined in: [src/chain/misc.ts:161](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L161)
 
 Delegation id.
 
@@ -58,7 +58,7 @@ Delegation id.
 
 > **min\_delegation\_time**: `string`
 
-Defined in: [src/chain/misc.ts:177](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L177)
+Defined in: [src/chain/misc.ts:177](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L177)
 
 Earliest date delegation can be removed.
 
@@ -68,6 +68,6 @@ Earliest date delegation can be removed.
 
 > **vesting\_shares**: `string` \| [`Asset`](../classes/Asset.md)
 
-Defined in: [src/chain/misc.ts:173](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L173)
+Defined in: [src/chain/misc.ts:173](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L173)
 
 Amount of VESTS delegated.

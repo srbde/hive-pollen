@@ -6,7 +6,7 @@
 
 # Interface: TransferToVestingCompletedOperation
 
-Defined in: [src/chain/operation.ts:1628](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1628)
+Defined in: [src/chain/operation.ts:1628](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1628)
 
 Generic Hive operation tuple.
 
@@ -37,7 +37,7 @@ const op: Operation = ['transfer', {
 
 > **0**: `"transfer_to_vesting_completed"`
 
-Defined in: [src/chain/operation.ts:1629](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1629)
+Defined in: [src/chain/operation.ts:1629](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1629)
 
 #### Overrides
 
@@ -49,7 +49,7 @@ Defined in: [src/chain/operation.ts:1629](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1630](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1630)
+Defined in: [src/chain/operation.ts:1630](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1630)
 
 #### from\_account
 

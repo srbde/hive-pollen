@@ -6,7 +6,7 @@
 
 # Interface: AppliedOperation
 
-Defined in: [src/chain/operation.ts:296](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L296)
+Defined in: [src/chain/operation.ts:296](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L296)
 
 Operation record annotated with block and transaction position.
 
@@ -28,7 +28,7 @@ console.log(operations[0].block, operations[0].op[0])
 
 > **block**: `number`
 
-Defined in: [src/chain/operation.ts:298](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L298)
+Defined in: [src/chain/operation.ts:298](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L298)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/operation.ts:298](https://github.com/srbde/hive-pollen/bl
 
 > **op**: [`Operation`](../type-aliases/Operation.md)
 
-Defined in: [src/chain/operation.ts:303](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L303)
+Defined in: [src/chain/operation.ts:303](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L303)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [src/chain/operation.ts:303](https://github.com/srbde/hive-pollen/bl
 
 > **op\_in\_trx**: `number`
 
-Defined in: [src/chain/operation.ts:300](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L300)
+Defined in: [src/chain/operation.ts:300](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L300)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [src/chain/operation.ts:300](https://github.com/srbde/hive-pollen/bl
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/operation.ts:302](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L302)
+Defined in: [src/chain/operation.ts:302](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L302)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [src/chain/operation.ts:302](https://github.com/srbde/hive-pollen/bl
 
 > **trx\_id**: `string`
 
-Defined in: [src/chain/operation.ts:297](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L297)
+Defined in: [src/chain/operation.ts:297](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L297)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [src/chain/operation.ts:297](https://github.com/srbde/hive-pollen/bl
 
 > **trx\_in\_block**: `number`
 
-Defined in: [src/chain/operation.ts:299](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L299)
+Defined in: [src/chain/operation.ts:299](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L299)
 
 ***
 
@@ -76,4 +76,4 @@ Defined in: [src/chain/operation.ts:299](https://github.com/srbde/hive-pollen/bl
 
 > **virtual\_op**: `number`
 
-Defined in: [src/chain/operation.ts:301](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L301)
+Defined in: [src/chain/operation.ts:301](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L301)

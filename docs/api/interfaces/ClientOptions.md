@@ -6,7 +6,7 @@
 
 # Interface: ClientOptions
 
-Defined in: [src/client.ts:172](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L172)
+Defined in: [src/client.ts:173](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L173)
 
 Configuration for a [Client](../classes/Client.md) instance.
 
@@ -38,7 +38,7 @@ const client = new Client(
 
 > `optional` **addressPrefix?**: `string`
 
-Defined in: [src/client.ts:184](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L184)
+Defined in: [src/client.ts:185](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L185)
 
 Hive address prefix. Defaults to main network:
 `STM`
@@ -49,7 +49,7 @@ Hive address prefix. Defaults to main network:
 
 > `optional` **agent?**: `unknown`
 
-Defined in: [src/client.ts:217](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L217)
+Defined in: [src/client.ts:218](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L218)
 
 Node.js http(s) agent, use if you want http keep-alive.
 Defaults to using https.globalAgent.
@@ -64,7 +64,7 @@ https://nodejs.org/api/http.html#http_new_agent_options.
 
 > `optional` **backoff?**: (`tries`) => `number`
 
-Defined in: [src/client.ts:211](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L211)
+Defined in: [src/client.ts:212](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L212)
 
 Retry backoff function, returns milliseconds. Defaults to Pollen's
 jittered exponential backoff.
@@ -85,7 +85,7 @@ jittered exponential backoff.
 
 > `optional` **chainId?**: `string`
 
-Defined in: [src/client.ts:179](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L179)
+Defined in: [src/client.ts:180](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L180)
 
 Hive chain id. Defaults to main hive network:
 need the new id?
@@ -97,7 +97,7 @@ need the new id?
 
 > `optional` **consoleOnFailover?**: `boolean`
 
-Defined in: [src/client.ts:205](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L205)
+Defined in: [src/client.ts:206](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L206)
 
 Whether a console.log should be made when RPC failed over to another one
 
@@ -107,7 +107,7 @@ Whether a console.log should be made when RPC failed over to another one
 
 > `optional` **failoverThreshold?**: `number`
 
-Defined in: [src/client.ts:200](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L200)
+Defined in: [src/client.ts:201](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L201)
 
 Specifies the amount of times the urls (RPC nodes) should be
 iterated and retried in case of timeout errors.
@@ -120,7 +120,7 @@ Can be set to 0 to iterate and retry forever. Defaults to 3 rounds.
 
 > `optional` **healthTrackerOptions?**: [`HealthTrackerOptions`](HealthTrackerOptions.md)
 
-Defined in: [src/client.ts:222](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L222)
+Defined in: [src/client.ts:223](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L223)
 
 Options for the node health tracker.
 Controls cooldown periods, stale block thresholds, etc.
@@ -131,7 +131,7 @@ Controls cooldown periods, stale block thresholds, etc.
 
 > `optional` **timeout?**: `number`
 
-Defined in: [src/client.ts:192](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L192)
+Defined in: [src/client.ts:193](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L193)
 
 Send timeout, how long to wait in milliseconds before giving
 up on a rpc call. Note that this is not an exact timeout,

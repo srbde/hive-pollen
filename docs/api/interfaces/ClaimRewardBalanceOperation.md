@@ -6,7 +6,7 @@
 
 # Interface: ClaimRewardBalanceOperation
 
-Defined in: [src/chain/operation.ts:486](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L486)
+Defined in: [src/chain/operation.ts:486](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L486)
 
 Claims pending author, curation, and vesting rewards.
 
@@ -25,7 +25,7 @@ operation to name all three reward buckets explicitly.
 
 > **0**: `"claim_reward_balance"`
 
-Defined in: [src/chain/operation.ts:487](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L487)
+Defined in: [src/chain/operation.ts:487](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L487)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:487](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:488](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L488)
+Defined in: [src/chain/operation.ts:488](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L488)
 
 #### account
 

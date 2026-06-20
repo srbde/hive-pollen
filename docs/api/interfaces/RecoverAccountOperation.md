@@ -6,7 +6,7 @@
 
 # Interface: RecoverAccountOperation
 
-Defined in: [src/chain/operation.ts:918](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L918)
+Defined in: [src/chain/operation.ts:918](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L918)
 
 Recover an account to a new authority using a previous authority and verification
 of the recovery account as proof of identity. This operation can only succeed
@@ -54,7 +54,7 @@ concern.
 
 > **0**: `"recover_account"`
 
-Defined in: [src/chain/operation.ts:919](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L919)
+Defined in: [src/chain/operation.ts:919](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L919)
 
 #### Overrides
 
@@ -66,7 +66,7 @@ Defined in: [src/chain/operation.ts:919](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:920](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L920)
+Defined in: [src/chain/operation.ts:920](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L920)
 
 #### account\_to\_recover
 

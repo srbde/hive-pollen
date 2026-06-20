@@ -6,7 +6,7 @@
 
 # Interface: RecurrentTransferOperation
 
-Defined in: [src/chain/operation.ts:1353](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1353)
+Defined in: [src/chain/operation.ts:1353](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1353)
 
 Schedules a recurring transfer.
 
@@ -39,7 +39,7 @@ const op: RecurrentTransferOperation = ['recurrent_transfer', {
 
 > **0**: `"recurrent_transfer"`
 
-Defined in: [src/chain/operation.ts:1354](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1354)
+Defined in: [src/chain/operation.ts:1354](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1354)
 
 #### Overrides
 
@@ -51,7 +51,7 @@ Defined in: [src/chain/operation.ts:1354](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1355](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1355)
+Defined in: [src/chain/operation.ts:1355](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1355)
 
 #### amount
 

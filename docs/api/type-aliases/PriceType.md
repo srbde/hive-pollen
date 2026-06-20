@@ -8,7 +8,7 @@
 
 > **PriceType** = [`Price`](../classes/Price.md) \| \{ `base`: [`Asset`](../classes/Asset.md) \| `string`; `quote`: [`Asset`](../classes/Asset.md) \| `string`; \}
 
-Defined in: [src/chain/asset.ts:358](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/asset.ts#L358)
+Defined in: [src/chain/asset.ts:358](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/asset.ts#L358)
 
 Value accepted anywhere Pollen needs a Hive price ratio.
 

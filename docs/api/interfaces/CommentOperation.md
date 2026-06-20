@@ -6,7 +6,7 @@
 
 # Interface: CommentOperation
 
-Defined in: [src/chain/operation.ts:536](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L536)
+Defined in: [src/chain/operation.ts:536](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L536)
 
 Creates or updates a post or reply.
 
@@ -39,7 +39,7 @@ const op: CommentOperation = ['comment', {
 
 > **0**: `"comment"`
 
-Defined in: [src/chain/operation.ts:537](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L537)
+Defined in: [src/chain/operation.ts:537](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L537)
 
 #### Overrides
 
@@ -51,7 +51,7 @@ Defined in: [src/chain/operation.ts:537](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:538](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L538)
+Defined in: [src/chain/operation.ts:538](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L538)
 
 #### author
 

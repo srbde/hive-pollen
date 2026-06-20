@@ -8,7 +8,7 @@
 
 > `const` **cryptoUtils**: `object`
 
-Defined in: [src/crypto.ts:454](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L454)
+Defined in: [src/crypto.ts:454](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L454)
 
 Low-level cryptographic utility namespace.
 

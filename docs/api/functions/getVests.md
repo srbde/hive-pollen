@@ -8,7 +8,7 @@
 
 > **getVests**(`account`, `subtract_delegated?`, `add_received?`): `number`
 
-Defined in: [src/chain/misc.ts:350](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/misc.ts#L350)
+Defined in: [src/chain/misc.ts:350](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/misc.ts#L350)
 
 Calculates an account's effective vesting shares.
 

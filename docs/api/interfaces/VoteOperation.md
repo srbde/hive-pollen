@@ -6,7 +6,7 @@
 
 # Interface: VoteOperation
 
-Defined in: [src/chain/operation.ts:1163](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1163)
+Defined in: [src/chain/operation.ts:1163](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1163)
 
 Casts, updates, or removes a vote on a post or comment.
 
@@ -36,7 +36,7 @@ const op: VoteOperation = ['vote', {
 
 > **0**: `"vote"`
 
-Defined in: [src/chain/operation.ts:1164](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1164)
+Defined in: [src/chain/operation.ts:1164](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1164)
 
 #### Overrides
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/operation.ts:1164](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1165](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1165)
+Defined in: [src/chain/operation.ts:1165](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1165)
 
 #### author
 

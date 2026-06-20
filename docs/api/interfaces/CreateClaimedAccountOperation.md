@@ -6,7 +6,7 @@
 
 # Interface: CreateClaimedAccountOperation
 
-Defined in: [src/chain/operation.ts:588](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L588)
+Defined in: [src/chain/operation.ts:588](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L588)
 
 Consumes a claimed account ticket to create a new account.
 
@@ -20,7 +20,7 @@ Consumes a claimed account ticket to create a new account.
 
 > **0**: `"create_claimed_account"`
 
-Defined in: [src/chain/operation.ts:589](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L589)
+Defined in: [src/chain/operation.ts:589](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L589)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:589](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:590](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L590)
+Defined in: [src/chain/operation.ts:590](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L590)
 
 #### active
 

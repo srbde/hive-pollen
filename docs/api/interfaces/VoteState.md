@@ -6,7 +6,7 @@
 
 # Interface: VoteState
 
-Defined in: [src/chain/comment.ts:94](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L94)
+Defined in: [src/chain/comment.ts:94](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L94)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/chain/comment.ts:94](https://github.com/srbde/hive-pollen/blob/
 
 > **percent**: `number`
 
-Defined in: [src/chain/comment.ts:98](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L98)
+Defined in: [src/chain/comment.ts:98](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L98)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/chain/comment.ts:98](https://github.com/srbde/hive-pollen/blob/
 
 > **reputation**: `string` \| `number`
 
-Defined in: [src/chain/comment.ts:99](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L99)
+Defined in: [src/chain/comment.ts:99](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L99)
 
 ***
 
@@ -30,7 +30,7 @@ Defined in: [src/chain/comment.ts:99](https://github.com/srbde/hive-pollen/blob/
 
 > **rshares**: `string` \| `number`
 
-Defined in: [src/chain/comment.ts:97](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L97)
+Defined in: [src/chain/comment.ts:97](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L97)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [src/chain/comment.ts:97](https://github.com/srbde/hive-pollen/blob/
 
 > **time**: `string`
 
-Defined in: [src/chain/comment.ts:100](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L100)
+Defined in: [src/chain/comment.ts:100](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L100)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/chain/comment.ts:100](https://github.com/srbde/hive-pollen/blob
 
 > **voter**: `string`
 
-Defined in: [src/chain/comment.ts:95](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L95)
+Defined in: [src/chain/comment.ts:95](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L95)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [src/chain/comment.ts:95](https://github.com/srbde/hive-pollen/blob/
 
 > **weight**: `string` \| `number`
 
-Defined in: [src/chain/comment.ts:96](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/comment.ts#L96)
+Defined in: [src/chain/comment.ts:96](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/comment.ts#L96)

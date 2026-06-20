@@ -6,7 +6,7 @@
 
 # Interface: UpdateProposalVotesOperation
 
-Defined in: [src/chain/operation.ts:1284](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1284)
+Defined in: [src/chain/operation.ts:1284](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1284)
 
 Approves or removes approvals for DHF proposal ids.
 
@@ -20,7 +20,7 @@ Approves or removes approvals for DHF proposal ids.
 
 > **0**: `"update_proposal_votes"`
 
-Defined in: [src/chain/operation.ts:1285](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1285)
+Defined in: [src/chain/operation.ts:1285](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1285)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:1285](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1286](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1286)
+Defined in: [src/chain/operation.ts:1286](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1286)
 
 #### approve
 

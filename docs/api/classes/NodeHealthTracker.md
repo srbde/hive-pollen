@@ -6,7 +6,7 @@
 
 # Class: NodeHealthTracker
 
-Defined in: [src/health-tracker.ts:112](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L112)
+Defined in: [src/health-tracker.ts:112](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L112)
 
 Tracks per-node health for resilient Hive RPC failover.
 
@@ -35,7 +35,7 @@ const ordered = tracker.getOrderedNodes([
 
 > **new NodeHealthTracker**(`options?`): `NodeHealthTracker`
 
-Defined in: [src/health-tracker.ts:130](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L130)
+Defined in: [src/health-tracker.ts:130](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L130)
 
 Creates a health tracker with optional cooldown and freshness tuning.
 
@@ -57,7 +57,7 @@ Health tracker thresholds and cooldown durations.
 
 > **getHealthSnapshot**(): `Map`\<`string`, \{ `apiFailures`: `Record`\<`string`, \{ `count`: `number`; \}\>; `consecutiveFailures`: `number`; `headBlock`: `number`; `healthy`: `boolean`; \}\>
 
-Defined in: [src/health-tracker.ts:406](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L406)
+Defined in: [src/health-tracker.ts:406](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L406)
 
 Returns a diagnostic snapshot of tracked node health.
 
@@ -82,7 +82,7 @@ for (const [node, health] of tracker.getHealthSnapshot()) {
 
 > **getOrderedNodes**(`allNodes`, `api?`): `string`[]
 
-Defined in: [src/health-tracker.ts:364](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L364)
+Defined in: [src/health-tracker.ts:364](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L364)
 
 Orders endpoint URLs by current health for an API call.
 
@@ -119,7 +119,7 @@ const ordered = tracker.getOrderedNodes(nodes, 'condenser_api')
 
 > **isNodeHealthy**(`node`, `api?`): `boolean`
 
-Defined in: [src/health-tracker.ts:308](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L308)
+Defined in: [src/health-tracker.ts:308](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L308)
 
 Checks whether a node should be preferred for a given API.
 
@@ -155,7 +155,7 @@ const healthy = tracker.isNodeHealthy('https://api.hive.blog', 'bridge')
 
 > **isRateLimited**(`node`): `boolean`
 
-Defined in: [src/health-tracker.ts:235](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L235)
+Defined in: [src/health-tracker.ts:235](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L235)
 
 Checks whether a node is currently in a rate-limit cooldown.
 
@@ -187,7 +187,7 @@ if (!tracker.isRateLimited(node)) {
 
 > **recordApiFailure**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:257](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L257)
+Defined in: [src/health-tracker.ts:257](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L257)
 
 Records an API/plugin-specific failure.
 
@@ -227,7 +227,7 @@ tracker.recordApiFailure('https://api.hive.blog', 'transaction_status_api')
 
 > **recordFailure**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:191](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L191)
+Defined in: [src/health-tracker.ts:191](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L191)
 
 Records a network-level failure for a node and API.
 
@@ -266,7 +266,7 @@ tracker.recordFailure('https://api.hive.blog', 'bridge')
 
 > **recordRateLimit**(`node`, `retryAfterSeconds?`): `void`
 
-Defined in: [src/health-tracker.ts:214](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L214)
+Defined in: [src/health-tracker.ts:214](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L214)
 
 Records that a node returned HTTP 429.
 
@@ -305,7 +305,7 @@ tracker.recordRateLimit('https://api.hive.blog', 10)
 
 > **recordSuccess**(`node`, `api`): `void`
 
-Defined in: [src/health-tracker.ts:170](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L170)
+Defined in: [src/health-tracker.ts:170](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L170)
 
 Records a successful call to a node for a specific API.
 
@@ -344,7 +344,7 @@ tracker.recordSuccess('https://api.hive.blog', 'condenser_api')
 
 > **reset**(): `void`
 
-Defined in: [src/health-tracker.ts:387](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L387)
+Defined in: [src/health-tracker.ts:387](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L387)
 
 Clears all tracked health, rate-limit, and freshness data.
 
@@ -364,7 +364,7 @@ tracker.reset()
 
 > **updateHeadBlock**(`node`, `headBlock`): `void`
 
-Defined in: [src/health-tracker.ts:285](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/health-tracker.ts#L285)
+Defined in: [src/health-tracker.ts:285](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/health-tracker.ts#L285)
 
 Updates the last observed head block number for a node.
 

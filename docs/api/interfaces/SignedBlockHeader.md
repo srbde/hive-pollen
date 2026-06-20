@@ -6,7 +6,7 @@
 
 # Interface: SignedBlockHeader
 
-Defined in: [src/chain/block.ts:72](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L72)
+Defined in: [src/chain/block.ts:72](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L72)
 
 Hive block header plus witness signature.
 
@@ -36,7 +36,7 @@ console.log(block.witness_signature)
 
 > **extensions**: `unknown`[]
 
-Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L56)
+Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L56)
 
 #### Inherited from
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/cc
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L52)
+Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L52)
 
 #### Inherited from
 
@@ -60,7 +60,7 @@ Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/cc
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L53)
+Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L53)
 
 #### Inherited from
 
@@ -72,7 +72,7 @@ Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/cc
 
 > **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L55)
+Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L55)
 
 #### Inherited from
 
@@ -84,7 +84,7 @@ Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/cc
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:54](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L54)
+Defined in: [src/chain/block.ts:54](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L54)
 
 #### Inherited from
 
@@ -96,4 +96,4 @@ Defined in: [src/chain/block.ts:54](https://github.com/srbde/hive-pollen/blob/cc
 
 > **witness\_signature**: `string`
 
-Defined in: [src/chain/block.ts:73](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L73)
+Defined in: [src/chain/block.ts:73](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L73)

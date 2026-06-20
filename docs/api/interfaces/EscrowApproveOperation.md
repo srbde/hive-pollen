@@ -6,7 +6,7 @@
 
 # Interface: EscrowApproveOperation
 
-Defined in: [src/chain/operation.ts:720](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L720)
+Defined in: [src/chain/operation.ts:720](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L720)
 
 The agent and to accounts must approve an escrow transaction for it to be valid on
 the blockchain. Once a part approves the escrow, the cannot revoke their approval.
@@ -22,7 +22,7 @@ Subsequent escrow approve operations, regardless of the approval, will be reject
 
 > **0**: `"escrow_approve"`
 
-Defined in: [src/chain/operation.ts:721](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L721)
+Defined in: [src/chain/operation.ts:721](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L721)
 
 #### Overrides
 
@@ -34,7 +34,7 @@ Defined in: [src/chain/operation.ts:721](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:722](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L722)
+Defined in: [src/chain/operation.ts:722](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L722)
 
 #### agent
 

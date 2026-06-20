@@ -6,7 +6,7 @@
 
 # Class: PollenError
 
-Defined in: [src/errors.ts:25](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L25)
+Defined in: [src/errors.ts:25](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L25)
 
 Base error class for all Pollen-specific failures.
 
@@ -43,7 +43,7 @@ try {
 
 > **new PollenError**(`message`, `info?`): `PollenError`
 
-Defined in: [src/errors.ts:34](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L34)
+Defined in: [src/errors.ts:34](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L34)
 
 Creates a Pollen error with optional structured context.
 
@@ -87,7 +87,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `unknown`
 
-Defined in: [src/errors.ts:26](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L26)
+Defined in: [src/errors.ts:26](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L26)
 
 ***
 

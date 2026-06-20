@@ -6,7 +6,7 @@
 
 # Interface: ConvertOperation
 
-Defined in: [src/chain/operation.ts:576](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L576)
+Defined in: [src/chain/operation.ts:576](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L576)
 
 Converts HBD to HIVE through the standard conversion request flow.
 
@@ -20,7 +20,7 @@ Converts HBD to HIVE through the standard conversion request flow.
 
 > **0**: `"convert"`
 
-Defined in: [src/chain/operation.ts:577](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L577)
+Defined in: [src/chain/operation.ts:577](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L577)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:577](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:578](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L578)
+Defined in: [src/chain/operation.ts:578](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L578)
 
 #### amount
 

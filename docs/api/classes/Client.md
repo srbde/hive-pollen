@@ -6,7 +6,7 @@
 
 # Class: Client
 
-Defined in: [src/client.ts:248](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L248)
+Defined in: [src/client.ts:249](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L249)
 
 High-level Hive RPC client used by every Pollen helper.
 
@@ -40,7 +40,7 @@ console.log(`Hive head block: ${props.head_block_number}`)
 
 > **new Client**(`address`, `options?`): `Client`
 
-Defined in: [src/client.ts:348](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L348)
+Defined in: [src/client.ts:354](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L354)
 
 Creates a client for one or more Hive RPC endpoints.
 
@@ -94,7 +94,7 @@ console.log(accounts[0].balance)
 
 > **address**: `string` \| `string`[]
 
-Defined in: [src/client.ts:258](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L258)
+Defined in: [src/client.ts:259](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L259)
 
 Address to Hive RPC server.
 String or String[] *read-only*
@@ -105,7 +105,7 @@ String or String[] *read-only*
 
 > `readonly` **addressPrefix**: `string`
 
-Defined in: [src/client.ts:309](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L309)
+Defined in: [src/client.ts:315](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L315)
 
 Address prefix for current network.
 
@@ -115,7 +115,7 @@ Address prefix for current network.
 
 > `readonly` **blockchain**: [`Blockchain`](Blockchain.md)
 
-Defined in: [src/client.ts:278](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L278)
+Defined in: [src/client.ts:279](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L279)
 
 Blockchain helper.
 
@@ -125,7 +125,7 @@ Blockchain helper.
 
 > `readonly` **broadcast**: [`BroadcastAPI`](BroadcastAPI.md)
 
-Defined in: [src/client.ts:273](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L273)
+Defined in: [src/client.ts:274](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L274)
 
 Broadcast API helper.
 
@@ -135,7 +135,7 @@ Broadcast API helper.
 
 > `readonly` **chainId**: `Uint8Array`
 
-Defined in: [src/client.ts:304](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L304)
+Defined in: [src/client.ts:310](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L310)
 
 Chain ID for current network.
 
@@ -145,7 +145,7 @@ Chain ID for current network.
 
 > **currentAddress**: `string`
 
-Defined in: [src/client.ts:318](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L318)
+Defined in: [src/client.ts:324](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L324)
 
 ***
 
@@ -153,7 +153,7 @@ Defined in: [src/client.ts:318](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > `readonly` **database**: [`DatabaseAPI`](DatabaseAPI.md)
 
-Defined in: [src/client.ts:263](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L263)
+Defined in: [src/client.ts:264](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L264)
 
 Database API helper.
 
@@ -163,7 +163,7 @@ Database API helper.
 
 > `readonly` **healthTracker**: [`NodeHealthTracker`](NodeHealthTracker.md)
 
-Defined in: [src/client.ts:299](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L299)
+Defined in: [src/client.ts:305](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L305)
 
 Node health tracker for smart failover.
 Tracks per-node, per-API health and head block freshness.
@@ -174,7 +174,7 @@ Tracks per-node, per-API health and head block freshness.
 
 > `readonly` **hivemind**: [`HivemindAPI`](HivemindAPI.md)
 
-Defined in: [src/client.ts:283](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L283)
+Defined in: [src/client.ts:289](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L289)
 
 Hivemind helper.
 
@@ -184,9 +184,19 @@ Hivemind helper.
 
 > `readonly` **keys**: [`AccountByKeyAPI`](AccountByKeyAPI.md)
 
-Defined in: [src/client.ts:288](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L288)
+Defined in: [src/client.ts:294](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L294)
 
 Accounts by key API helper.
+
+***
+
+### market
+
+> `readonly` **market**: [`MarketHistoryAPI`](MarketHistoryAPI.md)
+
+Defined in: [src/client.ts:284](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L284)
+
+Market History API helper.
 
 ***
 
@@ -194,7 +204,7 @@ Accounts by key API helper.
 
 > `readonly` **options**: [`ClientOptions`](../interfaces/ClientOptions.md)
 
-Defined in: [src/client.ts:252](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L252)
+Defined in: [src/client.ts:253](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L253)
 
 Client options, *read-only*.
 
@@ -204,7 +214,7 @@ Client options, *read-only*.
 
 > `readonly` **rc**: [`RCAPI`](RCAPI.md)
 
-Defined in: [src/client.ts:268](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L268)
+Defined in: [src/client.ts:269](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L269)
 
 RC API helper.
 
@@ -214,7 +224,7 @@ RC API helper.
 
 > `readonly` **transaction**: [`TransactionStatusAPI`](TransactionStatusAPI.md)
 
-Defined in: [src/client.ts:293](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L293)
+Defined in: [src/client.ts:299](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L299)
 
 Transaction status API helper.
 
@@ -224,7 +234,7 @@ Transaction status API helper.
 
 > **call**\<`T`\>(`api`, `method`, `params?`): `Promise`\<`T`\>
 
-Defined in: [src/client.ts:441](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L441)
+Defined in: [src/client.ts:481](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L481)
 
 Sends a JSON-RPC request through the configured failover transport.
 
@@ -298,11 +308,51 @@ console.log(config.HIVE_BLOCK_INTERVAL)
 
 ***
 
+### fromNectarflower()
+
+> `static` **fromNectarflower**(`options?`, `bootstrapNodes?`): `Promise`\<`Client`\>
+
+Defined in: [src/client.ts:430](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L430)
+
+Creates a Client instance initialized with healthy nodes fetched dynamically
+from nectarflower's on-chain metadata.
+
+#### Parameters
+
+##### options?
+
+[`ClientOptions`](../interfaces/ClientOptions.md)
+
+Additional options for the client.
+
+##### bootstrapNodes?
+
+`string` \| `string`[]
+
+Optional list of bootstrap nodes to fetch metadata from.
+Defaults to mainnet public nodes.
+
+#### Returns
+
+`Promise`\<`Client`\>
+
+#### Example
+
+```ts
+import { Client } from '@srbde/pollen'
+
+const client = await Client.fromNectarflower()
+const props = await client.database.getDynamicGlobalProperties()
+console.log(props.head_block_number)
+```
+
+***
+
 ### testnet()
 
 > `static` **testnet**(`options?`): `Client`
 
-Defined in: [src/client.ts:394](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L394)
+Defined in: [src/client.ts:401](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L401)
 
 Creates a client preconfigured for the public Hive testnet.
 

@@ -6,7 +6,7 @@
 
 # Interface: ClaimAccountOperation
 
-Defined in: [src/chain/operation.ts:504](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L504)
+Defined in: [src/chain/operation.ts:504](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L504)
 
 Claims a discounted account creation ticket.
 
@@ -26,7 +26,7 @@ free account subsidies available.
 
 > **0**: `"claim_account"`
 
-Defined in: [src/chain/operation.ts:505](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L505)
+Defined in: [src/chain/operation.ts:505](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L505)
 
 #### Overrides
 
@@ -38,7 +38,7 @@ Defined in: [src/chain/operation.ts:505](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:506](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L506)
+Defined in: [src/chain/operation.ts:506](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L506)
 
 #### creator
 

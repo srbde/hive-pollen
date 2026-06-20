@@ -8,7 +8,7 @@
 
 > **assert**(`condition`, `message?`): `asserts condition`
 
-Defined in: [src/utils.ts:73](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/utils.ts#L73)
+Defined in: [src/utils.ts:73](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/utils.ts#L73)
 
 Asserts that a condition is truthy.
 

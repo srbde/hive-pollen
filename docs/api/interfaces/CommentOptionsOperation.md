@@ -6,7 +6,7 @@
 
 # Interface: CommentOptionsOperation
 
-Defined in: [src/chain/operation.ts:556](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L556)
+Defined in: [src/chain/operation.ts:556](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L556)
 
 Sets payout, vote, curation, and beneficiary options for a comment.
 
@@ -25,7 +25,7 @@ new post never exists with unintended payout settings.
 
 > **0**: `"comment_options"`
 
-Defined in: [src/chain/operation.ts:557](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L557)
+Defined in: [src/chain/operation.ts:557](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L557)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:557](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:558](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L558)
+Defined in: [src/chain/operation.ts:558](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L558)
 
 #### allow\_curation\_rewards
 

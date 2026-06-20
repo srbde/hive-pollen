@@ -6,7 +6,7 @@
 
 # Interface: CollateralizedConvertOperation
 
-Defined in: [src/chain/operation.ts:1324](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1324)
+Defined in: [src/chain/operation.ts:1324](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1324)
 
 Converts HIVE to HBD through the collateralized conversion flow.
 
@@ -20,7 +20,7 @@ Converts HIVE to HBD through the collateralized conversion flow.
 
 > **0**: `"collateralized_convert"`
 
-Defined in: [src/chain/operation.ts:1325](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1325)
+Defined in: [src/chain/operation.ts:1325](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1325)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:1325](https://github.com/srbde/hive-pollen/b
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:1326](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L1326)
+Defined in: [src/chain/operation.ts:1326](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L1326)
 
 #### amount
 

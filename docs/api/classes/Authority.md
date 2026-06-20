@@ -6,7 +6,7 @@
 
 # Class: Authority
 
-Defined in: [src/chain/account.ts:75](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L75)
+Defined in: [src/chain/account.ts:75](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L75)
 
 Convenience wrapper for Hive owner, active, and posting authorities.
 
@@ -31,7 +31,7 @@ const posting = Authority.from(postingPublicKey)
 
 > **new Authority**(`authority`): `Authority`
 
-Defined in: [src/chain/account.ts:85](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L85)
+Defined in: [src/chain/account.ts:85](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L85)
 
 Creates an authority from explicit threshold and auth lists.
 
@@ -53,7 +53,7 @@ Raw authority fields from Hive.
 
 > **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:77](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L77)
+Defined in: [src/chain/account.ts:77](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L77)
 
 #### Implementation of
 
@@ -65,7 +65,7 @@ Defined in: [src/chain/account.ts:77](https://github.com/srbde/hive-pollen/blob/
 
 > **key\_auths**: \[`string` \| [`PublicKey`](PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:78](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L78)
+Defined in: [src/chain/account.ts:78](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L78)
 
 #### Implementation of
 
@@ -77,7 +77,7 @@ Defined in: [src/chain/account.ts:78](https://github.com/srbde/hive-pollen/blob/
 
 > **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:76](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L76)
+Defined in: [src/chain/account.ts:76](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L76)
 
 #### Implementation of
 
@@ -89,7 +89,7 @@ Defined in: [src/chain/account.ts:76](https://github.com/srbde/hive-pollen/blob/
 
 > `static` **from**(`value`): `Authority`
 
-Defined in: [src/chain/account.ts:103](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L103)
+Defined in: [src/chain/account.ts:103](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L103)
 
 Normalizes a public key or raw authority into an Authority.
 

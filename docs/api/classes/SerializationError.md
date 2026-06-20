@@ -6,7 +6,7 @@
 
 # Class: SerializationError
 
-Defined in: [src/errors.ts:95](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L95)
+Defined in: [src/errors.ts:95](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L95)
 
 Error thrown when Hive binary serialization or deserialization fails.
 
@@ -38,7 +38,7 @@ try {
 
 > **new SerializationError**(`message`, `info?`): `SerializationError`
 
-Defined in: [src/errors.ts:102](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L102)
+Defined in: [src/errors.ts:102](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L102)
 
 Creates a serialization error.
 
@@ -82,7 +82,7 @@ Defined in: node\_modules/.pnpm/typescript@6.0.3/node\_modules/typescript/lib/li
 
 > `readonly` `optional` **info?**: `unknown`
 
-Defined in: [src/errors.ts:26](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/errors.ts#L26)
+Defined in: [src/errors.ts:26](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/errors.ts#L26)
 
 #### Inherited from
 

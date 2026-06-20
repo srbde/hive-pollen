@@ -6,7 +6,7 @@
 
 # Interface: CommunityRolesQuery
 
-Defined in: [src/helpers/hivemind.ts:89](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/hivemind.ts#L89)
+Defined in: [src/helpers/hivemind.ts:89](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/hivemind.ts#L89)
 
 Query options for community role lookups.
 
@@ -21,4 +21,4 @@ other community team assignments.
 
 > **community**: `string`
 
-Defined in: [src/helpers/hivemind.ts:90](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/hivemind.ts#L90)
+Defined in: [src/helpers/hivemind.ts:90](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/hivemind.ts#L90)

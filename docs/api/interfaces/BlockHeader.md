@@ -6,7 +6,7 @@
 
 # Interface: BlockHeader
 
-Defined in: [src/chain/block.ts:51](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L51)
+Defined in: [src/chain/block.ts:51](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L51)
 
 Hive block header without the witness signature.
 
@@ -32,7 +32,7 @@ console.log(header.witness, header.timestamp)
 
 > **extensions**: `unknown`[]
 
-Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L56)
+Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L56)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/chain/block.ts:56](https://github.com/srbde/hive-pollen/blob/cc
 
 > **previous**: `string`
 
-Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L52)
+Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L52)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [src/chain/block.ts:52](https://github.com/srbde/hive-pollen/blob/cc
 
 > **timestamp**: `string`
 
-Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L53)
+Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L53)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [src/chain/block.ts:53](https://github.com/srbde/hive-pollen/blob/cc
 
 > **transaction\_merkle\_root**: `string`
 
-Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L55)
+Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L55)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [src/chain/block.ts:55](https://github.com/srbde/hive-pollen/blob/cc
 
 > **witness**: `string`
 
-Defined in: [src/chain/block.ts:54](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/block.ts#L54)
+Defined in: [src/chain/block.ts:54](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/block.ts#L54)

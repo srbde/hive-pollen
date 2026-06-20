@@ -6,7 +6,7 @@
 
 # Interface: CustomOperation
 
-Defined in: [src/chain/operation.ts:608](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L608)
+Defined in: [src/chain/operation.ts:608](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L608)
 
 Legacy binary custom operation requiring active authority.
 
@@ -20,7 +20,7 @@ Legacy binary custom operation requiring active authority.
 
 > **0**: `"custom"`
 
-Defined in: [src/chain/operation.ts:609](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L609)
+Defined in: [src/chain/operation.ts:609](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L609)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:609](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:610](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L610)
+Defined in: [src/chain/operation.ts:610](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L610)
 
 #### data
 

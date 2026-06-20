@@ -6,7 +6,7 @@
 
 # Interface: LimitOrderCancelOperation
 
-Defined in: [src/chain/operation.ts:842](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L842)
+Defined in: [src/chain/operation.ts:842](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L842)
 
 Cancels an order and returns the balance to owner.
 
@@ -20,7 +20,7 @@ Cancels an order and returns the balance to owner.
 
 > **0**: `"limit_order_cancel"`
 
-Defined in: [src/chain/operation.ts:843](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L843)
+Defined in: [src/chain/operation.ts:843](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L843)
 
 #### Overrides
 
@@ -32,7 +32,7 @@ Defined in: [src/chain/operation.ts:843](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:844](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L844)
+Defined in: [src/chain/operation.ts:844](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L844)
 
 #### orderid
 

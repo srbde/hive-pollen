@@ -6,7 +6,7 @@
 
 # Class: Signature
 
-Defined in: [src/crypto.ts:350](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L350)
+Defined in: [src/crypto.ts:350](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L350)
 
 Compact recoverable secp256k1 signature.
 
@@ -16,7 +16,7 @@ Compact recoverable secp256k1 signature.
 
 > **new Signature**(`data`, `recovery`): `Signature`
 
-Defined in: [src/crypto.ts:351](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L351)
+Defined in: [src/crypto.ts:351](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L351)
 
 #### Parameters
 
@@ -38,7 +38,7 @@ Defined in: [src/crypto.ts:351](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > **data**: `Uint8Array`
 
-Defined in: [src/crypto.ts:352](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L352)
+Defined in: [src/crypto.ts:352](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L352)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [src/crypto.ts:352](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > **recovery**: `number`
 
-Defined in: [src/crypto.ts:353](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L353)
+Defined in: [src/crypto.ts:353](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L353)
 
 ## Methods
 
@@ -54,7 +54,7 @@ Defined in: [src/crypto.ts:353](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > **recover**(`message`, `prefix?`): [`PublicKey`](PublicKey.md)
 
-Defined in: [src/crypto.ts:376](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L376)
+Defined in: [src/crypto.ts:376](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L376)
 
 Recovers the public key that produced this signature.
 
@@ -78,7 +78,7 @@ Recovers the public key that produced this signature.
 
 > **toBuffer**(): `Uint8Array`\<`ArrayBuffer`\>
 
-Defined in: [src/crypto.ts:384](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L384)
+Defined in: [src/crypto.ts:384](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L384)
 
 #### Returns
 
@@ -90,7 +90,7 @@ Defined in: [src/crypto.ts:384](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > **toString**(): `string`
 
-Defined in: [src/crypto.ts:392](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L392)
+Defined in: [src/crypto.ts:392](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L392)
 
 #### Returns
 
@@ -102,7 +102,7 @@ Defined in: [src/crypto.ts:392](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > `static` **fromBuffer**(`buffer`): `Signature`
 
-Defined in: [src/crypto.ts:358](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L358)
+Defined in: [src/crypto.ts:358](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L358)
 
 #### Parameters
 
@@ -120,7 +120,7 @@ Defined in: [src/crypto.ts:358](https://github.com/srbde/hive-pollen/blob/cc8a30
 
 > `static` **fromString**(`string`): `Signature`
 
-Defined in: [src/crypto.ts:369](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/crypto.ts#L369)
+Defined in: [src/crypto.ts:369](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/crypto.ts#L369)
 
 #### Parameters
 

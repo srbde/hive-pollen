@@ -6,7 +6,7 @@
 
 # Interface: DelegateVestingSharesOperation
 
-Defined in: [src/chain/operation.ts:686](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L686)
+Defined in: [src/chain/operation.ts:686](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L686)
 
 Delegates vesting shares from one account to another.
 
@@ -24,7 +24,7 @@ Set `vesting_shares` to `0.000000 VESTS` to remove an existing delegation.
 
 > **0**: `"delegate_vesting_shares"`
 
-Defined in: [src/chain/operation.ts:687](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L687)
+Defined in: [src/chain/operation.ts:687](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L687)
 
 #### Overrides
 
@@ -36,7 +36,7 @@ Defined in: [src/chain/operation.ts:687](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:688](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L688)
+Defined in: [src/chain/operation.ts:688](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L688)
 
 #### delegatee
 

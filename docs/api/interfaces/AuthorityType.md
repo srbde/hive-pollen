@@ -6,7 +6,7 @@
 
 # Interface: AuthorityType
 
-Defined in: [src/chain/account.ts:57](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L57)
+Defined in: [src/chain/account.ts:57](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L57)
 
 Raw Hive authority object.
 
@@ -32,7 +32,7 @@ const authority: AuthorityType = {
 
 > **account\_auths**: \[`string`, `number`\][]
 
-Defined in: [src/chain/account.ts:59](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L59)
+Defined in: [src/chain/account.ts:59](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L59)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [src/chain/account.ts:59](https://github.com/srbde/hive-pollen/blob/
 
 > **key\_auths**: \[`string` \| [`PublicKey`](../classes/PublicKey.md), `number`\][]
 
-Defined in: [src/chain/account.ts:60](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L60)
+Defined in: [src/chain/account.ts:60](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L60)
 
 ***
 
@@ -48,4 +48,4 @@ Defined in: [src/chain/account.ts:60](https://github.com/srbde/hive-pollen/blob/
 
 > **weight\_threshold**: `number`
 
-Defined in: [src/chain/account.ts:58](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/account.ts#L58)
+Defined in: [src/chain/account.ts:58](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/account.ts#L58)

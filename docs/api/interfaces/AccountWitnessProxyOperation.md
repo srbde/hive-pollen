@@ -6,7 +6,7 @@
 
 # Interface: AccountWitnessProxyOperation
 
-Defined in: [src/chain/operation.ts:403](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L403)
+Defined in: [src/chain/operation.ts:403](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L403)
 
 Sets or clears the witness voting proxy for an account.
 
@@ -25,7 +25,7 @@ account instead of voting witnesses directly.
 
 > **0**: `"account_witness_proxy"`
 
-Defined in: [src/chain/operation.ts:404](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L404)
+Defined in: [src/chain/operation.ts:404](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L404)
 
 #### Overrides
 
@@ -37,7 +37,7 @@ Defined in: [src/chain/operation.ts:404](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:405](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L405)
+Defined in: [src/chain/operation.ts:405](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L405)
 
 #### account
 

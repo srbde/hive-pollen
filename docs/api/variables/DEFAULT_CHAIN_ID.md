@@ -8,7 +8,7 @@
 
 > `const` **DEFAULT\_CHAIN\_ID**: `Uint8Array`\<`ArrayBufferLike`\>
 
-Defined in: [src/client.ts:87](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/client.ts#L87)
+Defined in: [src/client.ts:88](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/client.ts#L88)
 
 Main Hive network chain id as 32 raw bytes.
 

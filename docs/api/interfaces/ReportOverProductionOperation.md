@@ -6,7 +6,7 @@
 
 # Interface: ReportOverProductionOperation
 
-Defined in: [src/chain/operation.ts:954](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L954)
+Defined in: [src/chain/operation.ts:954](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L954)
 
 This operation is used to report a miner who signs two blocks
 at the same time. To be valid, the violation must be reported within
@@ -30,7 +30,7 @@ of the block producer to the reporter.
 
 > **0**: `"report_over_production"`
 
-Defined in: [src/chain/operation.ts:955](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L955)
+Defined in: [src/chain/operation.ts:955](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L955)
 
 #### Overrides
 
@@ -42,7 +42,7 @@ Defined in: [src/chain/operation.ts:955](https://github.com/srbde/hive-pollen/bl
 
 > **1**: `object`
 
-Defined in: [src/chain/operation.ts:956](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/chain/operation.ts#L956)
+Defined in: [src/chain/operation.ts:956](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/chain/operation.ts#L956)
 
 #### first\_block
 

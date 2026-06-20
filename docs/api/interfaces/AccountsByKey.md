@@ -6,7 +6,7 @@
 
 # Interface: AccountsByKey
 
-Defined in: [src/helpers/key.ts:9](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/key.ts#L9)
+Defined in: [src/helpers/key.ts:9](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/key.ts#L9)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/helpers/key.ts:9](https://github.com/srbde/hive-pollen/blob/cc8
 
 > **accounts**: `string`[][]
 
-Defined in: [src/helpers/key.ts:17](https://github.com/srbde/hive-pollen/blob/cc8a302f18f789980b78a8d2601884c4007a5de7/src/helpers/key.ts#L17)
+Defined in: [src/helpers/key.ts:17](https://github.com/srbde/hive-pollen/blob/b65f93b1588bdeee045417e8462b70a51105c045/src/helpers/key.ts#L17)
 
 Account names grouped by the queried public key order.
 
