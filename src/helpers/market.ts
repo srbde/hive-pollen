@@ -6,7 +6,7 @@ import { Client } from "../client.js";
 
 // ── NAI constants ─────────────────────────────────────────────────────────────
 
-export const HBD_NAI  = "@@000000013";
+export const HBD_NAI = "@@000000013";
 export const HIVE_NAI = "@@000000021";
 
 // ── Shared primitives ─────────────────────────────────────────────────────────
