@@ -21,27 +21,27 @@ describe("misc", function () {
     it("should handle backpressure", async function () {
       const stream = utils.iteratorStream(counter(100));
       const reader = stream.getReader();
-      
+
       // Simulate slow consumer
-      await new Promise(r => setTimeout(r, 50));
-      
+      await new Promise((r) => setTimeout(r, 50));
+
       let lastValue = 0;
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
         lastValue = value.i;
       }
-      
+
       expect(lastValue).toBe(99);
     });
 
     it("should handle errors", async function () {
       const stream = utils.iteratorStream(errorCounter(10, 2));
       const reader = stream.getReader();
-      
+
       let lastValue = 0;
       let sawError = false;
-      
+
       try {
         while (true) {
           const { value, done } = await reader.read();
@@ -53,7 +53,7 @@ describe("misc", function () {
         expect(lastValue).toBe(2);
         sawError = true;
       }
-      
+
       expect(sawError).toBe(true);
     });
   });
