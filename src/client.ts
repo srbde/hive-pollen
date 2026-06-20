@@ -41,6 +41,7 @@ import { BroadcastAPI } from "./helpers/broadcast.js";
 import { DatabaseAPI } from "./helpers/database.js";
 import { HivemindAPI } from "./helpers/hivemind.js";
 import { AccountByKeyAPI } from "./helpers/key.js";
+import { MarketHistoryAPI } from "./helpers/market.js";
 import { RCAPI } from "./helpers/rc.js";
 import { TransactionStatusAPI } from "./helpers/transaction.js";
 import { NodeHealthTracker, HealthTrackerOptions } from "./health-tracker.js";
@@ -278,6 +279,11 @@ export class Client {
   public readonly blockchain: Blockchain;
 
   /**
+   * Market History API helper.
+   */
+  public readonly market: MarketHistoryAPI;
+
+  /**
    * Hivemind helper.
    */
   public readonly hivemind: HivemindAPI;
@@ -362,6 +368,7 @@ export class Client {
     this.healthTracker = new NodeHealthTracker(options.healthTrackerOptions);
     this.database = new DatabaseAPI(this);
     this.broadcast = new BroadcastAPI(this);
+    this.market = new MarketHistoryAPI(this);
     this.blockchain = new Blockchain(this);
     this.rc = new RCAPI(this);
     this.hivemind = new HivemindAPI(this);
@@ -448,13 +455,7 @@ export class Client {
       method: api + "." + method,
       params,
     };
-    const body = JSON.stringify(request, (key, value) => {
-      // encode bytes as hex strings instead of an array of bytes
-      if (value instanceof Uint8Array) {
-        return toHex(value);
-      }
-      return value;
-    });
+    const body = serializeRpcBody(request);
     const opts: RequestInit & { agent?: unknown } = {
       body,
       cache: "no-cache",
@@ -578,6 +579,32 @@ export class Client {
     assert(response.id === request.id, "got invalid response id");
     return response.result as T;
   }
+}
+
+/**
+ * Serializes an RPC request body to a JSON string with support for BigInt and Uint8Array.
+ *
+ * `JSON.stringify` cannot emit BigInt as a raw JSON integer — it either throws or, when coerced
+ * to Number first, loses precision for values above 2^53. This is a real hazard for
+ * `condenser_api.get_account_history` filter params (e.g. `fill_order` is bit 57 = 2^57).
+ * A placeholder-and-replace approach is unsafe because arbitrary string params (memos,
+ * custom_json) could collide with the placeholder pattern. This recursive serializer
+ * handles both types natively and is correct by construction.
+ */
+function serializeRpcBody(value: unknown): string {
+  if (value === null || value === undefined) return "null";
+  if (typeof value === "bigint") return value.toString();
+  if (typeof value === "boolean" || typeof value === "number") return JSON.stringify(value);
+  if (typeof value === "string") return JSON.stringify(value);
+  if (value instanceof Uint8Array) return JSON.stringify(toHex(value));
+  if (Array.isArray(value)) return "[" + value.map(serializeRpcBody).join(",") + "]";
+  if (typeof value === "object") {
+    const pairs = Object.entries(value)
+      .filter(([, v]) => v !== undefined)
+      .map(([k, v]) => `${JSON.stringify(k)}:${serializeRpcBody(v)}`);
+    return "{" + pairs.join(",") + "}";
+  }
+  return "null";
 }
 
 /**

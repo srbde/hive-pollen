@@ -54,6 +54,7 @@ export { utils };
 export { NodeHealthTracker, HealthTrackerOptions } from "./health-tracker.js";
 
 export * from "./helpers/blockchain.js";
+export * from "./helpers/market.js";
 export * from "./helpers/broadcast.js";
 export * from "./helpers/database.js";
 export * from "./helpers/rc.js";
@@ -67,6 +68,7 @@ export * from "./chain/block.js";
 export * from "./chain/comment.js";
 export * from "./chain/misc.js";
 export * from "./chain/operation.js";
+export * from "./chain/op-filter.js";
 export * from "./chain/rc.js";
 export * from "./chain/serializer.js";
 export * from "./chain/transaction.js";
