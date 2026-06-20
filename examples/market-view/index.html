@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hive Pollen — Market Explorer</title>
+    <!-- Google Fonts Inter -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+      :root {
+        --bg-color: #060913;
+        --surface-color: rgba(15, 22, 42, 0.75);
+        --surface-border: rgba(255, 255, 255, 0.07);
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --accent-color: #ff124f;
+        --accent-glow: rgba(255, 18, 79, 0.25);
+        --bid-color: #00f5d4;
+        --bid-glow: rgba(0, 245, 212, 0.15);
+        --ask-color: #ff007f;
+        --ask-glow: rgba(255, 0, 127, 0.15);
+        --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-color);
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(255, 18, 79, 0.05) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(0, 245, 212, 0.05) 0%, transparent 40%);
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        padding: 2rem 1.5rem;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--surface-border);
+        padding-bottom: 1.5rem;
+      }
+
+      .header-title h1 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        background: linear-gradient(135deg, #ffffff 30%, #ff124f 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.25rem;
+      }
+
+      .header-title p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .node-selector-card {
+        background: var(--surface-color);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--surface-border);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #64748b;
+      }
+
+      .status-dot.connected {
+        background-color: var(--bid-color);
+        box-shadow: 0 0 8px var(--bid-color);
+        animation: pulse 2s infinite;
+      }
+
+      .status-dot.loading {
+        background-color: #f59e0b;
+        box-shadow: 0 0 8px #f59e0b;
+        animation: pulse 1s infinite;
+      }
+
+      .node-dropdown {
+        background: #0f172a;
+        color: var(--text-primary);
+        border: 1px solid var(--surface-border);
+        border-radius: 6px;
+        padding: 0.4rem 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, var(--accent-color), #b90535);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 0 10px var(--accent-glow);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 15px var(--accent-color);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      /* Ticker Summary Stats */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .stat-card {
+        background: var(--surface-color);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--surface-border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 18, 79, 0.2);
+      }
+
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .stat-card:hover::before {
+        opacity: 1;
+      }
+
+      .stat-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-value {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        font-family: var(--font-mono);
+      }
+
+      .stat-desc {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-top: 0.4rem;
+      }
+
+      .stat-value.up {
+        color: var(--bid-color);
+      }
+
+      .stat-value.down {
+        color: var(--ask-color);
+      }
+
+      /* Main Content Grid */
+      .main-grid {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .panel {
+        background: var(--surface-color);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--surface-border);
+        border-radius: 20px;
+        padding: 1.75rem;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--surface-border);
+        padding-bottom: 0.75rem;
+      }
+
+      .panel-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .panel-subtitle {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+      }
+
+      /* Order Book Styling */
+      .order-book-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 640px) {
+        .order-book-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .book-side-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        letter-spacing: 0.05em;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .book-side-title.bids { color: var(--bid-color); }
+      .book-side-title.asks { color: var(--ask-color); }
+
+      .book-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.825rem;
+        font-family: var(--font-mono);
+      }
+
+      .book-table th {
+        text-align: right;
+        color: var(--text-secondary);
+        font-weight: 500;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.75rem;
+      }
+
+      .book-table th:first-child { text-align: left; }
+
+      .book-row {
+        position: relative;
+        cursor: pointer;
+        transition: background 0.1s ease;
+      }
+
+      .book-row:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .book-depth-bar {
+        position: absolute;
+        top: 2px;
+        bottom: 2px;
+        right: 0;
+        z-index: 1;
+        opacity: 0.08;
+        pointer-events: none;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      .bids .book-depth-bar {
+        background-color: var(--bid-color);
+      }
+
+      .asks .book-depth-bar {
+        background-color: var(--ask-color);
+      }
+
+      .book-table td {
+        padding: 0.35rem 0;
+        text-align: right;
+        position: relative;
+        z-index: 2;
+      }
+
+      .book-table td:first-child { text-align: left; }
+
+      .book-table .price { font-weight: 600; }
+      .bids .price { color: var(--bid-color); }
+      .asks .price { color: var(--ask-color); }
+
+      .book-table .seller {
+        color: #64748b;
+        font-size: 0.75rem;
+      }
+
+      /* Trade History Table */
+      .trades-table-container {
+        max-height: 520px;
+        overflow-y: auto;
+      }
+
+      .trades-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.825rem;
+        font-family: var(--font-mono);
+      }
+
+      .trades-table th {
+        text-align: right;
+        color: var(--text-secondary);
+        font-weight: 500;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        position: sticky;
+        top: 0;
+        background: #0f172a;
+        z-index: 10;
+        font-size: 0.75rem;
+      }
+
+      .trades-table th:first-child { text-align: left; }
+
+      .trades-table td {
+        padding: 0.45rem 0;
+        text-align: right;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      }
+
+      .trades-table td:first-child { text-align: left; color: var(--text-secondary); }
+
+      .trade-buy { color: var(--bid-color); font-weight: 500; }
+      .trade-sell { color: var(--ask-color); font-weight: 500; }
+
+      .trades-table .time-ago {
+        color: #64748b;
+        font-size: 0.75rem;
+      }
+
+      /* Auto Refresh Checkbox styling */
+      .refresh-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .refresh-controls label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        user-select: none;
+      }
+
+      /* Animations */
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.9); }
+      }
+
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(6, 9, 19, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .loader-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 18, 79, 0.1);
+        border-left-color: var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-overlay" id="loader">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+      <header>
+        <div class="header-title">
+          <h1>Hive Pollen Market</h1>
+          <p>Dynamic Hive Internal Market Dashboard powered by @srbde/pollen</p>
+        </div>
+        <div class="node-selector-card">
+          <div class="status-indicator">
+            <div class="status-dot" id="status-dot"></div>
+            <span id="status-text">Connecting...</span>
+          </div>
+          <select class="node-dropdown" id="node-select">
+            <option value="https://api.hive.blog">https://api.hive.blog</option>
+          </select>
+          <div class="refresh-controls">
+            <label>
+              <input type="checkbox" id="auto-refresh-check" checked />
+              Live update (10s)
+            </label>
+            <button class="btn" id="refresh-btn">Refresh</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Latest Price</div>
+          <div class="stat-value" id="price-val">— HBD</div>
+          <div class="stat-desc" id="price-change-desc">24h Change: —%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">24h HIVE Volume</div>
+          <div class="stat-value" id="hive-vol-val">— HIVE</div>
+          <div class="stat-desc" id="hive-vol-desc">≈ — HBD</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">24h HBD Volume</div>
+          <div class="stat-value" id="hbd-vol-val">— HBD</div>
+          <div class="stat-desc" id="total-vol-desc">Combined trading volume</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Spread</div>
+          <div class="stat-value" id="spread-val">—</div>
+          <div class="stat-desc" id="spread-percent">Bid/Ask Gap: —%</div>
+        </div>
+      </main>
+
+      <div class="main-grid">
+        <!-- Order Book Panel -->
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>Order Book</span>
+            </div>
+            <div class="panel-subtitle">database_api.list_limit_orders</div>
+          </div>
+          
+          <div class="order-book-container">
+            <!-- Bids -->
+            <div class="bids">
+              <div class="book-side-title bids">
+                <span>Bids (Buys)</span>
+                <span id="bid-depth-total">Total: 0 HIVE</span>
+              </div>
+              <table class="book-table">
+                <thead>
+                  <tr>
+                    <th style="width: 35%">Price (HBD)</th>
+                    <th style="width: 35%; text-align: right">Size (HIVE)</th>
+                    <th style="width: 30%; text-align: right">Buyer</th>
+                  </tr>
+                </thead>
+                <tbody id="bids-body">
+                  <tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">Loading bids...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Asks -->
+            <div class="asks">
+              <div class="book-side-title asks">
+                <span>Asks (Sells)</span>
+                <span id="ask-depth-total">Total: 0 HIVE</span>
+              </div>
+              <table class="book-table">
+                <thead>
+                  <tr>
+                    <th style="width: 35%">Price (HBD)</th>
+                    <th style="width: 35%; text-align: right">Size (HIVE)</th>
+                    <th style="width: 30%; text-align: right">Seller</th>
+                  </tr>
+                </thead>
+                <tbody id="asks-body">
+                  <tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">Loading asks...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Trade History Panel -->
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>Recent Trades</span>
+            </div>
+            <div class="panel-subtitle">market_history_api.get_recent_trades</div>
+          </div>
+          
+          <div class="trades-table-container">
+            <table class="trades-table">
+              <thead>
+                <tr>
+                  <th style="width: 25%; text-align: left">Time</th>
+                  <th style="width: 20%">Type</th>
+                  <th style="width: 25%">Price</th>
+                  <th style="width: 30%">Amount (HIVE)</th>
+                </tr>
+              </thead>
+              <tbody id="trades-body">
+                <tr><td colspan="4" style="text-align: center; color: var(--text-secondary)">Loading trades...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Application Script -->
+    <script type="module">
+      import { Client } from "@srbde/pollen";
+
+      let client;
+      let refreshInterval = null;
+      let isFetching = false;
+
+      const elements = {
+        loader: document.getElementById("loader"),
+        statusDot: document.getElementById("status-dot"),
+        statusText: document.getElementById("status-text"),
+        nodeSelect: document.getElementById("node-select"),
+        refreshBtn: document.getElementById("refresh-btn"),
+        autoRefreshCheck: document.getElementById("auto-refresh-check"),
+        
+        priceVal: document.getElementById("price-val"),
+        priceChangeDesc: document.getElementById("price-change-desc"),
+        hiveVolVal: document.getElementById("hive-vol-val"),
+        hiveVolDesc: document.getElementById("hive-vol-desc"),
+        hbdVolVal: document.getElementById("hbd-vol-val"),
+        spreadVal: document.getElementById("spread-val"),
+        spreadPercent: document.getElementById("spread-percent"),
+        
+        bidsBody: document.getElementById("bids-body"),
+        asksBody: document.getElementById("asks-body"),
+        tradesBody: document.getElementById("trades-body"),
+        bidDepthTotal: document.getElementById("bid-depth-total"),
+        askDepthTotal: document.getElementById("ask-depth-total")
+      };
+
+      // Bootstrap and load nodes from Nectarflower
+      async function init() {
+        showLoader(true);
+        setStatus("loading", "Fetching nodes...");
+        
+        try {
+          // Initialize client with Nectarflower live nodes
+          client = await Client.fromNectarflower();
+          
+          // Populate the select dropdown with dynamic nodes
+          elements.nodeSelect.innerHTML = "";
+          const addresses = Array.isArray(client.address) ? client.address : [client.address];
+          addresses.forEach(addr => {
+            const opt = document.createElement("option");
+            opt.value = addr;
+            opt.textContent = addr;
+            elements.nodeSelect.appendChild(opt);
+          });
+          
+          // Select the currently active address
+          elements.nodeSelect.value = client.currentAddress;
+          
+          setStatus("connected", `Connected: ${new URL(client.currentAddress).hostname}`);
+          
+          // Load data
+          await refreshData();
+          setupAutoRefresh();
+        } catch (err) {
+          console.error("Initialization failed:", err);
+          setStatus("error", "Failover/Nectarflower error. Using fallback node.");
+          // Fallback to static node list
+          client = new Client(["https://api.hive.blog", "https://api.syncad.com"]);
+          await refreshData();
+        } finally {
+          showLoader(false);
+        }
+      }
+
+      // Fetch and refresh all dashboard data
+      async function refreshData() {
+        if (isFetching) return;
+        isFetching = true;
+        
+        try {
+          setStatus("loading", "Updating...");
+          
+          // Run API calls in parallel
+          const [ticker, bookResponse, tradesResponse] = await Promise.all([
+            client.market.getTicker(),
+            client.database.listLimitOrders({ start: ["", 0], limit: 200, order: "by_account" }),
+            client.market.getRecentTrades({ limit: 40 })
+          ]);
+
+          updateTicker(ticker);
+          updateOrderBook(bookResponse.orders);
+          updateTrades(tradesResponse.trades);
+          
+          setStatus("connected", `Connected: ${new URL(client.currentAddress).hostname}`);
+        } catch (err) {
+          console.error("Fetch failed:", err);
+          setStatus("loading", "RPC Error. Failover in progress...");
+          // Passive failover will recover on next tick
+        } finally {
+          isFetching = false;
+        }
+      }
+
+      function updateTicker(ticker) {
+        const latestPrice = parseFloat(ticker.latest);
+        elements.priceVal.textContent = `${latestPrice.toFixed(4)} HBD`;
+        
+        const change = parseFloat(ticker.percent_change);
+        elements.priceChangeDesc.textContent = `24h Change: ${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
+        if (change >= 0) {
+          elements.priceVal.className = "stat-value up";
+        } else {
+          elements.priceVal.className = "stat-value down";
+        }
+
+        const hiveVol = parseFloat(ticker.hive_volume.amount) / 1000;
+        const hbdVol = parseFloat(ticker.hbd_volume.amount) / 1000;
+        elements.hiveVolVal.textContent = `${hiveVol.toLocaleString(undefined, { maximumFractionDigits: 0 })} HIVE`;
+        elements.hbdVolVal.textContent = `${hbdVol.toLocaleString(undefined, { maximumFractionDigits: 0 })} HBD`;
+        
+        const approxHbdVal = hiveVol * latestPrice;
+        elements.hiveVolDesc.textContent = `≈ ${approxHbdVal.toLocaleString(undefined, { maximumFractionDigits: 0 })} HBD`;
+      }
+
+      function updateOrderBook(orders) {
+        const HIVE_NAI = "@@000000021";
+        const HBD_NAI  = "@@000000013";
+
+        const bids = [];
+        const asks = [];
+
+        // Parse orders into bids and asks
+        orders.forEach(order => {
+          const isAsk = order.sell_price.base.nai === HIVE_NAI;
+          const isBid = order.sell_price.base.nai === HBD_NAI;
+          
+          let price, size;
+          if (isAsk) {
+            price = parseFloat(order.sell_price.quote.amount) / parseFloat(order.sell_price.base.amount);
+            size = order.for_sale / 1000; // millis to main
+            asks.push({ price, size, seller: order.seller });
+          } else if (isBid) {
+            price = parseFloat(order.sell_price.base.amount) / parseFloat(order.sell_price.quote.amount);
+            size = order.for_sale / 1000 / price; // sell_price.base is HBD. size is HIVE.
+            bids.push({ price, size, seller: order.seller });
+          }
+        });
+
+        // Sort: Bids descending, Asks ascending
+        bids.sort((a, b) => b.price - a.price);
+        asks.sort((a, b) => a.price - b.price);
+
+        // Limit to top 15
+        const displayBids = bids.slice(0, 15);
+        const displayAsks = asks.slice(0, 15);
+
+        // Compute cumulative depths
+        let cumulativeBid = 0;
+        const bidsWithDepth = displayBids.map(b => {
+          cumulativeBid += b.size;
+          return { ...b, depth: cumulativeBid };
+        });
+
+        let cumulativeAsk = 0;
+        const asksWithDepth = displayAsks.map(a => {
+          cumulativeAsk += a.size;
+          return { ...a, depth: cumulativeAsk };
+        });
+
+        const maxBidDepth = cumulativeBid || 1;
+        const maxAskDepth = cumulativeAsk || 1;
+
+        elements.bidDepthTotal.textContent = `Total: ${cumulativeBid.toLocaleString(undefined, { maximumFractionDigits: 1 })} HIVE`;
+        elements.askDepthTotal.textContent = `Total: ${cumulativeAsk.toLocaleString(undefined, { maximumFractionDigits: 1 })} HIVE`;
+
+        // Render Bids
+        if (bidsWithDepth.length === 0) {
+          elements.bidsBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">No active bids</td></tr>`;
+        } else {
+          elements.bidsBody.innerHTML = bidsWithDepth.map(b => {
+            const pct = (b.depth / maxBidDepth) * 100;
+            return `
+              <tr class="book-row">
+                <td class="price">${b.price.toFixed(4)}</td>
+                <td>${b.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</td>
+                <td class="seller">${b.seller}</td>
+                <div class="book-depth-bar" style="width: ${pct}%"></div>
+              </tr>
+            `;
+          }).join("");
+        }
+
+        // Render Asks
+        if (asksWithDepth.length === 0) {
+          elements.asksBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--text-secondary)">No active asks</td></tr>`;
+        } else {
+          elements.asksBody.innerHTML = asksWithDepth.map(a => {
+            const pct = (a.depth / maxAskDepth) * 100;
+            return `
+              <tr class="book-row">
+                <td class="price">${a.price.toFixed(4)}</td>
+                <td>${a.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</td>
+                <td class="seller">${a.seller}</td>
+                <div class="book-depth-bar" style="width: ${pct}%"></div>
+              </tr>
+            `;
+          }).join("");
+        }
+
+        // Calculate spread
+        if (bids.length > 0 && asks.length > 0) {
+          const highestBid = bids[0].price;
+          const lowestAsk = asks[0].price;
+          const spread = lowestAsk - highestBid;
+          const spreadPct = (spread / lowestAsk) * 100;
+          
+          elements.spreadVal.textContent = `${spread.toFixed(4)} HBD`;
+          elements.spreadPercent.textContent = `Spread: ${spreadPct.toFixed(2)}%`;
+        } else {
+          elements.spreadVal.textContent = "—";
+          elements.spreadPercent.textContent = "Bid/Ask Gap: —%";
+        }
+      }
+
+      function updateTrades(trades) {
+        if (!trades || trades.length === 0) {
+          elements.tradesBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-secondary)">No recent trades</td></tr>`;
+          return;
+        }
+
+        elements.tradesBody.innerHTML = trades.map(t => {
+          const dateStr = t.date + "Z";
+          const time = new Date(dateStr).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+          
+          // Determine side: If current_pays is HBD, they sold HBD to buy HIVE (BUY).
+          // Otherwise they sold HIVE to get HBD (SELL).
+          const isBuy = t.current_pays.nai === "@@000000013";
+          const sideText = isBuy ? "BUY" : "SELL";
+          const sideClass = isBuy ? "trade-buy" : "trade-sell";
+
+          // Calculate trade price: HBD / HIVE
+          let price, hiveAmount;
+          const curVal = parseFloat(t.current_pays.amount) / 1000;
+          const opnVal = parseFloat(t.open_pays.amount) / 1000;
+
+          if (isBuy) {
+            price = curVal / opnVal;
+            hiveAmount = opnVal;
+          } else {
+            price = opnVal / curVal;
+            hiveAmount = curVal;
+          }
+
+          return `
+            <tr>
+              <td><span class="time-ago">${time}</span></td>
+              <td><span class="${sideClass}">${sideText}</span></td>
+              <td class="price" style="font-weight: 500">${price.toFixed(4)}</td>
+              <td>${hiveAmount.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function setStatus(type, message) {
+        elements.statusDot.className = "status-dot " + type;
+        elements.statusText.textContent = message;
+      }
+
+      function showLoader(show) {
+        if (show) {
+          elements.loader.classList.add("active");
+        } else {
+          elements.loader.classList.remove("active");
+        }
+      }
+
+      function setupAutoRefresh() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        
+        if (elements.autoRefreshCheck.checked) {
+          refreshInterval = setInterval(refreshData, 10000);
+        }
+      }
+
+      // Event Listeners
+      elements.refreshBtn.addEventListener("click", refreshData);
+      
+      elements.autoRefreshCheck.addEventListener("change", () => {
+        setupAutoRefresh();
+      });
+
+      elements.nodeSelect.addEventListener("change", (e) => {
+        const selectedNode = e.target.value;
+        client.currentAddress = selectedNode;
+        // Also ensure it is in the failover addresses list
+        const addresses = Array.isArray(client.address) ? client.address : [client.address];
+        if (!addresses.includes(selectedNode)) {
+          client.address = [selectedNode, ...addresses.filter(a => a !== selectedNode)];
+        }
+        refreshData();
+      });
+
+      // Start Dashboard
+      init();
+    </script>
+  </body>
+</html>
