@@ -527,6 +527,24 @@ export async function retryingFetch(
         opts.timeout = fetchTimeout(nodesTriedInRound);
       }
 
+      // Validate node URL to mitigate SSRF (CWE-918)
+      try {
+        const parsedUrl = new URL(node);
+        if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+          const err = new Error(`Forbidden protocol: ${parsedUrl.protocol}`) as any;
+          err.code = "EINVALURL";
+          throw err;
+        }
+      } catch (err: any) {
+        if (err.code === "EINVALURL") {
+          throw err;
+        }
+        const message = err instanceof Error ? err.message : String(err);
+        const formatErr = new Error(`Invalid or insecure RPC node URL: ${node}. Details: ${message}`) as any;
+        formatErr.code = "EINVALURL";
+        throw formatErr;
+      }
+
       const response = await fetch(node, opts);
 
       if (!response.ok) {
