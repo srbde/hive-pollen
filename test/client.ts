@@ -93,4 +93,60 @@ describe("client", function () {
   //     assert(seenBackoff, "should have seen backoff");
   //   }
   // });
+
+  it("should fail validation with invalid node URL / protocols (SSRF check)", async () => {
+    const invalidClient = new Client("ftp://wrong-protocol.hive.blog");
+    try {
+      await invalidClient.call("condenser_api", "get_accounts", [["initminer"]]);
+      assert(false, "should have failed");
+    } catch (error: any) {
+      assert(error.message.includes("Invalid or insecure RPC node") || error.message.includes("Forbidden"));
+    }
+
+    const nonUrlClient = new Client("not-a-valid-url");
+    try {
+      await nonUrlClient.call("condenser_api", "get_accounts", [["initminer"]]);
+      assert(false, "should have failed");
+    } catch (error: any) {
+      assert(error.message.includes("Invalid or insecure RPC node"));
+    }
+  });
+
+  it("should safely format RPC errors with placeholder replacements without ReDoS", async () => {
+    const mockResponse = {
+      id: 0,
+      jsonrpc: "2.0",
+      error: {
+        code: -32003,
+        message: "Assertion failure",
+        data: {
+          stack: [
+            {
+              format: "Transaction failed: ${val_one} at block ${val_two} with code ${non_existent}",
+              data: {
+                val_one: "limit_exceeded",
+                val_two: 123456,
+              }
+            }
+          ]
+        }
+      }
+    };
+
+    const mockFetch = vi.spyOn(globalThis, "fetch").mockImplementationOnce(() => 
+      Promise.resolve(new Response(JSON.stringify(mockResponse), { status: 200 }))
+    );
+
+    try {
+      const testClient = new Client("https://api.hive.blog");
+      await testClient.call("condenser_api", "get_accounts", [["initminer"]]);
+      assert(false, "should have failed");
+    } catch (error: any) {
+      assert.equal(error.name, "RPCError");
+      assert.equal(error.message, "Transaction failed: limit_exceeded at block 123456 with code ${non_existent}");
+    }
+
+    mockFetch.mockRestore();
+  });
 });
+

@@ -638,6 +638,20 @@
       let refreshInterval = null;
       let isFetching = false;
 
+      function escapeHtml(str) {
+        if (typeof str !== "string") return str;
+        return str.replace(/[&<>"']/g, function(match) {
+          const escapeMap = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#x27;"
+          };
+          return escapeMap[match];
+        });
+      }
+
       const elements = {
         loader: document.getElementById("loader"),
         statusDot: document.getElementById("status-dot"),
@@ -810,7 +824,7 @@
               <div class="book-row">
                 <div class="book-cell price">${b.price.toFixed(4)}</div>
                 <div class="book-cell">${b.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</div>
-                <div class="book-cell seller">${b.seller}</div>
+                <div class="book-cell seller">${escapeHtml(b.seller)}</div>
                 <div class="book-depth-bar" style="width: ${pct}%"></div>
               </div>
             `;
@@ -827,7 +841,7 @@
               <div class="book-row">
                 <div class="book-cell price">${a.price.toFixed(4)}</div>
                 <div class="book-cell">${a.size.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}</div>
-                <div class="book-cell seller">${a.seller}</div>
+                <div class="book-cell seller">${escapeHtml(a.seller)}</div>
                 <div class="book-depth-bar" style="width: ${pct}%"></div>
               </div>
             `;

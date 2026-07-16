@@ -580,14 +580,38 @@ export class Client {
       if (data && data.stack && data.stack.length > 0) {
         const top = data.stack[0];
         const topData = copy(top.data);
-        message = top.format.replace(/\$\{([a-z_]+)\}/gi, (match: string, key: string) => {
-          let rv = match;
-          if (topData[key] !== undefined) {
-            rv = formatValue(topData[key]);
-            delete topData[key];
+        let formatStr = top.format;
+        if (formatStr.length > 2000) {
+          formatStr = formatStr.slice(0, 2000);
+        }
+        let parsedMessage = "";
+        let lastIdx = 0;
+        while (true) {
+          const startIdx = formatStr.indexOf("${", lastIdx);
+          if (startIdx === -1) {
+            parsedMessage += formatStr.slice(lastIdx);
+            break;
           }
-          return rv;
-        });
+          parsedMessage += formatStr.slice(lastIdx, startIdx);
+          const endIdx = formatStr.indexOf("}", startIdx + 2);
+          if (endIdx === -1) {
+            parsedMessage += formatStr.slice(startIdx);
+            break;
+          }
+          const key = formatStr.slice(startIdx + 2, endIdx);
+          if (/^[a-z_]+$/i.test(key)) {
+            if (topData[key] !== undefined) {
+              parsedMessage += formatValue(topData[key]);
+              delete topData[key];
+            } else {
+              parsedMessage += "${" + key + "}";
+            }
+          } else {
+            parsedMessage += formatStr.slice(startIdx, endIdx + 1);
+          }
+          lastIdx = endIdx + 1;
+        }
+        message = parsedMessage;
         const unformattedData = Object.keys(topData)
           .map((key) => ({ key, value: formatValue(topData[key]) }))
           .map((item) => `${item.key}=${item.value}`);
